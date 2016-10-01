@@ -50,6 +50,7 @@
     <Compile Include="ScheduleFetcher\Game.cs" />
     <Compile Include="ScheduleFetcher\Team.cs" />
     <Compile Include="ScheduleFetcher\MockScheduleFetcher.cs" />
+    <Compile Include="ScheduleFetcher\ScheduleHtmlParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

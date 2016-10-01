@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -431,20 +432,20 @@ a:active {
 ";
 		#endregion
 
-		public async Task<List<string>> GetScheduleTypes(string season)
+		public async Task<List<string>> GetSeasons()
 		{
 			await Task.Delay(1000);
 
+			return ScheduleHtmlParser.GetSeasons(ScheduleScoresDisplayHtml).ToList();
+		}
+
+		public async Task<List<string>> GetScheduleTypes(string season)
+		{
+			await Task.Delay(1000);
 			throw new NotImplementedException();
 		}
 
 		public async Task<List<NavigationOption>> GetScheduleTypes(string season, string schedule)
-		{
-			await Task.Delay(1000);
-			throw new NotImplementedException();
-		}
-
-		public async Task<List<string>> GetSeasons()
 		{
 			await Task.Delay(1000);
 			throw new NotImplementedException();
