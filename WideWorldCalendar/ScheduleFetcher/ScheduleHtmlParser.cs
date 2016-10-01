@@ -90,6 +90,23 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 		}
 
+		public static IEnumerable<Game> GetTeamSchedule(string html)
+		{
+			var teamListTable = html.Split(new[] { "Team Contacts" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(new[] { "<table" }, StringSplitOptions.RemoveEmptyEntries)[1];
+
+			var teamRows = teamListTable.Split(new[] { "</tr>" }, StringSplitOptions.RemoveEmptyEntries);
+
+			foreach (var row in teamRows)
+			{
+				if (row.StartsWith(" width", StringComparison.CurrentCultureIgnoreCase)) continue;
+				if (row.Contains("/table>")) break;
+
+				var foo = 1;
+			}
+
+			yield break;
+		}
+
 		private static string CleanString(string source)
 		{
 			return source.Replace("\n", "").Trim();

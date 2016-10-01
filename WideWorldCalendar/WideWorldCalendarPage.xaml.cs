@@ -19,6 +19,7 @@ namespace WideWorldCalendar
 			var scheduleGroupings = await scheduleFetcher.GetScheduleGroupings(seasons.Last());
 			var scheduleTypes = await scheduleFetcher.GetDivisions(seasons.Last(), scheduleGroupings.Last());
 			var teams = await scheduleFetcher.GetTeams(scheduleTypes.Last().Id);
+			var games = await scheduleFetcher.GetTeamSchedule(teams.Last().Id);
 
 			var bar = 1;
 		}

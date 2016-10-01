@@ -462,7 +462,7 @@ a:active {
 		public async Task<List<Game>> GetTeamSchedule(int teamId)
 		{
 			await Task.Delay(1000);
-			throw new NotImplementedException();
+			return ScheduleHtmlParser.GetTeamSchedule(PrintTeamScheduleHtml).ToList();
 		}
 	}
 }
