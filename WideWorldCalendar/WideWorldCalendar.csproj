@@ -45,6 +45,11 @@
     <Compile Include="GetScheduleScreen.xaml.cs">
       <DependentUpon>GetScheduleScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScheduleFetcher\IScheduleFetcher.cs" />
+    <Compile Include="ScheduleFetcher\NavigationOption.cs" />
+    <Compile Include="ScheduleFetcher\Game.cs" />
+    <Compile Include="ScheduleFetcher\Team.cs" />
+    <Compile Include="ScheduleFetcher\MockScheduleFetcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -59,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ScheduleFetcher\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
