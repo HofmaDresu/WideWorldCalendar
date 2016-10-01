@@ -446,11 +446,11 @@ a:active {
 			return ScheduleHtmlParser.GetScheduleGroupings(ScheduleScoresDisplayHtml, season).ToList();
 		}
 
-		public async Task<List<NavigationOption>> GetScheduleTypes(string season, string schedule)
+		public async Task<List<NavigationOption>> GetDivisions(string season, string schedule)
 		{
 			await Task.Delay(1000);
 
-			return ScheduleHtmlParser.GetScheduleTypes(ScheduleScoresDisplayHtml, season, schedule).ToList();
+			return ScheduleHtmlParser.GetDivisions(ScheduleScoresDisplayHtml, season, schedule).ToList();
 		}
 
 		public async Task<List<NavigationOption>> GetTeams(int divisionId)

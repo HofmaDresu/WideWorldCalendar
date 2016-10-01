@@ -44,7 +44,7 @@ namespace WideWorldCalendar.ScheduleFetcher
 			}
 		}
 
-		public static IEnumerable<NavigationOption> GetScheduleTypes(string html, string season, string schedule)
+		public static IEnumerable<NavigationOption> GetDivisions(string html, string season, string schedule)
 		{
 			var seasonSections = html.Split(new[] { "Season: </strong>" }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -59,15 +59,14 @@ namespace WideWorldCalendar.ScheduleFetcher
 			var selectedGroupingSections = scheduleGroupingSections.Where(s => s.Contains(schedule)).ToList();
 			if (selectedGroupingSections.Count != 1) yield break;
 
-			var scheduleTypeSections = selectedGroupingSections[0].Split(new[] { "ID=" }, StringSplitOptions.RemoveEmptyEntries);
+			var divisionSections = selectedGroupingSections[0].Split(new[] { "ID=" }, StringSplitOptions.RemoveEmptyEntries);
 
-			for (int i = 1; i < scheduleTypeSections.Length; i++)
+			for (int i = 1; i < divisionSections.Length; i++)
 			{
-				var scheduleTypeSection = scheduleTypeSections[i];
-				var id = scheduleTypeSection.Split('\'')[0];
+				var divisionSection = divisionSections[i];
+				var id = divisionSection.Split('\'')[0];
 
-				var name = scheduleTypeSection.Split('>')[1].Split('<')[0];
-
+				var name = divisionSection.Split('>')[1].Split('<')[0];
 
 				yield return new NavigationOption { Id = int.Parse(id), Name = name };
 			}

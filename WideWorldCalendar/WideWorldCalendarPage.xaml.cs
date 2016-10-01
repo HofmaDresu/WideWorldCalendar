@@ -17,7 +17,7 @@ namespace WideWorldCalendar
 			var scheduleFetcher = new MockScheduleFetcher();
 			var seasons = await scheduleFetcher.GetSeasons();
 			var scheduleGroupings = await scheduleFetcher.GetScheduleGroupings(seasons.Last());
-			var scheduleTypes = await scheduleFetcher.GetScheduleTypes(seasons.Last(), scheduleGroupings.Last());
+			var scheduleTypes = await scheduleFetcher.GetDivisions(seasons.Last(), scheduleGroupings.Last());
 			var teams = await scheduleFetcher.GetTeams(scheduleTypes.Last().Id);
 
 			var bar = 1;
