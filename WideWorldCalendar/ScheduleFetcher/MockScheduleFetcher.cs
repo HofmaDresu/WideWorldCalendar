@@ -439,23 +439,24 @@ a:active {
 			return ScheduleHtmlParser.GetSeasons(ScheduleScoresDisplayHtml).ToList();
 		}
 
-		public async Task<List<string>> GetScheduleTypes(string season)
+		public async Task<List<string>> GetScheduleGroupings(string season)
 		{
 			await Task.Delay(1000);
 
-			return ScheduleHtmlParser.GetScheduleTypes(ScheduleScoresDisplayHtml, season).ToList();
+			return ScheduleHtmlParser.GetScheduleGroupings(ScheduleScoresDisplayHtml, season).ToList();
 		}
 
 		public async Task<List<NavigationOption>> GetScheduleTypes(string season, string schedule)
 		{
 			await Task.Delay(1000);
-			throw new NotImplementedException();
+
+			return ScheduleHtmlParser.GetScheduleTypes(ScheduleScoresDisplayHtml, season, schedule).ToList();
 		}
 
 		public async Task<List<NavigationOption>> GetTeams(int divisionId)
 		{
 			await Task.Delay(1000);
-			throw new NotImplementedException();
+			return ScheduleHtmlParser.GetTeams(DivisionReportHtml).ToList();
 		}
 
 		public async Task<List<Game>> GetTeamSchedule(int teamId)
