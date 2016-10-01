@@ -1,5 +1,6 @@
 ﻿using WideWorldCalendar.ScheduleFetcher;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace WideWorldCalendar
 {
@@ -14,8 +15,8 @@ namespace WideWorldCalendar
 		{
 			base.OnAppearing();
 			var scheduleFetcher = new MockScheduleFetcher();
-			var foo = await scheduleFetcher.GetSeasons();
-
+			var seasons = await scheduleFetcher.GetSeasons();
+			var scheduleTypes = await scheduleFetcher.GetScheduleTypes(seasons.Last());
 
 
 			var bar = 1;

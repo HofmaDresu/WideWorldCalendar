@@ -442,7 +442,8 @@ a:active {
 		public async Task<List<string>> GetScheduleTypes(string season)
 		{
 			await Task.Delay(1000);
-			throw new NotImplementedException();
+
+			return ScheduleHtmlParser.GetScheduleTypes(ScheduleScoresDisplayHtml, season).ToList();
 		}
 
 		public async Task<List<NavigationOption>> GetScheduleTypes(string season, string schedule)
