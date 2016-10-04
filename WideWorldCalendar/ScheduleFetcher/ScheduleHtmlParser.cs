@@ -92,6 +92,12 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 		public static IEnumerable<Game> GetTeamSchedule(string html)
 		{
+			var myTeamId = html.Split(new[] { "styleTeam" }, StringSplitOptions.RemoveEmptyEntries)[2]
+							   .Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries)[1]
+							   .Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0]
+			                   .Trim();
+
+
 			var teamDictionary = new Dictionary<string, Team>();
 
 			var teamListTable = html.Split(new[] { "Team Contacts" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(new[] { "<table" }, StringSplitOptions.RemoveEmptyEntries)[1];
@@ -113,13 +119,37 @@ namespace WideWorldCalendar.ScheduleFetcher
 				teamDictionary.Add(GetValueFromColumn(columns[0]), team);
 			}
 
+			var scheduleTable = html.Split(new[] { "Schedules/Scores" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(new[] { "<table" }, StringSplitOptions.RemoveEmptyEntries)[1];;
+
+			var scheduleRows = scheduleTable.Split(new[] { "</tr>" }, StringSplitOptions.RemoveEmptyEntries);
+
+			foreach (var row in scheduleRows)
+			{
+				if (row.StartsWith(" width", StringComparison.CurrentCultureIgnoreCase)) continue;
+				if (row.Contains("/table>")) break;
+
+				var columns = row.Split(new[] { "</td>" }, StringSplitOptions.RemoveEmptyEntries);
+
+				var homeTeamId = GetValueFromColumn(columns[4]);
+				var awayTeamId = GetValueFromColumn(columns[6]);
+				var isHomeGame = homeTeamId == myTeamId;
+
+				yield return new Game
+				{
+					ScheduledDateTime = DateTime.Parse(GetValueFromColumn(columns[0]) + " " + GetValueFromColumn(columns[2])),
+					Field = GetValueFromColumn(columns[3]),
+					IsHomeGame = isHomeGame,
+					MyTeam = teamDictionary[myTeamId],
+					OpposingTeam = isHomeGame ? teamDictionary[awayTeamId] : teamDictionary[homeTeamId]
+				};
+			}
 			yield break;
 		}
 
 		private static string GetValueFromColumn(string column)
 		{
 			var substring = column.Split(new[] { "'style3'>" }, StringSplitOptions.RemoveEmptyEntries)[1];
-			return substring.Split('<')[0];
+			return substring.Split('<')[0].Trim();
 		}
 
 		private static string CleanString(string source)
