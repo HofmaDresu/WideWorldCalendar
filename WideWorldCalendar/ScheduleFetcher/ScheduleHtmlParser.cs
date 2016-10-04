@@ -92,6 +92,8 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 		public static IEnumerable<Game> GetTeamSchedule(string html)
 		{
+			var teamDictionary = new Dictionary<string, Team>();
+
 			var teamListTable = html.Split(new[] { "Team Contacts" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(new[] { "<table" }, StringSplitOptions.RemoveEmptyEntries)[1];
 
 			var teamRows = teamListTable.Split(new[] { "</tr>" }, StringSplitOptions.RemoveEmptyEntries);
@@ -101,10 +103,23 @@ namespace WideWorldCalendar.ScheduleFetcher
 				if (row.StartsWith(" width", StringComparison.CurrentCultureIgnoreCase)) continue;
 				if (row.Contains("/table>")) break;
 
-				var foo = 1;
+				var columns = row.Split(new[] { "</td>" }, StringSplitOptions.RemoveEmptyEntries);
+				var team = new Team
+				{
+					Name = GetValueFromColumn(columns[1]),
+					Color = GetValueFromColumn(columns[5])
+				};
+
+				teamDictionary.Add(GetValueFromColumn(columns[0]), team);
 			}
 
 			yield break;
+		}
+
+		private static string GetValueFromColumn(string column)
+		{
+			var substring = column.Split(new[] { "'style3'>" }, StringSplitOptions.RemoveEmptyEntries)[1];
+			return substring.Split('<')[0];
 		}
 
 		private static string CleanString(string source)
