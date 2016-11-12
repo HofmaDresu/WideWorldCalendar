@@ -5,10 +5,6 @@
 	</ContentPage.Padding>
 	<StackLayout
 		Padding="20, 20, 20, 0">
-		<Label Text="Select your team"
-				FontSize="Large"
-				HorizontalOptions="Center"
-				Margin="0,0,0,30"/>
 		<Label Text="Season"/>
 		<Picker x:Name="SeasonPicker"
 				SelectedIndexChanged="SeasonChanged">

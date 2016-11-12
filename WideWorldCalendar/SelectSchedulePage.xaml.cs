@@ -13,12 +13,11 @@ namespace WideWorldCalendar
 		private List<string> _leagues;
 		private List<NavigationOption> _divisions;
 		private List<NavigationOption> _teams;
-		private List<Game> _games;
-
 		public SelectSchedulePage()
 		{
 			InitializeComponent();
 			_scheduleFetcher = new MockScheduleFetcher();
+			Title = "Select Team";
 		}
 
 		protected override async void OnAppearing()

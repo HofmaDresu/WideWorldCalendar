@@ -32,6 +32,9 @@
     <EmbeddedResource Include="SelectSchedulePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewSchedulePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -46,6 +49,9 @@
     <Compile Include="ScheduleFetcher\ScheduleHtmlParser.cs" />
     <Compile Include="SelectSchedulePage.xaml.cs">
       <DependentUpon>SelectSchedulePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSchedulePage.xaml.cs">
+      <DependentUpon>ViewSchedulePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
