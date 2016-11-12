@@ -10,6 +10,7 @@ namespace WideWorldCalendar
 		public ViewSchedulePage()
 		{
 			InitializeComponent();
+			Title = "Schedule";
 		}
 	}
 }
