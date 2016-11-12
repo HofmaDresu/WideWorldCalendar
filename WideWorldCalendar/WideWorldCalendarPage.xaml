@@ -1,4 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:WideWorldCalendar" x:Class="WideWorldCalendar.WideWorldCalendarPage">
-	<Label Text="Welcome to Xamarin Forms!" VerticalOptions="Center" HorizontalOptions="Center" />
+	<StackLayout>
+		<Label Text="Season"/>
+		<Picker x:Name="SeasonPicker"
+				SelectedIndexChanged="SeasonChanged">
+		</Picker>
+		<Label Text="League"/>
+		<Picker x:Name="LeaguePicker"
+				SelectedIndexChanged="LeagueChanged"
+				IsEnabled="false">
+		</Picker>
+		<Label Text="Division"/>
+		<Picker x:Name="DivisionPicker"
+				SelectedIndexChanged="DivisionChanged"
+				IsEnabled="false">
+		</Picker>
+		<Label Text="Team"/>
+		<Picker x:Name="TeamPicker"
+				SelectedIndexChanged="TeamChanged"
+				IsEnabled="false">
+		</Picker>
+	</StackLayout>
 </ContentPage>
