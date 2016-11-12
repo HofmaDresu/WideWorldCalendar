@@ -10,7 +10,7 @@ namespace WideWorldCalendar
 		{
 			InitializeComponent();
 
-			MainPage = new WideWorldCalendarPage();
+			MainPage = new SelectSchedulePage();
 		}
 
 		protected override void OnStart()

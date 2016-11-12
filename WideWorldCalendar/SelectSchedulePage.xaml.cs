@@ -1,11 +1,12 @@
-﻿using WideWorldCalendar.ScheduleFetcher;
-using Xamarin.Forms;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using WideWorldCalendar.ScheduleFetcher;
+using Xamarin.Forms;
 
 namespace WideWorldCalendar
 {
-	public partial class WideWorldCalendarPage : ContentPage
+	public partial class SelectSchedulePage : ContentPage
 	{
 		private readonly IScheduleFetcher _scheduleFetcher;
 		private List<string> _seasons;
@@ -14,10 +15,10 @@ namespace WideWorldCalendar
 		private List<NavigationOption> _teams;
 		private List<Game> _games;
 
-		public WideWorldCalendarPage()
+		public SelectSchedulePage()
 		{
 			InitializeComponent();
-		    _scheduleFetcher = new MockScheduleFetcher();
+			_scheduleFetcher = new MockScheduleFetcher();
 		}
 
 		protected override async void OnAppearing()
@@ -87,6 +88,5 @@ namespace WideWorldCalendar
 		{
 			GetScheduleButton.IsEnabled = true;
 		}
-
 	}
 }

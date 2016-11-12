@@ -29,8 +29,7 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
-    <EmbeddedResource Include="WideWorldCalendarPage.xaml" />
-    <EmbeddedResource Include="GetScheduleScreen.xaml">
+    <EmbeddedResource Include="SelectSchedulePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -38,19 +37,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WideWorldCalendarPage.xaml.cs">
-      <DependentUpon>WideWorldCalendarPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GetScheduleScreen.xaml.cs">
-      <DependentUpon>GetScheduleScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ScheduleFetcher\IScheduleFetcher.cs" />
     <Compile Include="ScheduleFetcher\NavigationOption.cs" />
     <Compile Include="ScheduleFetcher\Game.cs" />
     <Compile Include="ScheduleFetcher\Team.cs" />
     <Compile Include="ScheduleFetcher\MockScheduleFetcher.cs" />
     <Compile Include="ScheduleFetcher\ScheduleHtmlParser.cs" />
+    <Compile Include="SelectSchedulePage.xaml.cs">
+      <DependentUpon>SelectSchedulePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
