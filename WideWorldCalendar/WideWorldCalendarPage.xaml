@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:WideWorldCalendar" x:Class="WideWorldCalendar.WideWorldCalendarPage">
-	<StackLayout>
+	<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" WinPhone="20,20,20,20" />
+	</ContentPage.Padding>
+	<StackLayout
+		Padding="20, 20, 20, 0">
+		<Label Text="Select your team"
+				FontSize="Large"
+				HorizontalOptions="Center"
+				Margin="0,0,0,30"/>
 		<Label Text="Season"/>
 		<Picker x:Name="SeasonPicker"
 				SelectedIndexChanged="SeasonChanged">
