@@ -40,13 +40,6 @@ namespace WideWorldCalendar
 
 				LeaguePicker.IsEnabled = true;
 			}
-
-
-			/*
-			var scheduleTypes = await scheduleFetcher.GetDivisions(_seasons.Last(), _scheduleGroupings.Last());
-			var teams = await scheduleFetcher.GetTeams(scheduleTypes.Last().Id);
-			var games = await scheduleFetcher.GetTeamSchedule(teams.Last().Id);
-*/
 		}
 
 		async void SeasonChanged(object sender, System.EventArgs e)
@@ -60,6 +53,7 @@ namespace WideWorldCalendar
 			LeaguePicker.IsEnabled = true;
 			DivisionPicker.IsEnabled = false;
 			TeamPicker.IsEnabled = false;
+			GetScheduleButton.IsEnabled = false;
 		}
 
 		async void LeagueChanged(object sender, System.EventArgs e)
@@ -73,6 +67,7 @@ namespace WideWorldCalendar
 
 			DivisionPicker.IsEnabled = true;
 			TeamPicker.IsEnabled = false;
+			GetScheduleButton.IsEnabled = false;
 		}
 
 		async void DivisionChanged(object sender, System.EventArgs e)
@@ -85,10 +80,13 @@ namespace WideWorldCalendar
 			}
 
 			TeamPicker.IsEnabled = true;
+			GetScheduleButton.IsEnabled = false;
 		}
 
-		async void TeamChanged(object sender, System.EventArgs e)
+		void TeamChanged(object sender, System.EventArgs e)
 		{
+			GetScheduleButton.IsEnabled = true;
 		}
+
 	}
 }

@@ -20,5 +20,9 @@
 				SelectedIndexChanged="TeamChanged"
 				IsEnabled="false">
 		</Picker>
+		<Button Text="Get Schedule"
+				x:Name="GetScheduleButton"
+				IsEnabled="false"
+				HorizontalOptions="Center"/>
 	</StackLayout>
 </ContentPage>
