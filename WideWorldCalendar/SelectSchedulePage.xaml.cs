@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WideWorldCalendar.ScheduleFetcher;
+using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar
@@ -13,6 +14,8 @@ namespace WideWorldCalendar
 		private List<string> _leagues;
 		private List<NavigationOption> _divisions;
 		private List<NavigationOption> _teams;
+		private SelectScheduleViewModel _vm = new SelectScheduleViewModel();
+
 		public SelectSchedulePage()
 		{
 			InitializeComponent();
@@ -25,7 +28,8 @@ namespace WideWorldCalendar
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
-			_seasons = await _scheduleFetcher.GetSeasons();
+			_vm.SchedulePageHtml = await _scheduleFetcher.GetSchedulesPage();
+			_seasons = _scheduleFetcher.GetSeasons(_vm.SchedulePageHtml);
 
 			foreach (var season in _seasons)
 			{
@@ -34,7 +38,7 @@ namespace WideWorldCalendar
 
 			if (_seasons.Count == 1)
 			{
-				_leagues = await _scheduleFetcher.GetScheduleGroupings(_seasons.Last());
+				_leagues = _scheduleFetcher.GetScheduleGroupings(_vm.SchedulePageHtml, _seasons.Last());
 				foreach (var league in _leagues)
 				{
 					LeaguePicker.Items.Add(league);
@@ -44,9 +48,9 @@ namespace WideWorldCalendar
 			}
 		}
 
-		async void SeasonChanged(object sender, System.EventArgs e)
+		void SeasonChanged(object sender, EventArgs e)
 		{
-			_leagues = await _scheduleFetcher.GetScheduleGroupings(_seasons[SeasonPicker.SelectedIndex]);
+			_leagues = _scheduleFetcher.GetScheduleGroupings(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex]);
 			LeaguePicker.Items.Clear();
 			foreach (var league in _leagues)
 			{
@@ -58,9 +62,9 @@ namespace WideWorldCalendar
 			GetScheduleButton.IsEnabled = false;
 		}
 
-		async void LeagueChanged(object sender, System.EventArgs e)
+		void LeagueChanged(object sender, EventArgs e)
 		{
-			_divisions = await _scheduleFetcher.GetDivisions(_seasons[SeasonPicker.SelectedIndex], _leagues[LeaguePicker.SelectedIndex]);
+			_divisions = _scheduleFetcher.GetDivisions(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex], _leagues[LeaguePicker.SelectedIndex]);
 			DivisionPicker.Items.Clear();
 			foreach (var division in _divisions)
 			{
@@ -72,7 +76,7 @@ namespace WideWorldCalendar
 			GetScheduleButton.IsEnabled = false;
 		}
 
-		async void DivisionChanged(object sender, System.EventArgs e)
+		async void DivisionChanged(object sender, EventArgs e)
 		{
 			_teams = await _scheduleFetcher.GetTeams(_divisions[DivisionPicker.SelectedIndex].Id);
 			TeamPicker.Items.Clear();
@@ -85,7 +89,7 @@ namespace WideWorldCalendar
 			GetScheduleButton.IsEnabled = false;
 		}
 
-		void TeamChanged(object sender, System.EventArgs e)
+		void TeamChanged(object sender, EventArgs e)
 		{
 			GetScheduleButton.IsEnabled = true;
 		}

@@ -6,9 +6,11 @@ namespace WideWorldCalendar.ScheduleFetcher
 {
 	public interface IScheduleFetcher
 	{
-		Task<List<string>> GetSeasons();
-		Task<List<string>> GetScheduleGroupings(string season);
-		Task<List<NavigationOption>> GetDivisions(string season, string schedule);
+		Task<string> GetSchedulesPage();
+
+		List<string> GetSeasons(string schedulePageHtml);
+		List<string> GetScheduleGroupings(string schedulePageHtml, string season);
+		List<NavigationOption> GetDivisions(string schedulePageHtml, string season, string schedule);
 		Task<List<NavigationOption>> GetTeams(int divisionId);
 		Task<List<Game>> GetTeamSchedule(int teamId);
 	}

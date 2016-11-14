@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using MvvmHelpers;
+﻿using MvvmHelpers;
 using WideWorldCalendar.ScheduleFetcher;
 
 namespace WideWorldCalendar.ViewModels

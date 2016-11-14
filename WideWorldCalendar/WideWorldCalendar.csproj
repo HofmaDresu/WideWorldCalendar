@@ -55,6 +55,8 @@
     </Compile>
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
     <Compile Include="Converters\BoolHomeAwayConverter.cs" />
+    <Compile Include="ScheduleFetcher\ScheduleFetcher.cs" />
+    <Compile Include="ViewModels\SelectScheduleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

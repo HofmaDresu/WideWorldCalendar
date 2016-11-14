@@ -432,25 +432,26 @@ a:active {
 ";
 		#endregion
 
-		public async Task<List<string>> GetSeasons()
+		public async Task<string> GetSchedulesPage()
 		{
 			await Task.Delay(1000);
 
-			return ScheduleHtmlParser.GetSeasons(ScheduleScoresDisplayHtml).ToList();
+			return ScheduleScoresDisplayHtml;
 		}
 
-		public async Task<List<string>> GetScheduleGroupings(string season)
+		public List<string> GetSeasons(string schedulePageHtml)
 		{
-			await Task.Delay(1000);
-
-			return ScheduleHtmlParser.GetScheduleGroupings(ScheduleScoresDisplayHtml, season).ToList();
+			return ScheduleHtmlParser.GetSeasons(schedulePageHtml).ToList();
 		}
 
-		public async Task<List<NavigationOption>> GetDivisions(string season, string schedule)
+		public List<string> GetScheduleGroupings(string schedulePageHtml, string season)
 		{
-			await Task.Delay(1000);
+			return ScheduleHtmlParser.GetScheduleGroupings(schedulePageHtml, season).ToList();
+		}
 
-			return ScheduleHtmlParser.GetDivisions(ScheduleScoresDisplayHtml, season, schedule).ToList();
+		public List<NavigationOption> GetDivisions(string schedulePageHtml, string season, string schedule)
+		{
+			return ScheduleHtmlParser.GetDivisions(schedulePageHtml, season, schedule).ToList();
 		}
 
 		public async Task<List<NavigationOption>> GetTeams(int divisionId)
