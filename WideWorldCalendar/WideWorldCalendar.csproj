@@ -57,6 +57,8 @@
     <Compile Include="Converters\BoolHomeAwayConverter.cs" />
     <Compile Include="ScheduleFetcher\RestScheduleFetcher.cs" />
     <Compile Include="ViewModels\SelectScheduleViewModel.cs" />
+    <Compile Include="Converters\DateTimeDateStringConverter.cs" />
+    <Compile Include="Converters\DateTimeTimeStringConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
