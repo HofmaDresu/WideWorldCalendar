@@ -1,6 +1,46 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WideWorldCalendar.ViewSchedulePage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:local="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar"
+		x:Class="WideWorldCalendar.ViewSchedulePage">
 	<ContentPage.Content>
         <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" WinPhone="20,20,20,20" />
 	</ContentPage.Content>
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<local:BoolHomeAwayConverter x:Key="HomeAwayCvt"/>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	<StackLayout Padding="20, 20, 20, 0"
+			Orientation="Vertical">
+		<Label
+				FontSize="Large"
+				HorizontalOptions="Center"
+				Text="{Binding Title}"/>
+		<ListView
+				ItemsSource="{Binding Games}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<Grid >
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Label Grid.Row="0" Grid.Column="0" Text="{Binding GameTimeString}" />
+							<Label Grid.Row="0" Grid.Column="1"
+								Grid.ColumnSpan="2" Text="{Binding Field}"/>
+							<Label Grid.Row="1" Grid.Column="0" Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}"/>
+							<Label Grid.Row="1" Grid.Column="1"
+								Grid.ColumnSpan="2" Text="{Binding OpposingTeam.NameAndColor}"/>
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</StackLayout>
 </ContentPage>

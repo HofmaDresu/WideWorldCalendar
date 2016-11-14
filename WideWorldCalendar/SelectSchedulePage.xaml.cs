@@ -19,7 +19,7 @@ namespace WideWorldCalendar
 			_scheduleFetcher = new MockScheduleFetcher();
 			Title = "Select Team";
 
-			GetScheduleButton.Clicked += (sender, e) => Navigation.PushAsync(new ViewSchedulePage());
+			GetScheduleButton.Clicked += (sender, e) => Navigation.PushAsync(new ViewSchedulePage(_teams[TeamPicker.SelectedIndex].Id));
 		}
 
 		protected override async void OnAppearing()
