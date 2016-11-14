@@ -11,7 +11,7 @@
 			<local:BoolHomeAwayConverter x:Key="HomeAwayCvt"/>
 		</ResourceDictionary>
 	</ContentPage.Resources>
-	<StackLayout Padding="20, 20, 20, 0"
+	<StackLayout Padding="0, 20, 0, 0"
 			Orientation="Vertical">
 		<Label
 				FontSize="Large"
