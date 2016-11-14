@@ -19,7 +19,7 @@ namespace WideWorldCalendar
 		public SelectSchedulePage()
 		{
 			InitializeComponent();
-			_scheduleFetcher = new MockScheduleFetcher();
+			_scheduleFetcher = new RestScheduleFetcher();
 			Title = "Select Team";
 
 			GetScheduleButton.Clicked += (sender, e) => Navigation.PushAsync(new ViewSchedulePage(_teams[TeamPicker.SelectedIndex].Id));

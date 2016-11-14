@@ -16,7 +16,7 @@ namespace WideWorldCalendar
 		public ViewSchedulePage(int teamId)
 		{
 			InitializeComponent();
-			_scheduleFetcher = new MockScheduleFetcher();
+			_scheduleFetcher = new RestScheduleFetcher();
 			Title = "Schedule";
 			_teamId = teamId;
 
