@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using WideWorldCalendar.ScheduleFetcher;
 using WideWorldCalendar.ViewModels;
@@ -23,33 +24,51 @@ namespace WideWorldCalendar
 			Title = "Select Team";
 
 			GetScheduleButton.Clicked += (sender, e) => Navigation.PushAsync(new ViewSchedulePage(_teams[TeamPicker.SelectedIndex].Id));
-		}
 
-		protected override async void OnAppearing()
-		{
-			base.OnAppearing();
-			_vm.SchedulePageHtml = await _scheduleFetcher.GetSchedulesPage();
-			_seasons = _scheduleFetcher.GetSeasons(_vm.SchedulePageHtml);
-
-			foreach (var season in _seasons)
-			{
-				SeasonPicker.Items.Add(season);
-			}
-
-			if (_seasons.Count == 1)
-			{
-				_leagues = _scheduleFetcher.GetScheduleGroupings(_vm.SchedulePageHtml, _seasons.Last());
-				foreach (var league in _leagues)
+			_scheduleFetcher.GetSchedulesPage()
+				.ContinueWith(data =>
 				{
-					LeaguePicker.Items.Add(league);
-				}
+					if (data.IsFaulted || data.IsCanceled)
+					{
+						if(data.Exception != null) Debug.WriteLine(string.Join("\n", data.Exception.InnerExceptions.Select(e => e.Message)));
+						return;
+					}
 
-				LeaguePicker.IsEnabled = true;
-			}
+					_vm.SchedulePageHtml = data.Result;
+
+					_seasons = _scheduleFetcher.GetSeasons(_vm.SchedulePageHtml);
+
+					Device.BeginInvokeOnMainThread(() => 
+					{
+						foreach (var season in _seasons)
+						{
+							SeasonPicker.Items.Add(season);
+						}
+					});
+
+					if (_seasons.Count == 1)
+					{
+						_leagues = _scheduleFetcher.GetScheduleGroupings(_vm.SchedulePageHtml, _seasons.Last());
+						foreach (var league in _leagues)
+						{
+							LeaguePicker.Items.Add(league);
+						}
+
+						LeaguePicker.IsEnabled = true;
+					}
+				});
 		}
 
 		void SeasonChanged(object sender, EventArgs e)
 		{
+			if (SeasonPicker.SelectedIndex == -1) return;
+
+			DivisionPicker.IsEnabled = false;
+			DivisionPicker.SelectedIndex = -1;
+			TeamPicker.IsEnabled = false;
+			TeamPicker.SelectedIndex = -1;
+			GetScheduleButton.IsEnabled = false;
+
 			_leagues = _scheduleFetcher.GetScheduleGroupings(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex]);
 			LeaguePicker.Items.Clear();
 			foreach (var league in _leagues)
@@ -57,13 +76,16 @@ namespace WideWorldCalendar
 				LeaguePicker.Items.Add(league);
 			}
 			LeaguePicker.IsEnabled = true;
-			DivisionPicker.IsEnabled = false;
-			TeamPicker.IsEnabled = false;
-			GetScheduleButton.IsEnabled = false;
 		}
 
 		void LeagueChanged(object sender, EventArgs e)
 		{
+			if (LeaguePicker.SelectedIndex == -1) return;
+			
+			TeamPicker.IsEnabled = false;
+			TeamPicker.SelectedIndex = -1;
+			GetScheduleButton.IsEnabled = false;
+
 			_divisions = _scheduleFetcher.GetDivisions(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex], _leagues[LeaguePicker.SelectedIndex]);
 			DivisionPicker.Items.Clear();
 			foreach (var division in _divisions)
@@ -72,12 +94,12 @@ namespace WideWorldCalendar
 			}
 
 			DivisionPicker.IsEnabled = true;
-			TeamPicker.IsEnabled = false;
-			GetScheduleButton.IsEnabled = false;
 		}
 
 		async void DivisionChanged(object sender, EventArgs e)
 		{
+			if (DivisionPicker.SelectedIndex == -1) return;
+
 			_teams = await _scheduleFetcher.GetTeams(_divisions[DivisionPicker.SelectedIndex].Id);
 			TeamPicker.Items.Clear();
 			foreach (var team in _teams)
@@ -91,6 +113,8 @@ namespace WideWorldCalendar
 
 		void TeamChanged(object sender, EventArgs e)
 		{
+			if (TeamPicker.SelectedIndex == -1) return;
+
 			GetScheduleButton.IsEnabled = true;
 		}
 	}
