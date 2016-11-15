@@ -24,13 +24,15 @@ namespace WideWorldCalendar
 			Title = "Select Team";
 
 			GetScheduleButton.Clicked += (sender, e) => Navigation.PushAsync(new ViewSchedulePage(_teams[TeamPicker.SelectedIndex].Id));
-
+			_vm.IsBusy = true;
 			_scheduleFetcher.GetSchedulesPage()
 				.ContinueWith(data =>
 				{
 					if (data.IsFaulted || data.IsCanceled)
 					{
 						if(data.Exception != null) Debug.WriteLine(string.Join("\n", data.Exception.InnerExceptions.Select(e => e.Message)));
+						//TODO: Notify user
+						IsBusy = false;
 						return;
 					}
 
@@ -56,6 +58,7 @@ namespace WideWorldCalendar
 
 						LeaguePicker.IsEnabled = true;
 					}
+					_vm.IsBusy = false;
 				});
 		}
 
@@ -99,16 +102,28 @@ namespace WideWorldCalendar
 		async void DivisionChanged(object sender, EventArgs e)
 		{
 			if (DivisionPicker.SelectedIndex == -1) return;
+			_vm.IsBusy = true;
 
-			_teams = await _scheduleFetcher.GetTeams(_divisions[DivisionPicker.SelectedIndex].Id);
-			TeamPicker.Items.Clear();
-			foreach (var team in _teams)
+			try
 			{
-				TeamPicker.Items.Add(team.Name);
-			}
+				_teams = await _scheduleFetcher.GetTeams(_divisions[DivisionPicker.SelectedIndex].Id);
+				TeamPicker.Items.Clear();
+				foreach (var team in _teams)
+				{
+					TeamPicker.Items.Add(team.Name);
+				}
 
-			TeamPicker.IsEnabled = true;
-			GetScheduleButton.IsEnabled = false;
+				TeamPicker.IsEnabled = true;
+				GetScheduleButton.IsEnabled = false;
+			}
+			catch (Exception ex)
+			{
+				//TODO:
+			}
+			finally
+			{
+				IsBusy = false;
+			}
 		}
 
 		void TeamChanged(object sender, EventArgs e)

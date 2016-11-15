@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Diagnostics;
 using System.Linq;
 using WideWorldCalendar.ScheduleFetcher;
 using WideWorldCalendar.ViewModels;
@@ -21,23 +20,27 @@ namespace WideWorldCalendar
 			_teamId = teamId;
 
 			BindingContext = _vm;
-		}
 
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
+			IsBusy = true;
 			_scheduleFetcher.GetTeamSchedule(_teamId)
 							.ContinueWith(data =>
 							{
 								if (data.IsFaulted || data.IsCanceled)
 								{
-									//TODO
+									if (data.Exception != null) Debug.WriteLine(string.Join("\n", data.Exception.InnerExceptions.Select(e => e.Message)));
+									//TODO: Notify user
 									return;
 								}
 
 								_vm.Games.AddRange(data.Result);
 								_vm.Title = data.Result.First()?.MyTeam.Name;
+								IsBusy = false;
 							});
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
 		}
 	}
 }
