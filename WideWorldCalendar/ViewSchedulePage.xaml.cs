@@ -9,8 +9,8 @@ namespace WideWorldCalendar
 	public partial class ViewSchedulePage : ContentPage
 	{
 		private readonly IScheduleFetcher _scheduleFetcher;
-		private int _teamId;
-		private ScheduleViewModel _vm = new ScheduleViewModel();
+		private readonly int _teamId;
+		private readonly ScheduleViewModel _vm;
 
 		public ViewSchedulePage(int teamId)
 		{
@@ -18,8 +18,10 @@ namespace WideWorldCalendar
 			_scheduleFetcher = new RestScheduleFetcher();
 			Title = "Schedule";
 			_teamId = teamId;
+		    _vm = new ScheduleViewModel(Navigation);
 
-			BindingContext = _vm;
+
+            BindingContext = _vm;
 
 			_vm.IsBusy = true;
 			_scheduleFetcher.GetTeamSchedule(_teamId)
