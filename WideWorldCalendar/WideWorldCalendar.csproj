@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
-    <EmbeddedResource Include="SelectSchedulePage.xaml">
+    <EmbeddedResource Include="Views\SelectSchedulePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewSchedulePage.xaml">
+    <EmbeddedResource Include="Views\ViewSchedulePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -55,12 +55,12 @@
     <Compile Include="ScheduleFetcher\Team.cs" />
     <Compile Include="ScheduleFetcher\MockScheduleFetcher.cs" />
     <Compile Include="ScheduleFetcher\ScheduleHtmlParser.cs" />
-    <Compile Include="SelectSchedulePage.xaml.cs">
+    <Compile Include="Views\SelectSchedulePage.xaml.cs">
       <DependentUpon>SelectSchedulePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CurrentTeamsViewModel.cs" />
     <Compile Include="ViewModels\TeamScheduleViewModel.cs" />
-    <Compile Include="ViewSchedulePage.xaml.cs">
+    <Compile Include="Views\ViewSchedulePage.xaml.cs">
       <DependentUpon>ViewSchedulePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
