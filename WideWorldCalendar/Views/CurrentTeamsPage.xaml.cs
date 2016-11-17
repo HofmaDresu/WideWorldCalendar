@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WideWorldCalendar.ViewModels;
+﻿using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.Views
 {
     public partial class CurrentTeamsPage : ContentPage
     {
+        private readonly CurrentTeamsViewModel _vm;
+
         public CurrentTeamsPage()
         {
             InitializeComponent();
-            BindingContext = new CurrentTeamsViewModel(Navigation);
+            Title = "My Teams";
+            _vm = new CurrentTeamsViewModel(Navigation);
+            BindingContext = _vm;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _vm.RefreshTeams();
         }
     }
 }

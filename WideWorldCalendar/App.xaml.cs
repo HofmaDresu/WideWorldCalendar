@@ -11,7 +11,7 @@ namespace WideWorldCalendar
 		{
 			InitializeComponent();
 
-			MainPage = new NavigationPage(new MyTeamsPage());
+			MainPage = new NavigationPage(new CurrentTeamsPage());
 		}
 
 		protected override void OnStart()

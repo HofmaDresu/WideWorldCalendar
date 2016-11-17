@@ -2,8 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WideWorldCalendar.Views.CurrentTeamsPage">
-  <Button Text="Add Team"
-      Command="{Binding AddTeamsCommand}"
-      HorizontalOptions="Center"
-      VerticalOptions="End"/>
+  <StackLayout Padding="0, 20, 0, 20"
+			  Orientation="Vertical"
+        IsVisible="{Binding IsNotBusy}">
+    <ListView
+        ItemsSource="{Binding Teams}"
+        RowHeight="90">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Grid Padding="20,10,20,10">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" />
+              <Label Grid.Row="1" Grid.Column="0" Text="{Binding Division}" />
+            </Grid>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+    <Button Text="Add Team"
+        Command="{Binding AddTeamsCommand}"
+        HorizontalOptions="Center"
+        VerticalOptions="End"/>
+  </StackLayout>
 </ContentPage>

@@ -12,5 +12,8 @@ namespace WideWorldCalendar.Persistence.Models
         public string TeamColor { get; set; }
         public string Division { get; set; }
         public DateTime LastGameDateTime { get; set; }
+
+        [Ignore]
+        public string NameAndColor => $"{TeamName} ({TeamColor})";
     }
 }

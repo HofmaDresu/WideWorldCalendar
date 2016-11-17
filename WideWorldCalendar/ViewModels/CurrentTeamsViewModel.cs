@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using MvvmHelpers;
-using WideWorldCalendar.ScheduleFetcher;
+using WideWorldCalendar.Persistence;
+using WideWorldCalendar.Persistence.Models;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.ViewModels
@@ -18,9 +19,13 @@ namespace WideWorldCalendar.ViewModels
             });
         }
 
-	    public ObservableRangeCollection<Team> Teams { get; } = new ObservableRangeCollection<Team>();
+	    public ObservableRangeCollection<MyTeam> Teams { get; } = new ObservableRangeCollection<MyTeam>();
 
         public ICommand AddTeamsCommand { protected set; get; }
 
+	    public void RefreshTeams()
+	    {
+            Teams.ReplaceRange(Data.GetInstance().GetMyCurrentTeams());
+        }
     }
 }
