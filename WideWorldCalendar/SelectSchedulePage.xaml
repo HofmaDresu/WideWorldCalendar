@@ -28,5 +28,6 @@
 				x:Name="GetScheduleButton"
 				IsEnabled="false"
 				HorizontalOptions="Center"/>
+    <ActivityIndicator IsRunning="{Binding IsBusy}"></ActivityIndicator>
 	</StackLayout>
 </ContentPage>

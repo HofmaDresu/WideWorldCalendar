@@ -14,7 +14,8 @@
 		</ResourceDictionary>
 	</ContentPage.Resources>
 	<StackLayout Padding="0, 20, 0, 0"
-			Orientation="Vertical">
+			Orientation="Vertical"
+      IsVisible="{Binding IsNotBusy}">
 		<Label
 				FontSize="Large"
 				HorizontalOptions="Center"

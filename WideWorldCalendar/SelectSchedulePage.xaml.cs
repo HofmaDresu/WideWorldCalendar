@@ -15,13 +15,14 @@ namespace WideWorldCalendar
 		private List<string> _leagues;
 		private List<NavigationOption> _divisions;
 		private List<NavigationOption> _teams;
-		private SelectScheduleViewModel _vm = new SelectScheduleViewModel();
+		private readonly SelectScheduleViewModel _vm = new SelectScheduleViewModel();
 
 		public SelectSchedulePage()
 		{
 			InitializeComponent();
 			_scheduleFetcher = new RestScheduleFetcher();
 			Title = "Select Team";
+		    BindingContext = _vm;
 
 			GetScheduleButton.Clicked += (sender, e) => Navigation.PushAsync(new ViewSchedulePage(_teams[TeamPicker.SelectedIndex].Id));
 			_vm.IsBusy = true;
@@ -32,7 +33,7 @@ namespace WideWorldCalendar
 					{
 						if(data.Exception != null) Debug.WriteLine(string.Join("\n", data.Exception.InnerExceptions.Select(e => e.Message)));
 						//TODO: Notify user
-						IsBusy = false;
+						_vm.IsBusy = false;
 						return;
 					}
 
@@ -122,7 +123,7 @@ namespace WideWorldCalendar
 			}
 			finally
 			{
-				IsBusy = false;
+                _vm.IsBusy = false;
 			}
 		}
 

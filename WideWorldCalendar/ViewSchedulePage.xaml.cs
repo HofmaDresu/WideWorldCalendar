@@ -21,7 +21,7 @@ namespace WideWorldCalendar
 
 			BindingContext = _vm;
 
-			IsBusy = true;
+			_vm.IsBusy = true;
 			_scheduleFetcher.GetTeamSchedule(_teamId)
 							.ContinueWith(data =>
 							{
@@ -34,7 +34,7 @@ namespace WideWorldCalendar
 
 								_vm.Games.AddRange(data.Result);
 								_vm.Title = data.Result.First()?.MyTeam.Name;
-								IsBusy = false;
+								_vm.IsBusy = false;
 							});
 		}
 
