@@ -42,6 +42,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\GameDateFutureColorConverter.cs" />
     <Compile Include="Persistence\Data.cs" />
     <Compile Include="Persistence\ISQLite.cs" />
     <Compile Include="Persistence\Models\Game.cs" />

@@ -11,6 +11,7 @@
       <converters:BoolHomeAwayConverter x:Key="HomeAwayCvt"/>
       <converters:DateTimeDateStringConverter x:Key="DateCvt"/>
       <converters:DateTimeTimeStringConverter x:Key="TimeCvt"/>
+      <converters:GameDateFutureColorConverter x:Key="GameFutureCvt"/>
     </ResourceDictionary>
   </ContentPage.Resources>
     <ListView
@@ -19,7 +20,7 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <Grid Padding="20,10,20,10">
+            <Grid Padding="20,10,20,10" BackgroundColor="{Binding ScheduledDateTime, Converter={StaticResource GameFutureCvt}}">
               <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
