@@ -2,6 +2,7 @@
 using MvvmHelpers;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
+using WideWorldCalendar.Views;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.ViewModels
@@ -27,5 +28,19 @@ namespace WideWorldCalendar.ViewModels
 	    {
             Teams.ReplaceRange(Data.GetInstance().GetMyCurrentTeams());
         }
+
+	    private MyTeam _selectedTeam;
+	    public MyTeam SelectedTeam
+	    {
+	        get { return _selectedTeam; }
+	        set
+	        {
+	            if (value == null) return;
+	            _navigation.PushAsync(new TeamSchedulePage(value));
+
+                SetProperty(ref _selectedTeam, value);
+                SetProperty(ref _selectedTeam, null);
+	        }
+	    }
     }
 }
