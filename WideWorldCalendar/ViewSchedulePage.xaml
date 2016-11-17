@@ -15,7 +15,7 @@
 	</ContentPage.Resources>
   <StackLayout
 			  Orientation="Vertical">
-	  <StackLayout Padding="0, 20, 0, 0"
+	  <StackLayout Padding="0, 20, 0, 20"
 			  Orientation="Vertical"
         IsVisible="{Binding IsNotBusy}">
 		  <Label
@@ -49,6 +49,9 @@
 				  </DataTemplate>
 			  </ListView.ItemTemplate>
 		  </ListView>
+      <Button Text="Save Schedule"
+          Command="{Binding SaveCommand}"
+          HorizontalOptions="Center"/>
 	  </StackLayout>
     <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></ActivityIndicator>
   </StackLayout>
