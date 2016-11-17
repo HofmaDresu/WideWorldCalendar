@@ -97,8 +97,13 @@ namespace WideWorldCalendar.ScheduleFetcher
 							   .Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0]
 			                   .Trim();
 
+		    var division = html.Split(new[] {"Season:"}, StringSplitOptions.RemoveEmptyEntries)[1]
+		        .Split(new[] {"style81\">"}, StringSplitOptions.RemoveEmptyEntries)[1]
+		        .Split(new[] {"<"}, StringSplitOptions.RemoveEmptyEntries)[0];
 
-			var teamDictionary = new Dictionary<string, Team>();
+
+
+            var teamDictionary = new Dictionary<string, Team>();
 
 			var teamListTable = html.Split(new[] { "Team Contacts" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(new[] { "<table" }, StringSplitOptions.RemoveEmptyEntries)[1];
 
@@ -113,7 +118,8 @@ namespace WideWorldCalendar.ScheduleFetcher
 				var team = new Team
 				{
 					Name = GetValueFromColumn(columns[1]),
-					Color = GetValueFromColumn(columns[5])
+					Color = GetValueFromColumn(columns[5]),
+                    Division = division
 				};
 
 				teamDictionary.Add(GetValueFromColumn(columns[0]), team);
