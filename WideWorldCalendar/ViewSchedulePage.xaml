@@ -13,39 +13,43 @@
 			<local:DateTimeTimeStringConverter x:Key="TimeCvt"/>
 		</ResourceDictionary>
 	</ContentPage.Resources>
-	<StackLayout Padding="0, 20, 0, 0"
-			Orientation="Vertical"
-      IsVisible="{Binding IsNotBusy}">
-		<Label
-				FontSize="Large"
-				HorizontalOptions="Center"
-				Text="{Binding Title}"/>
-		<ListView
-				ItemsSource="{Binding Games}"
-				RowHeight="90">
-			<ListView.ItemTemplate>
-				<DataTemplate>
-					<ViewCell>
-						<Grid Padding="20,10,20,10">
-							<Grid.RowDefinitions>
-								<RowDefinition Height="*"/>
-								<RowDefinition Height="*"/>
-								<RowDefinition Height="*"/>
-							</Grid.RowDefinitions>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="1.75*"/>
-							</Grid.ColumnDefinitions>
-							<Label Grid.Row="0" Grid.Column="0" Text="{Binding ScheduledDateTime, Converter={StaticResource DateCvt}}" />
-							<Label Grid.Row="0" Grid.Column="1" Text="{Binding Field}"/>
-							<Label Grid.Row="1" Grid.Column="0" Text="{Binding ScheduledDateTime, Converter={StaticResource TimeCvt}}" />
-							<Label Grid.Row="1" Grid.Column="1" Text="{Binding OpposingTeam.Name}"/>
-							<Label Grid.Row="2" Grid.Column="0" Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}"/>
-							<Label Grid.Row="2" Grid.Column="1" Text="{Binding OpposingTeam.Color}"/>
-						</Grid>
-					</ViewCell>
-				</DataTemplate>
-			</ListView.ItemTemplate>
-		</ListView>
-	</StackLayout>
+  <StackLayout
+			  Orientation="Vertical">
+	  <StackLayout Padding="0, 20, 0, 0"
+			  Orientation="Vertical"
+        IsVisible="{Binding IsNotBusy}">
+		  <Label
+				  FontSize="Large"
+				  HorizontalOptions="Center"
+				  Text="{Binding Title}"/>
+		  <ListView
+				  ItemsSource="{Binding Games}"
+				  RowHeight="90">
+			  <ListView.ItemTemplate>
+				  <DataTemplate>
+					  <ViewCell>
+						  <Grid Padding="20,10,20,10">
+							  <Grid.RowDefinitions>
+								  <RowDefinition Height="*"/>
+								  <RowDefinition Height="*"/>
+								  <RowDefinition Height="*"/>
+							  </Grid.RowDefinitions>
+							  <Grid.ColumnDefinitions>
+								  <ColumnDefinition Width="*"/>
+								  <ColumnDefinition Width="1.75*"/>
+							  </Grid.ColumnDefinitions>
+							  <Label Grid.Row="0" Grid.Column="0" Text="{Binding ScheduledDateTime, Converter={StaticResource DateCvt}}" />
+							  <Label Grid.Row="0" Grid.Column="1" Text="{Binding Field}"/>
+							  <Label Grid.Row="1" Grid.Column="0" Text="{Binding ScheduledDateTime, Converter={StaticResource TimeCvt}}" />
+							  <Label Grid.Row="1" Grid.Column="1" Text="{Binding OpposingTeam.Name}"/>
+							  <Label Grid.Row="2" Grid.Column="0" Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}"/>
+							  <Label Grid.Row="2" Grid.Column="1" Text="{Binding OpposingTeam.Color}"/>
+						  </Grid>
+					  </ViewCell>
+				  </DataTemplate>
+			  </ListView.ItemTemplate>
+		  </ListView>
+	  </StackLayout>
+    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></ActivityIndicator>
+  </StackLayout>
 </ContentPage>
