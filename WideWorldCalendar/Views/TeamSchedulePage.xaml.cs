@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WideWorldCalendar.Persistence.Models;
+using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.Views
@@ -14,6 +15,7 @@ namespace WideWorldCalendar.Views
         {
             InitializeComponent();
             Title = selectedTeam.TeamName;
+            BindingContext = new TeamScheduleViewModel(selectedTeam.Id);
         }
     }
 }

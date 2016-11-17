@@ -58,6 +58,7 @@
       <DependentUpon>SelectSchedulePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CurrentTeamsViewModel.cs" />
+    <Compile Include="ViewModels\TeamScheduleViewModel.cs" />
     <Compile Include="ViewSchedulePage.xaml.cs">
       <DependentUpon>ViewSchedulePage.xaml</DependentUpon>
     </Compile>
