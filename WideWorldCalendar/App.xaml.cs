@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using WideWorldCalendar.Views;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -10,7 +11,7 @@ namespace WideWorldCalendar
 		{
 			InitializeComponent();
 
-			MainPage = new NavigationPage(new SelectSchedulePage());
+			MainPage = new NavigationPage(new MyTeamsPage());
 		}
 
 		protected override void OnStart()
