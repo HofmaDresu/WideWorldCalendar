@@ -27,7 +27,7 @@ namespace WideWorldCalendar.ViewModels
                     LastGameDateTime = Games.OrderBy(g => g.ScheduledDateTime).Last().ScheduledDateTime
 	            };
 
-	            var myTeamId = data.InsertMyTeam(myTeam);
+	            data.InsertMyTeam(myTeam);
 
 	            foreach (var gameInfo in Games)
 	            {
@@ -35,7 +35,7 @@ namespace WideWorldCalendar.ViewModels
 	                {
 	                    Field = gameInfo.Field,
                         IsHomeGame = gameInfo.IsHomeGame,
-                        MyTeamId = myTeamId,
+                        MyTeamId = myTeam.Id,
                         ScheduledDateTime = gameInfo.ScheduledDateTime,
                         OpposingTeam = new Persistence.Models.OpposingTeam
                         {

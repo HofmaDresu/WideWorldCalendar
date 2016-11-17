@@ -52,9 +52,9 @@ namespace WideWorldCalendar.Persistence
             DeleteGames(id);
         }
 
-        public int InsertMyTeam(MyTeam myTeam)
+        public void InsertMyTeam(MyTeam myTeam)
         {
-            return _db.Insert(myTeam);
+            _db.Insert(myTeam);
         }
         #endregion
 
@@ -74,16 +74,17 @@ namespace WideWorldCalendar.Persistence
             _db.Delete<OpposingTeam>(id);
         }
 
-        public int InsertOpposingTeam(OpposingTeam opposingTeam)
+        public void InsertOpposingTeam(OpposingTeam opposingTeam)
         {
-            return _db.Insert(opposingTeam);
+            _db.Insert(opposingTeam);
         }
         #endregion
 
         #region OpposingTeams
         public List<Game> GetGames(int myTeamId)
         {
-            return Games.Where(g => g.MyTeamId == myTeamId)
+            var enumerable = Games.Where(g => g.MyTeamId == myTeamId).ToList();
+            return enumerable
                 .Select(g =>
                 {
                     g.OpposingTeam = GetOpposingTeam(g.OpposingTeamId);
@@ -105,11 +106,11 @@ namespace WideWorldCalendar.Persistence
             }
         }
 
-        public int InsertGame(Game game)
+        public void InsertGame(Game game)
         {
-            var opposingTeamId = InsertOpposingTeam(game.OpposingTeam);
-            game.OpposingTeamId = opposingTeamId;
-            return _db.Insert(game);
+            InsertOpposingTeam(game.OpposingTeam);
+            game.OpposingTeamId = game.OpposingTeam.Id;
+            _db.Insert(game);
         }
         #endregion
     }
