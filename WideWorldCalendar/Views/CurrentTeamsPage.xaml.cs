@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.Views
@@ -13,6 +13,7 @@ namespace WideWorldCalendar.Views
         public CurrentTeamsPage()
         {
             InitializeComponent();
+            BindingContext = new CurrentTeamsViewModel(Navigation);
         }
     }
 }

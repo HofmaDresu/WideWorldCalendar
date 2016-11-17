@@ -7,12 +7,15 @@ namespace WideWorldCalendar.ViewModels
 {
 	public class CurrentTeamsViewModel : BaseViewModel
 	{
-        public CurrentTeamsViewModel()
-	    {
-            AddTeamsCommand = new Command(_ =>
-	        {
-	            
-	        });
+	    private readonly INavigation _navigation;
+
+        public CurrentTeamsViewModel(INavigation navigation)
+        {
+            _navigation = navigation;
+            AddTeamsCommand = new Command(async _ =>
+            {
+                await _navigation.PushAsync(new SelectSchedulePage());
+            });
         }
 
 	    public ObservableRangeCollection<Team> Teams { get; } = new ObservableRangeCollection<Team>();
