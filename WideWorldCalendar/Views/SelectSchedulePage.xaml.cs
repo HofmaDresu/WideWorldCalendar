@@ -57,7 +57,7 @@ namespace WideWorldCalendar
 							LeaguePicker.Items.Add(league);
 						}
 
-						LeaguePicker.IsEnabled = true;
+					    _vm.LeagueSelected = true;
 					}
 					_vm.IsBusy = false;
 				});
@@ -67,45 +67,49 @@ namespace WideWorldCalendar
 		{
 			if (SeasonPicker.SelectedIndex == -1) return;
 
-			DivisionPicker.IsEnabled = false;
-			DivisionPicker.SelectedIndex = -1;
-			TeamPicker.IsEnabled = false;
+		    _vm.LeagueSelected = false;
+		    _vm.DivisionSelected = false;
+            DivisionPicker.SelectedIndex = -1;
+            _vm.TeamSelected = false;
 			TeamPicker.SelectedIndex = -1;
-			GetScheduleButton.IsEnabled = false;
 
 			_leagues = _scheduleFetcher.GetScheduleGroupings(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex]);
 			LeaguePicker.Items.Clear();
 			foreach (var league in _leagues)
 			{
 				LeaguePicker.Items.Add(league);
-			}
-			LeaguePicker.IsEnabled = true;
-		}
+            }
+            _vm.SeasonSelected = true;
+        }
 
 		void LeagueChanged(object sender, EventArgs e)
 		{
 			if (LeaguePicker.SelectedIndex == -1) return;
-			
-			TeamPicker.IsEnabled = false;
-			TeamPicker.SelectedIndex = -1;
-			GetScheduleButton.IsEnabled = false;
+            
+            _vm.DivisionSelected = false;
+            DivisionPicker.SelectedIndex = -1;
+            _vm.TeamSelected = false;
+            TeamPicker.SelectedIndex = -1;
 
-			_divisions = _scheduleFetcher.GetDivisions(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex], _leagues[LeaguePicker.SelectedIndex]);
+            _divisions = _scheduleFetcher.GetDivisions(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex], _leagues[LeaguePicker.SelectedIndex]);
 			DivisionPicker.Items.Clear();
 			foreach (var division in _divisions)
 			{
 				DivisionPicker.Items.Add(division.Name);
 			}
 
-			DivisionPicker.IsEnabled = true;
-		}
+            _vm.LeagueSelected = true;
+        }
 
 		async void DivisionChanged(object sender, EventArgs e)
 		{
 			if (DivisionPicker.SelectedIndex == -1) return;
 			_vm.IsBusy = true;
+            
+            _vm.TeamSelected = false;
+            TeamPicker.SelectedIndex = -1;
 
-			try
+            try
 			{
 				_teams = await _scheduleFetcher.GetTeams(_divisions[DivisionPicker.SelectedIndex].Id);
 				TeamPicker.Items.Clear();
@@ -114,9 +118,8 @@ namespace WideWorldCalendar
 					TeamPicker.Items.Add(team.Name);
 				}
 
-				TeamPicker.IsEnabled = true;
-				GetScheduleButton.IsEnabled = false;
-			}
+                _vm.DivisionSelected = true;
+            }
 			catch (Exception ex)
 			{
 				//TODO:
@@ -131,7 +134,7 @@ namespace WideWorldCalendar
 		{
 			if (TeamPicker.SelectedIndex == -1) return;
 
-			GetScheduleButton.IsEnabled = true;
-		}
+            _vm.TeamSelected = true;
+        }
 	}
 }

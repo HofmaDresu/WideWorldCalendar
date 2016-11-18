@@ -9,24 +9,27 @@
 		<Picker x:Name="SeasonPicker"
 				SelectedIndexChanged="SeasonChanged">
 		</Picker>
-		<Label Text="League"/>
+		<Label Text="League"
+        IsVisible="{Binding SeasonSelected}"/>
 		<Picker x:Name="LeaguePicker"
-				SelectedIndexChanged="LeagueChanged"
-				IsEnabled="false">
+        IsVisible="{Binding SeasonSelected}"
+				SelectedIndexChanged="LeagueChanged">
 		</Picker>
-		<Label Text="Division"/>
+		<Label Text="Division"
+        IsVisible="{Binding LeagueSelected}"/>
 		<Picker x:Name="DivisionPicker"
-				SelectedIndexChanged="DivisionChanged"
-				IsEnabled="false">
+        IsVisible="{Binding LeagueSelected}"
+				SelectedIndexChanged="DivisionChanged">
 		</Picker>
-		<Label Text="Team"/>
+		<Label Text="Team"
+        IsVisible="{Binding DivisionSelected}"/>
 		<Picker x:Name="TeamPicker"
-				SelectedIndexChanged="TeamChanged"
-				IsEnabled="false">
+        IsVisible="{Binding DivisionSelected}"
+				SelectedIndexChanged="TeamChanged">
 		</Picker>
 		<Button Text="Get Schedule"
+        IsVisible="{Binding TeamSelected}"
 				x:Name="GetScheduleButton"
-				IsEnabled="false"
 				HorizontalOptions="Center"/>
     <ActivityIndicator IsRunning="{Binding IsBusy}"></ActivityIndicator>
 	</StackLayout>
