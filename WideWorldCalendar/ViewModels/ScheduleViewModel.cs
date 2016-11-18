@@ -84,9 +84,25 @@ namespace WideWorldCalendar.ViewModels
 	    private static void CreateNotification(Persistence.Models.MyTeam myTeam, List<Persistence.Models.Game> games, ILocalNotification localNotification)
 	    {
 	        if (!games.Any()) return;
+	        string notificationTitle;
 
-	        var notificationTitle = games.Count == 1 ? "Game Tonight!" : "Double Header Tonight!";
-	        var notificationMessage = $"{myTeam.TeamName} @ {string.Join(",", games.Select(g => g.ScheduledDateTime.ToString("t")))}";
+	        switch (games.Count)
+	        {
+                case 1:
+	                notificationTitle = "Game Tonight!";
+	                break;
+                case 2:
+	                notificationTitle = "Double Header Tonight!";
+	                break;
+                case 3:
+	                notificationTitle = "Triple Header Tonight!";
+	                break;
+                default:
+	                notificationTitle = "Games Tonight!";
+	                break;
+	        }
+
+            var notificationMessage = $"{myTeam.TeamName} @ {string.Join(",", games.Select(g => g.ScheduledDateTime.ToString("t")))}";
 	        if (games.First().ScheduledDateTime.Date > DateTime.Now.Date)
 	        {
 	            localNotification.ScheduleGameNotification(notificationTitle, notificationMessage, games.First().Id,
