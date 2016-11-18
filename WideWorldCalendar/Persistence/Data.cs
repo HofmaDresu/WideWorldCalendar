@@ -13,6 +13,7 @@ namespace WideWorldCalendar.Persistence
         private IEnumerable<MyTeam> MyTeams => _db.Table<MyTeam>();
         private IEnumerable<OpposingTeam> OpposingTeams => _db.Table<OpposingTeam>();
         private IEnumerable<Game> Games => _db.Table<Game>();
+        private IEnumerable<Season> Seasons => _db.Table<Season>();
 
         private static readonly Lazy<Data> LazyData = new Lazy<Data>();
 
@@ -30,6 +31,7 @@ namespace WideWorldCalendar.Persistence
             _db.CreateTable<MyTeam>();
             _db.CreateTable<Game>();
             _db.CreateTable<OpposingTeam>();
+            _db.CreateTable<Season>();
         }
 
         #region MyTeams
@@ -111,6 +113,19 @@ namespace WideWorldCalendar.Persistence
             InsertOpposingTeam(game.OpposingTeam);
             game.OpposingTeamId = game.OpposingTeam.Id;
             _db.Insert(game);
+        }
+        #endregion
+
+        #region Divisions
+        public bool IsNewDivision(string seasonName)
+        {
+            return Seasons.Any(d => d.Name == seasonName);
+        }
+
+        public void UpdateDivisions(List<string> seasonNames)
+        {
+            _db.DeleteAll<Season>();
+            _db.InsertAll(seasonNames.Select(n => new Season { Name = n}));
         }
         #endregion
     }

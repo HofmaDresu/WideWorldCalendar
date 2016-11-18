@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using WideWorldCalendar.Persistence;
 using WideWorldCalendar.ScheduleFetcher;
 using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
@@ -40,8 +41,10 @@ namespace WideWorldCalendar
 					_vm.SchedulePageHtml = data.Result;
 
 					_seasons = _scheduleFetcher.GetSeasons(_vm.SchedulePageHtml);
+                    Data.GetInstance().UpdateDivisions(_seasons);
 
-					Device.BeginInvokeOnMainThread(() => 
+
+                    Device.BeginInvokeOnMainThread(() => 
 					{
 						foreach (var season in _seasons)
 						{
