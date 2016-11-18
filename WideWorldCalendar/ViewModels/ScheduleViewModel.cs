@@ -75,6 +75,7 @@ namespace WideWorldCalendar.ViewModels
 	        var myTeamInfo = Games.First().MyTeam;
 	        var myTeam = new Persistence.Models.MyTeam
 	        {
+                Id = myTeamInfo.Id,
 	            TeamName = myTeamInfo.Name,
 	            TeamColor = myTeamInfo.Color,
 	            Division = myTeamInfo.Division,

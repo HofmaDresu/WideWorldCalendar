@@ -90,7 +90,7 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 		}
 
-		public static IEnumerable<Game> GetTeamSchedule(string html)
+		public static IEnumerable<Game> GetTeamSchedule(int teamId, string html)
 		{
 			var myTeamId = html.Split(new[] { "styleTeam" }, StringSplitOptions.RemoveEmptyEntries)[2]
 							   .Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries)[1]
@@ -117,7 +117,8 @@ namespace WideWorldCalendar.ScheduleFetcher
 				var columns = row.Split(new[] { "</td>" }, StringSplitOptions.RemoveEmptyEntries);
 				var team = new Team
 				{
-					Name = GetValueFromColumn(columns[1]),
+                    Id = teamId,
+                    Name = GetValueFromColumn(columns[1]),
 					Color = GetValueFromColumn(columns[5]),
                     Division = division
 				};

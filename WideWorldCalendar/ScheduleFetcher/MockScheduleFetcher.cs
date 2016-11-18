@@ -463,7 +463,7 @@ a:active {
 		public async Task<List<Game>> GetTeamSchedule(int teamId)
 		{
 			await Task.Delay(1000);
-			return ScheduleHtmlParser.GetTeamSchedule(PrintTeamScheduleHtml).ToList();
+			return ScheduleHtmlParser.GetTeamSchedule(teamId, PrintTeamScheduleHtml).ToList();
 		}
 	}
 }

@@ -40,7 +40,7 @@ namespace WideWorldCalendar.ScheduleFetcher
 		{
 			var client = new HttpClient();
 			var divisionReportHtml = await client.GetStringAsync($"https://secure.wideworld-sports.me/wws_membership/PrintTeamSchedule.asp?ID={teamId}");
-			return ScheduleHtmlParser.GetTeamSchedule(divisionReportHtml).ToList();
+			return ScheduleHtmlParser.GetTeamSchedule(teamId, divisionReportHtml).ToList();
 		}
 	}
 }
