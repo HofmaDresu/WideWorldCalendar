@@ -30,19 +30,19 @@ namespace WideWorldCalendar.Droid
                     .SetPriority((int)NotificationPriority.High)
                     .SetVisibility(NotificationCompat.VisibilityPublic)
                     .SetCategory("reminder")
-                    .SetSmallIcon(Resource.Drawable.icon);
+                    .SetSmallIcon(Resource.Drawable.ic_launcher);
             }
             else if ((int)Build.VERSION.SdkInt >= 20)
             {
                 builder
-                    .SetSmallIcon(Resource.Drawable.icon);
+                    .SetSmallIcon(Resource.Drawable.ic_launcher);
             }
             else
             {
                 // Disable obsolete warning 'cause this was how you do it pre-20
 #pragma warning disable 618
                 builder
-                    .SetSmallIcon(Resource.Drawable.icon);
+                    .SetSmallIcon(Resource.Drawable.ic_launcher);
 #pragma warning restore 618
             }
 
