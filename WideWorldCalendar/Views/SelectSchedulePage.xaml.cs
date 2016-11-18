@@ -33,9 +33,11 @@ namespace WideWorldCalendar
 					if (data.IsFaulted || data.IsCanceled)
 					{
 						if(data.Exception != null) Debug.WriteLine(string.Join("\n", data.Exception.InnerExceptions.Select(e => e.Message)));
-						//TODO: Notify user
-						_vm.IsBusy = false;
-						return;
+                        Device.BeginInvokeOnMainThread(async () => {
+                            await DisplayAlert("Network Error", "There was a problem communicating with the Wide World server. Please try again later", "OK");
+                            _vm.IsBusy = false;
+                        });
+                        return;
 					}
 
 					_vm.SchedulePageHtml = data.Result;
@@ -124,9 +126,9 @@ namespace WideWorldCalendar
                 _vm.DivisionSelected = true;
             }
 			catch (Exception ex)
-			{
-				//TODO:
-			}
+            {
+                await DisplayAlert("Network Error", "There was a problem communicating with the Wide World server. Please try again later", "OK");
+            }
 			finally
 			{
                 _vm.IsBusy = false;

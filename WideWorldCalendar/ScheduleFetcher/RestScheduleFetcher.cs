@@ -9,9 +9,8 @@ namespace WideWorldCalendar.ScheduleFetcher
 	public class RestScheduleFetcher : IScheduleFetcher
 	{
 		public async Task<string> GetSchedulesPage()
-		{
-			var client = new HttpClient();
-			return await client.GetStringAsync("https://secure.wideworld-sports.me/wws_membership/SchedulesScoresDisplay.asp");
+		{ 
+			return await GetClient().GetStringAsync("https://secure.wideworld-sports.me/wws_membership/SchedulesScoresDisplay.asp");
 		}
 
 		public List<string> GetSeasons(string schedulePageHtml)
@@ -31,16 +30,19 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 		public async Task<List<NavigationOption>> GetTeams(int divisionId)
 		{
-			var client = new HttpClient();
-			var divisionReportHtml = await client.GetStringAsync($"https://secure.wideworld-sports.me/wws_membership/DivisionReport.asp?ID={divisionId}");
+			var divisionReportHtml = await GetClient().GetStringAsync($"https://secure.wideworld-sports.me/wws_membership/DivisionReport.asp?ID={divisionId}");
 			return ScheduleHtmlParser.GetTeams(divisionReportHtml).ToList();
 		}
 
 		public async Task<List<Game>> GetTeamSchedule(int teamId)
 		{
-			var client = new HttpClient();
-			var divisionReportHtml = await client.GetStringAsync($"https://secure.wideworld-sports.me/wws_membership/PrintTeamSchedule.asp?ID={teamId}");
+			var divisionReportHtml = await GetClient().GetStringAsync($"https://secure.wideworld-sports.me/wws_membership/PrintTeamSchedule.asp?ID={teamId}");
 			return ScheduleHtmlParser.GetTeamSchedule(teamId, divisionReportHtml).ToList();
 		}
+
+	    private HttpClient GetClient()
+	    {
+	        return new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
+	    }
 	}
 }

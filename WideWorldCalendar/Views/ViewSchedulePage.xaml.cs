@@ -30,8 +30,11 @@ namespace WideWorldCalendar
 								if (data.IsFaulted || data.IsCanceled)
 								{
 									if (data.Exception != null) Debug.WriteLine(string.Join("\n", data.Exception.InnerExceptions.Select(e => e.Message)));
-									//TODO: Notify user
-									return;
+                                    Device.BeginInvokeOnMainThread(async () => {
+                                        await DisplayAlert("Network Error", "There was a problem communicating with the Wide World server. Please try again later", "OK");
+                                        _vm.IsBusy = false;
+                                    });
+                                    return;
 								}
 
 								_vm.Games.AddRange(data.Result);
