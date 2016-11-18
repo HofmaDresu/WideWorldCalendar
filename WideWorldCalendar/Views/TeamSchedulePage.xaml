@@ -17,6 +17,7 @@
     <ListView
 				ItemsSource="{Binding Games}"
 				RowHeight="90">
+      <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>

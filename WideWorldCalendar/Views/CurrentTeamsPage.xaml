@@ -9,6 +9,7 @@
         ItemsSource="{Binding Teams}"
          SelectedItem="{Binding SelectedTeam, Mode=TwoWay}"
         RowHeight="90">
+      <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
