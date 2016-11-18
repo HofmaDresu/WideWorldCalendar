@@ -13,11 +13,11 @@ namespace WideWorldCalendar.ViewModels
 	{
 	    private readonly INavigation _navigation;
 
-        public ScheduleViewModel(INavigation navigation)
+        public ScheduleViewModel(Page page)
         {
             var gameDays = new Dictionary<DateTime, List<Persistence.Models.Game>>();
-            _navigation = navigation;
-            SaveCommand = new Command(_ =>
+            _navigation = page.Navigation;
+            SaveCommand = new Command(async _ =>
 	        {
 	            var data = Data.GetInstance();
                 var localNotification = DependencyService.Get<ILocalNotification>();
@@ -37,14 +37,18 @@ namespace WideWorldCalendar.ViewModels
 	                    gameDays.Add(game.ScheduledDateTime.Date, new List<Persistence.Models.Game> { game });
 	                }
 	            }
-
-	            //TODO: ask if user wants notifications
-                foreach (var day in gameDays)
+                
+                //HACK: I'm not happy with passing in page like this, but there seems to be no way for the VM to create an alert and I want to handle all this logic here rather than in the code behind 
+                var answer = await page.DisplayAlert("Game Notifications", $"Would you like reminders the morning of your games for {myTeam.TeamName}?", "Yes", "No");
+	            if (answer)
                 {
-                    CreateNotification(myTeam, day.Value, localNotification);
+                    foreach (var day in gameDays)
+                    {
+                        CreateNotification(myTeam, day.Value, localNotification);
+                    }
                 }
 
-	            _navigation.PopToRootAsync(true);
+	            await _navigation.PopToRootAsync(true);
 	        });
         }
 

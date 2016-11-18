@@ -18,7 +18,7 @@ namespace WideWorldCalendar
 			_scheduleFetcher = new RestScheduleFetcher();
 			Title = "Schedule";
 			_teamId = teamId;
-		    _vm = new ScheduleViewModel(Navigation);
+		    _vm = new ScheduleViewModel(this);
 
 
             BindingContext = _vm;
