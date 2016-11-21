@@ -13,7 +13,7 @@ namespace WideWorldCalendar.Droid
         public void ScheduleGameNotification()
         {
 #if DEBUG
-            var checkTime = DateTime.Now.AddMinutes(5);
+            var checkTime = DateTime.Now.AddMinutes(1);
 #else
             var checkTime = DateTime.Now.Date.AddDays(1).AddHours(9);
 #endif

@@ -14,44 +14,15 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
     {
         public override void OnReceive(Context context, Intent intent)
         {
-            var data = Data.GetInstance();
-
-            var teamsWithReminders = data.GetMyCurrentTeams().Where(t => t.SendGameTimeReminders).ToList();
-            var todaysTeamGamesWithReminders =
-                teamsWithReminders.SelectMany(
-                    t => data.GetGames(t.Id).Where(g => g.ScheduledDateTime.Date == DateTime.Now.Date))
-                    .GroupBy(g => g.MyTeamId);
-
-            foreach (var teamGames in todaysTeamGamesWithReminders)
+            foreach (var notification in Data.GetInstance().GetTodaysNotifications())
             {
-                string notificationTitle;
-
-                switch (teamGames.Count())
-                {
-                    case 1:
-                        notificationTitle = "Game Tonight!";
-                        break;
-                    case 2:
-                        notificationTitle = "Double Header Tonight!";
-                        break;
-                    case 3:
-                        notificationTitle = "Triple Header Tonight!";
-                        break;
-                    default:
-                        notificationTitle = "Games Tonight!";
-                        break;
-                }
-                var currentTeam = teamsWithReminders.First(t => t.Id == teamGames.Key);
-                var notificationMessage =
-                    $"{currentTeam.TeamName} @ {string.Join(",", teamGames.Select(g => g.ScheduledDateTime.ToString("t")))}";
-
-                CreateNotification(context, currentTeam.Id, notificationTitle, notificationMessage);
+                CreateNotification(context, notification.TeamId, notification.Title, notification.Message);
             }
 
             DependencyService.Get<ILocalNotification>().ScheduleGameNotification();
         }
 
-        private static void CreateNotification(Context context, int teamId, string title, string message)
+        private static void CreateNotification(Context context, int requestCode, string title, string message)
         {
             var builder = new NotificationCompat.Builder(context)
                 .SetContentTitle(title)
@@ -84,7 +55,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             notification.Flags |= NotificationFlags.AutoCancel;
 
             var notificationManager = NotificationManagerCompat.From(context);
-            notificationManager?.Notify(teamId, notification);
+            notificationManager?.Notify(requestCode, notification);
         }
     }
 }
