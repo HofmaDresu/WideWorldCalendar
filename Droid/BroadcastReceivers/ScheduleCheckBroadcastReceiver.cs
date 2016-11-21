@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
@@ -25,7 +26,8 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                     CreateNotification(context, notification.TeamId, notification.Title, notification.Message);
                 }
             }
-            
+#if DEBUG
+#else
             if (dataInstance.ShowScheduleChangedNotifications())
             {
                 await UpdateSchedulesIfNeeded(context, dataInstance);
@@ -35,6 +37,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             {
                 await CheckForNewSeason(context, dataInstance);
             }
+#endif
 
             new LocalNotification_Android().ScheduleGameNotification(context);
         }
@@ -42,10 +45,19 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
         private static async Task CheckForNewSeason(Context context, Data dataInstance)
         {
             var scheduleFetcher = new RestScheduleFetcher();
-            var scheduleHtml = await scheduleFetcher.GetSchedulesPage();
+            string scheduleHtml;
+            try
+            {
+                scheduleHtml = await scheduleFetcher.GetSchedulesPage();
+            }
+            catch (Exception)
+            {
+                //Eat exception
+                return;
+            }
             var seasons = scheduleFetcher.GetSeasons(scheduleHtml);
 
-            if (seasons.Any(s => dataInstance.IsNewSeason(s)))
+            if (seasons.Any(dataInstance.IsNewSeason))
             {
                 dataInstance.UpdateSeasons(seasons);
                 CreateNotification(context, Constants.NewSeasonNotificationRequestCode, "Wide World Sports",
@@ -59,7 +71,16 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             foreach (var team in dataInstance.GetMyTeams())
             {
                 var currentGames = dataInstance.GetGames(team.Id);
-                var serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);
+                List<Game> serverGames;
+                try
+                {
+                    serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);
+                }
+                catch (Exception)
+                {
+                    //Eat exception
+                    return;
+                }
 
                 if (currentGames.Any(
                     g =>
