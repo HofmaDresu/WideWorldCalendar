@@ -21,11 +21,23 @@ namespace WideWorldCalendar.Views
                 new MasterPageItem
                 {
                     Title = "Settings",
-                    //TargetType = typeof(TodoListPage)
+                    TargetType = typeof(SettingsPage)
                 }
             };
 
             MenuList.ItemsSource = masterPageItems;
+            MenuList.ItemSelected += OnItemSelected;
+        }
+
+        void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = e.SelectedItem as MasterPageItem;
+            if (item != null)
+            {
+                Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
+                MenuList.SelectedItem = null;
+                IsPresented = false;
+            }
         }
     }
 
