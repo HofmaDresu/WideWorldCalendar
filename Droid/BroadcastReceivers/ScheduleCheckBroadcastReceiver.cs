@@ -24,8 +24,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                     CreateNotification(context, notification.TeamId, notification.Title, notification.Message);
                 }
             }
-
-#if !DEBUG
+            
             if (dataInstance.ShowScheduleChangedNotifications())
             {
                 var scheduleFetcher = new RestScheduleFetcher();
@@ -40,11 +39,27 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                         serverGames.Any(sg => !currentGames.Any(g => g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime && g.Field == sg.Field
                                                                   && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name && g.OpposingTeam.TeamColor == sg.OpposingTeam.Color)))
                     {
+                        dataInstance.DeleteGames(team.Id);
+                        foreach (var gameInfo in serverGames)
+                        {
+                            var game = new Persistence.Models.Game
+                            {
+                                Field = gameInfo.Field,
+                                IsHomeGame = gameInfo.IsHomeGame,
+                                MyTeamId = team.Id,
+                                ScheduledDateTime = gameInfo.ScheduledDateTime,
+                                OpposingTeam = new Persistence.Models.OpposingTeam
+                                {
+                                    TeamName = gameInfo.OpposingTeam.Name,
+                                    TeamColor = gameInfo.OpposingTeam.Color
+                                }
+                            };
+                            dataInstance.InsertGame(game);
+                        }
                         CreateNotification(context, team.Id, "Team Schedule Changed", $"The schedule for {team.TeamName} has been updated.");
                     }
                 }
             }
-#endif
 
             if (dataInstance.ShowNewSeasonAvailableNotifications())
             {
