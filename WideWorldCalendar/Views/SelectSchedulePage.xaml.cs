@@ -43,7 +43,7 @@ namespace WideWorldCalendar
 					_vm.SchedulePageHtml = data.Result;
 
 					_seasons = _scheduleFetcher.GetSeasons(_vm.SchedulePageHtml);
-                    Data.GetInstance().UpdateDivisions(_seasons);
+                    Data.GetInstance().UpdateSeasons(_seasons);
 
 
                     Device.BeginInvokeOnMainThread(() => 

@@ -127,13 +127,13 @@ namespace WideWorldCalendar.Persistence
         }
         #endregion
 
-        #region Divisions
-        public bool IsNewDivision(string seasonName)
+        #region Seasons
+        public bool IsNewSeason(string seasonName)
         {
-            return Seasons.Any(d => d.Name == seasonName);
+            return Seasons.All(d => d.Name != seasonName);
         }
 
-        public void UpdateDivisions(List<string> seasonNames)
+        public void UpdateSeasons(List<string> seasonNames)
         {
             _db.DeleteAll<Season>();
             _db.InsertAll(seasonNames.Select(n => new Season { Name = n}));
