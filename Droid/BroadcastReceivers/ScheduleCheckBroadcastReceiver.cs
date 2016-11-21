@@ -5,11 +5,12 @@ using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
 using WideWorldCalendar.Persistence;
+using Xamarin.Forms;
 
 namespace WideWorldCalendar.Droid.BroadcastReceivers
 {
     [BroadcastReceiver]
-    public class ScheduledNotificationBroadcastReceiver : BroadcastReceiver
+    public class ScheduleCheckBroadcastReceiver : BroadcastReceiver
     {
         public override void OnReceive(Context context, Intent intent)
         {
@@ -47,6 +48,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 CreateNotification(context, currentTeam.Id, notificationTitle, notificationMessage);
             }
 
+            DependencyService.Get<ILocalNotification>().ScheduleGameNotification();
         }
 
         private static void CreateNotification(Context context, int teamId, string title, string message)

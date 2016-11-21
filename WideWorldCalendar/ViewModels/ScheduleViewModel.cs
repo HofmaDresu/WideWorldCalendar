@@ -38,7 +38,7 @@ namespace WideWorldCalendar.ViewModels
 	                }
 	            }
 
-                CreateNotification(myTeam, gameDays.SelectMany(g => g.Value).ToList());
+                DependencyService.Get<ILocalNotification>().ScheduleGameNotification();
 
                 await _navigation.PopToRootAsync(true);
 	        });
@@ -82,43 +82,6 @@ namespace WideWorldCalendar.ViewModels
 	        data.InsertMyTeam(myTeam);
 	        return myTeam;
 	    }
-
-	    private static void CreateNotification(Persistence.Models.MyTeam myTeam, List<Persistence.Models.Game> games)
-        {
-            var localNotification = DependencyService.Get<ILocalNotification>();
-            if (!games.Any()) return;
-	        string notificationTitle;
-
-	        switch (games.Count)
-	        {
-                case 1:
-	                notificationTitle = "Game Tonight!";
-	                break;
-                case 2:
-	                notificationTitle = "Double Header Tonight!";
-	                break;
-                case 3:
-	                notificationTitle = "Triple Header Tonight!";
-	                break;
-                default:
-	                notificationTitle = "Games Tonight!";
-	                break;
-	        }
-
-            var notificationMessage = $"{myTeam.TeamName} @ {string.Join(",", games.Select(g => g.ScheduledDateTime.ToString("t")))}";
-	        if (games.First().ScheduledDateTime.Date > DateTime.Now.Date)
-	        {
-	            localNotification.ScheduleGameNotification(notificationTitle, notificationMessage, games.First().Id,
-                    games.First().ScheduledDateTime.Date.AddHours(9));
-	        }
-#if DEBUG
-	        if (true || games.First().ScheduledDateTime.Date == DateTime.Now.Date)
-	        {
-	            localNotification.ScheduleGameNotification(DateTime.Now.AddMinutes(1));
-	        }
-#endif
-	    }
-
 
 	    public ObservableRangeCollection<Game> Games { get; } = new ObservableRangeCollection<Game>();
 

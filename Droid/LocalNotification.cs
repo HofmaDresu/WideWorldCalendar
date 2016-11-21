@@ -10,33 +10,21 @@ namespace WideWorldCalendar.Droid
 {
     public class LocalNotification_Android : ILocalNotification
     {
-        public void ScheduleGameNotification(string title, string message, int gameId, DateTime notificationTime)
+        public void ScheduleGameNotification()
         {
-            var reminder = new Intent(Forms.Context, typeof(GameNotificationBroadcastReceiver));
-            reminder.PutExtra(Constants.NotificationTitleKey, title);
-            reminder.PutExtra(Constants.NotificationMessageKey, message);
+#if DEBUG
+            var checkTime = DateTime.Now.AddMinutes(5);
+#else
+            var checkTime = DateTime.Now.Date.AddDays(1).AddHours(9);
+#endif
 
-            var reminderBroadcast = PendingIntent.GetBroadcast(Forms.Context, gameId, reminder, PendingIntentFlags.CancelCurrent);
+            var reminder = new Intent(Forms.Context, typeof(ScheduleCheckBroadcastReceiver));
+
+            var reminderBroadcast = PendingIntent.GetBroadcast(Forms.Context, Constants.ScheduleCheckRequestCode, reminder, PendingIntentFlags.CancelCurrent);
             var alarms = (AlarmManager)Forms.Context.GetSystemService(Context.AlarmService);
 
-
             var dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var notificationTimeMilliseconds = notificationTime.ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
-            alarms.SetExact(AlarmType.RtcWakeup,
-                (long)notificationTimeMilliseconds,
-                reminderBroadcast);
-        }
-
-        public void ScheduleGameNotification(DateTime notificationTime)
-        {
-            var reminder = new Intent(Forms.Context, typeof(ScheduledNotificationBroadcastReceiver));
-
-            var reminderBroadcast = PendingIntent.GetBroadcast(Forms.Context, 0, reminder, PendingIntentFlags.CancelCurrent);
-            var alarms = (AlarmManager)Forms.Context.GetSystemService(Context.AlarmService);
-
-
-            var dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var notificationTimeMilliseconds = notificationTime.ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
+            var notificationTimeMilliseconds = checkTime.ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
             alarms.SetExact(AlarmType.RtcWakeup,
                 (long)notificationTimeMilliseconds,
                 reminderBroadcast);
