@@ -14,9 +14,24 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
     {
         public override void OnReceive(Context context, Intent intent)
         {
-            foreach (var notification in Data.GetInstance(new SQLite_Android().GetConnection()).GetTodaysNotifications())
+            var dataInstance = Data.GetInstance(new SQLite_Android().GetConnection());
+
+            if (dataInstance.ShowGameNotifications())
             {
-                CreateNotification(context, notification.TeamId, notification.Title, notification.Message);
+                foreach (var notification in dataInstance.GetTodaysNotifications())
+                {
+                    CreateNotification(context, notification.TeamId, notification.Title, notification.Message);
+                }
+            }
+
+            if (dataInstance.ShowScheduleChangedNotifications())
+            {
+                //TODO
+            }
+
+            if (dataInstance.ShowNewSeasonAvailableNotifications())
+            {
+                //TODO
             }
 
             new LocalNotification_Android().ScheduleGameNotification(context);

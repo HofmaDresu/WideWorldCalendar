@@ -32,6 +32,12 @@ namespace WideWorldCalendar.Persistence
             _db.CreateTable<Game>();
             _db.CreateTable<OpposingTeam>();
             _db.CreateTable<Season>();
+            _db.CreateTable<DeviceData>();
+
+            if (!_db.Table<DeviceData>().Any())
+            {
+                _db.Insert(new DeviceData());
+            }
         }
 
         #region MyTeams
@@ -169,6 +175,42 @@ namespace WideWorldCalendar.Persistence
                     Message = notificationMessage
                 };
             }
+        }
+
+        public bool ShowGameNotifications()
+        {
+            return _db.Table<DeviceData>().Single().ShowGameNotifications;
+        }
+
+        public void SetShowGameNotifications(bool show)
+        {
+            var data = _db.Table<DeviceData>().Single();
+            data.ShowGameNotifications = show;
+            _db.Update(data);
+        }
+
+        public bool ShowScheduleChangedNotifications()
+        {
+            return _db.Table<DeviceData>().Single().ShowScheduleChangedNotifications;
+        }
+
+        public void SetShowScheduleChangedNotifications(bool show)
+        {
+            var data = _db.Table<DeviceData>().Single();
+            data.ShowScheduleChangedNotifications = show;
+            _db.Update(data);
+        }
+
+        public bool ShowNewSeasonAvailableNotifications()
+        {
+            return _db.Table<DeviceData>().Single().ShowNewSeasonAvailableNotifications;
+        }
+
+        public void SetShowNewSeasonAvailableNotifications(bool show)
+        {
+            var data = _db.Table<DeviceData>().Single();
+            data.ShowNewSeasonAvailableNotifications = show;
+            _db.Update(data);
         }
         #endregion
     }
