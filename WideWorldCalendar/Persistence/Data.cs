@@ -17,16 +17,16 @@ namespace WideWorldCalendar.Persistence
 
         private static readonly Lazy<Data> LazyData = new Lazy<Data>();
 
-        public static Data GetInstance()
+        public static Data GetInstance(SQLiteConnection connection = null)
         {
             var instance = LazyData.Value;
-            instance.Initalize();
+            instance.Initalize(connection);
             return instance;
         }
 
-        private void Initalize()
+        private void Initalize(SQLiteConnection connection = null)
         {
-            _db = DependencyService.Get<ISQLite>().GetConnection();
+            _db = connection ?? DependencyService.Get<ISQLite>().GetConnection();
 
             _db.CreateTable<MyTeam>();
             _db.CreateTable<Game>();

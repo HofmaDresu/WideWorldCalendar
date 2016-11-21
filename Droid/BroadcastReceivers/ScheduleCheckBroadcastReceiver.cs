@@ -14,12 +14,12 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
     {
         public override void OnReceive(Context context, Intent intent)
         {
-            foreach (var notification in Data.GetInstance().GetTodaysNotifications())
+            foreach (var notification in Data.GetInstance(new SQLite_Android().GetConnection()).GetTodaysNotifications())
             {
                 CreateNotification(context, notification.TeamId, notification.Title, notification.Message);
             }
 
-            DependencyService.Get<ILocalNotification>().ScheduleGameNotification();
+            new LocalNotification_Android().ScheduleGameNotification(context);
         }
 
         private static void CreateNotification(Context context, int requestCode, string title, string message)
