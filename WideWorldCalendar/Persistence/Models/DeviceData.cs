@@ -7,7 +7,7 @@ using SQLite;
 
 namespace WideWorldCalendar.Persistence.Models
 {
-    [Table("Games")]
+    [Table("DeviceData")]
     public class DeviceData
     {
         [PrimaryKey, AutoIncrement]
