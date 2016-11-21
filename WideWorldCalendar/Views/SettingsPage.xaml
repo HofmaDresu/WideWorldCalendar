@@ -1,6 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WideWorldCalendar.Views.SettingsPage">
-  <Label Text="Settings" VerticalOptions="Center" HorizontalOptions="Center" />
+             x:Class="WideWorldCalendar.Views.SettingsPage"
+             Title="Settings">
+  <Grid Padding="20, 20, 20, 0"
+        RowSpacing="20">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
+    </Grid.RowDefinitions>
+    <Label Grid.Row="0" Grid.Column="0" Text="Game reminder notifications:" FontSize="Medium" />
+    <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding ShowGameNotifications}" ></Switch>
+    <Label Grid.Row="1" Grid.Column="0" Text="Schedule change notifications:" FontSize="Medium" />
+    <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding ShowScheduleChangedNotifications}" ></Switch>
+    <Label Grid.Row="2" Grid.Column="0" Text="New season available notifications:" FontSize="Medium" />
+    <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding ShowNewSeasonAvailableNotifications}" ></Switch>
+  </Grid>
 </ContentPage>
