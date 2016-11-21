@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -27,38 +28,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             
             if (dataInstance.ShowScheduleChangedNotifications())
             {
-                var scheduleFetcher = new RestScheduleFetcher();
-                foreach (var team in dataInstance.GetMyTeams())
-                {
-                    var currentGames = dataInstance.GetGames(team.Id);
-                    var serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);
-
-                    if (currentGames.Any(g => !serverGames.Any(sg => g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime && g.Field == sg.Field
-                                                                  && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name && g.OpposingTeam.TeamColor == sg.OpposingTeam.Color))
-                        ||
-                        serverGames.Any(sg => !currentGames.Any(g => g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime && g.Field == sg.Field
-                                                                  && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name && g.OpposingTeam.TeamColor == sg.OpposingTeam.Color)))
-                    {
-                        dataInstance.DeleteGames(team.Id);
-                        foreach (var gameInfo in serverGames)
-                        {
-                            var game = new Persistence.Models.Game
-                            {
-                                Field = gameInfo.Field,
-                                IsHomeGame = gameInfo.IsHomeGame,
-                                MyTeamId = team.Id,
-                                ScheduledDateTime = gameInfo.ScheduledDateTime,
-                                OpposingTeam = new Persistence.Models.OpposingTeam
-                                {
-                                    TeamName = gameInfo.OpposingTeam.Name,
-                                    TeamColor = gameInfo.OpposingTeam.Color
-                                }
-                            };
-                            dataInstance.InsertGame(game);
-                        }
-                        CreateNotification(context, team.Id, "Team Schedule Changed", $"The schedule for {team.TeamName} has been updated.");
-                    }
-                }
+                await UpdateSchedulesIfNeeded(context, dataInstance);
             }
 
             if (dataInstance.ShowNewSeasonAvailableNotifications())
@@ -67,6 +37,55 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             }
 
             new LocalNotification_Android().ScheduleGameNotification(context);
+        }
+
+        private static async Task UpdateSchedulesIfNeeded(Context context, Data dataInstance)
+        {
+            var scheduleFetcher = new RestScheduleFetcher();
+            foreach (var team in dataInstance.GetMyTeams())
+            {
+                var currentGames = dataInstance.GetGames(team.Id);
+                var serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);
+
+                if (currentGames.Any(
+                    g =>
+                        !serverGames.Any(
+                            sg =>
+                                g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
+                                g.Field == sg.Field
+                                && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
+                                g.OpposingTeam.TeamColor == sg.OpposingTeam.Color))
+                    ||
+                    serverGames.Any(
+                        sg =>
+                            !currentGames.Any(
+                                g =>
+                                    g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
+                                    g.Field == sg.Field
+                                    && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
+                                    g.OpposingTeam.TeamColor == sg.OpposingTeam.Color)))
+                {
+                    dataInstance.DeleteGames(team.Id);
+                    foreach (var gameInfo in serverGames)
+                    {
+                        var game = new Persistence.Models.Game
+                        {
+                            Field = gameInfo.Field,
+                            IsHomeGame = gameInfo.IsHomeGame,
+                            MyTeamId = team.Id,
+                            ScheduledDateTime = gameInfo.ScheduledDateTime,
+                            OpposingTeam = new Persistence.Models.OpposingTeam
+                            {
+                                TeamName = gameInfo.OpposingTeam.Name,
+                                TeamColor = gameInfo.OpposingTeam.Color
+                            }
+                        };
+                        dataInstance.InsertGame(game);
+                    }
+                    CreateNotification(context, team.Id, "Team Schedule Changed",
+                        $"The schedule for {team.TeamName} has been updated.");
+                }
+            }
         }
 
         private static void CreateNotification(Context context, int requestCode, string title, string message)
