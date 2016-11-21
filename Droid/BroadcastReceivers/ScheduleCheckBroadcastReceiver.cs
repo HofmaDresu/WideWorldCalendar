@@ -5,6 +5,7 @@ using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
 using WideWorldCalendar.Persistence;
+using WideWorldCalendar.ScheduleFetcher;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.Droid.BroadcastReceivers
@@ -12,7 +13,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
     [BroadcastReceiver]
     public class ScheduleCheckBroadcastReceiver : BroadcastReceiver
     {
-        public override void OnReceive(Context context, Intent intent)
+        public override async void OnReceive(Context context, Intent intent)
         {
             var dataInstance = Data.GetInstance(new SQLite_Android().GetConnection());
 
@@ -24,10 +25,26 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 }
             }
 
+#if !DEBUG
             if (dataInstance.ShowScheduleChangedNotifications())
             {
-                //TODO
+                var scheduleFetcher = new RestScheduleFetcher();
+                foreach (var team in dataInstance.GetMyTeams())
+                {
+                    var currentGames = dataInstance.GetGames(team.Id);
+                    var serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);
+
+                    if (currentGames.Any(g => !serverGames.Any(sg => g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime && g.Field == sg.Field
+                                                                  && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name && g.OpposingTeam.TeamColor == sg.OpposingTeam.Color))
+                        ||
+                        serverGames.Any(sg => !currentGames.Any(g => g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime && g.Field == sg.Field
+                                                                  && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name && g.OpposingTeam.TeamColor == sg.OpposingTeam.Color)))
+                    {
+                        CreateNotification(context, team.Id, "Team Schedule Changed", $"The schedule for {team.TeamName} has been updated.");
+                    }
+                }
             }
+#endif
 
             if (dataInstance.ShowNewSeasonAvailableNotifications())
             {
