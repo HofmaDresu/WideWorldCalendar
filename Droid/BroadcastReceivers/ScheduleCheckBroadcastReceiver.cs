@@ -33,19 +33,24 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
             if (dataInstance.ShowNewSeasonAvailableNotifications())
             {
-                var scheduleFetcher = new RestScheduleFetcher();
-                var scheduleHtml = await scheduleFetcher.GetSchedulesPage();
-                var seasons = scheduleFetcher.GetSeasons(scheduleHtml);
-
-                if (seasons.Any(s => dataInstance.IsNewSeason(s)))
-                {
-                    dataInstance.UpdateSeasons(seasons);
-                    CreateNotification(context, Constants.NewSeasonNotificationRequestCode, "Wide World Sports",
-                        "A new season is available.");
-                }
+                await CheckForNewSeason(context, dataInstance);
             }
 
             new LocalNotification_Android().ScheduleGameNotification(context);
+        }
+
+        private static async Task CheckForNewSeason(Context context, Data dataInstance)
+        {
+            var scheduleFetcher = new RestScheduleFetcher();
+            var scheduleHtml = await scheduleFetcher.GetSchedulesPage();
+            var seasons = scheduleFetcher.GetSeasons(scheduleHtml);
+
+            if (seasons.Any(s => dataInstance.IsNewSeason(s)))
+            {
+                dataInstance.UpdateSeasons(seasons);
+                CreateNotification(context, Constants.NewSeasonNotificationRequestCode, "Wide World Sports",
+                    "A new season is available.");
+            }
         }
 
         private static async Task UpdateSchedulesIfNeeded(Context context, Data dataInstance)
