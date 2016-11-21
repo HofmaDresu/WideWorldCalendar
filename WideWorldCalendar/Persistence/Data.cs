@@ -36,7 +36,12 @@ namespace WideWorldCalendar.Persistence
 
             if (!_db.Table<DeviceData>().Any())
             {
-                _db.Insert(new DeviceData());
+                _db.Insert(new DeviceData
+                {
+                    ShowGameNotifications = true,
+                    ShowNewSeasonAvailableNotifications = true,
+                    ShowScheduleChangedNotifications = true
+                });
             }
         }
 
