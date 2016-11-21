@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
 using WideWorldCalendar.Persistence;
@@ -20,9 +21,8 @@ namespace WideWorldCalendar.ViewModels
             SaveCommand = new Command(async _ =>
 	        {
 	            var data = Data.GetInstance();
-                var localNotification = DependencyService.Get<ILocalNotification>();
 
-                var myTeam = SaveMyTeam(data);
+	            var myTeam = await SaveMyTeam(data, page);
 
 	            foreach (var gameInfo in Games)
 	            {
@@ -37,18 +37,10 @@ namespace WideWorldCalendar.ViewModels
 	                    gameDays.Add(game.ScheduledDateTime.Date, new List<Persistence.Models.Game> { game });
 	                }
 	            }
-                
-                //HACK: I'm not happy with passing in page like this, but there seems to be no way for the VM to create an alert and I want to handle all this logic here rather than in the code behind 
-                var answer = await page.DisplayAlert("Game Notifications", $"Would you like reminders the morning of your games for {myTeam.TeamName}?", "Yes", "No");
-	            if (answer)
-                {
-                    foreach (var day in gameDays)
-                    {
-                        CreateNotification(myTeam, day.Value, localNotification);
-                    }
-                }
 
-	            await _navigation.PopToRootAsync(true);
+                DependencyService.Get<ILocalNotification>().ScheduleGameNotification();
+
+                await _navigation.PopToRootAsync(true);
 	        });
         }
 
@@ -70,58 +62,26 @@ namespace WideWorldCalendar.ViewModels
 	        return game;
 	    }
 
-	    private Persistence.Models.MyTeam SaveMyTeam(Data data)
-	    {
-	        var myTeamInfo = Games.First().MyTeam;
+	    private async Task<Persistence.Models.MyTeam> SaveMyTeam(Data data, Page page)
+        {
+            var myTeamInfo = Games.First().MyTeam;
+            //HACK: I'm not happy with passing in page like this, but there seems to be no way for the VM to create an alert and I want to handle all this logic here rather than in the code behind 
+            var getReminders = await page.DisplayAlert("Game Notifications", $"Would you like reminders the morning of your games for {myTeamInfo.Name}?", "Yes", "No");
+
+
 	        var myTeam = new Persistence.Models.MyTeam
 	        {
                 Id = myTeamInfo.Id,
 	            TeamName = myTeamInfo.Name,
 	            TeamColor = myTeamInfo.Color,
 	            Division = myTeamInfo.Division,
-	            LastGameDateTime = Games.OrderBy(g => g.ScheduledDateTime).Last().ScheduledDateTime
+	            LastGameDateTime = Games.OrderBy(g => g.ScheduledDateTime).Last().ScheduledDateTime,
+                SendGameTimeReminders = getReminders
 	        };
 
 	        data.InsertMyTeam(myTeam);
 	        return myTeam;
 	    }
-
-	    private static void CreateNotification(Persistence.Models.MyTeam myTeam, List<Persistence.Models.Game> games, ILocalNotification localNotification)
-	    {
-	        if (!games.Any()) return;
-	        string notificationTitle;
-
-	        switch (games.Count)
-	        {
-                case 1:
-	                notificationTitle = "Game Tonight!";
-	                break;
-                case 2:
-	                notificationTitle = "Double Header Tonight!";
-	                break;
-                case 3:
-	                notificationTitle = "Triple Header Tonight!";
-	                break;
-                default:
-	                notificationTitle = "Games Tonight!";
-	                break;
-	        }
-
-            var notificationMessage = $"{myTeam.TeamName} @ {string.Join(",", games.Select(g => g.ScheduledDateTime.ToString("t")))}";
-	        if (games.First().ScheduledDateTime.Date > DateTime.Now.Date)
-	        {
-	            localNotification.ScheduleGameNotification(notificationTitle, notificationMessage, games.First().Id,
-                    games.First().ScheduledDateTime.Date.AddHours(9));
-	        }
-#if DEBUG
-	        if (games.First().ScheduledDateTime.Date == DateTime.Now.Date)
-	        {
-	            localNotification.ScheduleGameNotification(notificationTitle, notificationMessage, games.First().Id,
-	                DateTime.Now.AddMinutes(1));
-	        }
-#endif
-	    }
-
 
 	    public ObservableRangeCollection<Game> Games { get; } = new ObservableRangeCollection<Game>();
 

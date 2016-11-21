@@ -17,16 +17,16 @@ namespace WideWorldCalendar.Persistence
 
         private static readonly Lazy<Data> LazyData = new Lazy<Data>();
 
-        public static Data GetInstance()
+        public static Data GetInstance(SQLiteConnection connection = null)
         {
             var instance = LazyData.Value;
-            instance.Initalize();
+            instance.Initalize(connection);
             return instance;
         }
 
-        private void Initalize()
+        private void Initalize(SQLiteConnection connection = null)
         {
-            _db = DependencyService.Get<ISQLite>().GetConnection();
+            _db = connection ?? DependencyService.Get<ISQLite>().GetConnection();
 
             _db.CreateTable<MyTeam>();
             _db.CreateTable<Game>();
@@ -126,6 +126,49 @@ namespace WideWorldCalendar.Persistence
         {
             _db.DeleteAll<Season>();
             _db.InsertAll(seasonNames.Select(n => new Season { Name = n}));
+        }
+        #endregion
+
+        #region Notifications
+
+        public IEnumerable<GameNotification> GetTodaysNotifications()
+        {
+            var teamsWithReminders = GetMyCurrentTeams().Where(t => t.SendGameTimeReminders).ToList();
+            var todaysTeamGamesWithReminders =
+                teamsWithReminders.SelectMany(
+                    t => GetGames(t.Id).Where(g => g.ScheduledDateTime.Date == DateTime.Now.Date))
+                    .GroupBy(g => g.MyTeamId);
+
+            foreach (var teamGames in todaysTeamGamesWithReminders)
+            {
+                string notificationTitle;
+
+                switch (teamGames.Count())
+                {
+                    case 1:
+                        notificationTitle = "Game Tonight!";
+                        break;
+                    case 2:
+                        notificationTitle = "Double Header Tonight!";
+                        break;
+                    case 3:
+                        notificationTitle = "Triple Header Tonight!";
+                        break;
+                    default:
+                        notificationTitle = "Games Tonight!";
+                        break;
+                }
+                var currentTeam = teamsWithReminders.First(t => t.Id == teamGames.Key);
+                var notificationMessage =
+                    $"{currentTeam.TeamName} @ {string.Join(",", teamGames.Select(g => g.ScheduledDateTime.ToString("t")))}";
+
+                yield return new GameNotification
+                {
+                    TeamId = currentTeam.Id,
+                    Title = notificationTitle,
+                    Message = notificationMessage
+                };
+            }
         }
         #endregion
     }

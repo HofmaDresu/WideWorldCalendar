@@ -4,6 +4,6 @@ namespace WideWorldCalendar
 {
     public interface ILocalNotification
     {
-        void ScheduleGameNotification(string title, string message, int gameId, DateTime notificationTime);
+        void ScheduleGameNotification();
     }
 }

@@ -46,6 +46,7 @@
     <Compile Include="ILocalNotification.cs" />
     <Compile Include="Persistence\Data.cs" />
     <Compile Include="Persistence\ISQLite.cs" />
+    <Compile Include="Persistence\Models\GameNotification.cs" />
     <Compile Include="Persistence\Models\Season.cs" />
     <Compile Include="Persistence\Models\Game.cs" />
     <Compile Include="Persistence\Models\OpposingTeam.cs" />

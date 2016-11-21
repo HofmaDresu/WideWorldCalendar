@@ -119,9 +119,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BroadcastReceivers\ScheduleCheckBroadcastReceiver.cs" />
+    <Compile Include="BroadcastReceivers\ScheduleCheckRebootReceiver.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="GameNotificationBroadcastReceiver.cs" />
-    <Compile Include="LocalNotification.cs" />
+    <Compile Include="LocalNotification_Android.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
