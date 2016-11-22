@@ -22,12 +22,12 @@ namespace WideWorldCalendar.iOS
                 foreach (var notification in dataInstance.GetTodaysNotifications().Where(n => n.FirstGameTime.HasValue))
                 {
                     //CreateNotification(notification.FirstGameTime.Value.Date.AddHours(9), notification.Title, notification.Message);
-                    CreateNotification(DateTime.Now.AddMinutes(1), notification.Title, notification.Message);
+                    CreateNotification(DateTime.Now.AddMinutes(1), notification.Title, notification.Message, notification.TeamId);
                 }
             }
         }
 
-        private void CreateNotification(DateTime notificationTime, string title, string message)
+        private void CreateNotification(DateTime notificationTime, string title, string message, int teamId)
         {
             UNUserNotificationCenter.Current.GetNotificationSettings(settings =>
             {
@@ -52,7 +52,7 @@ namespace WideWorldCalendar.iOS
                     Second = notificationTime.Second
                 };
                 UNNotificationTrigger trigger = UNCalendarNotificationTrigger.CreateTrigger(dateComponants, true);
-                string requestId = $"exerciseNotification_{dateComponants.Year}:{dateComponants.Month}:{dateComponants.Day}:{dateComponants.Hour}:{dateComponants.Minute}:{dateComponants.Second}";
+                string requestId = $"exerciseNotification_{teamId}:{dateComponants.Year}:{dateComponants.Month}:{dateComponants.Day}:{dateComponants.Hour}:{dateComponants.Minute}:{dateComponants.Second}";
 
                 var request = UNNotificationRequest.FromIdentifier(requestId, content, trigger);
 
