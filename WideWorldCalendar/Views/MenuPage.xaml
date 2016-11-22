@@ -5,8 +5,14 @@
              x:Class="WideWorldCalendar.Views.MenuPage">
   <MasterDetailPage.Master>
     <ContentPage Title="Menu">
+      <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" Android="0,20,0,0" iOS="0, 20, 0, 0" WinPhone="20,20,20,20" />
+      </ContentPage.Padding>
       <StackLayout VerticalOptions="FillAndExpand">
-        <ListView x:Name="MenuList" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+        <Image Source="WWsoccer.jpg"
+               HeightRequest="100"
+               WidthRequest="100"></Image>
+        <ListView x:Name="MenuList" VerticalOptions="FillAndExpand">
           <ListView.ItemTemplate>
             <DataTemplate>
               <ImageCell Text="{Binding Title}" />
