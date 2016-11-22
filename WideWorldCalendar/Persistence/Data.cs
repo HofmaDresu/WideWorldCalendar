@@ -177,7 +177,8 @@ namespace WideWorldCalendar.Persistence
                 {
                     TeamId = currentTeam.Id,
                     Title = notificationTitle,
-                    Message = notificationMessage
+                    Message = notificationMessage,
+                    FirstGameTime = teamGames?.FirstOrDefault()?.ScheduledDateTime
                 };
             }
         }

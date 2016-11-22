@@ -10,7 +10,7 @@ namespace WideWorldCalendar.iOS
 {
     public class SQLite_iOS : ISQLite
     {
-        SQLiteConnection ISQLite.GetConnection()
+        public SQLiteConnection GetConnection()
         {
             const string sqliteFilename = "WideWorldCalendar.db3";
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // Documents folder

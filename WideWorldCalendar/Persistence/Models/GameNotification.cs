@@ -11,5 +11,6 @@ namespace WideWorldCalendar.Persistence.Models
         public int TeamId { get; set; }
         public string Title { get; set; }
         public string Message { get; set; }
+        public DateTime? FirstGameTime { get; set; }
     }
 }

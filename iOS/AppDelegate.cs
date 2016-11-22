@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using ObjCRuntime;
 using UIKit;
+using UserNotifications;
 
 namespace WideWorldCalendar.iOS
 {
@@ -21,7 +23,19 @@ namespace WideWorldCalendar.iOS
 
 			LoadApplication(new App());
 
-			return base.FinishedLaunching(app, options);
+
+            UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound, (approved, err) =>
+            {
+            });
+            
+            var intentIDs = new string[] { };
+
+            var category = UNNotificationCategory.FromIdentifier(Constants.GameTonightNotification, new UNNotificationAction[] {}, intentIDs, UNNotificationCategoryOptions.CustomDismissAction);
+
+            var categories = new[] { category };
+            UNUserNotificationCenter.Current.SetNotificationCategories(new NSSet<UNNotificationCategory>(categories));
+
+            return base.FinishedLaunching(app, options);
 		}
 	}
 }
