@@ -36,6 +36,16 @@ namespace WideWorldCalendar.iOS
             UNUserNotificationCenter.Current.SetNotificationCategories(new NSSet<UNNotificationCategory>(categories));
 
             return base.FinishedLaunching(app, options);
-		}
-	}
+        }
+
+        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+        {
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 1;
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+
+            var alert = new UIAlertView { Title = notification.AlertTitle, Message = notification.AlertBody };
+            alert.AddButton("OK");
+            alert.Show();
+        }
+    }
 }
