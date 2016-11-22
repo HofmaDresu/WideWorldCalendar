@@ -152,26 +152,10 @@ namespace WideWorldCalendar.Persistence
 
             foreach (var teamGames in todaysTeamGamesWithReminders)
             {
-                string notificationTitle;
+                var notificationTitle = GetNotificationTitle(teamGames);
 
-                switch (teamGames.Count())
-                {
-                    case 1:
-                        notificationTitle = "Game Tonight!";
-                        break;
-                    case 2:
-                        notificationTitle = "Double Header Tonight!";
-                        break;
-                    case 3:
-                        notificationTitle = "Triple Header Tonight!";
-                        break;
-                    default:
-                        notificationTitle = "Games Tonight!";
-                        break;
-                }
                 var currentTeam = teamsWithReminders.First(t => t.Id == teamGames.Key);
-                var notificationMessage =
-                    $"{currentTeam.TeamName} @ {string.Join(",", teamGames.Select(g => g.ScheduledDateTime.ToString("t")))}";
+                var notificationMessage = GetNotificationMessage(currentTeam, teamGames);
 
                 yield return new GameNotification
                 {
@@ -181,6 +165,59 @@ namespace WideWorldCalendar.Persistence
                     FirstGameTime = teamGames?.FirstOrDefault()?.ScheduledDateTime
                 };
             }
+        }
+
+        public IEnumerable<GameNotification> GetAllGameNotifications()
+        {
+            var teamsWithReminders = GetMyCurrentTeams().Where(t => t.SendGameTimeReminders).ToList();
+
+            foreach (var team in teamsWithReminders)
+            {
+                var teamGamesWithReminders = GetGames(team.Id).Where(g => g.ScheduledDateTime.Date >= DateTime.Now.Date).GroupBy(g => g.ScheduledDateTime.Date);
+
+                foreach (var teamGames in teamGamesWithReminders)
+                {
+                    var notificationTitle = GetNotificationTitle(teamGames);
+
+                    var notificationMessage = GetNotificationMessage(team, teamGames);
+
+                    yield return new GameNotification
+                    {
+                        TeamId = team.Id,
+                        Title = notificationTitle,
+                        Message = notificationMessage,
+                        FirstGameTime = teamGames?.FirstOrDefault()?.ScheduledDateTime
+                    };
+                }
+
+            }
+        }
+
+        private string GetNotificationMessage(MyTeam team, IEnumerable<Game> games)
+        {
+            return $"{team.TeamName} @ {string.Join(",", games.Select(g => g.ScheduledDateTime.ToString("t")))}";
+        }
+
+        private string GetNotificationTitle(IEnumerable<Game> games)
+        {
+            string notificationTitle;
+
+            switch (games.Count())
+            {
+                case 1:
+                    notificationTitle = "Game Tonight!";
+                    break;
+                case 2:
+                    notificationTitle = "Double Header Tonight!";
+                    break;
+                case 3:
+                    notificationTitle = "Triple Header Tonight!";
+                    break;
+                default:
+                    notificationTitle = "Games Tonight!";
+                    break;
+            }
+            return notificationTitle;
         }
 
         public bool ShowGameNotifications()
