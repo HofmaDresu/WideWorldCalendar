@@ -15,7 +15,9 @@
         <ListView x:Name="MenuList" VerticalOptions="FillAndExpand">
           <ListView.ItemTemplate>
             <DataTemplate>
-              <ImageCell Text="{Binding Title}" />
+              <ViewCell>
+                <Label Text="{Binding Title}" Margin="20, 0, 20, 0" VerticalOptions="CenterAndExpand" Style="{StaticResource ActionLabel}"/>
+              </ViewCell>
             </DataTemplate>
           </ListView.ItemTemplate>
         </ListView>
