@@ -7,6 +7,7 @@ namespace WideWorldCalendar.Views
 {
     public partial class MenuPage : MasterDetailPage
     {
+        private const string MyTeamsTitle = "My Teams";
         private readonly Stack<Page> _pageHistory = new Stack<Page>();
 
         public MenuPage()
@@ -18,7 +19,7 @@ namespace WideWorldCalendar.Views
             {
                 new MasterPageItem
                 {
-                    Title = "My Teams",
+                    Title = MyTeamsTitle,
                     TargetType = typeof (CurrentTeamsPage)
                 },
                 new MasterPageItem
@@ -38,7 +39,7 @@ namespace WideWorldCalendar.Views
             if (item != null)
             {
                 Page targetPage;
-                if (item.Title == "My Teams")
+                if (item.Title == MyTeamsTitle)
                 {
                     targetPage = _pageHistory.ElementAtOrDefault(0) ?? Detail;
                     _pageHistory.Clear();
