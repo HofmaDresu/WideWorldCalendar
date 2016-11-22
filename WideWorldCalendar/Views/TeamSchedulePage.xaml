@@ -4,7 +4,7 @@
              xmlns:converters="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar"
              x:Class="WideWorldCalendar.Views.TeamSchedulePage">
   <ContentPage.Content>
-    <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" WinPhone="20,20,20,20" />
+    <OnPlatform x:TypeArguments="Thickness" WinPhone="20,20,20,20" />
   </ContentPage.Content>
   <ContentPage.Resources>
     <ResourceDictionary>
