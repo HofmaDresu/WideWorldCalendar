@@ -93,7 +93,7 @@ namespace WideWorldCalendar.iOS
             if (seasons.Any(dataInstance.IsNewSeason))
             {
                 dataInstance.UpdateSeasons(seasons);
-                localNotifications.CreateNotification(DateTime.Now, "Wide World Sports",
+				localNotifications.CreateNotification(DateTime.Now.AddMinutes(1), "Wide World Sports",
                    "A new season is available.", Constants.NewSeasonRequestId, Constants.NewSeasonNotification);
                 return true;
             }
@@ -144,7 +144,7 @@ namespace WideWorldCalendar.iOS
                         };
                         dataInstance.InsertGame(game);
                     }
-                    localNotifications.CreateNotification(DateTime.Now, "Team Schedule Changed",
+					localNotifications.CreateNotification(DateTime.Now.AddMinutes(1), "Team Schedule Changed",
                         $"The schedule for {team.TeamName} has been updated.", team.Id, Constants.ScheduleChangedNotification);
                     newData = true;
                 }
