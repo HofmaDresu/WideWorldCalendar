@@ -10,7 +10,7 @@ namespace WideWorldCalendar.Droid
 {
     public class LocalNotification_Android : ILocalNotification
     {
-        public void ScheduleGameNotification()
+        public void ScheduleGameNotifications()
         {
             ScheduleGameNotification(Forms.Context);
         }
@@ -40,6 +40,11 @@ namespace WideWorldCalendar.Droid
             alarms.SetExact(AlarmType.RtcWakeup,
                 (long) notificationTimeMilliseconds,
                 reminderBroadcast);
+        }
+
+        public void ClearAllNotifications()
+        {
+            //No implementation needed on Android. No notifications are "scheduled", and this is fully controlled in the ScheduleCheckBroadcastReceiver
         }
     }
 }

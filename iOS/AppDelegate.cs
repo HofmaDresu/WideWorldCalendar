@@ -61,21 +61,24 @@ namespace WideWorldCalendar.iOS
 
 	        try
 	        {
-                if (dataInstance.ShowScheduleChangedNotifications())
-                {
-                    dataUpdated = await UpdateSchedulesIfNeeded(dataInstance, localNotifications);
-                    localNotifications.ClearAllNotifications();
-                    localNotifications.ScheduleGameNotifications();
-                }
+	            if (dataInstance.ShowScheduleChangedNotifications())
+	            {
+	                localNotifications.ClearAllNotifications();
+	                dataUpdated = await UpdateSchedulesIfNeeded(dataInstance, localNotifications);
+	            }
 
-                if (dataInstance.ShowNewSeasonAvailableNotifications())
-                {
-                    dataUpdated = await CheckForNewSeason(dataInstance, localNotifications);
-                }
+	            if (dataInstance.ShowNewSeasonAvailableNotifications())
+	            {
+	                dataUpdated = await CheckForNewSeason(dataInstance, localNotifications);
+	            }
 	        }
 	        catch (Exception)
+	        {
+	            completionHandler(UIBackgroundFetchResult.Failed);
+	        }
+	        finally
             {
-                completionHandler(UIBackgroundFetchResult.Failed);
+                localNotifications.ScheduleGameNotifications();
             }
 
 	        completionHandler(dataUpdated ? UIBackgroundFetchResult.NewData : UIBackgroundFetchResult.NoData);
