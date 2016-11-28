@@ -4,6 +4,7 @@ using UIKit;
 using WideWorldCalendar.Effects;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using MainButtonEffect = WideWorldCalendar.iOS.Effects.MainButtonEffect;
 
 [assembly: ResolutionGroupName(EffectIds.EffectGroupName)]
 [assembly: ExportEffect(typeof(MainButtonEffect), EffectIds.MainButtonEffectName)]
@@ -34,10 +35,6 @@ namespace WideWorldCalendar.iOS.Effects
 
             try
             {
-                if (args.PropertyName == "IsFocused")
-                {
-                    Control.BackgroundColor = Equals(Control.BackgroundColor, Colors.PrimaryColor.ToUIColor()) ? Colors.PrimaryHightlightColor.ToUIColor() : Colors.PrimaryColor.ToUIColor();
-                }
                 if (args.PropertyName == "IsEnabled")
                 {
                     Control.BackgroundColor = uiButton.Enabled ? Colors.PrimaryDisabledColor.ToUIColor() : Colors.PrimaryColor.ToUIColor();
