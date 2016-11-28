@@ -42,7 +42,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Colors.cs" />
+    <Compile Include="Effects\EffectIds.cs" />
     <Compile Include="Converters\GameDateFutureColorConverter.cs" />
+    <Compile Include="Effects\MainButtonEffect.cs" />
     <Compile Include="ILocalNotification.cs" />
     <Compile Include="Persistence\Data.cs" />
     <Compile Include="Persistence\ISQLite.cs" />

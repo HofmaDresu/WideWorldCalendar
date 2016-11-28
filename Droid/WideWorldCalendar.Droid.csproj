@@ -122,6 +122,7 @@
     <Compile Include="BroadcastReceivers\ScheduleCheckBroadcastReceiver.cs" />
     <Compile Include="BroadcastReceivers\ScheduleCheckRebootReceiver.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Effects\MainButtonEffect.cs" />
     <Compile Include="LocalNotification_Android.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
