@@ -26,8 +26,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                     CreateNotification(context, notification.TeamId, notification.Title, notification.Message);
                 }
             }
-#if DEBUG
-#else
+
             if (dataInstance.ShowScheduleChangedNotifications())
             {
                 await UpdateSchedulesIfNeeded(context, dataInstance);
@@ -37,7 +36,6 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             {
                 await CheckForNewSeason(context, dataInstance);
             }
-#endif
 
             new LocalNotification_Android().ScheduleGameNotification(context);
         }
