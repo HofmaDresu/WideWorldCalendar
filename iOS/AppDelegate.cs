@@ -8,6 +8,7 @@ using UIKit;
 using UserNotifications;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.ScheduleFetcher;
+using Xamarin.Forms.Platform.iOS;
 
 namespace WideWorldCalendar.iOS
 {
@@ -17,6 +18,7 @@ namespace WideWorldCalendar.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init();
+			SetUpTheme();
 
 			// Code for starting up the Xamarin Test Cloud Agent
 #if ENABLE_TEST_CLOUD
@@ -39,8 +41,15 @@ namespace WideWorldCalendar.iOS
 
             UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(24*60*60);
 
+
             return base.FinishedLaunching(app, options);
         }
+
+		private void SetUpTheme()
+		{
+			UISwitch.Appearance.OnTintColor = Colors.SecondaryColor.ToUIColor();
+			UINavigationBar.Appearance.BarTintColor = Colors.PrimaryColor.ToUIColor();
+		}
 
         public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
         {

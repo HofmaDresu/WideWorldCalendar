@@ -13,7 +13,10 @@ namespace WideWorldCalendar.Views
         public MenuPage()
         {
             InitializeComponent();
-            Detail = new NavigationPage(new CurrentTeamsPage());
+			Detail = new NavigationPage(new CurrentTeamsPage())
+			{
+				BarTextColor = Color.White
+			};
 
             var masterPageItems = new List<MasterPageItem>
             {
@@ -46,7 +49,10 @@ namespace WideWorldCalendar.Views
                 }
                 else
                 {
-                    targetPage = new NavigationPage((Page) Activator.CreateInstance(item.TargetType));
+					targetPage = new NavigationPage((Page)Activator.CreateInstance(item.TargetType))
+					{
+						BarTextColor = Color.White
+					};
                     _pageHistory.Push(Detail);
                 }
                 
