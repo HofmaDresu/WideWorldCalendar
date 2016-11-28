@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		xmlns:local="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar"
+		xmlns:effects="clr-namespace:WideWorldCalendar.Effects;assembly=WideWorldCalendar"
 		x:Class="WideWorldCalendar.ViewSchedulePage">
 	<ContentPage.Content>
         <OnPlatform x:TypeArguments="Thickness" WinPhone="20,20,20,20" />
@@ -52,7 +53,13 @@
 		  </ListView>
       <Button Text="Save Schedule"
           Command="{Binding SaveCommand}"
-          HorizontalOptions="Center"/>
+          HorizontalOptions="FillAndExpand"
+          Margin="20, 20, 20, 0"
+          TextColor="White">
+        <Button.Effects>
+          <effects:MainButtonEffect />
+        </Button.Effects>
+      </Button>
 	  </StackLayout>
     <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></ActivityIndicator>
   </StackLayout>
