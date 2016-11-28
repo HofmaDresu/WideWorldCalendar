@@ -19,7 +19,11 @@ namespace WideWorldCalendar.iOS
             {
                 foreach (var notification in dataInstance.GetAllGameNotifications().Where(n => n.FirstGameTime.HasValue))
                 {
-                    CreateNotification(notification.FirstGameTime.Value.Date.AddHours(9), notification.Title, notification.Message, notification.TeamId, Constants.GameNotification);
+                    var notificationTime = notification.FirstGameTime.Value.Date.AddHours(9);
+                    if (notificationTime > DateTime.Now.AddHours(1))
+                    {
+                        CreateNotification(notificationTime, notification.Title, notification.Message, notification.TeamId, Constants.GameNotification);
+                    }
                 }
             }
         }
