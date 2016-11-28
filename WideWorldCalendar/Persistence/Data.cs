@@ -67,6 +67,7 @@ namespace WideWorldCalendar.Persistence
 
         public void InsertMyTeam(MyTeam myTeam)
         {
+            DeleteMyTeam(myTeam.Id);
             _db.Insert(myTeam);
         }
         #endregion
