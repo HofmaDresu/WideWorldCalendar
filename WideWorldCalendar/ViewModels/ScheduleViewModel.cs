@@ -38,7 +38,7 @@ namespace WideWorldCalendar.ViewModels
 	                }
 	            }
 
-                DependencyService.Get<ILocalNotification>().ScheduleGameNotification();
+                DependencyService.Get<ILocalNotification>().ScheduleGameNotifications();
 
                 await _navigation.PopToRootAsync(true);
 	        });

@@ -57,25 +57,20 @@ namespace WideWorldCalendar.iOS
 	        var dataUpdated = false;
 
             var dataInstance = Data.GetInstance(new SQLite_iOS().GetConnection());
-
-            if (dataInstance.ShowGameNotifications())
-            {
-                foreach (var notification in dataInstance.GetTodaysNotifications())
-                {
-                    //CreateNotification(context, notification.TeamId, notification.Title, notification.Message);
-                }
-            }
+	        var localNotifications = new LocalNotification_iOS();
 
 	        try
 	        {
                 if (dataInstance.ShowScheduleChangedNotifications())
                 {
-                    dataUpdated = await UpdateSchedulesIfNeeded(dataInstance);
+                    dataUpdated = await UpdateSchedulesIfNeeded(dataInstance, localNotifications);
+                    localNotifications.ClearAllNotifications();
+                    localNotifications.ScheduleGameNotifications();
                 }
 
                 if (dataInstance.ShowNewSeasonAvailableNotifications())
                 {
-                    dataUpdated = await CheckForNewSeason(dataInstance);
+                    dataUpdated = await CheckForNewSeason(dataInstance, localNotifications);
                 }
 	        }
 	        catch (Exception)
@@ -86,7 +81,7 @@ namespace WideWorldCalendar.iOS
 	        completionHandler(dataUpdated ? UIBackgroundFetchResult.NewData : UIBackgroundFetchResult.NoData);
 	    }
 
-        private static async Task<bool> CheckForNewSeason(Data dataInstance)
+        private static async Task<bool> CheckForNewSeason(Data dataInstance, LocalNotification_iOS localNotifications)
         {
             var scheduleFetcher = new RestScheduleFetcher();
             var scheduleHtml = await scheduleFetcher.GetSchedulesPage();
@@ -95,14 +90,14 @@ namespace WideWorldCalendar.iOS
             if (seasons.Any(dataInstance.IsNewSeason))
             {
                 dataInstance.UpdateSeasons(seasons);
-                //CreateNotification(context, Constants.NewSeasonNotificationRequestCode, "Wide World Sports",
-                //    "A new season is available.");
+                localNotifications.CreateNotification(DateTime.Now, "Wide World Sports",
+                   "A new season is available.", Constants.NewSeasonRequestId, Constants.NewSeasonNotification);
                 return true;
             }
             return false;
         }
 
-        private static async Task<bool> UpdateSchedulesIfNeeded(Data dataInstance)
+        private static async Task<bool> UpdateSchedulesIfNeeded(Data dataInstance, LocalNotification_iOS localNotifications)
         {
             var scheduleFetcher = new RestScheduleFetcher();
             var newData = false;
@@ -146,8 +141,8 @@ namespace WideWorldCalendar.iOS
                         };
                         dataInstance.InsertGame(game);
                     }
-                    //CreateNotification(context, team.Id, "Team Schedule Changed",
-                    //    $"The schedule for {team.TeamName} has been updated.");
+                    localNotifications.CreateNotification(DateTime.Now, "Team Schedule Changed",
+                        $"The schedule for {team.TeamName} has been updated.", team.Id, Constants.ScheduleChangedNotification);
                     newData = true;
                 }
             }

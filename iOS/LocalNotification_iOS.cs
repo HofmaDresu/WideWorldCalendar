@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Foundation;
 using UserNotifications;
 using WideWorldCalendar.iOS;
@@ -13,7 +11,7 @@ namespace WideWorldCalendar.iOS
 {
     public class LocalNotification_iOS : ILocalNotification
     {
-        public void ScheduleGameNotification()
+        public void ScheduleGameNotifications()
         {
             var dataInstance = Data.GetInstance(new SQLite_iOS().GetConnection());
 
@@ -21,12 +19,17 @@ namespace WideWorldCalendar.iOS
             {
                 foreach (var notification in dataInstance.GetAllGameNotifications().Where(n => n.FirstGameTime.HasValue))
                 {
-                    CreateNotification(notification.FirstGameTime.Value.Date.AddHours(9), notification.Title, notification.Message, notification.TeamId);
+                    CreateNotification(notification.FirstGameTime.Value.Date.AddHours(9), notification.Title, notification.Message, notification.TeamId, Constants.GameNotification);
                 }
             }
         }
 
-        private void CreateNotification(DateTime notificationTime, string title, string message, int teamId)
+        public void ClearAllNotifications()
+        {
+            UNUserNotificationCenter.Current.RemoveAllPendingNotificationRequests();
+        }
+
+        public void CreateNotification(DateTime notificationTime, string title, string message, int requestIdCode, string notificationType)
         {
             UNUserNotificationCenter.Current.GetNotificationSettings(settings =>
             {
@@ -51,7 +54,7 @@ namespace WideWorldCalendar.iOS
                     Second = notificationTime.Second
                 };
                 UNNotificationTrigger trigger = UNCalendarNotificationTrigger.CreateTrigger(dateComponants, true);
-                string requestId = $"GameNotification_{teamId}:{dateComponants.Year}:{dateComponants.Month}:{dateComponants.Day}:{dateComponants.Hour}:{dateComponants.Minute}:{dateComponants.Second}";
+                string requestId = $"{notificationType}_{requestIdCode}:{dateComponants.Year}:{dateComponants.Month}:{dateComponants.Day}:{dateComponants.Hour}:{dateComponants.Minute}:{dateComponants.Second}";
 
                 var request = UNNotificationRequest.FromIdentifier(requestId, content, trigger);
 
