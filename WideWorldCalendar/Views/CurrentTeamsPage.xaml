@@ -35,7 +35,6 @@
         Margin="20, 0, 20, 0"
         VerticalOptions="End"
         TextColor="White">
-
       <Button.Effects>
         <effects:MainButtonEffect />
       </Button.Effects>
