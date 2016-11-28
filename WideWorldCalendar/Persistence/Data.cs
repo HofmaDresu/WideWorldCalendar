@@ -131,7 +131,7 @@ namespace WideWorldCalendar.Persistence
         #region Seasons
         public bool IsNewSeason(string seasonName)
         {
-            return Seasons.All(d => d.Name != seasonName);
+			return Seasons.Any() && Seasons.All(d => d.Name != seasonName);
         }
 
         public void UpdateSeasons(List<string> seasonNames)
