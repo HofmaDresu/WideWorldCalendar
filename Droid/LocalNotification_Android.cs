@@ -17,17 +17,12 @@ namespace WideWorldCalendar.Droid
 
         public void ScheduleGameNotification(Context packageContext)
         {
-#if DEBUG
-            var checkTime = DateTime.Now.AddMinutes(1);
-
-#else
             var checkTime = DateTime.Now.Date.AddHours(9);
 
             if (DateTime.Now.Hour > 8)
             {
                 checkTime = checkTime.AddDays(1);
             }
-#endif
 
             var reminder = new Intent(packageContext, typeof (ScheduleCheckBroadcastReceiver));
 
