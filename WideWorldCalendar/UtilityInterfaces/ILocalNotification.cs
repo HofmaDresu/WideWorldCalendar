@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WideWorldCalendar
+﻿namespace WideWorldCalendar.UtilityInterfaces
 {
     public interface ILocalNotification
     {

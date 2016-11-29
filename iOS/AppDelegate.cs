@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
-using ObjCRuntime;
 using UIKit;
 using UserNotifications;
+using WideWorldCalendar.iOS.Utilities;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.ScheduleFetcher;
 using Xamarin.Forms.Platform.iOS;

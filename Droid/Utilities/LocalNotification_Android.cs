@@ -1,12 +1,13 @@
 using System;
 using Android.App;
 using Android.Content;
-using WideWorldCalendar.Droid;
 using WideWorldCalendar.Droid.BroadcastReceivers;
+using WideWorldCalendar.Droid.Utilities;
+using WideWorldCalendar.UtilityInterfaces;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(LocalNotification_Android))]
-namespace WideWorldCalendar.Droid
+namespace WideWorldCalendar.Droid.Utilities
 {
     public class LocalNotification_Android : ILocalNotification
     {

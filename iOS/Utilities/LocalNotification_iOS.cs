@@ -2,12 +2,13 @@
 using System.Linq;
 using Foundation;
 using UserNotifications;
-using WideWorldCalendar.iOS;
+using WideWorldCalendar.iOS.Utilities;
 using WideWorldCalendar.Persistence;
+using WideWorldCalendar.UtilityInterfaces;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(LocalNotification_iOS))]
-namespace WideWorldCalendar.iOS
+namespace WideWorldCalendar.iOS.Utilities
 {
     public class LocalNotification_iOS : ILocalNotification
     {

@@ -1,7 +1,6 @@
 using Android.App;
 using Android.Content;
-using Android.Util;
-using Xamarin.Forms;
+using WideWorldCalendar.Droid.Utilities;
 
 namespace WideWorldCalendar.Droid.BroadcastReceivers
 {

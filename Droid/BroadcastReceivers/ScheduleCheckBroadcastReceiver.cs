@@ -6,9 +6,9 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
+using WideWorldCalendar.Droid.Utilities;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.ScheduleFetcher;
-using Xamarin.Forms;
 
 namespace WideWorldCalendar.Droid.BroadcastReceivers
 {

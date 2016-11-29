@@ -6,6 +6,7 @@ using System.Windows.Input;
 using MvvmHelpers;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.ScheduleFetcher;
+using WideWorldCalendar.UtilityInterfaces;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.ViewModels
