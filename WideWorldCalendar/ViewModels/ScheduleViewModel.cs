@@ -24,8 +24,10 @@ namespace WideWorldCalendar.ViewModels
 	            var data = Data.GetInstance();
 
 	            var myTeam = await SaveMyTeam(data, page);
+                DependencyService.Get<IUnifiedAnalytics>().CreateAndSendEventOnDefaultTracker(Constants.AnalyticsCategoryUserAction, "Save Team", myTeam.NameAndColor);
 
-	            foreach (var gameInfo in Games)
+
+                foreach (var gameInfo in Games)
 	            {
 	                var game = SaveGame(gameInfo, myTeam, data);
 

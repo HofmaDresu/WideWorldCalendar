@@ -43,6 +43,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Colors.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Effects\EffectIds.cs" />
     <Compile Include="Converters\GameDateFutureColorConverter.cs" />
     <Compile Include="Effects\MainButtonEffect.cs" />

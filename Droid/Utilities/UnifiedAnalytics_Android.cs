@@ -41,7 +41,7 @@ namespace WideWorldCalendar.Droid.Utilities
             DefaultTracker.SetScreenName(null);
         }
 
-        public void CreateAndSendEventOnDefaultTracker(string category, string action, string label, long? value)
+        public void CreateAndSendEventOnDefaultTracker(string category, string action, string label, long? value = null)
         {
             SendOnDefaultTracker(CreateEvent(category, action, label, value));
         }
