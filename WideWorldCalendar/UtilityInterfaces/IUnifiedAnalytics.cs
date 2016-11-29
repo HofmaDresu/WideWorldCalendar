@@ -1,4 +1,4 @@
-namespace WideWorldCalendar.Droid.Utilities
+namespace WideWorldCalendar.UtilityInterfaces
 {
     public interface IUnifiedAnalytics
     {

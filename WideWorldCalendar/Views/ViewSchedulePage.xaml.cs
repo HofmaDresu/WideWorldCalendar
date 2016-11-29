@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using WideWorldCalendar.ScheduleFetcher;
+using WideWorldCalendar.UtilityInterfaces;
 using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
 
@@ -46,6 +47,7 @@ namespace WideWorldCalendar
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-		}
+            DependencyService.Get<IUnifiedAnalytics>().SendScreenHitOnDefaultTracker("Server Team Schedule");
+        }
 	}
 }

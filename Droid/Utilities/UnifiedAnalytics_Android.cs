@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Android.App;
 using Android.Content;
 using Android.Gms.Analytics;
 using WideWorldCalendar.Droid.Utilities;
+using WideWorldCalendar.UtilityInterfaces;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(UnifiedAnalytics_Android))]
@@ -11,28 +11,17 @@ namespace WideWorldCalendar.Droid.Utilities
 {
     public class UnifiedAnalytics_Android : IUnifiedAnalytics
     {
+        /// <summary>
+        /// Only use for Xamarin DI
+        /// </summary>
+        public UnifiedAnalytics_Android() : this(Forms.Context) { }
 
-        private UnifiedAnalytics_Android(Context context)
+        public UnifiedAnalytics_Android(Context context)
         {
             AndroidAnalytics.Instance(context);
         }
 
-        private static UnifiedAnalytics_Android _unifiedAnalytics;
-        public static UnifiedAnalytics_Android GetInstance(Activity context)
-        {
-            if (_unifiedAnalytics == null)
-            {
-                _unifiedAnalytics = new UnifiedAnalytics_Android(context);
-                _unifiedAnalytics.DefaultTracker.EnableAutoActivityTracking(false);
-                _unifiedAnalytics.DefaultTracker.EnableExceptionReporting(true);
-                _unifiedAnalytics.Analytics.EnableAutoActivityReports(context.Application);
-            }
-            return _unifiedAnalytics;
-        }
-
         private Tracker DefaultTracker => AndroidAnalytics.Instance().Tracker;
-
-        private GoogleAnalytics Analytics => AndroidAnalytics.Instance().Analytics;
 
         public void SetOnDefaultTracker(string key, string value)
         {

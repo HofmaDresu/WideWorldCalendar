@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.ScheduleFetcher;
+using WideWorldCalendar.UtilityInterfaces;
 using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
 
@@ -68,7 +69,13 @@ namespace WideWorldCalendar
 				});
 		}
 
-		void SeasonChanged(object sender, EventArgs e)
+	    protected override void OnAppearing()
+	    {
+	        base.OnAppearing();
+            DependencyService.Get<IUnifiedAnalytics>().SendScreenHitOnDefaultTracker("Select Schedule");
+        }
+
+	    void SeasonChanged(object sender, EventArgs e)
 		{
 			if (SeasonPicker.SelectedIndex == -1) return;
 

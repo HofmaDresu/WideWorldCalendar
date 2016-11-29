@@ -1,4 +1,5 @@
-﻿using WideWorldCalendar.ViewModels;
+﻿using WideWorldCalendar.UtilityInterfaces;
+using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.Views
@@ -18,6 +19,7 @@ namespace WideWorldCalendar.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            DependencyService.Get<IUnifiedAnalytics>().SendScreenHitOnDefaultTracker("Current Teams");
             _vm.RefreshTeams();
         }
     }
