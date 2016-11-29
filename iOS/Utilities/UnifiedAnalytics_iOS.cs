@@ -1,20 +1,17 @@
 ﻿using Foundation;
 using Google.Analytics;
+using WideWorldCalendar.iOS.Utilities;
 using WideWorldCalendar.UtilityInterfaces;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(UnifiedAnalytics_iOS))]
 namespace WideWorldCalendar.iOS.Utilities
 {
     public class UnifiedAnalytics_iOS : IUnifiedAnalytics
     {
-        private UnifiedAnalytics_iOS()
+        public UnifiedAnalytics_iOS()
         {
-            Gai.SharedInstance.GetTracker(ThirdPartyIds.AnalyticsTrackingId);
-        }
-
-        private static UnifiedAnalytics_iOS _unifiedAnalytics;
-        public static UnifiedAnalytics_iOS GetInstance()
-        {
-            return _unifiedAnalytics ?? (_unifiedAnalytics = new UnifiedAnalytics_iOS());
+			IosAnalytics.Instance();
         }
 
         private static ITracker DefaultTracker
@@ -57,4 +54,20 @@ namespace WideWorldCalendar.iOS.Utilities
             return DictionaryBuilder.CreateEvent(category, action, label, value).Build();
         }
     }
+
+	class IosAnalytics
+	{
+		private static IosAnalytics _instance;
+
+		private IosAnalytics()
+		{
+
+            Gai.SharedInstance.GetTracker(ThirdPartyIds.AnalyticsTrackingId);
+		}
+
+		public static IosAnalytics Instance()
+		{
+			return _instance ?? (_instance = new IosAnalytics());
+		}
+	}
 }
