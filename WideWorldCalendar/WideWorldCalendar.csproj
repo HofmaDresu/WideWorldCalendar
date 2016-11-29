@@ -46,7 +46,7 @@
     <Compile Include="Effects\EffectIds.cs" />
     <Compile Include="Converters\GameDateFutureColorConverter.cs" />
     <Compile Include="Effects\MainButtonEffect.cs" />
-    <Compile Include="ILocalNotification.cs" />
+    <Compile Include="UtilityInterfaces\ILocalNotification.cs" />
     <Compile Include="Persistence\Data.cs" />
     <Compile Include="Persistence\ISQLite.cs" />
     <Compile Include="Persistence\Models\DeviceData.cs" />

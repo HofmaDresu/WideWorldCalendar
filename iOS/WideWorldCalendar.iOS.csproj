@@ -158,7 +158,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Effects\MainButtonEffect.cs" />
-    <Compile Include="LocalNotification_iOS.cs" />
+    <Compile Include="Utilities\LocalNotification_iOS.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="SQLite_iOS.cs" />
