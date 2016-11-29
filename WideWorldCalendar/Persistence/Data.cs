@@ -161,6 +161,7 @@ namespace WideWorldCalendar.Persistence
                 yield return new GameNotification
                 {
                     TeamId = currentTeam.Id,
+                    TeamNameAndColor = currentTeam.NameAndColor,
                     Title = notificationTitle,
                     Message = notificationMessage,
                     FirstGameTime = teamGames?.FirstOrDefault()?.ScheduledDateTime
@@ -185,6 +186,7 @@ namespace WideWorldCalendar.Persistence
                     yield return new GameNotification
                     {
                         TeamId = team.Id,
+                        TeamNameAndColor = team.NameAndColor,
                         Title = notificationTitle,
                         Message = notificationMessage,
                         FirstGameTime = teamGames?.FirstOrDefault()?.ScheduledDateTime

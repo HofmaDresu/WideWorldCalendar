@@ -23,6 +23,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             {
                 foreach (var notification in dataInstance.GetTodaysNotifications())
                 {
+                    new UnifiedAnalytics_Android(context).CreateAndSendEventOnDefaultTracker(WideWorldCalendar.Constants.AnalyticsCategoryNotification, WideWorldCalendar.Constants.AnalyticsLabelGame, notification.TeamNameAndColor);
                     CreateNotification(context, notification.TeamId, notification.Title, notification.Message);
                 }
             }
