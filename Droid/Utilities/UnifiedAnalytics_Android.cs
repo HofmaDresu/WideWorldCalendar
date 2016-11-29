@@ -78,7 +78,7 @@ namespace WideWorldCalendar.Droid.Utilities
                 _tracker.EnableAdvertisingIdCollection(true);
 
 #if DEBUG
-                analytics.SetDryRun(true);
+                //analytics.SetDryRun(true);
 #endif
             }
         }
