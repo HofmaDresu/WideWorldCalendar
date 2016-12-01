@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Microsoft.Azure.Mobile;
 
 namespace WideWorldCalendar.Droid
 {
@@ -15,8 +16,8 @@ namespace WideWorldCalendar.Droid
 			base.OnCreate(bundle);
 
 			global::Xamarin.Forms.Forms.Init(this, bundle);
-
-			LoadApplication(new App());
+            MobileCenter.Configure("31e541dc-2476-4e59-8da0-519cea09b4ad");
+            LoadApplication(new App());
 		}
 	}
 }

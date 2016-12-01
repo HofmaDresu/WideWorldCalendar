@@ -1,6 +1,9 @@
 ﻿using WideWorldCalendar.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace WideWorldCalendar
@@ -10,9 +13,10 @@ namespace WideWorldCalendar
 		public App()
 		{
 			InitializeComponent();
+            MobileCenter.Start(typeof(Analytics), typeof(Crashes));
 
-			//MainPage = new NavigationPage(new CurrentTeamsPage());
-		    MainPage = new MenuPage();
+            //MainPage = new NavigationPage(new CurrentTeamsPage());
+            MainPage = new MenuPage();
 		}
 
 		protected override void OnStart()

@@ -1,8 +1,9 @@
-﻿using System;
+﻿ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
-using UIKit;
+ using Microsoft.Azure.Mobile;
+ using UIKit;
 using UserNotifications;
 using WideWorldCalendar.iOS.Utilities;
 using WideWorldCalendar.Persistence;
@@ -23,8 +24,8 @@ namespace WideWorldCalendar.iOS
 #if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start();
 #endif
-
-			LoadApplication(new App());
+            MobileCenter.Configure("ce6abde5-5977-4858-bf93-d7661ab4fbf9");
+            LoadApplication(new App());
 
 
             UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound, (approved, err) =>
