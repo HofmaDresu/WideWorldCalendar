@@ -33,6 +33,7 @@ namespace WideWorldCalendar.Persistence
             _db.CreateTable<OpposingTeam>();
             _db.CreateTable<Season>();
             _db.CreateTable<DeviceData>();
+            _db.CreateTable<GameNotificationPreference>();
 
             if (!_db.Table<DeviceData>().Any())
             {
@@ -41,6 +42,16 @@ namespace WideWorldCalendar.Persistence
                     ShowGameNotifications = true,
                     ShowNewSeasonAvailableNotifications = true,
                     ShowScheduleChangedNotifications = true
+                });
+            }
+
+            if (!_db.Table<GameNotificationPreference>().Any())
+            {
+                _db.Insert(new GameNotificationPreference
+                {
+                    Day = DayPreference.GameDay,
+                    Hour = 9,
+                    Meridian = Meridian.Am
                 });
             }
         }
@@ -222,7 +233,9 @@ namespace WideWorldCalendar.Persistence
             }
             return notificationTitle;
         }
+        #endregion
 
+        #region devicedata
         public bool ShowGameNotifications()
         {
             return _db.Table<DeviceData>().Single().ShowGameNotifications;
@@ -257,6 +270,19 @@ namespace WideWorldCalendar.Persistence
             var data = _db.Table<DeviceData>().Single();
             data.ShowNewSeasonAvailableNotifications = show;
             _db.Update(data);
+        }
+        #endregion
+
+        #region GameNotificationPreferences
+        public GameNotificationPreference GetGameNotificationPreferences()
+        {
+            return _db.Table<GameNotificationPreference>().Single();
+        }
+
+        public void SetGameNotificationPreferences(GameNotificationPreference preference)
+        {
+            _db.DeleteAll<GameNotificationPreference>();
+            _db.Insert(preference);
         }
         #endregion
     }
