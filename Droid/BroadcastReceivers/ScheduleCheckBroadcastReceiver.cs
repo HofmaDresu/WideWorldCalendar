@@ -29,13 +29,12 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                                             ? preferences.Hour
                                             : preferences.Hour + 12);
 
-
                 foreach (var notification in dataInstance.GetNotificationsForDay(gameCheckDate))
                 {
                     var reminder = new Intent(context, typeof(GameNotificationBroadcastReceiver));
-                    intent.PutExtra(Constants.NotificationRequestCodeKey, notification.TeamId);
-                    intent.PutExtra(Constants.NotificationTitleKey, notification.Title);
-                    intent.PutExtra(Constants.NotificationMessageKey, notification.Message);
+                    reminder.PutExtra(Constants.NotificationRequestCodeKey, notification.TeamId);
+                    reminder.PutExtra(Constants.NotificationTitleKey, notification.Title);
+                    reminder.PutExtra(Constants.NotificationMessageKey, notification.Message);
 
                     var reminderBroadcast = PendingIntent.GetBroadcast(context, notification.TeamId, reminder,
                         PendingIntentFlags.CancelCurrent);
@@ -53,7 +52,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             {
                 await UpdateSchedulesIfNeeded(context, dataInstance);
             }
-
+            
             if (dataInstance.ShowNewSeasonAvailableNotifications())
             {
                 await CheckForNewSeason(context, dataInstance);
