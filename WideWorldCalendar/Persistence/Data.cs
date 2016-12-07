@@ -49,8 +49,8 @@ namespace WideWorldCalendar.Persistence
             {
                 _db.Insert(new GameNotificationPreference
                 {
-                    Day = DayPreference.DayBefore,
-                    Hour = 11,
+                    Day = DayPreference.GameDay,
+                    Hour = 9,
                     Meridian = Meridian.Am
                 });
             }
@@ -164,7 +164,7 @@ namespace WideWorldCalendar.Persistence
 
             foreach (var teamGames in todaysTeamGamesWithReminders)
             {
-                var notificationTitle = GetNotificationTitle(teamGames);
+                var notificationTitle = GetNotificationTitle(teamGames, checkDate);
 
                 var currentTeam = teamsWithReminders.First(t => t.Id == teamGames.Key);
                 var notificationMessage = GetNotificationMessage(currentTeam, teamGames);
@@ -190,7 +190,7 @@ namespace WideWorldCalendar.Persistence
 
                 foreach (var teamGames in teamGamesWithReminders)
                 {
-                    var notificationTitle = GetNotificationTitle(teamGames);
+                    var notificationTitle = GetNotificationTitle(teamGames, teamGames.First().ScheduledDateTime);
 
                     var notificationMessage = GetNotificationMessage(team, teamGames);
 
@@ -212,23 +212,25 @@ namespace WideWorldCalendar.Persistence
             return $"{team.TeamName} @ {string.Join(",", games.Select(g => g.ScheduledDateTime.ToString("t")))}";
         }
 
-        private string GetNotificationTitle(IEnumerable<Game> games)
+        private string GetNotificationTitle(IEnumerable<Game> games, DateTime checkDate)
         {
             string notificationTitle;
+
+            var gameDayString = checkDate.Date == DateTime.Now.Date ? "Tonight" : "Tomorrow";
 
             switch (games.Count())
             {
                 case 1:
-                    notificationTitle = "Game Tonight!";
+                    notificationTitle = $"Game {gameDayString}!";
                     break;
                 case 2:
-                    notificationTitle = "Double Header Tonight!";
+                    notificationTitle = $"Double Header {gameDayString}!";
                     break;
                 case 3:
-                    notificationTitle = "Triple Header Tonight!";
+                    notificationTitle = $"Triple Header {gameDayString}!";
                     break;
                 default:
-                    notificationTitle = "Games Tonight!";
+                    notificationTitle = $"Games {gameDayString}!";
                     break;
             }
             return notificationTitle;
