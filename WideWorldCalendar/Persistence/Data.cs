@@ -49,8 +49,8 @@ namespace WideWorldCalendar.Persistence
             {
                 _db.Insert(new GameNotificationPreference
                 {
-                    Day = DayPreference.GameDay,
-                    Hour = 9,
+                    Day = DayPreference.DayBefore,
+                    Hour = 11,
                     Meridian = Meridian.Am
                 });
             }
@@ -154,12 +154,12 @@ namespace WideWorldCalendar.Persistence
 
         #region Notifications
 
-        public IEnumerable<GameNotification> GetTodaysNotifications()
+        public IEnumerable<GameNotification> GetNotificationsForDay(DateTime checkDate)
         {
             var teamsWithReminders = GetMyCurrentTeams().Where(t => t.SendGameTimeReminders).ToList();
             var todaysTeamGamesWithReminders =
                 teamsWithReminders.SelectMany(
-                    t => GetGames(t.Id).Where(g => g.ScheduledDateTime.Date == DateTime.Now.Date))
+                    t => GetGames(t.Id).Where(g => g.ScheduledDateTime.Date == checkDate.Date))
                     .GroupBy(g => g.MyTeamId);
 
             foreach (var teamGames in todaysTeamGamesWithReminders)
