@@ -13,12 +13,21 @@
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
     <Label Grid.Row="0" Grid.Column="0" Text="Game reminder notifications:" FontSize="Medium" />
     <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding ShowGameNotifications}" ></Switch>
-    <Label Grid.Row="1" Grid.Column="0" Text="Schedule change notifications:" FontSize="Medium" />
-    <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding ShowScheduleChangedNotifications}" ></Switch>
-    <Label Grid.Row="2" Grid.Column="0" Text="New season available notifications:" FontSize="Medium" />
-    <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding ShowNewSeasonAvailableNotifications}" ></Switch>
+    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="20,-20,0,0" Orientation="Horizontal">
+      <Picker x:Name="HourPicker"
+              SelectedIndex="{Binding SelectedHourIndex}"/>
+      <Picker x:Name="MeridianPicker"
+              SelectedIndex="{Binding SelectedMeridianIndex}"/>
+      <Picker x:Name="DayPicker"
+              SelectedIndex="{Binding SelectedDayIndex}"/>
+    </StackLayout>
+    <Label Grid.Row="2" Grid.Column="0" Text="Schedule change notifications:" FontSize="Medium" />
+    <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding ShowScheduleChangedNotifications}" ></Switch>
+    <Label Grid.Row="3" Grid.Column="0" Text="New season available notifications:" FontSize="Medium" />
+    <Switch Grid.Row="3" Grid.Column="1" IsToggled="{Binding ShowNewSeasonAvailableNotifications}" ></Switch>
   </Grid>
 </ContentPage>

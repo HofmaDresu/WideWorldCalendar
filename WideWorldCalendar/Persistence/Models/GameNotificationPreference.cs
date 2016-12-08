@@ -20,7 +20,7 @@ namespace WideWorldCalendar.Persistence.Models
 
     public enum DayPreference
     {
-        GameDay,
-        DayBefore
+        TheDayOfTheGame,
+        TheDayBeforeTheGame
     }
 }

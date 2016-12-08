@@ -49,7 +49,7 @@ namespace WideWorldCalendar.Persistence
             {
                 _db.Insert(new GameNotificationPreference
                 {
-                    Day = DayPreference.GameDay,
+                    Day = DayPreference.TheDayOfTheGame,
                     Hour = 9,
                     Meridian = Meridian.Am
                 });
