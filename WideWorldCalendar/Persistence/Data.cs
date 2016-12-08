@@ -33,6 +33,7 @@ namespace WideWorldCalendar.Persistence
             _db.CreateTable<OpposingTeam>();
             _db.CreateTable<Season>();
             _db.CreateTable<DeviceData>();
+            _db.CreateTable<GameNotificationPreference>();
 
             if (!_db.Table<DeviceData>().Any())
             {
@@ -41,6 +42,16 @@ namespace WideWorldCalendar.Persistence
                     ShowGameNotifications = true,
                     ShowNewSeasonAvailableNotifications = true,
                     ShowScheduleChangedNotifications = true
+                });
+            }
+
+            if (!_db.Table<GameNotificationPreference>().Any())
+            {
+                _db.Insert(new GameNotificationPreference
+                {
+                    Day = DayPreference.TheDayOfTheGame,
+                    Hour = 9,
+                    Meridian = Meridian.Am
                 });
             }
         }
@@ -143,17 +154,17 @@ namespace WideWorldCalendar.Persistence
 
         #region Notifications
 
-        public IEnumerable<GameNotification> GetTodaysNotifications()
+        public IEnumerable<GameNotification> GetNotificationsForDay(DateTime checkDate)
         {
             var teamsWithReminders = GetMyCurrentTeams().Where(t => t.SendGameTimeReminders).ToList();
             var todaysTeamGamesWithReminders =
                 teamsWithReminders.SelectMany(
-                    t => GetGames(t.Id).Where(g => g.ScheduledDateTime.Date == DateTime.Now.Date))
+                    t => GetGames(t.Id).Where(g => g.ScheduledDateTime.Date == checkDate.Date))
                     .GroupBy(g => g.MyTeamId);
 
             foreach (var teamGames in todaysTeamGamesWithReminders)
             {
-                var notificationTitle = GetNotificationTitle(teamGames);
+                var notificationTitle = GetNotificationTitle(teamGames, checkDate);
 
                 var currentTeam = teamsWithReminders.First(t => t.Id == teamGames.Key);
                 var notificationMessage = GetNotificationMessage(currentTeam, teamGames);
@@ -179,7 +190,7 @@ namespace WideWorldCalendar.Persistence
 
                 foreach (var teamGames in teamGamesWithReminders)
                 {
-                    var notificationTitle = GetNotificationTitle(teamGames);
+                    var notificationTitle = GetNotificationTitle(teamGames, teamGames.First().ScheduledDateTime);
 
                     var notificationMessage = GetNotificationMessage(team, teamGames);
 
@@ -201,28 +212,32 @@ namespace WideWorldCalendar.Persistence
             return $"{team.TeamName} @ {string.Join(",", games.Select(g => g.ScheduledDateTime.ToString("t")))}";
         }
 
-        private string GetNotificationTitle(IEnumerable<Game> games)
+        private string GetNotificationTitle(IEnumerable<Game> games, DateTime checkDate)
         {
             string notificationTitle;
+
+            var gameDayString = checkDate.Date == DateTime.Now.Date ? "Tonight" : "Tomorrow";
 
             switch (games.Count())
             {
                 case 1:
-                    notificationTitle = "Game Tonight!";
+                    notificationTitle = $"Game {gameDayString}!";
                     break;
                 case 2:
-                    notificationTitle = "Double Header Tonight!";
+                    notificationTitle = $"Double Header {gameDayString}!";
                     break;
                 case 3:
-                    notificationTitle = "Triple Header Tonight!";
+                    notificationTitle = $"Triple Header {gameDayString}!";
                     break;
                 default:
-                    notificationTitle = "Games Tonight!";
+                    notificationTitle = $"Games {gameDayString}!";
                     break;
             }
             return notificationTitle;
         }
+        #endregion
 
+        #region devicedata
         public bool ShowGameNotifications()
         {
             return _db.Table<DeviceData>().Single().ShowGameNotifications;
@@ -257,6 +272,19 @@ namespace WideWorldCalendar.Persistence
             var data = _db.Table<DeviceData>().Single();
             data.ShowNewSeasonAvailableNotifications = show;
             _db.Update(data);
+        }
+        #endregion
+
+        #region GameNotificationPreferences
+        public GameNotificationPreference GetGameNotificationPreferences()
+        {
+            return _db.Table<GameNotificationPreference>().Single();
+        }
+
+        public void SetGameNotificationPreferences(GameNotificationPreference preference)
+        {
+            _db.DeleteAll<GameNotificationPreference>();
+            _db.Insert(preference);
         }
         #endregion
     }

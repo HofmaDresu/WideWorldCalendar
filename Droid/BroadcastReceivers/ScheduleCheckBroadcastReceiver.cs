@@ -8,7 +8,10 @@ using Android.OS;
 using Android.Support.V4.App;
 using WideWorldCalendar.Droid.Utilities;
 using WideWorldCalendar.Persistence;
+using WideWorldCalendar.Persistence.Models;
 using WideWorldCalendar.ScheduleFetcher;
+using WideWorldCalendar.Utilities;
+using Game = WideWorldCalendar.ScheduleFetcher.Game;
 
 namespace WideWorldCalendar.Droid.BroadcastReceivers
 {
@@ -21,10 +24,29 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
             if (dataInstance.ShowGameNotifications())
             {
-                foreach (var notification in dataInstance.GetTodaysNotifications())
+                var notificationPreferences = dataInstance.GetGameNotificationPreferences();
+                var gameCheckDate = DateTime.Now.Date.AddDays(notificationPreferences.Day == DayPreference.TheDayOfTheGame ? 0 : 1);
+
+                int preferredHour = TimeConversionUtil.ConvertHourPreferenceTo24Hour(notificationPreferences);
+
+                var notificationTime = DateTime.Now.Date.AddHours(preferredHour);
+
+                foreach (var notification in dataInstance.GetNotificationsForDay(gameCheckDate))
                 {
-                    new UnifiedAnalytics_Android(context).CreateAndSendEventOnDefaultTracker(WideWorldCalendar.Constants.AnalyticsCategoryNotification, WideWorldCalendar.Constants.AnalyticsLabelGame, notification.TeamNameAndColor);
-                    CreateNotification(context, notification.TeamId, notification.Title, notification.Message);
+                    var reminder = new Intent(context, typeof(GameNotificationBroadcastReceiver));
+                    reminder.PutExtra(Constants.NotificationRequestCodeKey, notification.TeamId);
+                    reminder.PutExtra(Constants.NotificationTitleKey, notification.Title);
+                    reminder.PutExtra(Constants.NotificationMessageKey, notification.Message);
+
+                    var reminderBroadcast = PendingIntent.GetBroadcast(context, notification.TeamId, reminder,
+                        PendingIntentFlags.CancelCurrent);
+                    var alarms = (AlarmManager)context.GetSystemService(Context.AlarmService);
+
+                    var dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    var notificationTimeMilliseconds = notificationTime.ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
+                    alarms.SetExact(AlarmType.RtcWakeup,
+                        (long)notificationTimeMilliseconds,
+                        reminderBroadcast);
                 }
             }
 
@@ -32,7 +54,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             {
                 await UpdateSchedulesIfNeeded(context, dataInstance);
             }
-
+            
             if (dataInstance.ShowNewSeasonAvailableNotifications())
             {
                 await CheckForNewSeason(context, dataInstance);
@@ -59,7 +81,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             if (seasons.Any(dataInstance.IsNewSeason))
             {
                 dataInstance.UpdateSeasons(seasons);
-                CreateNotification(context, Constants.NewSeasonNotificationRequestCode, "Wide World Sports",
+                LocalNotification_Android.CreateNotification(context, Constants.NewSeasonNotificationRequestCode, "Wide World Sports",
                     "A new season is available.");
             }
         }
@@ -116,46 +138,10 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                         };
                         dataInstance.InsertGame(game);
                     }
-                    CreateNotification(context, team.Id, "Team Schedule Changed",
+                    LocalNotification_Android.CreateNotification(context, team.Id, "Team Schedule Changed",
                         $"The schedule for {team.TeamName} has been updated.");
                 }
             }
-        }
-
-        private static void CreateNotification(Context context, int requestCode, string title, string message)
-        {
-            var builder = new NotificationCompat.Builder(context)
-                .SetContentTitle(title)
-                .SetContentText(message);
-
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-            {
-                builder
-                    .SetPriority((int) NotificationPriority.Low)
-                    .SetVisibility(NotificationCompat.VisibilityPublic)
-                    .SetCategory("reminder")
-                    .SetSmallIcon(Resource.Drawable.ic_launcher);
-            }
-            else if ((int) Build.VERSION.SdkInt >= 20)
-            {
-                builder
-                    .SetSmallIcon(Resource.Drawable.ic_launcher);
-            }
-            else
-            {
-                // Disable obsolete warning 'cause this was how you do it pre-20
-#pragma warning disable 618
-                builder
-                    .SetSmallIcon(Resource.Drawable.ic_launcher);
-#pragma warning restore 618
-            }
-
-            var notification = builder.Build();
-
-            notification.Flags |= NotificationFlags.AutoCancel;
-
-            var notificationManager = NotificationManagerCompat.From(context);
-            notificationManager?.Notify(requestCode, notification);
         }
     }
 }

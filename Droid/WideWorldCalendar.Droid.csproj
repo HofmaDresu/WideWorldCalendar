@@ -153,6 +153,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BroadcastReceivers\GameNotificationBroadcastReceiver.cs" />
     <Compile Include="BroadcastReceivers\ScheduleCheckBroadcastReceiver.cs" />
     <Compile Include="BroadcastReceivers\ScheduleCheckRebootReceiver.cs" />
     <Compile Include="Constants.cs" />

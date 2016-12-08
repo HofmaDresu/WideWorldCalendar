@@ -69,7 +69,7 @@ namespace WideWorldCalendar.ViewModels
         {
             var myTeamInfo = Games.First().MyTeam;
             //HACK: I'm not happy with passing in page like this, but there seems to be no way for the VM to create an alert and I want to handle all this logic here rather than in the code behind 
-            var getReminders = await page.DisplayAlert("Game Notifications", $"Would you like reminders the morning of your games for {myTeamInfo.Name}?", "Yes", "No");
+            var getReminders = await page.DisplayAlert("Game Notifications", $"Would you like game time reminders for {myTeamInfo.Name}?", "Yes", "No");
 
 
 	        var myTeam = new Persistence.Models.MyTeam
