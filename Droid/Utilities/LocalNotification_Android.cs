@@ -15,14 +15,14 @@ namespace WideWorldCalendar.Droid.Utilities
     {
         public void ScheduleGameNotifications()
         {
-            ScheduleGameNotification(Forms.Context);
+            ScheduleGameNotification(Forms.Context, true);
         }
 
-        public void ScheduleGameNotification(Context packageContext)
+        public void ScheduleGameNotification(Context packageContext, bool instantCheck = false)
         {
-            var checkTime = DateTime.Now.Date.AddHours(9);
+            var checkTime = instantCheck ? DateTime.Now : DateTime.Now.Date.AddHours(9);
 
-            if (DateTime.Now.Hour > 8)
+            if (DateTime.Now.Hour > 8 && ! instantCheck)
             {
                 checkTime = checkTime.AddDays(1);
             }

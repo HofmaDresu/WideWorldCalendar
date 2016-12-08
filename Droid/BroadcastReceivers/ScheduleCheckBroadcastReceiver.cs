@@ -25,9 +25,19 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             {
                 var preferences = dataInstance.GetGameNotificationPreferences();
                 var gameCheckDate = DateTime.Now.Date.AddDays(preferences.Day == DayPreference.TheDayOfTheGame ? 0 : 1);
-                var notificationTime = DateTime.Now.Date.AddHours(preferences.Meridian == Meridian.Am
-                                            ? preferences.Hour
-                                            : preferences.Hour + 12);
+
+                int preferredHour;
+                if (preferences.Meridian == Meridian.Am)
+                {
+                    preferredHour = preferences.Hour == 12 ? 0 : preferences.Hour;
+                }
+                else
+                {
+                    preferredHour = preferences.Hour == 12 ? 12 : preferences.Hour + 12;
+                }
+
+
+                var notificationTime = DateTime.Now.Date.AddHours(preferredHour);
 
                 foreach (var notification in dataInstance.GetNotificationsForDay(gameCheckDate))
                 {

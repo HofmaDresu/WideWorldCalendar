@@ -5,6 +5,8 @@ using Humanizer;
 using MvvmHelpers;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
+using WideWorldCalendar.UtilityInterfaces;
+using Xamarin.Forms;
 
 namespace WideWorldCalendar.ViewModels
 {
@@ -132,6 +134,7 @@ namespace WideWorldCalendar.ViewModels
                 Meridian = _meridianOptions[_selectedMeridianIndex],
                 Day = _dayOptions[_selectedDayIndex]
             });
+            DependencyService.Get<ILocalNotification>().ScheduleGameNotifications();
         }
     }
 }
