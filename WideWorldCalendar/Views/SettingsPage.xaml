@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControls="clr-namespace:WideWorldCalendar.CustomControls;assembly=WideWorldCalendar"
              x:Class="WideWorldCalendar.Views.SettingsPage"
              Title="Settings">
   <Grid Padding="20, 20, 20, 0"
@@ -18,11 +19,11 @@
     <Label Grid.Row="0" Grid.Column="0" Text="Game reminder notifications:" FontSize="Medium" />
     <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding ShowGameNotifications}" ></Switch>
     <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="20,-20,0,0" Orientation="Horizontal">
-      <Picker x:Name="HourPicker"
+      <customControls:AdjustableWidthPicker x:Name="HourPicker"
               SelectedIndex="{Binding SelectedHourIndex}"/>
-      <Picker x:Name="MeridianPicker"
+      <customControls:AdjustableWidthPicker x:Name="MeridianPicker"
               SelectedIndex="{Binding SelectedMeridianIndex}"/>
-      <Picker x:Name="DayPicker"
+      <customControls:AdjustableWidthPicker x:Name="DayPicker"
               SelectedIndex="{Binding SelectedDayIndex}"/>
     </StackLayout>
     <Label Grid.Row="2" Grid.Column="0" Text="Schedule change notifications:" FontSize="Medium" />
