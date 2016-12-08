@@ -10,6 +10,7 @@ using WideWorldCalendar.Droid.Utilities;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
 using WideWorldCalendar.ScheduleFetcher;
+using WideWorldCalendar.Utilities;
 using Game = WideWorldCalendar.ScheduleFetcher.Game;
 
 namespace WideWorldCalendar.Droid.BroadcastReceivers
@@ -23,19 +24,10 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
             if (dataInstance.ShowGameNotifications())
             {
-                var preferences = dataInstance.GetGameNotificationPreferences();
-                var gameCheckDate = DateTime.Now.Date.AddDays(preferences.Day == DayPreference.TheDayOfTheGame ? 0 : 1);
+                var notificationPreferences = dataInstance.GetGameNotificationPreferences();
+                var gameCheckDate = DateTime.Now.Date.AddDays(notificationPreferences.Day == DayPreference.TheDayOfTheGame ? 0 : 1);
 
-                int preferredHour;
-                if (preferences.Meridian == Meridian.Am)
-                {
-                    preferredHour = preferences.Hour == 12 ? 0 : preferences.Hour;
-                }
-                else
-                {
-                    preferredHour = preferences.Hour == 12 ? 12 : preferences.Hour + 12;
-                }
-
+                int preferredHour = TimeConversionUtil.ConvertHourPreferenceTo24Hour(notificationPreferences);
 
                 var notificationTime = DateTime.Now.Date.AddHours(preferredHour);
 

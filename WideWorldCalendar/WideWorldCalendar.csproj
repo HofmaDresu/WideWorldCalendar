@@ -49,6 +49,7 @@
     <Compile Include="Converters\GameDateFutureColorConverter.cs" />
     <Compile Include="Effects\MainButtonEffect.cs" />
     <Compile Include="Persistence\Models\GameNotificationPreference.cs" />
+    <Compile Include="Utilities\TimeConversionUtil.cs" />
     <Compile Include="UtilityInterfaces\ILocalNotification.cs" />
     <Compile Include="Persistence\Data.cs" />
     <Compile Include="Persistence\ISQLite.cs" />

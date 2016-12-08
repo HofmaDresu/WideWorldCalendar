@@ -5,6 +5,7 @@ using UserNotifications;
 using WideWorldCalendar.iOS.Utilities;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
+using WideWorldCalendar.Utilities;
 using WideWorldCalendar.UtilityInterfaces;
 using Xamarin.Forms;
 
@@ -26,19 +27,11 @@ namespace WideWorldCalendar.iOS.Utilities
                     // ReSharper disable once PossibleInvalidOperationException
                     var gameDate = notification.FirstGameTime.Value.Date;
                     var notificationPreferences = dataInstance.GetGameNotificationPreferences();
-                    int preferredHour;
-                    if (notificationPreferences.Meridian == Meridian.Am)
-                    {
-                        preferredHour = notificationPreferences.Hour == 12 ? 0 : notificationPreferences.Hour;
-                    }
-                    else
-                    {
-                        preferredHour = notificationPreferences.Hour == 12 ? 12 : notificationPreferences.Hour + 12;
-                    }
+                    int preferredHour = TimeConversionUtil.ConvertHourPreferenceTo24Hour(notificationPreferences);
 
                     var notificationTime =
                         gameDate.AddHours(preferredHour)
-                            .AddDays(notificationPreferences.Day == DayPreference.TheDayOfTheGame ? 0 : 1);
+                            .AddDays(notificationPreferences.Day == DayPreference.TheDayOfTheGame ? 0 : -1);
 
                     
                     if (notificationTime > DateTime.Now)
