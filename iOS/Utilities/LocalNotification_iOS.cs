@@ -4,6 +4,7 @@ using Foundation;
 using UserNotifications;
 using WideWorldCalendar.iOS.Utilities;
 using WideWorldCalendar.Persistence;
+using WideWorldCalendar.Persistence.Models;
 using WideWorldCalendar.UtilityInterfaces;
 using Xamarin.Forms;
 
@@ -14,14 +15,33 @@ namespace WideWorldCalendar.iOS.Utilities
     {
         public void ScheduleGameNotifications()
         {
+            ClearAllNotifications();
             var dataInstance = Data.GetInstance(new SQLite_iOS().GetConnection());
 
             if (dataInstance.ShowGameNotifications())
             {
                 foreach (var notification in dataInstance.GetAllGameNotifications().Where(n => n.FirstGameTime.HasValue))
                 {
-                    var notificationTime = notification.FirstGameTime.Value.Date.AddHours(9);
-                    if (notificationTime > DateTime.Now.AddHours(1))
+                    // This is OK since we verify that it has value in the foreach. just annoyed by the squiggly
+                    // ReSharper disable once PossibleInvalidOperationException
+                    var gameDate = notification.FirstGameTime.Value.Date;
+                    var notificationPreferences = dataInstance.GetGameNotificationPreferences();
+                    int preferredHour;
+                    if (notificationPreferences.Meridian == Meridian.Am)
+                    {
+                        preferredHour = notificationPreferences.Hour == 12 ? 0 : notificationPreferences.Hour;
+                    }
+                    else
+                    {
+                        preferredHour = notificationPreferences.Hour == 12 ? 12 : notificationPreferences.Hour + 12;
+                    }
+
+                    var notificationTime =
+                        gameDate.AddHours(preferredHour)
+                            .AddDays(notificationPreferences.Day == DayPreference.TheDayOfTheGame ? 0 : 1);
+
+                    
+                    if (notificationTime > DateTime.Now)
                     {
                         CreateNotification(notificationTime, notification.Title, notification.Message, notification.TeamId, Constants.GameNotification);
                     }
