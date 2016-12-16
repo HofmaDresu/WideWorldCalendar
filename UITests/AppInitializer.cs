@@ -12,7 +12,9 @@ namespace WideWorldCalendar.UITests
 		{
 			if (platform == Platform.Android)
 			{
-				return ConfigureApp.Android.StartApp();
+			    return ConfigureApp.Android
+			        .ApkFile("../../../Droid/bin/UITest/com.hofmadresu.wide_world_calendar-Signed.apk")
+			        .StartApp();
 			}
 
 			return ConfigureApp.iOS.StartApp();

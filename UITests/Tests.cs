@@ -8,7 +8,7 @@ using Xamarin.UITest.Queries;
 namespace WideWorldCalendar.UITests
 {
 	[TestFixture(Platform.Android)]
-	[TestFixture(Platform.iOS)]
+	//[TestFixture(Platform.iOS)]
 	public class Tests
 	{
 		IApp app;
@@ -28,10 +28,25 @@ namespace WideWorldCalendar.UITests
 		[Test]
 		public void WelcomeTextIsDisplayed()
 		{
-			AppResult[] results = app.WaitForElement(c => c.Marked("Welcome to Xamarin Forms!"));
-			app.Screenshot("Welcome screen.");
+            //Add teams
+			app.WaitForElement("AddTeamButton");
+		    app.Tap("AddTeamButton");
+		    app.Repl();
 
-			Assert.IsTrue(results.Any());
+
+            // Actual Test
+		    //app.Tap("OK");
+		    //app.WaitForElement(c => c.Text("Settings"));
+            //app.Tap(c => c.Text("Settings"));
+		    //app.WaitForElement(c => c.Class("PickerRenderer"));
+		    //app.Tap(c => c.Class("PickerRenderer"));
+		    //app.Tap(c => c.Text("12"));
+            //app.Tap(c => c.Class("PickerRenderer"));
+            //app.Tap(c => c.Text("9"));
+		    //app.Back();
+            //app.Repl();
+
+
 		}
 	}
 }

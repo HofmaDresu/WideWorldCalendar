@@ -29,7 +29,9 @@
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
-    <Button Text="Add Team"
+    <Button 
+        AutomationId="AddTeamButton"
+        Text="Add Team"
         Command="{Binding AddTeamsCommand}"
         HorizontalOptions="FillAndExpand"
         Margin="20, 0, 20, 0"

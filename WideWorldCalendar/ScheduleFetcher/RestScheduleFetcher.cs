@@ -9,7 +9,8 @@ namespace WideWorldCalendar.ScheduleFetcher
 	public class RestScheduleFetcher : IScheduleFetcher
 	{
 		public async Task<string> GetSchedulesPage()
-		{ 
+		{
+		    await Task.Delay(5000);
 			return await GetClient().GetStringAsync("https://secure.wideworld-sports.me/wws_membership/SchedulesScoresDisplay.asp");
 		}
 
