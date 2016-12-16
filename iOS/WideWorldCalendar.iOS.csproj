@@ -199,7 +199,16 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ipad-settings-29pt@2x.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\WWsoccer.png">
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\WWsoccer_120.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\WWsoccer_180.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\WWsoccer_80.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\WWsoccer_87.png">
       <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Contents.json">
