@@ -444,9 +444,11 @@ a:active {
 
         #endregion
 
+	    private const int delayMs = 5000;
+
         public async Task<string> GetSchedulesPage()
 		{
-			await Task.Delay(1000);
+			await Task.Delay(delayMs);
 
 			return ScheduleScoresDisplayHtml;
 		}
@@ -468,13 +470,13 @@ a:active {
 
 		public async Task<List<NavigationOption>> GetTeams(int divisionId)
 		{
-			await Task.Delay(1000);
+			await Task.Delay(delayMs);
 			return ScheduleHtmlParser.GetTeams(DivisionReportHtml).ToList();
 		}
 
 		public async Task<List<Game>> GetTeamSchedule(int teamId)
 		{
-			await Task.Delay(1000);
+			await Task.Delay(delayMs);
 			return ScheduleHtmlParser.GetTeamSchedule(teamId, PrintTeamScheduleHtml).ToList();
 		}
 	}
