@@ -52,6 +52,7 @@
 			  </ListView.ItemTemplate>
 		  </ListView>
       <Button Text="Save Schedule"
+        AutomationId="SaveScheduleCommand"
           Command="{Binding SaveCommand}"
           HorizontalOptions="FillAndExpand"
           Margin="20, 20, 20, 0"
