@@ -20,10 +20,13 @@
     <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding ShowGameNotifications}" ></Switch>
     <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="20,-20,0,0" Orientation="Horizontal" IsVisible="{Binding ShowGameNotifications}">
       <customControls:AdjustableWidthPicker x:Name="HourPicker"
+        AutomationId="HourPicker"
               SelectedIndex="{Binding SelectedHourIndex}"/>
       <customControls:AdjustableWidthPicker x:Name="MeridianPicker"
+        AutomationId="MeridianPicker"
               SelectedIndex="{Binding SelectedMeridianIndex}"/>
       <customControls:AdjustableWidthPicker x:Name="DayPicker"
+        AutomationId="DayPicker"
               SelectedIndex="{Binding SelectedDayIndex}"/>
     </StackLayout>
     <Label Grid.Row="2" Grid.Column="0" Text="Schedule change notifications:" FontSize="Medium" />

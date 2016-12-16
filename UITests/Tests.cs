@@ -31,25 +31,21 @@ namespace WideWorldCalendar.UITests
 	        AddTeamAndVerify(0);
 	    }
 
-
 	    [Test]
-		public void WelcomeTextIsDisplayed()
+		public void QuickBackAfterChangeSettingDoesNotCrash()
 		{
 		    AddTeamAndVerify(0);
-		    app.Repl();
 
-
-            // Actual Test
-            //app.Tap("OK");
-            //app.WaitForElement(c => c.Text("Settings"));
-            //app.Tap(c => c.Text("Settings"));
-            //app.WaitForElement(c => c.Class("PickerRenderer"));
-            //app.Tap(c => c.Class("PickerRenderer"));
-            //app.Tap(c => c.Text("12"));
-            //app.Tap(c => c.Class("PickerRenderer"));
-            //app.Tap(c => c.Text("9"));
-            //app.Back();
-            //app.Repl();
+            app.WaitForElement("OK");
+            app.Tap("OK");
+            app.WaitForElement(c => c.Text("Settings"));
+            app.Tap(c => c.Text("Settings"));
+            app.WaitForElement("HourPicker");
+            app.Tap("HourPicker");
+            app.Tap(c => c.Text("12"));
+            app.Tap("HourPicker");
+            app.Tap(c => c.Text("9"));
+            app.Back();
 		}
 
 	    private void AddTeamAndVerify(int teamIndex)
