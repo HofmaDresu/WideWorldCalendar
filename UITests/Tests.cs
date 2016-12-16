@@ -26,13 +26,13 @@ namespace WideWorldCalendar.UITests
         }
 
 	    [Test]
-	    public void TeamIsDisplayedWhenAdded()
+	    public void Test1_TeamIsDisplayedWhenAdded()
 	    {
 	        AddTeamAndVerify(0);
 	    }
 
 	    [Test]
-		public void QuickBackAfterChangeSettingDoesNotCrash()
+		public void Test2_QuickBackAfterChangeSettingDoesNotCrash()
 		{
 		    AddTeamAndVerify(0);
 
@@ -43,10 +43,30 @@ namespace WideWorldCalendar.UITests
             app.WaitForElement("HourPicker");
             app.Tap("HourPicker");
             app.Tap(c => c.Text("12"));
-            app.Tap("HourPicker");
-            app.Tap(c => c.Text("9"));
             app.Back();
 		}
+
+	    [Test]
+	    public void Test3_HourChangeIsSaved()
+        {
+            //SetHour hour
+            app.WaitForElement("OK");
+            app.Tap("OK");
+            app.WaitForElement(c => c.Text("Settings"));
+            app.Tap(c => c.Text("Settings"));
+            app.WaitForElement("HourPicker");
+            app.Tap("HourPicker");
+            app.Tap(c => c.Text("12"));
+            app.Back();
+
+            //Check hour
+            app.WaitForElement("OK");
+            app.Tap("OK");
+            app.WaitForElement(c => c.Text("Settings"));
+            app.Tap(c => c.Text("Settings"));
+            app.WaitForElement("HourPicker");
+	        Assert.IsTrue(app.Query("HourPicker").First().Text == "12", "Hour change was not saved");
+        }
 
 	    private void AddTeamAndVerify(int teamIndex)
 	    {
