@@ -16,8 +16,8 @@ namespace WideWorldCalendar
 		public ViewSchedulePage(int teamId)
 		{
 			InitializeComponent();
-			_scheduleFetcher = new RestScheduleFetcher();
-			Title = "Schedule";
+            _scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
+            Title = "Schedule";
 			_teamId = teamId;
 		    _vm = new ScheduleViewModel(this);
 

@@ -4,6 +4,7 @@ using Xamarin.Forms.Xaml;
 using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
+using WideWorldCalendar.ScheduleFetcher;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace WideWorldCalendar
@@ -14,6 +15,12 @@ namespace WideWorldCalendar
 		{
 			InitializeComponent();
             MobileCenter.Start(typeof(Analytics), typeof(Crashes));
+
+#if UITEST
+            DependencyService.Register<MockScheduleFetcher>();
+#else
+            DependencyService.Register<RestScheduleFetcher>();
+#endif
 
             //MainPage = new NavigationPage(new CurrentTeamsPage());
             MainPage = new MenuPage();

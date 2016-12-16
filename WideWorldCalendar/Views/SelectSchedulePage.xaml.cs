@@ -22,7 +22,7 @@ namespace WideWorldCalendar
 		public SelectSchedulePage()
 		{
 			InitializeComponent();
-			_scheduleFetcher = new RestScheduleFetcher();
+			_scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
 			Title = "Select Team";
 		    BindingContext = _vm;
 

@@ -11,6 +11,7 @@ using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
 using WideWorldCalendar.ScheduleFetcher;
 using WideWorldCalendar.Utilities;
+using Xamarin.Forms;
 using Game = WideWorldCalendar.ScheduleFetcher.Game;
 
 namespace WideWorldCalendar.Droid.BroadcastReceivers
@@ -65,7 +66,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
         private static async Task CheckForNewSeason(Context context, Data dataInstance)
         {
-            var scheduleFetcher = new RestScheduleFetcher();
+            var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
             string scheduleHtml;
             try
             {
@@ -88,7 +89,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
         private static async Task UpdateSchedulesIfNeeded(Context context, Data dataInstance)
         {
-            var scheduleFetcher = new RestScheduleFetcher();
+            var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
             foreach (var team in dataInstance.GetMyTeams())
             {
                 var currentGames = dataInstance.GetGames(team.Id);

@@ -8,7 +8,8 @@ using UserNotifications;
 using WideWorldCalendar.iOS.Utilities;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.ScheduleFetcher;
-using Xamarin.Forms.Platform.iOS;
+ using Xamarin.Forms;
+ using Xamarin.Forms.Platform.iOS;
 
 namespace WideWorldCalendar.iOS
 {
@@ -95,7 +96,7 @@ namespace WideWorldCalendar.iOS
 
         private static async Task<bool> CheckForNewSeason(Data dataInstance, LocalNotification_iOS localNotifications)
         {
-            var scheduleFetcher = new RestScheduleFetcher();
+            var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
             var scheduleHtml = await scheduleFetcher.GetSchedulesPage();
             var seasons = scheduleFetcher.GetSeasons(scheduleHtml);
 
@@ -111,7 +112,7 @@ namespace WideWorldCalendar.iOS
 
         private static async Task<bool> UpdateSchedulesIfNeeded(Data dataInstance, LocalNotification_iOS localNotifications)
         {
-            var scheduleFetcher = new RestScheduleFetcher();
+            var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
             var newData = false;
             foreach (var team in dataInstance.GetMyTeams())
             {
