@@ -68,6 +68,16 @@ namespace WideWorldCalendar.UITests
 	        Assert.IsTrue(app.Query("HourPicker").First().Text == "12", "Hour change was not saved");
         }
 
+	    [Test]
+	    public void Test4_CanViewTeamSchedule()
+	    {
+            AddTeamAndVerify(0);
+            app.WaitForElement(c => c.Class("ViewCellRenderer_ViewCellContainer"));
+            app.Tap(c => c.Class("ViewCellRenderer_ViewCellContainer"));
+	        app.WaitForElement(c => c.Class("ViewCellRenderer_ViewCellContainer"));
+            Assert.IsTrue(app.Query(c => c.Class("ViewCellRenderer_ViewCellContainer")).Any());
+	    }
+
 	    private void AddTeamAndVerify(int teamIndex)
 	    {
 	        app.WaitForElement("AddTeamButton");
