@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Humanizer;
 using MvvmHelpers;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
@@ -118,21 +117,43 @@ namespace WideWorldCalendar.ViewModels
 
         public List<string> MeridianDisplayOptions
         {
-            get { return _meridianOptions.Select(m => m.Humanize(LetterCasing.LowerCase)).ToList(); }
+            get { return _meridianOptions.Select(m =>
+            {
+                switch (m)
+                {
+                    case Meridian.Am:
+                        return "am";
+                    case Meridian.Pm:
+                        return "pm";
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(m), m, null);
+                }
+            }).ToList();
+            }
         }
 
         public List<string> DayDisplayOptions
         {
-            get { return _dayOptions.Select(m => m.Humanize(LetterCasing.LowerCase)).ToList(); }
+            get { return _dayOptions.Select(m =>
+            {
+                switch (m)
+                {
+                    case DayPreference.TheDayOfTheGame:
+                        return "the day of the game";
+                    case DayPreference.TheDayBeforeTheGame:
+                        return "the day before the game";
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(m), m, null);
+                }
+            }).ToList();
+            }
         }
 
         private void SetGameNotificationPreference()
         {
             _data.SetGameNotificationPreferences(new GameNotificationPreference
             {
-                Hour = HourOptions[_selectedHourIndex],
-                Meridian = _meridianOptions[_selectedMeridianIndex],
-                Day = _dayOptions[_selectedDayIndex]
+                Hour = HourOptions[_selectedHourIndex], Meridian = _meridianOptions[_selectedMeridianIndex], Day = _dayOptions[_selectedDayIndex]
             });
             DependencyService.Get<ILocalNotification>().ScheduleGameNotifications();
         }
