@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:effects="clr-namespace:WideWorldCalendar.Effects;assembly=WideWorldCalendar"
              x:Class="WideWorldCalendar.Views.CurrentTeamsPage">
-  <StackLayout Padding="0, 20, 0, 20"
+  <StackLayout Padding="0, 0, 0, 20"
 			  Orientation="Vertical"
         IsVisible="{Binding IsNotBusy}">
     <ListView
@@ -15,7 +15,7 @@
       <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
       <ListView.GroupHeaderTemplate>
         <DataTemplate>
-          <ViewCell Height="25">
+          <ViewCell Height="30">
             <StackLayout VerticalOptions="FillAndExpand"
                          Padding="5"
                          BackgroundColor="#3498DB">
