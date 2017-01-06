@@ -16,13 +16,15 @@
   </ContentPage.Resources>
     <ListView
 				ItemsSource="{Binding Games}"
-				RowHeight="90">
+				RowHeight="100">
+      <!-- This was 90 before adding gamescore-->
       <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
             <Grid Padding="20,10,20,10" BackgroundColor="{Binding ScheduledDateTime, Converter={StaticResource GameFutureCvt}}">
               <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -37,6 +39,7 @@
               <Label Grid.Row="1" Grid.Column="1" Text="{Binding OpposingTeam.TeamName}"/>
               <Label Grid.Row="2" Grid.Column="0" Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}"/>
               <Label Grid.Row="2" Grid.Column="1" Text="{Binding OpposingTeam.TeamColor}"/>
+              <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding GameScore}"/>
             </Grid>
           </ViewCell>
         </DataTemplate>
