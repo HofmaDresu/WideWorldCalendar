@@ -74,7 +74,7 @@ namespace WideWorldCalendar.Persistence
                 pastTeams.Add(new MyTeam
                 {
                     Division = "Test Division",
-                    LastGameDateTime = DateTime.Now.AddDays(-2),
+                    LastGameDateTime = new System.DateTime(2017, 01, 01),
                     Id = 1,
                     SendGameTimeReminders = true,
                     TeamColor = "Brown",
@@ -121,7 +121,7 @@ namespace WideWorldCalendar.Persistence
         }
         #endregion
 
-        #region OpposingTeams
+        #region Games
         public List<Game> GetGames(int myTeamId)
         {
             var enumerable = Games.Where(g => g.MyTeamId == myTeamId).ToList();

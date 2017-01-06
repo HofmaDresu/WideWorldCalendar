@@ -31,12 +31,14 @@
               <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
               </Grid.RowDefinitions>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
               </Grid.ColumnDefinitions>
               <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" />
               <Label Grid.Row="1" Grid.Column="0" Text="{Binding Division}" />
+              <Label Grid.Row="2" Grid.Column="0" Text="{Binding Record}" />
             </Grid>
           </ViewCell>
         </DataTemplate>
