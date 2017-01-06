@@ -67,7 +67,23 @@ namespace WideWorldCalendar.Persistence
         }
         public List<MyTeam> GetMyPastTeams()
         {
-            return MyTeams.Where(t => t.LastGameDateTime.Date < DateTime.Now.Date).ToList();
+            var pastTeams = MyTeams.Where(t => t.LastGameDateTime.Date < DateTime.Now.Date).ToList();
+#if DEBUG
+            if (pastTeams.Count == 0)
+            {
+                pastTeams.Add(new MyTeam
+                {
+                    Division = "Test Division",
+                    LastGameDateTime = DateTime.Now.AddDays(-2),
+                    Id = 1,
+                    SendGameTimeReminders = true,
+                    TeamColor = "Brown",
+                    TeamName = "Producers"
+                });
+            }
+#endif
+
+            return pastTeams;
         }
 
         public void DeleteMyTeam(int id)

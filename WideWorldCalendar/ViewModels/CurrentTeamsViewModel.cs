@@ -4,12 +4,14 @@ using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
 using WideWorldCalendar.Views;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace WideWorldCalendar.ViewModels
 {
-	public class CurrentTeamsViewModel : BaseViewModel
-	{
-	    private readonly INavigation _navigation;
+    public class CurrentTeamsViewModel : BaseViewModel
+    {
+        private readonly INavigation _navigation;
 
         public CurrentTeamsViewModel(INavigation navigation)
         {
@@ -20,13 +22,19 @@ namespace WideWorldCalendar.ViewModels
             });
         }
 
-	    public ObservableRangeCollection<MyTeam> Teams { get; } = new ObservableRangeCollection<MyTeam>();
+        public ObservableCollection<Grouping<string, MyTeam>> Teams { get; } = new ObservableCollection<Grouping<string, MyTeam>>();
 
         public ICommand AddTeamsCommand { protected set; get; }
 
 	    public void RefreshTeams()
 	    {
-            Teams.ReplaceRange(Data.GetInstance().GetMyCurrentTeams());
+            Teams.Clear();
+            Teams.Add(new Grouping<string, MyTeam>("Current Teams", Data.GetInstance().GetMyCurrentTeams()));
+            var pastTeams = Data.GetInstance().GetMyPastTeams().OrderByDescending(t => t.LastGameDateTime);
+            if (pastTeams.Any())
+            {
+                Teams.Add(new Grouping<string, MyTeam>("Previous Teams", pastTeams));
+            }
         }
 
 	    private MyTeam _selectedTeam;

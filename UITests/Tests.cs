@@ -101,7 +101,8 @@ namespace WideWorldCalendar.UITests
 	        app.Tap("SaveScheduleCommand");
 	        app.Tap("button1");
 	        app.WaitForElement("AddTeamButton");
-	        Assert.AreEqual(teamIndex + 1, app.Query(c => c.Class("ViewCellRenderer_ViewCellContainer")).Length);
+            // Index + 1, then +1 for group header
+	        Assert.AreEqual(teamIndex + 1 + 1, app.Query(c => c.Class("ViewCellRenderer_ViewCellContainer")).Length);
 	    }
 	}
 }
