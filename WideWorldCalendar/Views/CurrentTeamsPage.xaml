@@ -11,7 +11,6 @@
         SelectedItem="{Binding SelectedTeam, Mode=TwoWay}"
         IsGroupingEnabled="True"
         GroupDisplayBinding="{Binding Key}"
-        GroupShortNameBinding="{Binding Key}"
         HasUnevenRows="True">
       <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
       <ListView.GroupHeaderTemplate>
