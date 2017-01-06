@@ -114,7 +114,7 @@ namespace WideWorldCalendar.iOS
         {
             var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
             var newData = false;
-            foreach (var team in dataInstance.GetMyTeams())
+            foreach (var team in dataInstance.GetMyCurrentTeams())
             {
                 var currentGames = dataInstance.GetGames(team.Id);
                 var serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);

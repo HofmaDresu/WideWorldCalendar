@@ -90,7 +90,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
         private static async Task UpdateSchedulesIfNeeded(Context context, Data dataInstance)
         {
             var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
-            foreach (var team in dataInstance.GetMyTeams())
+            foreach (var team in dataInstance.GetMyCurrentTeams())
             {
                 var currentGames = dataInstance.GetGames(team.Id);
                 List<Game> serverGames;
