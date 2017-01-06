@@ -5,6 +5,7 @@ using WideWorldCalendar.Persistence.Models;
 using WideWorldCalendar.Views;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace WideWorldCalendar.ViewModels
 {
@@ -29,7 +30,11 @@ namespace WideWorldCalendar.ViewModels
 	    {
             Teams.Clear();
             Teams.Add(new Grouping<string, MyTeam>("Current Teams", Data.GetInstance().GetMyCurrentTeams()));
-            Teams.Add(new Grouping<string, MyTeam>("Previous Teams", Data.GetInstance().GetMyPastTeams()));
+            var pastTeams = Data.GetInstance().GetMyPastTeams().OrderByDescending(t => t.LastGameDateTime);
+            if (pastTeams.Any())
+            {
+                Teams.Add(new Grouping<string, MyTeam>("Previous Teams", pastTeams));
+            }
         }
 
 	    private MyTeam _selectedTeam;
