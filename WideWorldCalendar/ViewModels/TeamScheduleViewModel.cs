@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MvvmHelpers;
+﻿using MvvmHelpers;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
 
