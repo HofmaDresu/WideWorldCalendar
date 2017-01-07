@@ -6,6 +6,7 @@ using WideWorldCalendar.Views;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Linq;
+using WideWorldCalendar.UtilityInterfaces;
 
 namespace WideWorldCalendar.ViewModels
 {
@@ -25,6 +26,17 @@ namespace WideWorldCalendar.ViewModels
             EditTeamCommand = new Command<MyTeam>(async t =>
             {
                 var getReminders = await page.DisplayAlert("Game Notifications", $"Would you like game time reminders for {t.TeamName}?", "Yes", "No");
+
+                if (getReminders && !_data.ShowGameNotifications())
+                {
+                    var activateReminders = await page.DisplayAlert("Game Notifications", $"Game notifications are turned off in settings. Would you like to turn them on?", "Yes", "No");
+                    if (activateReminders)
+                    {
+                        _data.SetShowGameNotifications(true);
+                        DependencyService.Get<ILocalNotification>().ScheduleGameNotifications();
+                    }
+                }
+
                 t.SendGameTimeReminders = getReminders;
                 _data.InsertMyTeam(t);
             });
