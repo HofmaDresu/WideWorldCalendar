@@ -51,10 +51,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 }
             }
 
-            if (dataInstance.ShowScheduleChangedNotifications())
-            {
-                await UpdateSchedulesIfNeeded(context, dataInstance);
-            }
+            await UpdateSchedulesIfNeeded(context, dataInstance);
             
             if (dataInstance.ShowNewSeasonAvailableNotifications())
             {
@@ -104,23 +101,8 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                     return;
                 }
 
-                if (currentGames.Any(
-                    g =>
-                        !serverGames.Any(
-                            sg =>
-                                g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
-                                g.Field == sg.Field
-                                && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
-                                g.OpposingTeam.TeamColor == sg.OpposingTeam.Color))
-                    ||
-                    serverGames.Any(
-                        sg =>
-                            !currentGames.Any(
-                                g =>
-                                    g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
-                                    g.Field == sg.Field
-                                    && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
-                                    g.OpposingTeam.TeamColor == sg.OpposingTeam.Color)))
+
+                if (dataInstance.ShowScheduleChangedNotifications() && ScheduleHasChanged(currentGames, serverGames))
                 {
                     LocalNotification_Android.CreateNotification(context, team.Id, "Team Schedule Changed",
                         $"The schedule for {team.TeamName} has been updated.");
@@ -146,6 +128,27 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                     dataInstance.InsertGame(game);
                 }
             }
+        }
+
+        private static bool ScheduleHasChanged(List<Persistence.Models.Game> currentGames, List<Game> serverGames)
+        {
+            return currentGames.Any(
+                                g =>
+                                    !serverGames.Any(
+                                        sg =>
+                                            g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
+                                            g.Field == sg.Field
+                                            && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
+                                            g.OpposingTeam.TeamColor == sg.OpposingTeam.Color))
+                                ||
+                                serverGames.Any(
+                                    sg =>
+                                        !currentGames.Any(
+                                            g =>
+                                                g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
+                                                g.Field == sg.Field
+                                                && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
+                                                g.OpposingTeam.TeamColor == sg.OpposingTeam.Color));
         }
     }
 }
