@@ -22,9 +22,11 @@ namespace WideWorldCalendar.ViewModels
             {
                 await _navigation.PushAsync(new SelectSchedulePage());
             });
-            EditTeamCommand = new Command<MyTeam>(t =>
+            EditTeamCommand = new Command<MyTeam>(async t =>
             {
-                int foo = 1;
+                var getReminders = await page.DisplayAlert("Game Notifications", $"Would you like game time reminders for {t.TeamName}?", "Yes", "No");
+                t.SendGameTimeReminders = getReminders;
+                _data.InsertMyTeam(t);
             });
             DeleteTeamCommand = new Command<MyTeam>(async t =>
             {
