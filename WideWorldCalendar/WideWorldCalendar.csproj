@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="Colors.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Converters\BoolAlertOnOffIconSourceConverter.cs" />
     <Compile Include="CustomControls\AdjustableWidthPicker.cs" />
     <Compile Include="Effects\EffectIds.cs" />
     <Compile Include="Converters\GameDateFutureColorConverter.cs" />

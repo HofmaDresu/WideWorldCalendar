@@ -1958,10 +1958,10 @@ namespace WideWorldCalendar.Droid
 			public const int design_snackbar_background = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int ic_alarm_off_black_18dp = 2130837581;
+			public const int ic_alarm_off_black = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int ic_alarm_on_black_18dp = 2130837582;
+			public const int ic_alarm_on_black = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
 			public const int ic_audiotrack = 2130837583;

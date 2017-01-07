@@ -228,28 +228,28 @@
     <AndroidResource Include="Resources\xml\GlobalTracker.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_alarm_on_black_18dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_alarm_on_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_alarm_off_black_18dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_alarm_off_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ic_alarm_on_black_18dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_alarm_on_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ic_alarm_off_black_18dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_alarm_off_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_alarm_on_black_18dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_alarm_on_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_alarm_off_black_18dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_alarm_off_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ic_alarm_on_black_18dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_alarm_on_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ic_alarm_off_black_18dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_alarm_off_black.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
