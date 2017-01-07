@@ -71,11 +71,7 @@ namespace WideWorldCalendar.iOS
 
 	        try
 	        {
-	            if (dataInstance.ShowScheduleChangedNotifications())
-	            {
-	                localNotifications.ClearAllNotifications();
-	                dataUpdated = await UpdateSchedulesIfNeeded(dataInstance, localNotifications);
-	            }
+	            dataUpdated = await UpdateSchedulesIfNeeded(dataInstance, localNotifications);
 
 	            if (dataInstance.ShowNewSeasonAvailableNotifications())
 	            {
@@ -114,28 +110,19 @@ namespace WideWorldCalendar.iOS
         {
             var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
             var newData = false;
+
+
+            if (dataInstance.ShowScheduleChangedNotifications())
+            {
+                localNotifications.ClearAllNotifications();
+            }
+
             foreach (var team in dataInstance.GetMyCurrentTeams())
             {
                 var currentGames = dataInstance.GetGames(team.Id);
                 var serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);
 
-                if (currentGames.Any(
-                    g =>
-                        !serverGames.Any(
-                            sg =>
-                                g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
-                                g.Field == sg.Field
-                                && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
-                                g.OpposingTeam.TeamColor == sg.OpposingTeam.Color))
-                    ||
-                    serverGames.Any(
-                        sg =>
-                            !currentGames.Any(
-                                g =>
-                                    g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
-                                    g.Field == sg.Field
-                                    && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
-                                    g.OpposingTeam.TeamColor == sg.OpposingTeam.Color)))
+                if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, serverGames))
                 {
 					localNotifications.CreateNotification(DateTime.Now.AddMinutes(1), "Team Schedule Changed",
                         $"The schedule for {team.TeamName} has been updated.", team.Id, Constants.ScheduleChangedNotification);
