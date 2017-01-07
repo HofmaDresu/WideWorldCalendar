@@ -13,7 +13,7 @@ namespace WideWorldCalendar.Views
         {
             InitializeComponent();
             Title = "My Teams";
-            _vm = new CurrentTeamsViewModel(Navigation);
+            _vm = new CurrentTeamsViewModel(Navigation, this);
             BindingContext = _vm;
         }
 

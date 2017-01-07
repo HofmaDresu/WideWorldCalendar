@@ -14,7 +14,7 @@ namespace WideWorldCalendar.ViewModels
         private readonly INavigation _navigation;
         private readonly Data _data;
 
-        public CurrentTeamsViewModel(INavigation navigation)
+        public CurrentTeamsViewModel(INavigation navigation, Page page)
         {
             _data = Data.GetInstance();
             _navigation = navigation;
@@ -26,10 +26,14 @@ namespace WideWorldCalendar.ViewModels
             {
                 int foo = 1;
             });
-            DeleteTeamCommand = new Command<MyTeam>(t =>
+            DeleteTeamCommand = new Command<MyTeam>(async t =>
             {
-                _data.DeleteMyTeam(t.Id);
-                RefreshTeams();
+                var confirmDelete = await page.DisplayAlert("Confirm Delete", $"Delete {t.TeamName}?", "Yes", "No");
+                if (confirmDelete)
+                {
+                    _data.DeleteMyTeam(t.Id);
+                    RefreshTeams();
+                }
             });
         }
 
