@@ -73,7 +73,7 @@ namespace WideWorldCalendar.UITests
 	    {
             AddTeamAndVerify(0);
             app.WaitForElement(c => c.Class("ViewCellRenderer_ViewCellContainer"));
-            app.Tap(c => c.Class("ViewCellRenderer_ViewCellContainer"));
+            app.Tap(c => c.Class("ViewCellRenderer_ViewCellContainer").Index(1));
 	        app.WaitForElement(c => c.Class("ViewCellRenderer_ViewCellContainer"));
             Assert.IsTrue(app.Query(c => c.Class("ViewCellRenderer_ViewCellContainer")).Any());
 	    }
