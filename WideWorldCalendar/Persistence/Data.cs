@@ -153,6 +153,27 @@ namespace WideWorldCalendar.Persistence
             game.OpposingTeamId = game.OpposingTeam.Id;
             _db.Insert(game);
         }
+
+        public bool ScheduleHasChanged(List<Game> currentGames, List<ScheduleFetcher.Game> serverGames)
+        {
+            return currentGames.Any(
+                                g =>
+                                    !serverGames.Any(
+                                        sg =>
+                                            g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
+                                            g.Field == sg.Field
+                                            && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
+                                            g.OpposingTeam.TeamColor == sg.OpposingTeam.Color))
+                                ||
+                                serverGames.Any(
+                                    sg =>
+                                        !currentGames.Any(
+                                            g =>
+                                                g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
+                                                g.Field == sg.Field
+                                                && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
+                                                g.OpposingTeam.TeamColor == sg.OpposingTeam.Color));
+        }
         #endregion
 
         #region Seasons

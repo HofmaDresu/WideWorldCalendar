@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Support.V4.App;
 using WideWorldCalendar.Droid.Utilities;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
@@ -102,7 +100,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 }
 
 
-                if (dataInstance.ShowScheduleChangedNotifications() && ScheduleHasChanged(currentGames, serverGames))
+                if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, serverGames))
                 {
                     LocalNotification_Android.CreateNotification(context, team.Id, "Team Schedule Changed",
                         $"The schedule for {team.TeamName} has been updated.");
@@ -117,7 +115,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                         IsHomeGame = gameInfo.IsHomeGame,
                         MyTeamId = team.Id,
                         ScheduledDateTime = gameInfo.ScheduledDateTime,
-                        OpposingTeam = new Persistence.Models.OpposingTeam
+                        OpposingTeam = new OpposingTeam
                         {
                             TeamName = gameInfo.OpposingTeam.Name,
                             TeamColor = gameInfo.OpposingTeam.Color
@@ -130,25 +128,6 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             }
         }
 
-        private static bool ScheduleHasChanged(List<Persistence.Models.Game> currentGames, List<Game> serverGames)
-        {
-            return currentGames.Any(
-                                g =>
-                                    !serverGames.Any(
-                                        sg =>
-                                            g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
-                                            g.Field == sg.Field
-                                            && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
-                                            g.OpposingTeam.TeamColor == sg.OpposingTeam.Color))
-                                ||
-                                serverGames.Any(
-                                    sg =>
-                                        !currentGames.Any(
-                                            g =>
-                                                g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
-                                                g.Field == sg.Field
-                                                && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
-                                                g.OpposingTeam.TeamColor == sg.OpposingTeam.Color));
-        }
+        
     }
 }
