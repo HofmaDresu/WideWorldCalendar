@@ -76,9 +76,22 @@ namespace WideWorldCalendar.UITests
             app.Tap(c => c.Class("ViewCellRenderer_ViewCellContainer").Index(1));
 	        app.WaitForElement(c => c.Class("ViewCellRenderer_ViewCellContainer"));
             Assert.IsTrue(app.Query(c => c.Class("ViewCellRenderer_ViewCellContainer")).Any());
-	    }
+        }
 
-	    private void AddTeamAndVerify(int teamIndex)
+        [Test]
+        public void Test5_CanDeleteTeam()
+        {
+            AddTeamAndVerify(0);
+            app.WaitForElement(c => c.Class("ViewCellRenderer_ViewCellContainer"));
+            app.TouchAndHold(c => c.Class("ViewCellRenderer_ViewCellContainer").Index(1));
+            app.WaitForElement("Delete");
+            app.Tap("Delete");
+            app.WaitForElement("button1");
+            app.Tap("button1");
+            Assert.AreEqual(1, app.Query(c => c.Class("ViewCellRenderer_ViewCellContainer")).Count());
+        }
+
+        private void AddTeamAndVerify(int teamIndex)
 	    {
 	        app.WaitForElement("AddTeamButton");
 	        app.Tap("AddTeamButton");
