@@ -52,11 +52,13 @@
     </Compile>
     <Compile Include="Colors.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Converters\BoolAlertOnOffIconSourceConverter.cs" />
     <Compile Include="CustomControls\AdjustableWidthPicker.cs" />
     <Compile Include="Effects\EffectIds.cs" />
     <Compile Include="Converters\GameDateFutureColorConverter.cs" />
     <Compile Include="Effects\MainButtonEffect.cs" />
     <Compile Include="Persistence\Models\GameNotificationPreference.cs" />
+    <Compile Include="Utilities\TeamTemplateSelector.cs" />
     <Compile Include="Utilities\GameTemplateSelector.cs" />
     <Compile Include="Utilities\TimeConversionUtil.cs" />
     <Compile Include="UtilityInterfaces\ILocalNotification.cs" />
