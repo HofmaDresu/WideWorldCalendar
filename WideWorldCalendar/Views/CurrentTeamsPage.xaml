@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:effects="clr-namespace:WideWorldCalendar.Effects;assembly=WideWorldCalendar"
-             x:Class="WideWorldCalendar.Views.CurrentTeamsPage">
+             x:Class="WideWorldCalendar.Views.CurrentTeamsPage"
+             x:Name="RootPage">
   <StackLayout Padding="0, 0, 0, 20"
 			  Orientation="Vertical"
         IsVisible="{Binding IsNotBusy}">
@@ -27,6 +28,16 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell Height="90">
+            <ViewCell.ContextActions>
+              <MenuItem 
+                Command="{Binding BindingContext.EditTeamCommand, Source={x:Reference RootPage}}"
+                CommandParameter="{Binding}"
+                Text="Edit" />
+              <MenuItem 
+                Command="{Binding BindingContext.DeleteTeamCommand, Source={x:Reference RootPage}}"
+                CommandParameter="{Binding}"
+                Text="Delete" IsDestructive="True" />
+            </ViewCell.ContextActions>
             <Grid Padding="20,10,20,10">
               <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

@@ -12,26 +12,39 @@ namespace WideWorldCalendar.ViewModels
     public class CurrentTeamsViewModel : BaseViewModel
     {
         private readonly INavigation _navigation;
+        private readonly Data _data;
 
         public CurrentTeamsViewModel(INavigation navigation)
         {
+            _data = Data.GetInstance();
             _navigation = navigation;
             AddTeamsCommand = new Command(async _ =>
             {
                 await _navigation.PushAsync(new SelectSchedulePage());
+            });
+            EditTeamCommand = new Command<MyTeam>(t =>
+            {
+                int foo = 1;
+            });
+            DeleteTeamCommand = new Command<MyTeam>(t =>
+            {
+                _data.DeleteMyTeam(t.Id);
+                RefreshTeams();
             });
         }
 
         public ObservableCollection<Grouping<string, MyTeam>> Teams { get; } = new ObservableCollection<Grouping<string, MyTeam>>();
 
         public ICommand AddTeamsCommand { protected set; get; }
+        public ICommand EditTeamCommand { protected set; get; }
+        public ICommand DeleteTeamCommand { protected set; get; }
 
-	    public void RefreshTeams()
+        public void RefreshTeams()
 	    {
             Teams.Clear();
-            var currentTeams = Data.GetInstance().GetMyCurrentTeams().Select(CalculateRecord);
+            var currentTeams = _data.GetMyCurrentTeams().Select(CalculateRecord);
             Teams.Add(new Grouping<string, MyTeam>("Current Teams", currentTeams));
-            var pastTeams = Data.GetInstance().GetMyPastTeams().OrderByDescending(t => t.LastGameDateTime).Select(CalculateRecord);
+            var pastTeams = _data.GetMyPastTeams().OrderByDescending(t => t.LastGameDateTime).Select(CalculateRecord);
             if (pastTeams.Any())
             {
                 Teams.Add(new Grouping<string, MyTeam>("Previous Teams", pastTeams));
@@ -40,7 +53,7 @@ namespace WideWorldCalendar.ViewModels
 
         private MyTeam CalculateRecord(MyTeam t)
         {
-            var games = Data.GetInstance().GetGames(t.Id);
+            var games = _data.GetGames(t.Id);
             var winCount = games.Where(g => g.WinLoss == Constants.Win).Count();
             var lossCount = games.Where(g => g.WinLoss == Constants.Loss).Count();
             var tieCount = games.Where(g => g.WinLoss == Constants.Tie).Count();
