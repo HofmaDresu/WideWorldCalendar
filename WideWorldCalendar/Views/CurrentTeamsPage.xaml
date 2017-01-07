@@ -3,7 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:effects="clr-namespace:WideWorldCalendar.Effects;assembly=WideWorldCalendar"
              x:Class="WideWorldCalendar.Views.CurrentTeamsPage"
+            xmlns:local="clr-namespace:WideWorldCalendar.Utilities;assembly=WideWorldCalendar"
              x:Name="RootPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="CurrentTeamTemplate">
+        <ViewCell Height="90">
+          <ViewCell.ContextActions>
+            <MenuItem
+              Command="{Binding BindingContext.EditTeamCommand, Source={x:Reference RootPage}}"
+              CommandParameter="{Binding}"
+              Text="Edit" />
+            <MenuItem
+              Command="{Binding BindingContext.DeleteTeamCommand, Source={x:Reference RootPage}}"
+              CommandParameter="{Binding}"
+              Text="Delete" IsDestructive="True" />
+          </ViewCell.ContextActions>
+          <Grid Padding="20,10,20,10">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" />
+            <Image Grid.Row="0" Grid.Column="1" Source="ic_alarm_on_black_18dp.png" VerticalOptions="Start"/>
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" />
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" />
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <DataTemplate x:Key="PreviousTeamTemplate">
+        <ViewCell Height="90">
+          <ViewCell.ContextActions>
+            <MenuItem
+              Command="{Binding BindingContext.DeleteTeamCommand, Source={x:Reference RootPage}}"
+              CommandParameter="{Binding}"
+              Text="Delete" IsDestructive="True" />
+          </ViewCell.ContextActions>
+          <Grid Padding="20,10,20,10">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" />
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" />
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" />
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <local:TeamTemplateSelector x:Key="TeamTemplateSelector"
+          CurrentTeamTemplate="{StaticResource CurrentTeamTemplate}"
+          PreviousTeamTemplate="{StaticResource PreviousTeamTemplate}" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
   <StackLayout Padding="0, 0, 0, 20"
 			  Orientation="Vertical"
         IsVisible="{Binding IsNotBusy}">
@@ -12,7 +72,8 @@
         SelectedItem="{Binding SelectedTeam, Mode=TwoWay}"
         IsGroupingEnabled="True"
         GroupDisplayBinding="{Binding Key}"
-        HasUnevenRows="True">
+        HasUnevenRows="True"
+        ItemTemplate="{StaticResource TeamTemplateSelector}">
       <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
       <ListView.GroupHeaderTemplate>
         <DataTemplate>
@@ -26,35 +87,6 @@
         </DataTemplate>
       </ListView.GroupHeaderTemplate>
       <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell Height="90">
-            <ViewCell.ContextActions>
-              <MenuItem 
-                Command="{Binding BindingContext.EditTeamCommand, Source={x:Reference RootPage}}"
-                CommandParameter="{Binding}"
-                Text="Edit" />
-              <MenuItem 
-                Command="{Binding BindingContext.DeleteTeamCommand, Source={x:Reference RootPage}}"
-                CommandParameter="{Binding}"
-                Text="Delete" IsDestructive="True" />
-            </ViewCell.ContextActions>
-            <Grid Padding="20,10,20,10">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-              </Grid.RowDefinitions>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-              </Grid.ColumnDefinitions>
-              <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" />
-              <Image Grid.Row="0" Grid.Column="1" Source="ic_alarm_on_black_18dp.png" VerticalOptions="Start"/>
-              <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" />
-              <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" />
-            </Grid>
-          </ViewCell>
-        </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
     <Button 
