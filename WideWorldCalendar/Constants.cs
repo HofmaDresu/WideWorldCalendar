@@ -6,5 +6,8 @@
         public const string AnalyticsCategoryNotification = "Notification";
         public const string AnalyticsLabelViewTeamSchedule = "View Team Schedule";
         public const string AnalyticsLabelGame = "Game";
+        public const string Tie = "Tie";
+        public const string Win = "Win";
+        public const string Loss = "Loss";
     }
 }

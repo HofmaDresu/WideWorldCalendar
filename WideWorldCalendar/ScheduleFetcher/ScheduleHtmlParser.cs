@@ -140,15 +140,21 @@ namespace WideWorldCalendar.ScheduleFetcher
 				var homeTeamId = GetValueFromColumn(columns[4]);
 				var awayTeamId = GetValueFromColumn(columns[6]);
 				var isHomeGame = homeTeamId == myTeamId;
+                int homeTeamScoreInt;
+                var homeTeamScore = int.TryParse(GetValueFromColumn(columns[5]), out homeTeamScoreInt) ? homeTeamScoreInt : (int?)null;
+                int awayTeamScoreInt;
+                var awayTeamScore = int.TryParse(GetValueFromColumn(columns[7]), out awayTeamScoreInt) ? awayTeamScoreInt : (int?)null;
 
-				yield return new Game
+                yield return new Game
 				{
 					ScheduledDateTime = DateTime.Parse(GetValueFromColumn(columns[0]) + " " + GetValueFromColumn(columns[2])),
 					Field = GetValueFromColumn(columns[3]),
 					IsHomeGame = isHomeGame,
 					MyTeam = teamDictionary[myTeamId],
-					OpposingTeam = isHomeGame ? teamDictionary[awayTeamId] : teamDictionary[homeTeamId]
-				};
+					OpposingTeam = isHomeGame ? teamDictionary[awayTeamId] : teamDictionary[homeTeamId],
+                    MyTeamScore = isHomeGame ? homeTeamScore : awayTeamScore,
+                    OpposingTeamScore = isHomeGame ? awayTeamScore : homeTeamScore
+                };
 			}
 			yield break;
 		}

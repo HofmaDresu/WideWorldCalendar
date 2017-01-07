@@ -114,7 +114,7 @@ namespace WideWorldCalendar.iOS
         {
             var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
             var newData = false;
-            foreach (var team in dataInstance.GetMyTeams())
+            foreach (var team in dataInstance.GetMyCurrentTeams())
             {
                 var currentGames = dataInstance.GetGames(team.Id);
                 var serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);
@@ -137,26 +137,28 @@ namespace WideWorldCalendar.iOS
                                     && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
                                     g.OpposingTeam.TeamColor == sg.OpposingTeam.Color)))
                 {
-                    dataInstance.DeleteGames(team.Id);
-                    foreach (var gameInfo in serverGames)
-                    {
-                        var game = new Persistence.Models.Game
-                        {
-                            Field = gameInfo.Field,
-                            IsHomeGame = gameInfo.IsHomeGame,
-                            MyTeamId = team.Id,
-                            ScheduledDateTime = gameInfo.ScheduledDateTime,
-                            OpposingTeam = new Persistence.Models.OpposingTeam
-                            {
-                                TeamName = gameInfo.OpposingTeam.Name,
-                                TeamColor = gameInfo.OpposingTeam.Color
-                            }
-                        };
-                        dataInstance.InsertGame(game);
-                    }
 					localNotifications.CreateNotification(DateTime.Now.AddMinutes(1), "Team Schedule Changed",
                         $"The schedule for {team.TeamName} has been updated.", team.Id, Constants.ScheduleChangedNotification);
                     newData = true;
+                }
+                dataInstance.DeleteGames(team.Id);
+                foreach (var gameInfo in serverGames)
+                {
+                    var game = new Persistence.Models.Game
+                    {
+                        Field = gameInfo.Field,
+                        IsHomeGame = gameInfo.IsHomeGame,
+                        MyTeamId = team.Id,
+                        ScheduledDateTime = gameInfo.ScheduledDateTime,
+                        OpposingTeam = new Persistence.Models.OpposingTeam
+                        {
+                            TeamName = gameInfo.OpposingTeam.Name,
+                            TeamColor = gameInfo.OpposingTeam.Color
+                        },
+                        MyTeamScore = gameInfo.MyTeamScore,
+                        OpposingTeamScore = gameInfo.OpposingTeamScore
+                    };
+                    dataInstance.InsertGame(game);
                 }
             }
             return newData;

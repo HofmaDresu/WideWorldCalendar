@@ -59,7 +59,9 @@ namespace WideWorldCalendar.ViewModels
 	            {
 	                TeamName = gameInfo.OpposingTeam.Name,
 	                TeamColor = gameInfo.OpposingTeam.Color
-	            }
+	            },
+                MyTeamScore = gameInfo.MyTeamScore,
+                OpposingTeamScore = gameInfo.OpposingTeamScore
 	        };
 	        data.InsertGame(game);
 	        return game;

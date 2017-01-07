@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar"
-             x:Class="WideWorldCalendar.Views.TeamSchedulePage">
+             x:Class="WideWorldCalendar.Views.TeamSchedulePage"
+            xmlns:local="clr-namespace:WideWorldCalendar.Utilities;assembly=WideWorldCalendar" >
   <ContentPage.Content>
     <OnPlatform x:TypeArguments="Thickness" WinPhone="20,20,20,20" />
   </ContentPage.Content>
@@ -12,34 +13,61 @@
       <converters:DateTimeDateStringConverter x:Key="DateCvt"/>
       <converters:DateTimeTimeStringConverter x:Key="TimeCvt"/>
       <converters:GameDateFutureColorConverter x:Key="GameFutureCvt"/>
+      <DataTemplate x:Key="ScoredGameTemplate">
+        <ViewCell Height="100">
+          <Grid Padding="20,10,20,10" BackgroundColor="{Binding ScheduledDateTime, Converter={StaticResource GameFutureCvt}}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="1.75*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding ScheduledDateTime, Converter={StaticResource DateCvt}}" />
+            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Field}"/>
+            <Label Grid.Row="1" Grid.Column="0" Text="{Binding ScheduledDateTime, Converter={StaticResource TimeCvt}}" />
+            <Label Grid.Row="1" Grid.Column="1" Text="{Binding OpposingTeam.TeamName}"/>
+            <Label Grid.Row="2" Grid.Column="0" Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}"/>
+            <Label Grid.Row="2" Grid.Column="1" Text="{Binding OpposingTeam.TeamColor}"/>
+            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding GameScore}"/>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <DataTemplate x:Key="UnscoredGameTemplate">
+        <ViewCell Height="90">
+          <Grid Padding="20,10,20,10" BackgroundColor="{Binding ScheduledDateTime, Converter={StaticResource GameFutureCvt}}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="1.75*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding ScheduledDateTime, Converter={StaticResource DateCvt}}" />
+            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Field}"/>
+            <Label Grid.Row="1" Grid.Column="0" Text="{Binding ScheduledDateTime, Converter={StaticResource TimeCvt}}" />
+            <Label Grid.Row="1" Grid.Column="1" Text="{Binding OpposingTeam.TeamName}"/>
+            <Label Grid.Row="2" Grid.Column="0" Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}"/>
+            <Label Grid.Row="2" Grid.Column="1" Text="{Binding OpposingTeam.TeamColor}"/>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <local:GameTemplateSelector x:Key="GameTemplateSelector"
+          ScoredGameTemplate="{StaticResource ScoredGameTemplate}"
+          UnscoredGameTemplate="{StaticResource UnscoredGameTemplate}" />
     </ResourceDictionary>
   </ContentPage.Resources>
     <ListView
 				ItemsSource="{Binding Games}"
-				RowHeight="90">
+				HasUnevenRows="True"
+        ItemTemplate="{StaticResource GameTemplateSelector}">
       <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
       <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <Grid Padding="20,10,20,10" BackgroundColor="{Binding ScheduledDateTime, Converter={StaticResource GameFutureCvt}}">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-              </Grid.RowDefinitions>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="1.75*"/>
-              </Grid.ColumnDefinitions>
-              <Label Grid.Row="0" Grid.Column="0" Text="{Binding ScheduledDateTime, Converter={StaticResource DateCvt}}" />
-              <Label Grid.Row="0" Grid.Column="1" Text="{Binding Field}"/>
-              <Label Grid.Row="1" Grid.Column="0" Text="{Binding ScheduledDateTime, Converter={StaticResource TimeCvt}}" />
-              <Label Grid.Row="1" Grid.Column="1" Text="{Binding OpposingTeam.TeamName}"/>
-              <Label Grid.Row="2" Grid.Column="0" Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}"/>
-              <Label Grid.Row="2" Grid.Column="1" Text="{Binding OpposingTeam.TeamColor}"/>
-            </Grid>
-          </ViewCell>
-        </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
 </ContentPage>

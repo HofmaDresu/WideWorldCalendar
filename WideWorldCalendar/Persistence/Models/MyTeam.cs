@@ -16,5 +16,7 @@ namespace WideWorldCalendar.Persistence.Models
 
         [Ignore]
         public string NameAndColor => $"{TeamName} ({TeamColor})";
+        [Ignore]
+        public string Record { get; set; }
     }
 }
