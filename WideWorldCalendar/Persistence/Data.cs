@@ -97,6 +97,11 @@ namespace WideWorldCalendar.Persistence
             DeleteMyTeam(myTeam.Id);
             _db.Insert(myTeam);
         }
+
+        public void UpdateMyTeam(MyTeam myTeam)
+        {
+            _db.Update(myTeam);
+        }
         #endregion
 
         #region OpposingTeams
