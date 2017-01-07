@@ -46,10 +46,12 @@
               </Grid.RowDefinitions>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
               </Grid.ColumnDefinitions>
               <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" />
-              <Label Grid.Row="1" Grid.Column="0" Text="{Binding Division}" />
-              <Label Grid.Row="2" Grid.Column="0" Text="{Binding Record}" />
+              <Image Grid.Row="0" Grid.Column="1" Source="ic_alarm_on_black_18dp.png" VerticalOptions="Start"/>
+              <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" />
+              <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" />
             </Grid>
           </ViewCell>
         </DataTemplate>
