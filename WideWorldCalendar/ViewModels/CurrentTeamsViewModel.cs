@@ -39,6 +39,7 @@ namespace WideWorldCalendar.ViewModels
 
                 t.SendGameTimeReminders = getReminders;
                 _data.UpdateMyTeam(t);
+                RefreshTeams();
             });
             DeleteTeamCommand = new Command<MyTeam>(async t =>
             {
