@@ -9,7 +9,7 @@ namespace WideWorldCalendar.Converters
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			var alertIsOn = (bool)value;
-			return alertIsOn ? "ic_alarm_on_black.png" : "ic_alarm_off_black.png";
+			return alertIsOn ? "ic_alarm_on.png" : "ic_alarm_off.png";
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
