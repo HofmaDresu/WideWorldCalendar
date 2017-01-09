@@ -1,0 +1,41 @@
+Resources
+    www.wideworld-sports.com
+        App should attempt to match branding of website
+
+Iconography (iOS (9+) & Android (4.4.4+), multiple sizes
+    Application Icon
+    Notification Icon
+        Grayscale option for Material Design?
+    Menu Header
+    Alarm On / Off Icon
+
+Color Scheme
+    Primary Color
+        Currently used for buttons / headers
+    Primary Color Dark
+        Darker version to color action bar in android
+    Primary Color Highlight
+        Color used to highlight pressed primary color buttons
+    Secondary Color
+        Currently used for non-button actionable items / activity indicator
+    Table Section-Header Background Color
+
+Screens
+    Splash Screen
+        Provide any assets needed
+        iOS cannot be complex
+    My Teams
+        Data Layout
+    Menu
+        Header
+        Layout
+    Settings
+        Layout
+    Select Team
+        Layout
+    Select Team Schedule
+        Data Layout
+    Current Team Schedule
+        Data Layout
+            2 Types: "Have Score" and "Don't Have Score"
+        "Finished" game style
