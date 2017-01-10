@@ -61,7 +61,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
         private static async Task CheckForNewSeason(Context context, Data dataInstance)
         {
-            var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
+            IScheduleFetcher scheduleFetcher = GetScheduleFetcher();
             string scheduleHtml;
             try
             {
@@ -84,7 +84,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
         private static async Task UpdateSchedulesIfNeeded(Context context, Data dataInstance)
         {
-            var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
+            var scheduleFetcher = GetScheduleFetcher();
             foreach (var team in dataInstance.GetMyCurrentTeams())
             {
                 var currentGames = dataInstance.GetGames(team.Id);
@@ -128,6 +128,21 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             }
         }
 
-        
+        private static IScheduleFetcher GetScheduleFetcher()
+        {
+            if (Forms.IsInitialized)
+            {
+                return DependencyService.Get<IScheduleFetcher>();
+            }
+            else
+            {
+#if UITEST
+                return new MockScheduleFetcher();
+#else
+                return new RestScheduleFetcher();
+#endif
+            }
+
+        }
     }
 }
