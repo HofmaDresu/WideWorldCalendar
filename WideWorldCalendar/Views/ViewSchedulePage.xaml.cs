@@ -43,6 +43,10 @@ namespace WideWorldCalendar
                                 DependencyService.Get<IUnifiedAnalytics>().CreateAndSendEventOnDefaultTracker(Constants.AnalyticsCategoryUserAction, Constants.AnalyticsLabelViewTeamSchedule, _vm.Title);
                                 _vm.IsBusy = false;
 							});
+            GamesList.ItemSelected += (sender, e) =>
+            {
+                ((ListView)sender).SelectedItem = null;
+            };
 		}
 
 		protected override void OnAppearing()

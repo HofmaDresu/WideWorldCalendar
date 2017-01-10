@@ -25,7 +25,8 @@
 				  Text="{Binding Title}"/>
 		  <ListView
 				  ItemsSource="{Binding Games}"
-				  RowHeight="90">
+				  RowHeight="90"
+          x:Name="GamesList">
         <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
 			  <ListView.ItemTemplate>
 				  <DataTemplate>
