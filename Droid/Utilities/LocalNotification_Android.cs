@@ -20,9 +20,9 @@ namespace WideWorldCalendar.Droid.Utilities
 
         public void ScheduleGameNotification(Context packageContext, bool instantCheck = false)
         {
-            var checkTime = instantCheck ? DateTime.Now : DateTime.Now.Date.AddHours(9);
+            var checkTime = instantCheck ? DateTime.Now : DateTime.Now.Date.AddMinutes(1);
 
-            if (DateTime.Now.Hour > 8 && ! instantCheck)
+            if (DateTime.Now > checkTime && ! instantCheck)
             {
                 checkTime = checkTime.AddDays(1);
             }

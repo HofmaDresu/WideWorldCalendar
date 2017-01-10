@@ -32,7 +32,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
                 foreach (var notification in dataInstance.GetNotificationsForDay(gameCheckDate))
                 {
-                    var reminder = new Intent(context, typeof(GameNotificationBroadcastReceiver));
+                    var reminder = new Intent(context, typeof(NotificationBroadcastReceiver));
                     reminder.PutExtra(Constants.NotificationRequestCodeKey, notification.TeamId);
                     reminder.PutExtra(Constants.NotificationTitleKey, notification.Title);
                     reminder.PutExtra(Constants.NotificationMessageKey, notification.Message);
@@ -77,8 +77,21 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             if (seasons.Any(dataInstance.IsNewSeason))
             {
                 dataInstance.UpdateSeasons(seasons);
-                LocalNotification_Android.CreateNotification(context, Constants.NewSeasonNotificationRequestCode, "Wide World Sports",
-                    "A new season is available.");
+
+                var reminder = new Intent(context, typeof(NotificationBroadcastReceiver));
+                reminder.PutExtra(Constants.NotificationRequestCodeKey, Constants.NewSeasonNotificationRequestCode);
+                reminder.PutExtra(Constants.NotificationTitleKey, "Wide World Sports");
+                reminder.PutExtra(Constants.NotificationMessageKey, "A new season is available.");
+
+                var reminderBroadcast = PendingIntent.GetBroadcast(context, Constants.NewSeasonNotificationRequestCode, reminder,
+                    PendingIntentFlags.CancelCurrent);
+                var alarms = (AlarmManager)context.GetSystemService(Context.AlarmService);
+
+                var dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                var notificationTimeMilliseconds = DateTime.Now.AddHours(9).ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
+                alarms.SetExact(AlarmType.RtcWakeup,
+                    (long)notificationTimeMilliseconds,
+                    reminderBroadcast);
             }
         }
 
@@ -102,8 +115,20 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
                 if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, serverGames))
                 {
-                    LocalNotification_Android.CreateNotification(context, team.Id, "Team Schedule Changed",
-                        $"The schedule for {team.TeamName} has been updated.");
+                    var reminder = new Intent(context, typeof(NotificationBroadcastReceiver));
+                    reminder.PutExtra(Constants.NotificationRequestCodeKey, team.Id);
+                    reminder.PutExtra(Constants.NotificationTitleKey, "Team Schedule Changed");
+                    reminder.PutExtra(Constants.NotificationMessageKey, $"The schedule for {team.TeamName} has been updated.");
+
+                    var reminderBroadcast = PendingIntent.GetBroadcast(context, team.Id, reminder,
+                        PendingIntentFlags.CancelCurrent);
+                    var alarms = (AlarmManager)context.GetSystemService(Context.AlarmService);
+
+                    var dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    var notificationTimeMilliseconds = DateTime.Now.AddHours(9).ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
+                    alarms.SetExact(AlarmType.RtcWakeup,
+                        (long)notificationTimeMilliseconds,
+                        reminderBroadcast);
                 }
 
                 dataInstance.DeleteGames(team.Id);
