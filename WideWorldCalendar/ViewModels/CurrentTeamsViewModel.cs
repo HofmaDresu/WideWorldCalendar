@@ -7,16 +7,22 @@ using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Linq;
 using WideWorldCalendar.UtilityInterfaces;
+using System.Collections.Generic;
+using WideWorldCalendar.ScheduleFetcher;
+using System;
+using WideWorldCalendar.Utilities;
 
 namespace WideWorldCalendar.ViewModels
 {
     public class CurrentTeamsViewModel : BaseViewModel
     {
         private readonly INavigation _navigation;
+        private readonly IScheduleFetcher _scheduleFetcher;
         private readonly Data _data;
 
         public CurrentTeamsViewModel(INavigation navigation, Page page)
         {
+            _scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
             _data = Data.GetInstance();
             _navigation = navigation;
             AddTeamsCommand = new Command(async _ =>
@@ -50,6 +56,34 @@ namespace WideWorldCalendar.ViewModels
                     RefreshTeams();
                 }
             });
+
+            RefreshGamesCommand = new Command(async _ =>
+            {
+                IsBusy = true;
+                foreach (var team in _data.GetMyCurrentTeams())
+                {
+                    List<ScheduleFetcher.Game> serverGames;
+                    try
+                    {
+                        serverGames = await _scheduleFetcher.GetTeamSchedule(team.Id);
+                    }
+                    catch (Exception)
+                    {
+                        //TODO: let user know and set not busy
+                        return;
+                    }
+
+                    _data.DeleteGames(team.Id);
+                    foreach (var gameInfo in serverGames)
+                    {
+                        var game = DataConverter.ConvertDtoToPersistence(gameInfo, team);
+                        _data.InsertGame(game);
+                    }
+                }
+
+                RefreshTeams();
+                IsBusy = false;
+            });
         }
 
         public ObservableCollection<Grouping<string, MyTeam>> Teams { get; } = new ObservableCollection<Grouping<string, MyTeam>>();
@@ -57,11 +91,12 @@ namespace WideWorldCalendar.ViewModels
         public ICommand AddTeamsCommand { protected set; get; }
         public ICommand EditTeamCommand { protected set; get; }
         public ICommand DeleteTeamCommand { protected set; get; }
+        public ICommand RefreshGamesCommand { protected set; get; }
 
         public void RefreshTeams()
-	    {
-            Teams.Clear();
+        {
             var currentTeams = _data.GetMyCurrentTeams().Select(CalculateRecord);
+            Teams.Clear();
             Teams.Add(new Grouping<string, MyTeam>("Current Teams", currentTeams));
             var pastTeams = _data.GetMyPastTeams().OrderByDescending(t => t.LastGameDateTime).Select(CalculateRecord);
             if (pastTeams.Any())

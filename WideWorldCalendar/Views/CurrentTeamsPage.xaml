@@ -75,7 +75,11 @@
         IsGroupingEnabled="True"
         GroupDisplayBinding="{Binding Key}"
         HasUnevenRows="True"
-        ItemTemplate="{StaticResource TeamTemplateSelector}">
+        ItemTemplate="{StaticResource TeamTemplateSelector}"
+        IsPullToRefreshEnabled="true"
+        RefreshCommand="{Binding RefreshGamesCommand}"
+        x:Name="TeamsList"        
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}">
       <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
       <ListView.GroupHeaderTemplate>
         <DataTemplate>

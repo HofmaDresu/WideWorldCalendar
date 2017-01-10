@@ -11,15 +11,8 @@ namespace WideWorldCalendar.ViewModels
         public TeamScheduleViewModel(int myTeamId)
         {
             Games.AddRange(Data.GetInstance().GetGames(myTeamId));
-
-            RefreshGamesCommand = new Command(_ =>
-            {
-
-            });
         }
 
         public ObservableRangeCollection<Game> Games { get; } = new ObservableRangeCollection<Game>();
-
-        public ICommand RefreshGamesCommand { get; set; }
     }
 }
