@@ -1,15 +1,16 @@
-﻿ using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
- using Microsoft.Azure.Mobile;
- using UIKit;
+using Microsoft.Azure.Mobile;
+using UIKit;
 using UserNotifications;
 using WideWorldCalendar.iOS.Utilities;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.ScheduleFetcher;
- using Xamarin.Forms;
- using Xamarin.Forms.Platform.iOS;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
+using WideWorldCalendar.Utilities;
 
 namespace WideWorldCalendar.iOS
 {
@@ -131,20 +132,7 @@ namespace WideWorldCalendar.iOS
                 dataInstance.DeleteGames(team.Id);
                 foreach (var gameInfo in serverGames)
                 {
-                    var game = new Persistence.Models.Game
-                    {
-                        Field = gameInfo.Field,
-                        IsHomeGame = gameInfo.IsHomeGame,
-                        MyTeamId = team.Id,
-                        ScheduledDateTime = gameInfo.ScheduledDateTime,
-                        OpposingTeam = new Persistence.Models.OpposingTeam
-                        {
-                            TeamName = gameInfo.OpposingTeam.Name,
-                            TeamColor = gameInfo.OpposingTeam.Color
-                        },
-                        MyTeamScore = gameInfo.MyTeamScore,
-                        OpposingTeamScore = gameInfo.OpposingTeamScore
-                    };
+                    var game = DataConverter.ConvertDtoToPersistence(gameInfo, team);
                     dataInstance.InsertGame(game);
                 }
             }

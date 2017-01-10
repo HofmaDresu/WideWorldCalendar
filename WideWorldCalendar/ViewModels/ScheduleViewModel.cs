@@ -8,6 +8,7 @@ using WideWorldCalendar.Persistence;
 using WideWorldCalendar.ScheduleFetcher;
 using WideWorldCalendar.UtilityInterfaces;
 using Xamarin.Forms;
+using WideWorldCalendar.Utilities;
 
 namespace WideWorldCalendar.ViewModels
 {
@@ -49,21 +50,8 @@ namespace WideWorldCalendar.ViewModels
 
 	    private static Persistence.Models.Game SaveGame(Game gameInfo, Persistence.Models.MyTeam myTeam, Data data)
 	    {
-	        var game = new Persistence.Models.Game
-	        {
-	            Field = gameInfo.Field,
-	            IsHomeGame = gameInfo.IsHomeGame,
-	            MyTeamId = myTeam.Id,
-	            ScheduledDateTime = gameInfo.ScheduledDateTime,
-	            OpposingTeam = new Persistence.Models.OpposingTeam
-	            {
-	                TeamName = gameInfo.OpposingTeam.Name,
-	                TeamColor = gameInfo.OpposingTeam.Color
-	            },
-                MyTeamScore = gameInfo.MyTeamScore,
-                OpposingTeamScore = gameInfo.OpposingTeamScore
-	        };
-	        data.InsertGame(game);
+            var game = DataConverter.ConvertDtoToPersistence(gameInfo, myTeam);
+            data.InsertGame(game);
 	        return game;
 	    }
 

@@ -134,20 +134,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 dataInstance.DeleteGames(team.Id);
                 foreach (var gameInfo in serverGames)
                 {
-                    var game = new Persistence.Models.Game
-                    {
-                        Field = gameInfo.Field,
-                        IsHomeGame = gameInfo.IsHomeGame,
-                        MyTeamId = team.Id,
-                        ScheduledDateTime = gameInfo.ScheduledDateTime,
-                        OpposingTeam = new OpposingTeam
-                        {
-                            TeamName = gameInfo.OpposingTeam.Name,
-                            TeamColor = gameInfo.OpposingTeam.Color
-                        },
-                        MyTeamScore = gameInfo.MyTeamScore,
-                        OpposingTeamScore = gameInfo.OpposingTeamScore
-                    };
+                    var game = DataConverter.ConvertDtoToPersistence(gameInfo, team);
                     dataInstance.InsertGame(game);
                 }
             }
