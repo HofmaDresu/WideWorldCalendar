@@ -65,7 +65,9 @@
     <ListView
 				ItemsSource="{Binding Games}"
 				HasUnevenRows="True"
-        ItemTemplate="{StaticResource GameTemplateSelector}">
+        ItemTemplate="{StaticResource GameTemplateSelector}"
+        IsPullToRefreshEnabled="true"
+        RefreshCommand="{Binding RefreshGamesCommand}">
       <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
       <ListView.ItemTemplate>
       </ListView.ItemTemplate>
