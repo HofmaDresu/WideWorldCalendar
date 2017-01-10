@@ -60,16 +60,7 @@ namespace WideWorldCalendar.ViewModels
             var myTeamInfo = Games.First().MyTeam;
             var getReminders = await page.DisplayAlert("Game Notifications", $"Would you like game time reminders for {myTeamInfo.Name}?", "Yes", "No");
 
-
-	        var myTeam = new Persistence.Models.MyTeam
-	        {
-                Id = myTeamInfo.Id,
-	            TeamName = myTeamInfo.Name,
-	            TeamColor = myTeamInfo.Color,
-	            Division = myTeamInfo.Division,
-	            LastGameDateTime = Games.OrderBy(g => g.ScheduledDateTime).Last().ScheduledDateTime,
-                SendGameTimeReminders = getReminders
-	        };
+            var myTeam = DataConverter.ConvertDtoToPersistence(myTeamInfo, Games.OrderBy(g => g.ScheduledDateTime).Last().ScheduledDateTime, getReminders);
 
 	        data.InsertMyTeam(myTeam);
 	        return myTeam;

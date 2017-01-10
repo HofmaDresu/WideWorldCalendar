@@ -25,5 +25,18 @@ namespace WideWorldCalendar.Utilities
                 OpposingTeamScore = dto.OpposingTeamScore
             };
         }
+
+        public static Persistence.Models.MyTeam ConvertDtoToPersistence(ScheduleFetcher.Team dto, DateTime lastGameDateTime, bool sendGameTimeReminders)
+        {
+            return new Persistence.Models.MyTeam
+            {
+                Id = dto.Id,
+                TeamName = dto.Name,
+                TeamColor = dto.Color,
+                Division = dto.Division,
+                LastGameDateTime = lastGameDateTime,
+                SendGameTimeReminders = sendGameTimeReminders
+            };
+        }
     }
 }
