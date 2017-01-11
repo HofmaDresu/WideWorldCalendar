@@ -67,8 +67,7 @@
     </ResourceDictionary>
   </ContentPage.Resources>
   <StackLayout Padding="0, 0, 0, 20"
-			  Orientation="Vertical"
-        IsVisible="{Binding IsNotBusy}">
+			  Orientation="Vertical">
     <ListView
         ItemsSource="{Binding Teams}"
         SelectedItem="{Binding SelectedTeam, Mode=TwoWay}"
