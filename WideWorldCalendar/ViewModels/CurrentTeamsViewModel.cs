@@ -69,7 +69,8 @@ namespace WideWorldCalendar.ViewModels
                     }
                     catch (Exception)
                     {
-                        //TODO: let user know and set not busy
+                        await page.DisplayAlert("Network Error", "An error occured while refreshing your teams. Please try again later.", "Ok");
+                        IsBusy = false;
                         return;
                     }
 
