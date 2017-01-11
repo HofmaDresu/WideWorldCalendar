@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using WideWorldCalendar.ScheduleFetcher;
 using System;
 using WideWorldCalendar.Utilities;
+using System.Threading.Tasks;
 
 namespace WideWorldCalendar.ViewModels
 {
@@ -60,28 +61,36 @@ namespace WideWorldCalendar.ViewModels
             RefreshGamesCommand = new Command(async _ =>
             {
                 IsBusy = true;
-                foreach (var team in _data.GetMyCurrentTeams())
+                await Task.Run(async () =>
                 {
-                    List<ScheduleFetcher.Game> serverGames;
-                    try
+                    var teams = _data.GetMyCurrentTeams();
+                    var dataFetchTasks = teams.Select(team => _scheduleFetcher.GetTeamSchedule(team.Id)).ToList();
+                    await Task.WhenAll(dataFetchTasks);
+
+                    foreach (var task in dataFetchTasks)
                     {
-                        serverGames = await _scheduleFetcher.GetTeamSchedule(team.Id);
+                        try
+                        {
+                            var serverGames = task.Result;
+                            _data.DeleteGames(serverGames.FirstOrDefault()?.MyTeam?.Id ?? -1);
+
+                            foreach (var gameInfo in serverGames)
+                            {
+                                var game = DataConverter.ConvertDtoToPersistence(gameInfo);
+                                _data.InsertGame(game);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Device.BeginInvokeOnMainThread(async () =>
+                            {
+                                IsBusy = false;
+                                await page.DisplayAlert("Network Error", "An error occured while refreshing your teams. Please try again later.", "Ok");
+                            });
+                            return;
+                        }
                     }
-                    catch (Exception)
-                    {
-                        IsBusy = false;
-                        await page.DisplayAlert("Network Error", "An error occured while refreshing your teams. Please try again later.", "Ok");
-                        return;
-                    }
-                
-                    _data.DeleteGames(team.Id);
-                    foreach (var gameInfo in serverGames)
-                    {
-                        var game = DataConverter.ConvertDtoToPersistence(gameInfo);
-                        _data.InsertGame(game);
-                    }
-                }
-                
+                });
                 RefreshTeams();
                 IsBusy = false;
             });
