@@ -4,9 +4,6 @@
 		xmlns:local="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar"
 		xmlns:effects="clr-namespace:WideWorldCalendar.Effects;assembly=WideWorldCalendar"
 		x:Class="WideWorldCalendar.ViewSchedulePage">
-	<ContentPage.Content>
-        <OnPlatform x:TypeArguments="Thickness" WinPhone="20,20,20,20" />
-	</ContentPage.Content>
 	<ContentPage.Resources>
 		<ResourceDictionary>
 			<local:BoolHomeAwayConverter x:Key="HomeAwayCvt"/>
