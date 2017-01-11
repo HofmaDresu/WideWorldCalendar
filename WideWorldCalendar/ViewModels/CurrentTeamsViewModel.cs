@@ -69,11 +69,11 @@ namespace WideWorldCalendar.ViewModels
                     }
                     catch (Exception)
                     {
-                        await page.DisplayAlert("Network Error", "An error occured while refreshing your teams. Please try again later.", "Ok");
                         IsBusy = false;
+                        await page.DisplayAlert("Network Error", "An error occured while refreshing your teams. Please try again later.", "Ok");
                         return;
                     }
-
+                
                     _data.DeleteGames(team.Id);
                     foreach (var gameInfo in serverGames)
                     {
@@ -81,7 +81,7 @@ namespace WideWorldCalendar.ViewModels
                         _data.InsertGame(game);
                     }
                 }
-
+                
                 RefreshTeams();
                 IsBusy = false;
             });
