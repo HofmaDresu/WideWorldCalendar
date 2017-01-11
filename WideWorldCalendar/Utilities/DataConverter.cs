@@ -8,13 +8,13 @@ namespace WideWorldCalendar.Utilities
 {
     public static class DataConverter
     {
-        public static Persistence.Models.Game ConvertDtoToPersistence(ScheduleFetcher.Game dto, Persistence.Models.MyTeam myTeam)
+        public static Persistence.Models.Game ConvertDtoToPersistence(ScheduleFetcher.Game dto)
         {
             return new Persistence.Models.Game
             {
                 Field = dto.Field,
                 IsHomeGame = dto.IsHomeGame,
-                MyTeamId = myTeam.Id,
+                MyTeamId = dto.MyTeam.Id,
                 ScheduledDateTime = dto.ScheduledDateTime,
                 OpposingTeam = new Persistence.Models.OpposingTeam
                 {

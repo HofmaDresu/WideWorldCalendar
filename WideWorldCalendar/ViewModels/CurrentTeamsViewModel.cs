@@ -77,7 +77,7 @@ namespace WideWorldCalendar.ViewModels
                     _data.DeleteGames(team.Id);
                     foreach (var gameInfo in serverGames)
                     {
-                        var game = DataConverter.ConvertDtoToPersistence(gameInfo, team);
+                        var game = DataConverter.ConvertDtoToPersistence(gameInfo);
                         _data.InsertGame(game);
                     }
                 }

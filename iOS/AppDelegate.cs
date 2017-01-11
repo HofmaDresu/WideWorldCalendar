@@ -132,7 +132,7 @@ namespace WideWorldCalendar.iOS
                 dataInstance.DeleteGames(team.Id);
                 foreach (var gameInfo in serverGames)
                 {
-                    var game = DataConverter.ConvertDtoToPersistence(gameInfo, team);
+                    var game = DataConverter.ConvertDtoToPersistence(gameInfo);
                     dataInstance.InsertGame(game);
                 }
             }

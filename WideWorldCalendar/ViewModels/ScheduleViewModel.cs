@@ -30,7 +30,7 @@ namespace WideWorldCalendar.ViewModels
 
                 foreach (var gameInfo in Games)
 	            {
-	                var game = SaveGame(gameInfo, myTeam, data);
+	                var game = SaveGame(gameInfo, data);
 
 	                if (gameDays.ContainsKey(game.ScheduledDateTime.Date))
 	                {
@@ -48,9 +48,9 @@ namespace WideWorldCalendar.ViewModels
 	        });
         }
 
-	    private static Persistence.Models.Game SaveGame(Game gameInfo, Persistence.Models.MyTeam myTeam, Data data)
+	    private static Persistence.Models.Game SaveGame(Game gameInfo, Data data)
 	    {
-            var game = DataConverter.ConvertDtoToPersistence(gameInfo, myTeam);
+            var game = DataConverter.ConvertDtoToPersistence(gameInfo);
             data.InsertGame(game);
 	        return game;
 	    }
