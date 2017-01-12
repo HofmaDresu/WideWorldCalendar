@@ -111,17 +111,18 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 return;
             }
 
+            var serverGames = new List<Game>();
             foreach (var task in dataFetchTasks)
             {
-                var serverGames = task.Result;
-                var teamId = serverGames.FirstOrDefault()?.MyTeam?.Id;
-                var teamName= serverGames.FirstOrDefault()?.MyTeam?.Name;
+                var teamGames = task.Result;
+                var teamId = teamGames.FirstOrDefault()?.MyTeam?.Id;
+                var teamName= teamGames.FirstOrDefault()?.MyTeam?.Name;
                 if (!teamId.HasValue) continue;
 
                 var currentGames = dataInstance.GetGames(teamId.Value);
 
 
-                if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, serverGames))
+                if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, teamGames))
                 {
                     var reminder = new Intent(context, typeof(NotificationBroadcastReceiver));
                     reminder.PutExtra(Constants.NotificationRequestCodeKey, teamId.Value);
@@ -140,12 +141,9 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 }
 
                 dataInstance.DeleteGames(teamId.Value);
-                foreach (var gameInfo in serverGames)
-                {
-                    var game = DataConverter.ConvertDtoToPersistence(gameInfo);
-                    dataInstance.InsertGame(game);
-                }
+                serverGames.AddRange(teamGames);
             }
+            dataInstance.InsertGames(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
         }
 
         private static IScheduleFetcher GetScheduleFetcher()

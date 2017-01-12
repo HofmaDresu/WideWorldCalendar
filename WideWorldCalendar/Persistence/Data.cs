@@ -120,11 +120,6 @@ namespace WideWorldCalendar.Persistence
             _db.Delete<OpposingTeam>(id);
         }
 
-        public void InsertOpposingTeam(OpposingTeam opposingTeam)
-        {
-            _db.Insert(opposingTeam);
-        }
-
         public void InsertOpposingTeams(List<OpposingTeam> opposingTeams)
         {
             _db.InsertAll(opposingTeams);
@@ -155,13 +150,6 @@ namespace WideWorldCalendar.Persistence
             {
                 _db.Delete(game);
             }
-        }
-
-        public void InsertGame(Game game)
-        {
-            InsertOpposingTeam(game.OpposingTeam);
-            game.OpposingTeamId = game.OpposingTeam.Id;
-            _db.Insert(game);
         }
 
         public void InsertGames(List<Game> games)
