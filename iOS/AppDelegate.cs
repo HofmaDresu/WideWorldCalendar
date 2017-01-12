@@ -148,6 +148,7 @@ namespace WideWorldCalendar.iOS
                 }
 
                 dataInstance.DeleteGames(teamId.Value);
+				serverGames.AddRange(teamGames);
             }
             dataInstance.InsertGames(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
             return newData;
