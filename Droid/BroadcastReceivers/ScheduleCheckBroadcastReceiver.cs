@@ -88,7 +88,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 var alarms = (AlarmManager)context.GetSystemService(Context.AlarmService);
 
                 var dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                var notificationTimeMilliseconds = DateTime.Now.AddHours(9).ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
+                var notificationTimeMilliseconds = DateTime.Now.Date.AddHours(9).ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
                 alarms.SetExact(AlarmType.RtcWakeup,
                     (long)notificationTimeMilliseconds,
                     reminderBroadcast);
@@ -98,9 +98,60 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
         private static async Task UpdateSchedulesIfNeeded(Context context, Data dataInstance)
         {
             var scheduleFetcher = GetScheduleFetcher();
+
+            var teams = dataInstance.GetMyCurrentTeams();
+            var dataFetchTasks = teams.Select(team => scheduleFetcher.GetTeamSchedule(team.Id)).ToList();
+            try
+            {
+                await Task.WhenAll(dataFetchTasks);
+            }
+            catch (Exception)
+            {
+                //Eat exception
+                return;
+            }
+
+            foreach (var task in dataFetchTasks)
+            {
+                var serverGames = task.Result;
+                var teamId = serverGames.FirstOrDefault()?.MyTeam?.Id;
+                var teamName= serverGames.FirstOrDefault()?.MyTeam?.Name;
+                if (!teamId.HasValue) continue;
+
+                var currentGames = dataInstance.GetGames(teamId.Value);
+
+
+                if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, serverGames))
+                {
+                    var reminder = new Intent(context, typeof(NotificationBroadcastReceiver));
+                    reminder.PutExtra(Constants.NotificationRequestCodeKey, teamId.Value);
+                    reminder.PutExtra(Constants.NotificationTitleKey, "Team Schedule Changed");
+                    reminder.PutExtra(Constants.NotificationMessageKey, $"The schedule for {teamName} has been updated.");
+
+                    var reminderBroadcast = PendingIntent.GetBroadcast(context, teamId.Value, reminder,
+                        PendingIntentFlags.CancelCurrent);
+                    var alarms = (AlarmManager)context.GetSystemService(Context.AlarmService);
+
+                    var dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    var notificationTimeMilliseconds = DateTime.Now.Date.AddHours(9).ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
+                    alarms.SetExact(AlarmType.RtcWakeup,
+                        (long)notificationTimeMilliseconds,
+                        reminderBroadcast);
+                }
+
+                dataInstance.DeleteGames(teamId.Value);
+                foreach (var gameInfo in serverGames)
+                {
+                    var game = DataConverter.ConvertDtoToPersistence(gameInfo);
+                    dataInstance.InsertGame(game);
+                }
+            }
+
+
+
+
             foreach (var team in dataInstance.GetMyCurrentTeams())
             {
-                var currentGames = dataInstance.GetGames(team.Id);
                 List<Game> serverGames;
                 try
                 {
@@ -110,25 +161,6 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 {
                     //Eat exception
                     return;
-                }
-
-
-                if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, serverGames))
-                {
-                    var reminder = new Intent(context, typeof(NotificationBroadcastReceiver));
-                    reminder.PutExtra(Constants.NotificationRequestCodeKey, team.Id);
-                    reminder.PutExtra(Constants.NotificationTitleKey, "Team Schedule Changed");
-                    reminder.PutExtra(Constants.NotificationMessageKey, $"The schedule for {team.TeamName} has been updated.");
-
-                    var reminderBroadcast = PendingIntent.GetBroadcast(context, team.Id, reminder,
-                        PendingIntentFlags.CancelCurrent);
-                    var alarms = (AlarmManager)context.GetSystemService(Context.AlarmService);
-
-                    var dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                    var notificationTimeMilliseconds = DateTime.Now.AddHours(9).ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
-                    alarms.SetExact(AlarmType.RtcWakeup,
-                        (long)notificationTimeMilliseconds,
-                        reminderBroadcast);
                 }
 
                 dataInstance.DeleteGames(team.Id);
