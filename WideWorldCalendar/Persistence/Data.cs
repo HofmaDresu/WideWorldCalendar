@@ -124,6 +124,11 @@ namespace WideWorldCalendar.Persistence
         {
             _db.Insert(opposingTeam);
         }
+
+        public void InsertOpposingTeams(List<OpposingTeam> opposingTeams)
+        {
+            _db.InsertAll(opposingTeams);
+        }
         #endregion
 
         #region Games
@@ -161,11 +166,13 @@ namespace WideWorldCalendar.Persistence
 
         public void InsertGames(List<Game> games)
         {
+            InsertOpposingTeams(games.Select(g => g.OpposingTeam).ToList());
+
             foreach (var game in games)
             {
-                InsertOpposingTeam(game.OpposingTeam);
                 game.OpposingTeamId = game.OpposingTeam.Id;
             }
+
             _db.InsertAll(games);
         }
 
