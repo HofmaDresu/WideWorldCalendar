@@ -79,20 +79,17 @@ namespace WideWorldCalendar.ViewModels
                         return;
                     }
 
+                    var serverGames = new List<ScheduleFetcher.Game>();
                     foreach (var task in dataFetchTasks)
                     {
-                        var serverGames = task.Result;
-                        var myTeamId = serverGames.FirstOrDefault()?.MyTeam?.Id;
+                        var teamGames = task.Result;
+                        var myTeamId = teamGames.FirstOrDefault()?.MyTeam?.Id;
                         if (!myTeamId.HasValue) continue;
 
                         _data.DeleteGames(myTeamId.Value);
-
-                        foreach (var gameInfo in serverGames)
-                        {
-                            var game = DataConverter.ConvertDtoToPersistence(gameInfo);
-                            _data.InsertGame(game);
-                        }
+                        serverGames.AddRange(teamGames);
                     }
+                    _data.InsertGames(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
                 });
                 RefreshTeams();
                 IsBusy = false;

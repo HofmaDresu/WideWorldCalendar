@@ -159,6 +159,16 @@ namespace WideWorldCalendar.Persistence
             _db.Insert(game);
         }
 
+        public void InsertGames(List<Game> games)
+        {
+            foreach (var game in games)
+            {
+                InsertOpposingTeam(game.OpposingTeam);
+                game.OpposingTeamId = game.OpposingTeam.Id;
+            }
+            _db.InsertAll(games);
+        }
+
         public bool ScheduleHasChanged(List<Game> currentGames, List<ScheduleFetcher.Game> serverGames)
         {
             return currentGames.Any(
