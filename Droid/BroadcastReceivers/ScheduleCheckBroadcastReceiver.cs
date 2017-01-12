@@ -146,30 +146,6 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                     dataInstance.InsertGame(game);
                 }
             }
-
-
-
-
-            foreach (var team in dataInstance.GetMyCurrentTeams())
-            {
-                List<Game> serverGames;
-                try
-                {
-                    serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);
-                }
-                catch (Exception)
-                {
-                    //Eat exception
-                    return;
-                }
-
-                dataInstance.DeleteGames(team.Id);
-                foreach (var gameInfo in serverGames)
-                {
-                    var game = DataConverter.ConvertDtoToPersistence(gameInfo);
-                    dataInstance.InsertGame(game);
-                }
-            }
         }
 
         private static IScheduleFetcher GetScheduleFetcher()
