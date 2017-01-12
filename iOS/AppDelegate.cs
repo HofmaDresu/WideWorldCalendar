@@ -11,6 +11,7 @@ using WideWorldCalendar.ScheduleFetcher;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using WideWorldCalendar.Utilities;
+using System.Collections.Generic;
 
 namespace WideWorldCalendar.iOS
 {
@@ -130,11 +131,12 @@ namespace WideWorldCalendar.iOS
                 return false;
             }
 
+            var serverGames = new List<Game>();
             foreach (var task in dataFetchTasks)
             {
-                var serverGames = task.Result;
-                var teamId = serverGames.FirstOrDefault()?.MyTeam?.Id;
-                var teamName = serverGames.FirstOrDefault()?.MyTeam?.Name;
+                var teamGames = task.Result;
+                var teamId = teamGames.FirstOrDefault()?.MyTeam?.Id;
+                var teamName = teamGames.FirstOrDefault()?.MyTeam?.Name;
                 if (!teamId.HasValue) continue;
                 var currentGames = dataInstance.GetGames(teamId.Value);
 
@@ -146,13 +148,8 @@ namespace WideWorldCalendar.iOS
                 }
 
                 dataInstance.DeleteGames(teamId.Value);
-
-                foreach (var gameInfo in serverGames)
-                {
-                    var game = DataConverter.ConvertDtoToPersistence(gameInfo);
-                    dataInstance.InsertGame(game);
-                }
             }
+            dataInstance.InsertGames(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
             return newData;
         }
     }
