@@ -139,11 +139,10 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                         (long)notificationTimeMilliseconds,
                         reminderBroadcast);
                 }
-
-                dataInstance.DeleteGames(teamId.Value);
+                
                 serverGames.AddRange(teamGames);
             }
-            dataInstance.InsertGames(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
+            dataInstance.UpdateSchedules(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
         }
 
         private static IScheduleFetcher GetScheduleFetcher()

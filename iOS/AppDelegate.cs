@@ -146,10 +146,9 @@ namespace WideWorldCalendar.iOS
                         $"The schedule for {teamName} has been updated.", teamId.Value, Constants.ScheduleChangedNotification);
                     newData = true;
                 }
-
-                dataInstance.DeleteGames(teamId.Value);
+                
             }
-            dataInstance.InsertGames(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
+            dataInstance.UpdateSchedules(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
             return newData;
         }
     }

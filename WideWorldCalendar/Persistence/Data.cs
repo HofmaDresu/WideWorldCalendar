@@ -115,9 +115,12 @@ namespace WideWorldCalendar.Persistence
             return _db.Get<OpposingTeam>(id);
         }
 
-        public void DeleteOpposingTeam(int id)
+        public void DeleteOpposingTeams(List<OpposingTeam> teams)
         {
-            _db.Delete<OpposingTeam>(id);
+            foreach (var team in teams)
+            {
+                _db.Delete(team);
+            }
         }
 
         public void InsertOpposingTeams(List<OpposingTeam> opposingTeams)
@@ -138,14 +141,10 @@ namespace WideWorldCalendar.Persistence
                 }).ToList();
         }
 
-        public void DeleteGames(int myTeamId)
+        private void DeleteGames(int myTeamId)
         {
-            var games = GetGames(myTeamId);
-            var opposingTeams = games.Select(g => g.OpposingTeam);
-            foreach (var team in opposingTeams)
-            {
-                _db.Delete(team);
-            }
+            var games = GetGames(myTeamId);            
+            DeleteOpposingTeams(games.Select(g => g.OpposingTeam).ToList());
             foreach (var game in games)
             {
                 _db.Delete(game);
@@ -162,6 +161,20 @@ namespace WideWorldCalendar.Persistence
             }
 
             _db.InsertAll(games);
+        }
+
+        public void UpdateSchedules(List<Game> games)
+        {
+            var teamIds = games.Select(g => g.MyTeamId).Distinct().ToList();
+
+            _db.RunInTransaction(() =>
+            {
+                foreach (var teamId in teamIds)
+                {
+                    DeleteGames(teamId);
+                }
+                InsertGames(games);
+            });
         }
 
         public bool ScheduleHasChanged(List<Game> currentGames, List<ScheduleFetcher.Game> serverGames)

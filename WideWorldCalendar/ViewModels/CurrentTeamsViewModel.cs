@@ -85,11 +85,10 @@ namespace WideWorldCalendar.ViewModels
                         var teamGames = task.Result;
                         var myTeamId = teamGames.FirstOrDefault()?.MyTeam?.Id;
                         if (!myTeamId.HasValue) continue;
-
-                        _data.DeleteGames(myTeamId.Value);
+                        
                         serverGames.AddRange(teamGames);
                     }
-                    _data.InsertGames(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
+                    _data.UpdateSchedules(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
                 });
                 RefreshTeams();
                 IsBusy = false;
