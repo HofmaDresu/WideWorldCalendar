@@ -65,29 +65,32 @@ namespace WideWorldCalendar.ViewModels
                 {
                     var teams = _data.GetMyCurrentTeams();
                     var dataFetchTasks = teams.Select(team => _scheduleFetcher.GetTeamSchedule(team.Id)).ToList();
-                    await Task.WhenAll(dataFetchTasks);
+                    try
+                    {
+                        await Task.WhenAll(dataFetchTasks);
+                    }
+                    catch (Exception)
+                    {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            IsBusy = false;
+                            await page.DisplayAlert("Network Error", "An error occured while refreshing your teams. Please try again later.", "Ok");
+                        });
+                        return;
+                    }
 
                     foreach (var task in dataFetchTasks)
                     {
-                        try
-                        {
-                            var serverGames = task.Result;
-                            _data.DeleteGames(serverGames.FirstOrDefault()?.MyTeam?.Id ?? -1);
+                        var serverGames = task.Result;
+                        var myTeamId = serverGames.FirstOrDefault()?.MyTeam?.Id;
+                        if (!myTeamId.HasValue) continue;
 
-                            foreach (var gameInfo in serverGames)
-                            {
-                                var game = DataConverter.ConvertDtoToPersistence(gameInfo);
-                                _data.InsertGame(game);
-                            }
-                        }
-                        catch (Exception)
+                        _data.DeleteGames(myTeamId.Value);
+
+                        foreach (var gameInfo in serverGames)
                         {
-                            Device.BeginInvokeOnMainThread(async () =>
-                            {
-                                IsBusy = false;
-                                await page.DisplayAlert("Network Error", "An error occured while refreshing your teams. Please try again later.", "Ok");
-                            });
-                            return;
+                            var game = DataConverter.ConvertDtoToPersistence(gameInfo);
+                            _data.InsertGame(game);
                         }
                     }
                 });

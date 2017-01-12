@@ -36,7 +36,6 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 		public async Task<List<Game>> GetTeamSchedule(int teamId)
 		{
-            await Task.Delay(TimeSpan.FromSeconds(5));
 			var divisionReportHtml = await GetClient().GetStringAsync($"https://secure.wideworld-sports.me/wws_membership/PrintTeamSchedule.asp?ID={teamId}");
 			return ScheduleHtmlParser.GetTeamSchedule(teamId, divisionReportHtml).ToList();
 		}
