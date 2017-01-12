@@ -115,14 +115,17 @@ namespace WideWorldCalendar.Persistence
             return _db.Get<OpposingTeam>(id);
         }
 
-        public void DeleteOpposingTeam(int id)
+        public void DeleteOpposingTeams(List<OpposingTeam> teams)
         {
-            _db.Delete<OpposingTeam>(id);
+            foreach (var team in teams)
+            {
+                _db.Delete(team);
+            }
         }
 
-        public void InsertOpposingTeam(OpposingTeam opposingTeam)
+        public void InsertOpposingTeams(List<OpposingTeam> opposingTeams)
         {
-            _db.Insert(opposingTeam);
+            _db.InsertAll(opposingTeams);
         }
         #endregion
 
@@ -138,25 +141,40 @@ namespace WideWorldCalendar.Persistence
                 }).ToList();
         }
 
-        public void DeleteGames(int myTeamId)
+        private void DeleteGames(int myTeamId)
         {
-            var games = GetGames(myTeamId);
-            var opposingTeams = games.Select(g => g.OpposingTeam);
-            foreach (var team in opposingTeams)
-            {
-                _db.Delete(team);
-            }
+            var games = GetGames(myTeamId);            
+            DeleteOpposingTeams(games.Select(g => g.OpposingTeam).ToList());
             foreach (var game in games)
             {
                 _db.Delete(game);
             }
         }
 
-        public void InsertGame(Game game)
+        public void InsertGames(List<Game> games)
         {
-            InsertOpposingTeam(game.OpposingTeam);
-            game.OpposingTeamId = game.OpposingTeam.Id;
-            _db.Insert(game);
+            InsertOpposingTeams(games.Select(g => g.OpposingTeam).ToList());
+
+            foreach (var game in games)
+            {
+                game.OpposingTeamId = game.OpposingTeam.Id;
+            }
+
+            _db.InsertAll(games);
+        }
+
+        public void UpdateSchedules(List<Game> games)
+        {
+            var teamIds = games.Select(g => g.MyTeamId).Distinct().ToList();
+
+            _db.RunInTransaction(() =>
+            {
+                foreach (var teamId in teamIds)
+                {
+                    DeleteGames(teamId);
+                }
+                InsertGames(games);
+            });
         }
 
         public bool ScheduleHasChanged(List<Game> currentGames, List<ScheduleFetcher.Game> serverGames)

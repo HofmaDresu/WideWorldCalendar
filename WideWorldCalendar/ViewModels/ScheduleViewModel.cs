@@ -27,11 +27,11 @@ namespace WideWorldCalendar.ViewModels
 	            var myTeam = await SaveMyTeam(data, page);
                 DependencyService.Get<IUnifiedAnalytics>().CreateAndSendEventOnDefaultTracker(Constants.AnalyticsCategoryUserAction, "Save Team", myTeam.NameAndColor);
 
+                var persistanceGames = Games.Select(DataConverter.ConvertDtoToPersistence).ToList();
+                data.InsertGames(persistanceGames);
 
-                foreach (var gameInfo in Games)
+                foreach (var game in persistanceGames)
 	            {
-	                var game = SaveGame(gameInfo, myTeam, data);
-
 	                if (gameDays.ContainsKey(game.ScheduledDateTime.Date))
 	                {
 	                    gameDays[game.ScheduledDateTime.Date].Add(game);
@@ -47,13 +47,6 @@ namespace WideWorldCalendar.ViewModels
                 await _navigation.PopToRootAsync(true);
 	        });
         }
-
-	    private static Persistence.Models.Game SaveGame(Game gameInfo, Persistence.Models.MyTeam myTeam, Data data)
-	    {
-            var game = DataConverter.ConvertDtoToPersistence(gameInfo, myTeam);
-            data.InsertGame(game);
-	        return game;
-	    }
 
 	    private async Task<Persistence.Models.MyTeam> SaveMyTeam(Data data, Page page)
         {

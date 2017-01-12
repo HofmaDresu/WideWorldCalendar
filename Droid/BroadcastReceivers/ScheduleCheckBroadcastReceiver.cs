@@ -88,7 +88,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 var alarms = (AlarmManager)context.GetSystemService(Context.AlarmService);
 
                 var dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                var notificationTimeMilliseconds = DateTime.Now.AddHours(9).ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
+                var notificationTimeMilliseconds = DateTime.Now.Date.AddHours(9).ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
                 alarms.SetExact(AlarmType.RtcWakeup,
                     (long)notificationTimeMilliseconds,
                     reminderBroadcast);
@@ -98,46 +98,51 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
         private static async Task UpdateSchedulesIfNeeded(Context context, Data dataInstance)
         {
             var scheduleFetcher = GetScheduleFetcher();
-            foreach (var team in dataInstance.GetMyCurrentTeams())
+
+            var teams = dataInstance.GetMyCurrentTeams();
+            var dataFetchTasks = teams.Select(team => scheduleFetcher.GetTeamSchedule(team.Id)).ToList();
+            try
             {
-                var currentGames = dataInstance.GetGames(team.Id);
-                List<Game> serverGames;
-                try
-                {
-                    serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);
-                }
-                catch (Exception)
-                {
-                    //Eat exception
-                    return;
-                }
+                await Task.WhenAll(dataFetchTasks);
+            }
+            catch (Exception)
+            {
+                //Eat exception
+                return;
+            }
+
+            var serverGames = new List<Game>();
+            foreach (var task in dataFetchTasks)
+            {
+                var teamGames = task.Result;
+                var teamId = teamGames.FirstOrDefault()?.MyTeam?.Id;
+                var teamName= teamGames.FirstOrDefault()?.MyTeam?.Name;
+                if (!teamId.HasValue) continue;
+
+                var currentGames = dataInstance.GetGames(teamId.Value);
 
 
-                if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, serverGames))
+                if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, teamGames))
                 {
                     var reminder = new Intent(context, typeof(NotificationBroadcastReceiver));
-                    reminder.PutExtra(Constants.NotificationRequestCodeKey, team.Id);
+                    reminder.PutExtra(Constants.NotificationRequestCodeKey, teamId.Value);
                     reminder.PutExtra(Constants.NotificationTitleKey, "Team Schedule Changed");
-                    reminder.PutExtra(Constants.NotificationMessageKey, $"The schedule for {team.TeamName} has been updated.");
+                    reminder.PutExtra(Constants.NotificationMessageKey, $"The schedule for {teamName} has been updated.");
 
-                    var reminderBroadcast = PendingIntent.GetBroadcast(context, team.Id, reminder,
+                    var reminderBroadcast = PendingIntent.GetBroadcast(context, teamId.Value, reminder,
                         PendingIntentFlags.CancelCurrent);
                     var alarms = (AlarmManager)context.GetSystemService(Context.AlarmService);
 
                     var dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                    var notificationTimeMilliseconds = DateTime.Now.AddHours(9).ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
+                    var notificationTimeMilliseconds = DateTime.Now.Date.AddHours(9).ToUniversalTime().Subtract(dtBasis).TotalMilliseconds;
                     alarms.SetExact(AlarmType.RtcWakeup,
                         (long)notificationTimeMilliseconds,
                         reminderBroadcast);
                 }
-
-                dataInstance.DeleteGames(team.Id);
-                foreach (var gameInfo in serverGames)
-                {
-                    var game = DataConverter.ConvertDtoToPersistence(gameInfo, team);
-                    dataInstance.InsertGame(game);
-                }
+                
+                serverGames.AddRange(teamGames);
             }
+            dataInstance.UpdateSchedules(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
         }
 
         private static IScheduleFetcher GetScheduleFetcher()

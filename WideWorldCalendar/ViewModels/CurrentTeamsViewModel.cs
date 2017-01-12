@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using WideWorldCalendar.ScheduleFetcher;
 using System;
 using WideWorldCalendar.Utilities;
+using System.Threading.Tasks;
 
 namespace WideWorldCalendar.ViewModels
 {
@@ -60,28 +61,35 @@ namespace WideWorldCalendar.ViewModels
             RefreshGamesCommand = new Command(async _ =>
             {
                 IsBusy = true;
-                foreach (var team in _data.GetMyCurrentTeams())
+                await Task.Run(async () =>
                 {
-                    List<ScheduleFetcher.Game> serverGames;
+                    var teams = _data.GetMyCurrentTeams();
+                    var dataFetchTasks = teams.Select(team => _scheduleFetcher.GetTeamSchedule(team.Id)).ToList();
                     try
                     {
-                        serverGames = await _scheduleFetcher.GetTeamSchedule(team.Id);
+                        await Task.WhenAll(dataFetchTasks);
                     }
                     catch (Exception)
                     {
-                        IsBusy = false;
-                        await page.DisplayAlert("Network Error", "An error occured while refreshing your teams. Please try again later.", "Ok");
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            IsBusy = false;
+                            await page.DisplayAlert("Network Error", "An error occured while refreshing your teams. Please try again later.", "Ok");
+                        });
                         return;
                     }
-                
-                    _data.DeleteGames(team.Id);
-                    foreach (var gameInfo in serverGames)
+
+                    var serverGames = new List<ScheduleFetcher.Game>();
+                    foreach (var task in dataFetchTasks)
                     {
-                        var game = DataConverter.ConvertDtoToPersistence(gameInfo, team);
-                        _data.InsertGame(game);
+                        var teamGames = task.Result;
+                        var myTeamId = teamGames.FirstOrDefault()?.MyTeam?.Id;
+                        if (!myTeamId.HasValue) continue;
+                        
+                        serverGames.AddRange(teamGames);
                     }
-                }
-                
+                    _data.UpdateSchedules(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
+                });
                 RefreshTeams();
                 IsBusy = false;
             });

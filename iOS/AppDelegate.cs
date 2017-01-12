@@ -11,6 +11,7 @@ using WideWorldCalendar.ScheduleFetcher;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using WideWorldCalendar.Utilities;
+using System.Collections.Generic;
 
 namespace WideWorldCalendar.iOS
 {
@@ -118,24 +119,36 @@ namespace WideWorldCalendar.iOS
                 localNotifications.ClearAllNotifications();
             }
 
-            foreach (var team in dataInstance.GetMyCurrentTeams())
+            var teams = dataInstance.GetMyCurrentTeams();
+            var dataFetchTasks = teams.Select(team => scheduleFetcher.GetTeamSchedule(team.Id)).ToList();
+            try
             {
-                var currentGames = dataInstance.GetGames(team.Id);
-                var serverGames = await scheduleFetcher.GetTeamSchedule(team.Id);
+                await Task.WhenAll(dataFetchTasks);
+            }
+            catch (Exception)
+            {
+                //Eat Exception
+                return false;
+            }
+
+            var serverGames = new List<Game>();
+            foreach (var task in dataFetchTasks)
+            {
+                var teamGames = task.Result;
+                var teamId = teamGames.FirstOrDefault()?.MyTeam?.Id;
+                var teamName = teamGames.FirstOrDefault()?.MyTeam?.Name;
+                if (!teamId.HasValue) continue;
+                var currentGames = dataInstance.GetGames(teamId.Value);
 
                 if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, serverGames))
                 {
-					localNotifications.CreateNotification(DateTime.Now.AddMinutes(1), "Team Schedule Changed",
-                        $"The schedule for {team.TeamName} has been updated.", team.Id, Constants.ScheduleChangedNotification);
+                    localNotifications.CreateNotification(DateTime.Now.AddMinutes(1), "Team Schedule Changed",
+                        $"The schedule for {teamName} has been updated.", teamId.Value, Constants.ScheduleChangedNotification);
                     newData = true;
                 }
-                dataInstance.DeleteGames(team.Id);
-                foreach (var gameInfo in serverGames)
-                {
-                    var game = DataConverter.ConvertDtoToPersistence(gameInfo, team);
-                    dataInstance.InsertGame(game);
-                }
+				serverGames.AddRange(teamGames);
             }
+            dataInstance.UpdateSchedules(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
             return newData;
         }
     }
