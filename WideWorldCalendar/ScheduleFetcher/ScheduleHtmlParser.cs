@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Net;
 
 namespace WideWorldCalendar.ScheduleFetcher
 {
@@ -66,7 +67,7 @@ namespace WideWorldCalendar.ScheduleFetcher
 				var divisionSection = divisionSections[i];
 				var id = divisionSection.Split('\'')[0];
 
-				var name = divisionSection.Split('>')[1].Split('<')[0];
+				var name = CleanString(divisionSection.Split('>')[1].Split('<')[0]);
 
 				yield return new NavigationOption { Id = int.Parse(id), Name = name };
 			}
@@ -82,7 +83,7 @@ namespace WideWorldCalendar.ScheduleFetcher
 				var scheduleTypeSection = teamSections[i];
 				var id = scheduleTypeSection.Split('\'')[0];
 
-				var name = scheduleTypeSection.Split('>')[1].Split('<')[0];
+				var name = CleanString(scheduleTypeSection.Split('>')[1].Split('<')[0]);
 
 
 				yield return new NavigationOption { Id = int.Parse(id), Name = name };
@@ -162,12 +163,12 @@ namespace WideWorldCalendar.ScheduleFetcher
 		private static string GetValueFromColumn(string column)
 		{
 			var substring = column.Split(new[] { "'style3'>" }, StringSplitOptions.RemoveEmptyEntries)[1];
-			return substring.Split('<')[0].Trim();
+			return CleanString(substring.Split('<')[0].Trim());
 		}
 
 		private static string CleanString(string source)
 		{
-			return source.Replace("\n", "").Trim();
+			return WebUtility.HtmlDecode(source.Replace("\n", "").Trim());
 		}
 	}
 }
