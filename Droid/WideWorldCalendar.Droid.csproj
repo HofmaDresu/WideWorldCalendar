@@ -195,7 +195,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BroadcastReceivers\NotificationBroadcastReceiver.cs" />
+    <Compile Include="BroadcastReceivers\GameBasicNotificationBroadcastReceiver.cs" />
+    <Compile Include="BroadcastReceivers\BasicNotificationBroadcastReceiver.cs" />
     <Compile Include="BroadcastReceivers\ScheduleCheckBroadcastReceiver.cs" />
     <Compile Include="BroadcastReceivers\ScheduleCheckRebootReceiver.cs" />
     <Compile Include="Constants.cs" />
