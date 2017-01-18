@@ -83,7 +83,7 @@ namespace WideWorldCalendar.Droid.Utilities
 
         public static void CreateGameNotification(Context context, int teamId, string title, string message)
         {
-            var notificationIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse($"wwc://WideWorldCalendar/TeamSchedule?id={teamId}"));
+            var notificationIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(WideWorldCalendar.Constants.ScheduleDeepLinkUrl + teamId));
             var clickPendingIntent = PendingIntent.GetActivity(context, 0, notificationIntent, 0);
 
             var builder = new NotificationCompat.Builder(context)

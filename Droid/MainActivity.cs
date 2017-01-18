@@ -9,8 +9,8 @@ namespace WideWorldCalendar.Droid
 	[Activity(Label = "Wide World Calendar", Icon = "@drawable/ic_launcher", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(new[] { "android.intent.action.VIEW" },
         Categories = new[] { "android.intent.category.DEFAULT", "android.intent.category.BROWSABLE" },
-                  DataScheme = "wwc",
-                  DataHost = "WideWorldCalendar")]
+                  DataScheme = WideWorldCalendar.Constants.ScheduleDeepLinkScheme,
+                  DataHost = WideWorldCalendar.Constants.ScheduleDeepLinkDataHost)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 		protected override void OnCreate(Bundle bundle)

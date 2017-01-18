@@ -38,7 +38,7 @@ namespace WideWorldCalendar
                 {
                     Title = team.TeamName,
                     Description = team.NameAndColor,
-                    AppLinkUri = new Uri(string.Format("wwc://WideWorldCalendar/TeamSchedule?id={0}", team.Id), UriKind.RelativeOrAbsolute),
+                    AppLinkUri = new Uri(Constants.ScheduleDeepLinkUrl + team.Id, UriKind.RelativeOrAbsolute),
                     IsLinkActive = true,
                     //Thumbnail = ImageSource.FromFile("monkey.png")
                 };
@@ -59,7 +59,7 @@ namespace WideWorldCalendar
 
         protected override async void OnAppLinkRequestReceived(Uri uri)
         {
-            string appDomain = "wwc://WideWorldCalendar/";
+            string appDomain = $"{Constants.ScheduleDeepLinkScheme}://{Constants.ScheduleDeepLinkDataHost}/";
             if (!uri.ToString().ToLowerInvariant().StartsWith(appDomain.ToLowerInvariant()))
             {
                 return;
