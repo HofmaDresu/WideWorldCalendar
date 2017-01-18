@@ -141,7 +141,7 @@ namespace WideWorldCalendar.ViewModels
 	        set
 	        {
 	            if (value == null) return;
-	            _navigation.PushAsync(new TeamSchedulePage(value));
+	            _navigation.PushAsync(new TeamSchedulePage(value.Id));
 
                 SetProperty(ref _selectedTeam, value);
                 SetProperty(ref _selectedTeam, null);

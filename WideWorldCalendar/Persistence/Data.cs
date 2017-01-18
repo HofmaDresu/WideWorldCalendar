@@ -61,6 +61,10 @@ namespace WideWorldCalendar.Persistence
         {
             return MyTeams.ToList();
         }
+        public MyTeam GetTeam(int teamId)
+        {
+            return MyTeams.FirstOrDefault(t => t.Id == teamId);
+        }
         public List<MyTeam> GetMyCurrentTeams()
         {
             return MyTeams.Where(t => t.LastGameDateTime.Date >= DateTime.Now.Date).ToList();

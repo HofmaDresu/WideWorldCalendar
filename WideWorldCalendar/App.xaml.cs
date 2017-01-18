@@ -5,6 +5,8 @@ using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
 using WideWorldCalendar.ScheduleFetcher;
+using System;
+using WideWorldCalendar.Persistence;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace WideWorldCalendar
@@ -22,14 +24,28 @@ namespace WideWorldCalendar
             DependencyService.Register<RestScheduleFetcher>();
 #endif
 
-            //MainPage = new NavigationPage(new CurrentTeamsPage());
+            
             MainPage = new MenuPage();
 		}
 
 		protected override void OnStart()
-		{
-			// Handle when your app starts
-		}
+        {
+            foreach (var team in Data.GetInstance().GetMyCurrentTeams())
+            {
+
+
+                var pageLink = new AppLinkEntry
+                {
+                    Title = team.TeamName,
+                    Description = team.NameAndColor,
+                    AppLinkUri = new Uri(string.Format("wwc://WideWorldCalendar/TeamSchedule?id={0}", team.Id), UriKind.RelativeOrAbsolute),
+                    IsLinkActive = true,
+                    //Thumbnail = ImageSource.FromFile("monkey.png")
+                };
+
+                Application.Current.AppLinks.RegisterLink(pageLink);
+            }
+        }
 
 		protected override void OnSleep()
 		{
@@ -40,5 +56,19 @@ namespace WideWorldCalendar
 		{
 			// Handle when your app resumes
 		}
-	}
+
+        protected override async void OnAppLinkRequestReceived(Uri uri)
+        {
+            string appDomain = "wwc://WideWorldCalendar/";
+            if (!uri.ToString().ToLowerInvariant().StartsWith(appDomain.ToLowerInvariant()))
+            {
+                return;
+            }
+
+            var teamId = int.Parse(uri.ToString().Split('=')[1]);
+            await (MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new TeamSchedulePage(teamId));
+
+            base.OnAppLinkRequestReceived(uri);
+        }
+    }
 }

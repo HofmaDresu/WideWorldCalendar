@@ -1,4 +1,5 @@
-﻿using WideWorldCalendar.Persistence.Models;
+﻿using WideWorldCalendar.Persistence;
+using WideWorldCalendar.Persistence.Models;
 using WideWorldCalendar.UtilityInterfaces;
 using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
@@ -7,9 +8,11 @@ namespace WideWorldCalendar.Views
 {
     public partial class TeamSchedulePage : ContentPage
     {
-        public TeamSchedulePage(MyTeam selectedTeam)
+        public TeamSchedulePage(int selectedTeamId)
         {
             InitializeComponent();
+            var selectedTeam = Data.GetInstance().GetTeam(selectedTeamId);
+
             Title = selectedTeam.TeamName;
             BindingContext = new TeamScheduleViewModel(selectedTeam.Id);
             GamesList.ItemSelected += (sender, e) => 
