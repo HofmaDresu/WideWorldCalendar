@@ -9,9 +9,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.hofmadresu.wide-world-calendar</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.5</string>
+	<string>1.1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.5</string>
+	<string>1.1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -48,16 +48,16 @@
 	<false/>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>wwc</string>
-      </array>
-      <key>CFBundleURLName</key>
-      <string>WideWorldCalendar</string>
-    </dict>
-  </array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wwc</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>WideWorldCalendar</string>
+		</dict>
+	</array>
 </dict>
 </plist>
