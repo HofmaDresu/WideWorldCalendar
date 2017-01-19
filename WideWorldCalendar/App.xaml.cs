@@ -73,6 +73,8 @@ namespace WideWorldCalendar
             }
 
             var teamId = int.Parse(uri.ToString().Split('=')[1]);
+
+            MainPage = new MenuPage();
             await (MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new TeamSchedulePage(teamId));
 
             base.OnAppLinkRequestReceived(uri);
