@@ -72,7 +72,7 @@ namespace WideWorldCalendar.iOS.Utilities
                     Minute = notificationTime.Minute,
                     Second = notificationTime.Second
                 };
-                UNNotificationTrigger trigger = UNCalendarNotificationTrigger.CreateTrigger(dateComponants, true);
+                UNNotificationTrigger trigger = UNCalendarNotificationTrigger.CreateTrigger(dateComponants, false);
                 string requestId = $"{notificationType}_{requestIdCode}:{dateComponants.Year}:{dateComponants.Month}:{dateComponants.Day}:{dateComponants.Hour}:{dateComponants.Minute}:{dateComponants.Second}";
 
                 var request = UNNotificationRequest.FromIdentifier(requestId, content, trigger);
