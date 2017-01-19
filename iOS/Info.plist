@@ -48,5 +48,16 @@
 	<false/>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>wwc</string>
+      </array>
+      <key>CFBundleURLName</key>
+      <string>WideWorldCalendar</string>
+    </dict>
+  </array>
 </dict>
 </plist>

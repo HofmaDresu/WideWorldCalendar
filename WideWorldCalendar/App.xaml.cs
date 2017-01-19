@@ -70,5 +70,10 @@ namespace WideWorldCalendar
 
             base.OnAppLinkRequestReceived(uri);
         }
+
+        public void OnAppLinkRequestReceived_WorkAround(Uri uri)
+        {
+            OnAppLinkRequestReceived(uri);
+        }
     }
 }

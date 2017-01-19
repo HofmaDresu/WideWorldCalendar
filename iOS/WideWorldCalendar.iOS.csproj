@@ -221,7 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Info.plist" />
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -229,6 +231,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Effects\MainButtonEffect.cs" />
     <Compile Include="ThirdPartyIds.cs" />
+    <Compile Include="UserNotificationCenterDelegate.cs" />
     <Compile Include="Utilities\LocalNotification_iOS.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
