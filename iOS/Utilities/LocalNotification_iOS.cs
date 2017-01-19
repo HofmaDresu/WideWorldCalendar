@@ -49,7 +49,6 @@ namespace WideWorldCalendar.iOS.Utilities
 
         public void CreateNotification(DateTime notificationTime, string title, string message, int requestIdCode, string notificationType)
         {
-            notificationTime = DateTime.Now.AddMinutes(1);
             UNUserNotificationCenter.Current.GetNotificationSettings(settings =>
             {
                 var alertsAllowed = settings.AlertSetting == UNNotificationSetting.Enabled;
