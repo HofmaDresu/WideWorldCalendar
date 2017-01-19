@@ -39,17 +39,13 @@ namespace WideWorldCalendar
         {
             foreach (var team in Data.GetInstance().GetMyCurrentTeams())
             {
-
-
                 var pageLink = new AppLinkEntry
                 {
-                    Title = team.TeamName,
-                    Description = team.NameAndColor,
+                    Title = team.NameAndColor,
+                    Description = team.Division,
                     AppLinkUri = new Uri(Constants.ScheduleDeepLinkUrl + team.Id, UriKind.RelativeOrAbsolute),
-                    IsLinkActive = true,
-                    //Thumbnail = ImageSource.FromFile("monkey.png")
+                    IsLinkActive = true
                 };
-
                 Application.Current.AppLinks.RegisterLink(pageLink);
             }
         }
