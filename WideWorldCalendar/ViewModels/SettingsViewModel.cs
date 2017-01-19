@@ -151,11 +151,19 @@ namespace WideWorldCalendar.ViewModels
 
         private void SetGameNotificationPreference()
         {
+            var currentGameNotificationPreferences = _data.GetGameNotificationPreferences();
+            var preferencesHaveChanged = currentGameNotificationPreferences.Hour != HourOptions[_selectedHourIndex]
+                || currentGameNotificationPreferences.Meridian != _meridianOptions[_selectedMeridianIndex]
+                || currentGameNotificationPreferences.Day != _dayOptions[_selectedDayIndex];
+
             _data.SetGameNotificationPreferences(new GameNotificationPreference
             {
-                Hour = HourOptions[_selectedHourIndex], Meridian = _meridianOptions[_selectedMeridianIndex], Day = _dayOptions[_selectedDayIndex]
+                Hour = HourOptions[_selectedHourIndex],
+                Meridian = _meridianOptions[_selectedMeridianIndex],
+                Day = _dayOptions[_selectedDayIndex]
             });
-            DependencyService.Get<ILocalNotification>().ScheduleGameNotifications();
+
+            if (preferencesHaveChanged) DependencyService.Get<ILocalNotification>().ScheduleGameNotifications();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
                 foreach (var notification in dataInstance.GetNotificationsForDay(gameCheckDate))
                 {
-                    var reminder = new Intent(context, typeof(NotificationBroadcastReceiver));
+                    var reminder = new Intent(context, typeof(GameNotificationBroadcastReceiver));
                     reminder.PutExtra(Constants.NotificationRequestCodeKey, notification.TeamId);
                     reminder.PutExtra(Constants.NotificationTitleKey, notification.Title);
                     reminder.PutExtra(Constants.NotificationMessageKey, notification.Message);
@@ -78,7 +78,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             {
                 dataInstance.UpdateSeasons(seasons);
 
-                var reminder = new Intent(context, typeof(NotificationBroadcastReceiver));
+                var reminder = new Intent(context, typeof(BasicNotificationBroadcastReceiver));
                 reminder.PutExtra(Constants.NotificationRequestCodeKey, Constants.NewSeasonNotificationRequestCode);
                 reminder.PutExtra(Constants.NotificationTitleKey, "Wide World Sports");
                 reminder.PutExtra(Constants.NotificationMessageKey, "A new season is available.");
@@ -124,7 +124,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
 
                 if (dataInstance.ShowScheduleChangedNotifications() && dataInstance.ScheduleHasChanged(currentGames, teamGames))
                 {
-                    var reminder = new Intent(context, typeof(NotificationBroadcastReceiver));
+                    var reminder = new Intent(context, typeof(BasicNotificationBroadcastReceiver));
                     reminder.PutExtra(Constants.NotificationRequestCodeKey, teamId.Value);
                     reminder.PutExtra(Constants.NotificationTitleKey, "Team Schedule Changed");
                     reminder.PutExtra(Constants.NotificationMessageKey, $"The schedule for {teamName} has been updated.");

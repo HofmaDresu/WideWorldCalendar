@@ -9,5 +9,9 @@
         public const string Tie = "Tie";
         public const string Win = "Win";
         public const string Loss = "Loss";
+
+        public const string ScheduleDeepLinkScheme = "wwc";
+        public const string ScheduleDeepLinkDataHost = "WideWorldCalendar";
+        public static readonly string ScheduleDeepLinkUrl = ScheduleDeepLinkScheme + "://" + ScheduleDeepLinkDataHost + "/TeamSchedule?id=";
     }
 }

@@ -18,6 +18,8 @@ namespace WideWorldCalendar.iOS
 	[Register("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 	{
+        private App _app;
+
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init();
@@ -28,11 +30,13 @@ namespace WideWorldCalendar.iOS
 			Xamarin.Calabash.Start();
 #endif
             MobileCenter.Configure("ce6abde5-5977-4858-bf93-d7661ab4fbf9");
-            LoadApplication(new App());
+            _app = new App();
+            LoadApplication(_app);
 
 
             UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound, (approved, err) =>
             {
+                UNUserNotificationCenter.Current.Delegate = new UserNotificationCenterDelegate();
             });
             
             var intentIDs = new string[] { };
@@ -48,7 +52,24 @@ namespace WideWorldCalendar.iOS
             return base.FinishedLaunching(app, options);
         }
 
-		private void SetUpTheme()
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            _app.OnAppLinkRequestReceived_WorkAround(url);
+            return true;
+        }
+        
+        public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+        {
+            _app.OnAppLinkRequestReceived_WorkAround(url);
+            return true;
+        }
+
+        public override void WillEnterForeground(UIApplication uiApplication)
+        {
+            base.WillEnterForeground(uiApplication);
+        }
+
+        private void SetUpTheme()
 		{
 			UISwitch.Appearance.OnTintColor = Colors.SecondaryColor.ToUIColor();
 			UINavigationBar.Appearance.BarTintColor = Colors.PrimaryColor.ToUIColor();
