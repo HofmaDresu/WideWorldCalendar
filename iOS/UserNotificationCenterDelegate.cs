@@ -1,8 +1,5 @@
 ﻿using Foundation;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using UIKit;
 using UserNotifications;
 
 namespace WideWorldCalendar.iOS
@@ -15,10 +12,7 @@ namespace WideWorldCalendar.iOS
             var notificationType = notificationInfo.Split('_')[0];
             var notificationId = notificationInfo.Split('_')[1];
 
-            if (notificationType == Constants.GameNotification)
-            {
-                UIApplication.SharedApplication.OpenUrl(new NSUrl(WideWorldCalendar.Constants.ScheduleDeepLinkUrl + notificationId));
-            }
+            App.GetInstance().OnAppLinkRequestReceived_WorkAround(new NSUrl(WideWorldCalendar.Constants.ScheduleDeepLinkUrl + notificationId));
 
             completionHandler();
         }

@@ -13,6 +13,12 @@ namespace WideWorldCalendar
 {
 	public partial class App : Application
 	{
+        private static App _instance;
+        public static App GetInstance()
+        {
+            return _instance;
+        }
+
 		public App()
 		{
 			InitializeComponent();
@@ -26,6 +32,7 @@ namespace WideWorldCalendar
 
             
             MainPage = new MenuPage();
+            _instance = this;
 		}
 
 		protected override void OnStart()
