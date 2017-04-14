@@ -106,11 +106,11 @@ namespace WideWorldCalendar.ViewModels
         {
             var currentTeams = _data.GetMyCurrentTeams().Select(CalculateRecord);
             Teams.Clear();
-            Teams.Add(new Grouping<string, MyTeam>("Current Teams", currentTeams));
+            Teams.Add(new Grouping<string, MyTeam>("CURRENT TEAMS", currentTeams));
             var pastTeams = _data.GetMyPastTeams().OrderByDescending(t => t.LastGameDateTime).Select(CalculateRecord);
             if (pastTeams.Any())
             {
-                Teams.Add(new Grouping<string, MyTeam>("Previous Teams", pastTeams));
+                Teams.Add(new Grouping<string, MyTeam>("PREVIOUS TEAMS", pastTeams));
             }
         }
 

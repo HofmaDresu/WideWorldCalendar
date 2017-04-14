@@ -78,15 +78,14 @@
         IsPullToRefreshEnabled="true"
         RefreshCommand="{Binding RefreshGamesCommand}"
         x:Name="TeamsList"        
-        IsRefreshing="{Binding IsBusy, Mode=OneWay}">
-      <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        SeparatorColor="{StaticResource Dividers}">
       <ListView.GroupHeaderTemplate>
         <DataTemplate>
-          <ViewCell Height="30">
+          <ViewCell Height="40">
             <StackLayout VerticalOptions="FillAndExpand"
-                         Padding="5"
-                         BackgroundColor="#3498DB">
-              <Label Text="{Binding Key}" TextColor="White" VerticalOptions="Center"/>
+                         Padding="20, 15, 20, 0">
+              <Label Text="{Binding Key}" Style="{StaticResource TableHeader}" VerticalOptions="Center"/>
             </StackLayout>
           </ViewCell>
         </DataTemplate>

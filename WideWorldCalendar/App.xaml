@@ -26,7 +26,7 @@
             </Style>
             <Style x:Key="TableHeader" TargetType="Label">
                 <Setter Property="FontSize" Value="12" />
-                <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+                <Setter Property="TextColor" Value="#80061e48" />
             </Style>
         </ResourceDictionary>
 	</Application.Resources>
