@@ -11,7 +11,7 @@ namespace WideWorldCalendar.Views
             InitializeComponent();
 
             var vm = new TeamScheduleViewModel(selectedTeamId);
-            Title = vm.MyTeamName;
+            Title = "Schedule";
             BindingContext = vm;
             GamesList.ItemSelected += (sender, e) => 
             {

@@ -62,13 +62,18 @@
           UnscoredGameTemplate="{StaticResource UnscoredGameTemplate}" />
     </ResourceDictionary>
   </ContentPage.Resources>
-    <ListView
-				ItemsSource="{Binding Games}"
-				HasUnevenRows="True"
-        ItemTemplate="{StaticResource GameTemplateSelector}"
-        x:Name="GamesList"
-        SeparatorColor="{StaticResource Dividers}">
-      <ListView.ItemTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
+    <StackLayout Orientation="Vertical" Spacing="0" Padding="0">
+        <ContentView Style="{StaticResource PageSubHeader}">
+            <Label Style="{StaticResource LightContent}" Text="{Binding MyTeamName}" />
+        </ContentView>
+        <ListView
+				    ItemsSource="{Binding Games}"
+				    HasUnevenRows="True"
+            ItemTemplate="{StaticResource GameTemplateSelector}"
+            x:Name="GamesList"
+            SeparatorColor="{StaticResource Dividers}">
+          <ListView.ItemTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

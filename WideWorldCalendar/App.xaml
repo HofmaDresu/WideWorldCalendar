@@ -33,6 +33,13 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="TextColor" Value="{StaticResource Secondary}" />
             </Style>
+            <Style x:Key="LightContent" TargetType="Label" BasedOn="Content">
+                <Setter Property="TextColor" Value="{StaticResource LightText}" />
+            </Style>
+            <Style x:Key="PageSubHeader" TargetType="ContentView">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Padding" Value="20,0,20,20"/>
+            </Style>
         </ResourceDictionary>
 	</Application.Resources>
 </Application>
