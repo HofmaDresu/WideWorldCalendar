@@ -16,7 +16,7 @@
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
-    <Label Grid.Row="0" Grid.Column="0" Text="Game reminder notifications:" FontSize="Medium" />
+    <Label Grid.Row="0" Grid.Column="0" Text="Game reminder notifications:" Style="{StaticResource Content}" />
     <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding ShowGameNotifications}" ></Switch>
     <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="20,-20,0,0" Orientation="Horizontal" IsVisible="{Binding ShowGameNotifications}">
       <customControls:AdjustableWidthPicker x:Name="HourPicker"
@@ -29,9 +29,9 @@
         AutomationId="DayPicker"
               SelectedIndex="{Binding SelectedDayIndex}"/>
     </StackLayout>
-    <Label Grid.Row="2" Grid.Column="0" Text="Schedule change notifications:" FontSize="Medium" />
+    <Label Grid.Row="2" Grid.Column="0" Text="Schedule change notifications:" Style="{StaticResource Content}" />
     <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding ShowScheduleChangedNotifications}" ></Switch>
-    <Label Grid.Row="3" Grid.Column="0" Text="New season available notifications:" FontSize="Medium" />
+    <Label Grid.Row="3" Grid.Column="0" Text="New season available notifications:" Style="{StaticResource Content}" />
     <Switch Grid.Row="3" Grid.Column="1" IsToggled="{Binding ShowNewSeasonAvailableNotifications}" ></Switch>
   </Grid>
 </ContentPage>
