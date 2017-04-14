@@ -10,7 +10,7 @@
     <ResourceDictionary>
       <converters:BoolAlertOnOffIconSourceConverter x:Key="AlertOnOffSourceCvt"/>
       <DataTemplate x:Key="CurrentTeamTemplate">
-        <ViewCell Height="110">
+        <ViewCell Height="100">
           <ViewCell.ContextActions>
             <MenuItem
               Command="{Binding BindingContext.EditTeamCommand, Source={x:Reference RootPage}}"
@@ -31,15 +31,15 @@
               <ColumnDefinition Width="*"/>
               <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" Style="{DynamicResource Header}" />
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" Style="{StaticResource ItemHeader}" />
             <Image Grid.Row="0" Grid.Column="1" Source="{Binding SendGameTimeReminders, Converter={StaticResource AlertOnOffSourceCvt}}" VerticalOptions="Start"/>
-            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" Style="{DynamicResource Content}" />
-            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" Style="{DynamicResource Content}" />
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" Style="{StaticResource Content}" />
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" Style="{StaticResource Content}" />
           </Grid>
         </ViewCell>
       </DataTemplate>
       <DataTemplate x:Key="PreviousTeamTemplate">
-        <ViewCell Height="110">
+        <ViewCell Height="100">
           <ViewCell.ContextActions>
             <MenuItem
               Command="{Binding BindingContext.DeleteTeamCommand, Source={x:Reference RootPage}}"
@@ -55,9 +55,9 @@
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" Style="{DynamicResource Header}" />
-            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" Style="{DynamicResource Content}" />
-            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" Style="{DynamicResource Content}" />
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" Style="{StaticResource ItemHeader}" />
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" Style="{StaticResource Content}" />
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" Style="{StaticResource Content}" />
           </Grid>
         </ViewCell>
       </DataTemplate>
