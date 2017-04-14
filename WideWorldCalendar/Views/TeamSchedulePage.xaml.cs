@@ -1,4 +1,6 @@
-﻿using WideWorldCalendar.Persistence;
+﻿using System;
+using System.Linq;
+using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
 using WideWorldCalendar.UtilityInterfaces;
 using WideWorldCalendar.ViewModels;
@@ -14,11 +16,14 @@ namespace WideWorldCalendar.Views
             var selectedTeam = Data.GetInstance().GetTeam(selectedTeamId);
 
             Title = selectedTeam.TeamName;
-            BindingContext = new TeamScheduleViewModel(selectedTeam.Id);
+            var vm = new TeamScheduleViewModel(selectedTeam.Id);
+            BindingContext = vm;
             GamesList.ItemSelected += (sender, e) => 
             {
                 GamesList.SelectedItem = null;
             };
+
+            GamesList.ScrollTo(vm.InitialDisplayGame, ScrollToPosition.Start, false);
         }
 
         protected override void OnAppearing()
