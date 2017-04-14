@@ -1,11 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WideWorldCalendar.App">
 	<Application.Resources>
-    <ResourceDictionary>
-      <Style x:Key="ActionLabel" TargetType="Label">
-        <Setter Property="FontSize" Value="Medium" />
-        <Setter Property="TextColor" Value="#ffc300" />
-      </Style>
-    </ResourceDictionary>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#1686f3</Color>
+            <Color x:Key="PrimarySelected">#1271d0</Color>
+            <Color x:Key="Secondary">#061e48</Color>
+            <Color x:Key="Dividers">#c8cdd5</Color>
+            <Color x:Key="Background">#f9f9f9</Color>
+            <Color x:Key="Cells">White</Color>
+            <Color x:Key="LightText">White</Color>
+            
+            <Style x:Key="ActionLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="#ffc300" />
+            </Style>
+            <Style x:Key="Header" TargetType="Label">
+                <Setter Property="FontFamily" Value="Roboto" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="Content" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+            </Style>
+            <Style x:Key="TableHeader" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+            </Style>
+        </ResourceDictionary>
 	</Application.Resources>
 </Application>
