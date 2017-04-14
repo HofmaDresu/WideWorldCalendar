@@ -7,26 +7,26 @@
 	</ContentPage.Padding>
 	<StackLayout
 		Padding="20, 20, 20, 0">
-		<Label Text="Season"/>
-		<Picker x:Name="SeasonPicker"
+	<Label Text="SEASON" Style="{StaticResource ItemDullHeader}"/>
+	<Picker x:Name="SeasonPicker"
         AutomationId="SeasonPicker"
         SelectedIndexChanged="SeasonChanged">
     </Picker>
-    <Label Text="League"
+    <Label Text="LEAGUE" Style="{StaticResource ItemDullHeader}"
         IsVisible="{Binding SeasonSelected}"/>
     <Picker x:Name="LeaguePicker"
         AutomationId="LeaguePicker"
         IsVisible="{Binding SeasonSelected}"
         SelectedIndexChanged="LeagueChanged">
     </Picker>
-    <Label Text="Division"
+    <Label Text="DIVISION" Style="{StaticResource ItemDullHeader}"
         IsVisible="{Binding LeagueSelected}"/>
     <Picker x:Name="DivisionPicker"
         AutomationId="DivisionPicker"
         IsVisible="{Binding LeagueSelected}"
         SelectedIndexChanged="DivisionChanged">
     </Picker>
-    <Label Text="Team"
+    <Label Text="TEAM" Style="{StaticResource ItemDullHeader}"
         IsVisible="{Binding DivisionSelected}"/>
     <Picker x:Name="TeamPicker"
         AutomationId="TeamPicker"
