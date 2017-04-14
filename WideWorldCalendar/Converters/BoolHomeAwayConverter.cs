@@ -9,7 +9,7 @@ namespace WideWorldCalendar.Converters
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			var isHome = (bool)value;
-			return isHome ? "Home" : "Away";
+			return isHome ? "HOME" : "AWAY";
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

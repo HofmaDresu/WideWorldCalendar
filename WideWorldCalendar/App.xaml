@@ -5,6 +5,7 @@
             <Color x:Key="Primary">#1686f3</Color>
             <Color x:Key="PrimarySelected">#1271d0</Color>
             <Color x:Key="Secondary">#061e48</Color>
+            <Color x:Key="SecondaryFiftyPercent">#80061e48</Color>
             <Color x:Key="Dividers">#c8cdd5</Color>
             <Color x:Key="Background">#f9f9f9</Color>
             <Color x:Key="Cells">White</Color>
@@ -20,9 +21,13 @@
                 <Setter Property="TextColor" Value="{StaticResource Secondary}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
+            <Style x:Key="ItemDullHeader" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="{StaticResource SecondaryFiftyPercent}" />
+            </Style>
             <Style x:Key="TableHeader" TargetType="Label">
                 <Setter Property="FontSize" Value="12" />
-                <Setter Property="TextColor" Value="#80061e48" />
+                <Setter Property="TextColor" Value="{StaticResource SecondaryFiftyPercent}" />
             </Style>
             <Style x:Key="Content" TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
