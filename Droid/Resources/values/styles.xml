@@ -11,6 +11,11 @@
 		<item name="colorAccent">@color/Secondary</item>
 		<item name="windowActionModeOverlay">true</item>
 		<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:colorPressedHighlight">@color/PrimarySelected</item>
+    <item name="android:colorLongPressedHighlight">@color/PrimarySelected</item>
+    <item name="android:colorFocusedHighlight">@color/PrimarySelected</item>
+    <item name="android:colorActivatedHighlight">@color/PrimarySelected</item>
+    <item name="android:activatedBackgroundIndicator">@color/PrimarySelected</item>
 	</style>
 	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
 		<item name="colorAccent">@color/Secondary</item>

@@ -6,17 +6,19 @@
   <MasterDetailPage.Master>
     <ContentPage Title="Menu">
       <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness" Android="0,20,0,0" iOS="0, 20, 0, 0" WinPhone="20,20,20,20" />
+        <OnPlatform x:TypeArguments="Thickness" Android="0,0,0,0" iOS="0, 20, 0, 0" WinPhone="20,20,20,20" />
       </ContentPage.Padding>
-      <StackLayout VerticalOptions="FillAndExpand">
-        <Image Source="WWsoccer.jpg"
+      <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Primary}" Padding="0,30,0,0">
+        <Image Source="icon_logo_menu.png"
                HeightRequest="100"
                WidthRequest="100"></Image>
-        <ListView x:Name="MenuList" VerticalOptions="FillAndExpand">
+        <ListView x:Name="MenuList" VerticalOptions="FillAndExpand" RowHeight="50" SeparatorColor="Transparent">
           <ListView.ItemTemplate>
             <DataTemplate>
               <ViewCell>
-                <Label Text="{Binding Title}" Margin="20, 0, 20, 0" VerticalOptions="CenterAndExpand" Style="{StaticResource ActionLabel}"/>
+                <ContentView Style="{StaticResource MenuView}">
+                  <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand" Style="{StaticResource MenuText}"/>
+                </ContentView>
               </ViewCell>
             </DataTemplate>
           </ListView.ItemTemplate>

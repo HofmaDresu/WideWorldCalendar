@@ -9,6 +9,7 @@ namespace WideWorldCalendar.Views
     {
         private const string MyTeamsTitle = "My Teams";
         private readonly Stack<Page> _pageHistory = new Stack<Page>();
+        private readonly MasterPageItem _currentPage;
 
         public MenuPage()
         {
@@ -32,6 +33,10 @@ namespace WideWorldCalendar.Views
                 }
             };
 
+            MenuList.SelectedItem = masterPageItems.First();
+
+            BindingContext = _currentPage;
+
             MenuList.ItemsSource = masterPageItems;
             MenuList.ItemSelected += OnItemSelected;
         }
@@ -39,6 +44,7 @@ namespace WideWorldCalendar.Views
         void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var item = e.SelectedItem as MasterPageItem;
+            
             if (item != null)
             {
                 Page targetPage;
@@ -57,7 +63,6 @@ namespace WideWorldCalendar.Views
                 }
                 
                 Detail = targetPage;
-                MenuList.SelectedItem = null;
                 IsPresented = false;
             }
         }
