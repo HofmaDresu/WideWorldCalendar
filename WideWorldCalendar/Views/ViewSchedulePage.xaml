@@ -21,13 +21,13 @@
           </ContentView>
 		  <ListView
 				  ItemsSource="{Binding Games}"
-				  RowHeight="95"
+				  HasUnevenRows="True"
                   SeparatorColor="{StaticResource Dividers}"
                   x:Name="GamesList">
 			  <ListView.ItemTemplate>
 				  <DataTemplate>
 					  <ViewCell>
-						  <Grid Padding="20,10,20,0">
+						  <Grid Padding="20,10,20,10">
 							  <Grid.RowDefinitions>
 								  <RowDefinition Height="auto"/>
 								  <RowDefinition Height="auto"/>

@@ -10,7 +10,7 @@
     <ResourceDictionary>
       <converters:BoolAlertOnOffIconSourceConverter x:Key="AlertOnOffSourceCvt"/>
       <DataTemplate x:Key="CurrentTeamTemplate">
-        <ViewCell Height="100">
+        <ViewCell>
           <ViewCell.ContextActions>
             <MenuItem
               Command="{Binding BindingContext.EditTeamCommand, Source={x:Reference RootPage}}"
@@ -39,7 +39,7 @@
         </ViewCell>
       </DataTemplate>
       <DataTemplate x:Key="PreviousTeamTemplate">
-        <ViewCell Height="100">
+        <ViewCell>
           <ViewCell.ContextActions>
             <MenuItem
               Command="{Binding BindingContext.DeleteTeamCommand, Source={x:Reference RootPage}}"
