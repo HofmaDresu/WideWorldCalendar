@@ -10,7 +10,7 @@ namespace WideWorldCalendar.Views
     public partial class MenuPage : MasterDetailPage
     {
         private const string MyTeamsTitle = "My Teams";
-        private readonly Stack<Tuple<Page, MasterPageItemViewModel>> _pageHistory = new Stack<Tuple<Page, MasterPageItemViewModel>>();
+        private readonly Stack<HistoryItem> _pageHistory = new Stack<HistoryItem>();
         private readonly ObservableCollection<MasterPageItemViewModel> _masterPageItems = new ObservableCollection<MasterPageItemViewModel>
         {
             new MasterPageItemViewModel
@@ -55,7 +55,7 @@ namespace WideWorldCalendar.Views
                 Page targetPage;
                 if (item.Title == MyTeamsTitle)
                 {
-                    targetPage = _pageHistory.ElementAtOrDefault(0).Item1 ?? Detail;
+                    targetPage = _pageHistory.ElementAtOrDefault(0).Page ?? Detail;
                     _pageHistory.Clear();
                 }
                 else
@@ -64,7 +64,7 @@ namespace WideWorldCalendar.Views
                     {
                         BarTextColor = Color.White
                     };
-                    _pageHistory.Push(new Tuple<Page, MasterPageItemViewModel>(Detail, currentSelectedItem));
+                    _pageHistory.Push(new HistoryItem(Detail, currentSelectedItem));
                 }
 
                 Detail = targetPage;
@@ -105,10 +105,22 @@ namespace WideWorldCalendar.Views
             else
             {
                 var previousPage = _pageHistory.Pop();
-                Detail = previousPage.Item1;
-                SetSelectedItem(previousPage.Item2);
+                Detail = previousPage.Page;
+                SetSelectedItem(previousPage.MasterPageItemViewModel);
                 return true;
             }
+        }
+
+        class HistoryItem
+        {
+            public HistoryItem(Page page, MasterPageItemViewModel masterPageItemViewModel)
+            {
+                Page = page;
+                MasterPageItemViewModel = masterPageItemViewModel;
+            }
+
+            public Page Page { get; set; }
+            public MasterPageItemViewModel MasterPageItemViewModel { get; set; }
         }
     }
 }
