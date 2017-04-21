@@ -50,6 +50,12 @@ namespace WideWorldCalendar.Views
             if (item != null)
             {
                 var currentSelectedItem = GetSelectedItem();
+                if (currentSelectedItem.Title == item.Title)
+                {
+                    IsPresented = false;
+                    return;
+                };
+
                 SetSelectedItem(item);
 
                 Page targetPage;
