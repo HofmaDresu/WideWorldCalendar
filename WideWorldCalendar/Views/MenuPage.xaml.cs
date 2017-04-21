@@ -10,7 +10,7 @@ namespace WideWorldCalendar.Views
     public partial class MenuPage : MasterDetailPage
     {
         private const string MyTeamsTitle = "My Teams";
-        private readonly Stack<Page> _pageHistory = new Stack<Page>();
+        private readonly Stack<Tuple<Page, MasterPageItemViewModel>> _pageHistory = new Stack<Tuple<Page, MasterPageItemViewModel>>();
         private readonly ObservableCollection<MasterPageItemViewModel> _masterPageItems = new ObservableCollection<MasterPageItemViewModel>
         {
             new MasterPageItemViewModel
@@ -49,12 +49,13 @@ namespace WideWorldCalendar.Views
             
             if (item != null)
             {
+                var currentSelectedItem = GetSelectedItem();
                 SetSelectedItem(item);
 
                 Page targetPage;
                 if (item.Title == MyTeamsTitle)
                 {
-                    targetPage = _pageHistory.ElementAtOrDefault(0) ?? Detail;
+                    targetPage = _pageHistory.ElementAtOrDefault(0).Item1 ?? Detail;
                     _pageHistory.Clear();
                 }
                 else
@@ -63,12 +64,17 @@ namespace WideWorldCalendar.Views
                     {
                         BarTextColor = Color.White
                     };
-                    _pageHistory.Push(Detail);
+                    _pageHistory.Push(new Tuple<Page, MasterPageItemViewModel>(Detail, currentSelectedItem));
                 }
 
                 Detail = targetPage;
                 IsPresented = false;
             }
+        }
+
+        private MasterPageItemViewModel GetSelectedItem()
+        {
+            return _masterPageItems.Single(p => p.IsSelected);
         }
 
         private void SetSelectedItem(MasterPageItemViewModel item)
@@ -99,7 +105,8 @@ namespace WideWorldCalendar.Views
             else
             {
                 var previousPage = _pageHistory.Pop();
-                Detail = previousPage;
+                Detail = previousPage.Item1;
+                SetSelectedItem(previousPage.Item2);
                 return true;
             }
         }
