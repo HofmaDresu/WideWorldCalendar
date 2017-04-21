@@ -11,15 +11,18 @@
 			<local:DateTimeTimeStringConverter x:Key="TimeCvt"/>
 		</ResourceDictionary>
 	</ContentPage.Resources>
-  <StackLayout Spacing="0" Padding="0"
-			  Orientation="Vertical">
-	  <StackLayout Padding="0, 0, 0, 20" Spacing="0"
-			  Orientation="Vertical"
+    <AbsoluteLayout  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+	  <Grid Padding="0, 0, 0, 20"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
         IsVisible="{Binding IsNotBusy}">
-          <ContentView Style="{StaticResource PageSubHeader}">
+		  <Grid.RowDefinitions>
+			  <RowDefinition Height="auto"/>
+			  <RowDefinition Height="*"/>
+			  <RowDefinition Height="auto"/>
+          </Grid.RowDefinitions>
+          <ContentView Style="{StaticResource PageSubHeader}" Grid.Row="0">
               <Label Style="{StaticResource LightContent}" Text="{Binding Title}" />
           </ContentView>
-		  <ListView
+		  <ListView Grid.Row="1"
 				  ItemsSource="{Binding Games}"
 				  HasUnevenRows="True"
                   SeparatorColor="{StaticResource Dividers}"
@@ -54,12 +57,15 @@
           Command="{Binding SaveCommand}"
           HorizontalOptions="FillAndExpand"
           Margin="20, 20, 20, 0"
-          TextColor="White">
+          TextColor="White"
+          Grid.Row="2">
         <Button.Effects>
           <effects:MainButtonEffect />
         </Button.Effects>
       </Button>
-	  </StackLayout>
-    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></ActivityIndicator>
-  </StackLayout>
+	  </Grid>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" 
+                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                 AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"></ActivityIndicator>
+  </AbsoluteLayout>
 </ContentPage>
