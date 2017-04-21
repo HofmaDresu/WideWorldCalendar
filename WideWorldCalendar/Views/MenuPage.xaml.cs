@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.Views
@@ -9,7 +11,21 @@ namespace WideWorldCalendar.Views
     {
         private const string MyTeamsTitle = "My Teams";
         private readonly Stack<Page> _pageHistory = new Stack<Page>();
-        private readonly MasterPageItem _currentPage;
+        private readonly ObservableCollection<MasterPageItemViewModel> _masterPageItems = new ObservableCollection<MasterPageItemViewModel>
+        {
+            new MasterPageItemViewModel
+            {
+                Title = MyTeamsTitle,
+                TargetType = typeof (CurrentTeamsPage),
+                IsSelected = true
+            },
+            new MasterPageItemViewModel
+            {
+                Title = "Settings",
+                TargetType = typeof(SettingsPage),
+                IsSelected = false
+            }
+        };
 
         public MenuPage()
         {
@@ -17,36 +33,24 @@ namespace WideWorldCalendar.Views
 			Detail = new NavigationPage(new CurrentTeamsPage())
 			{
 				BarTextColor = Color.White
-			};
+			};            
 
-            var masterPageItems = new List<MasterPageItem>
-            {
-                new MasterPageItem
-                {
-                    Title = MyTeamsTitle,
-                    TargetType = typeof (CurrentTeamsPage)
-                },
-                new MasterPageItem
-                {
-                    Title = "Settings",
-                    TargetType = typeof(SettingsPage)
-                }
-            };
+            MenuList.SelectedItem = _masterPageItems.First();
 
-            MenuList.SelectedItem = masterPageItems.First();
-
-            BindingContext = _currentPage;
-
-            MenuList.ItemsSource = masterPageItems;
+            MenuList.ItemsSource = _masterPageItems;
             MenuList.ItemSelected += OnItemSelected;
+            MenuList.SelectedItem = null;
         }
 
         void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as MasterPageItem;
+            var item = e.SelectedItem as MasterPageItemViewModel;
+            MenuList.SelectedItem = null;
             
             if (item != null)
             {
+                SetSelectedItem(item);
+
                 Page targetPage;
                 if (item.Title == MyTeamsTitle)
                 {
@@ -55,16 +59,30 @@ namespace WideWorldCalendar.Views
                 }
                 else
                 {
-					targetPage = new NavigationPage((Page)Activator.CreateInstance(item.TargetType))
-					{
-						BarTextColor = Color.White
-					};
+                    targetPage = new NavigationPage((Page)Activator.CreateInstance(item.TargetType))
+                    {
+                        BarTextColor = Color.White
+                    };
                     _pageHistory.Push(Detail);
                 }
-                
+
                 Detail = targetPage;
                 IsPresented = false;
             }
+        }
+
+        private void SetSelectedItem(MasterPageItemViewModel item)
+        {
+            foreach (var page in _masterPageItems)
+            {
+                page.IsSelected = item.Title == page.Title;
+            }
+
+            // ********************************************
+            // HACK: Horrible hack to make iOS work
+            MenuList.ItemsSource = null;
+            MenuList.ItemsSource = _masterPageItems;
+            // ********************************************
         }
 
         protected override bool OnBackButtonPressed()
@@ -85,11 +103,5 @@ namespace WideWorldCalendar.Views
                 return true;
             }
         }
-    }
-
-    public class MasterPageItem
-    {
-        public string Title { get; set; }
-        public Type TargetType { get; set; }
     }
 }
