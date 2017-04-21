@@ -214,25 +214,31 @@
     <Compile Include="Utilities\UnifiedAnalytics_iOS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\WWsoccer.jpg" />
+    <BundleResource Include="Resources\image_splash%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_alarm_off.png" />
+    <BundleResource Include="Resources\icon_alarm.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_alarm_off%402x.png" />
+    <BundleResource Include="Resources\icon_alarm%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_alarm_off%403x.png" />
+    <BundleResource Include="Resources\icon_alarm%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_alarm_on.png" />
+    <BundleResource Include="Resources\icon_logo_menu.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_alarm_on%402x.png" />
+    <BundleResource Include="Resources\icon_logo_menu%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_alarm_on%403x.png" />
+    <BundleResource Include="Resources\icon_logo_menu%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\image_splash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\image_splash%402x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

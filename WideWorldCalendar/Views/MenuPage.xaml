@@ -1,22 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              x:Class="WideWorldCalendar.Views.MenuPage">
   <MasterDetailPage.Master>
     <ContentPage Title="Menu">
-      <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness" Android="0,0,0,0" iOS="0, 20, 0, 0" WinPhone="20,20,20,20" />
-      </ContentPage.Padding>
-      <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Primary}" Padding="0,30,0,0">
+      <ContentPage.Resources>
+        <ResourceDictionary>
+          <converters:ListItemSelectedBackgroundColorConverter x:Key="SelectedBackgroundCvt"/>
+        </ResourceDictionary>
+      </ContentPage.Resources>
+      <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Primary}" Padding="0,40,0,0" Spacing="20">
         <Image Source="icon_logo_menu.png"
                HeightRequest="100"
                WidthRequest="100"></Image>
-        <ListView x:Name="MenuList" VerticalOptions="FillAndExpand" RowHeight="50" SeparatorColor="Transparent">
+        <ListView x:Name="MenuList" VerticalOptions="FillAndExpand" RowHeight="50" SeparatorColor="Transparent" BackgroundColor="Transparent">
           <ListView.ItemTemplate>
             <DataTemplate>
               <ViewCell>
-                <ContentView Style="{StaticResource MenuView}">
+                <ContentView Style="{StaticResource MenuView}" BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedBackgroundCvt}}">
                   <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand" Style="{StaticResource MenuText}"/>
                 </ContentView>
               </ViewCell>

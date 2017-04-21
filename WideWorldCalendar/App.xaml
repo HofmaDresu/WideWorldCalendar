@@ -37,7 +37,7 @@
             </Style>
             <Style x:Key="PageSubHeader" TargetType="ContentView">
                 <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Padding" Value="20,0,20,20"/>
+                <Setter Property="Padding" Value="20,10,20,10"/>
             </Style>
             <Style x:Key="MenuView" TargetType="ContentView">
                 <Setter Property="Padding" Value="20,10,20,10"/>
