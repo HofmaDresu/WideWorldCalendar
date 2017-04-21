@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <item name="Primary" type="color">#1686f3</item>
+  <item name="PrimarySelected" type="color">#1271d0</item>
+  <item name="Secondary" type="color">#061e48</item>
+  <item name="Dividers" type="color">#c8cdd5</item>
+  <item name="Background" type="color">#f9f9f9</item>
+  <item name="Cells_Light_Text" type="color">#ffffff</item>
+</resources>

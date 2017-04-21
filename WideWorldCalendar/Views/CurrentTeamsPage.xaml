@@ -10,7 +10,7 @@
     <ResourceDictionary>
       <converters:BoolAlertOnOffIconSourceConverter x:Key="AlertOnOffSourceCvt"/>
       <DataTemplate x:Key="CurrentTeamTemplate">
-        <ViewCell Height="90">
+        <ViewCell Height="100">
           <ViewCell.ContextActions>
             <MenuItem
               Command="{Binding BindingContext.EditTeamCommand, Source={x:Reference RootPage}}"
@@ -21,43 +21,43 @@
               CommandParameter="{Binding}"
               Text="Delete" IsDestructive="True" />
           </ViewCell.ContextActions>
-          <Grid Padding="20,10,20,10">
+          <Grid Padding="20,10,20,10" BackgroundColor="{StaticResource Cells}">
             <Grid.RowDefinitions>
-              <RowDefinition Height="*"/>
-              <RowDefinition Height="*"/>
-              <RowDefinition Height="*"/>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="*"/>
               <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" />
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" Style="{StaticResource ItemHeader}" />
             <Image Grid.Row="0" Grid.Column="1" Source="{Binding SendGameTimeReminders, Converter={StaticResource AlertOnOffSourceCvt}}" VerticalOptions="Start"/>
-            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" />
-            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" />
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" Style="{StaticResource Content}" />
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" Style="{StaticResource Content}" />
           </Grid>
         </ViewCell>
       </DataTemplate>
       <DataTemplate x:Key="PreviousTeamTemplate">
-        <ViewCell Height="90">
+        <ViewCell Height="100">
           <ViewCell.ContextActions>
             <MenuItem
               Command="{Binding BindingContext.DeleteTeamCommand, Source={x:Reference RootPage}}"
               CommandParameter="{Binding}"
               Text="Delete" IsDestructive="True" />
           </ViewCell.ContextActions>
-          <Grid Padding="20,10,20,10">
+          <Grid Padding="20,10,20,10" BackgroundColor="{StaticResource Cells}" >
             <Grid.RowDefinitions>
-              <RowDefinition Height="*"/>
-              <RowDefinition Height="*"/>
-              <RowDefinition Height="*"/>
+              <RowDefinition Height="auto"/>
+              <RowDefinition Height="auto"/>
+              <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" />
-            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" />
-            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" />
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" Style="{StaticResource ItemHeader}" />
+            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Division}" Style="{StaticResource Content}" />
+            <Label Grid.Row="2" Grid.Column="0" Text="{Binding Record}" Style="{StaticResource Content}" />
           </Grid>
         </ViewCell>
       </DataTemplate>
@@ -78,15 +78,14 @@
         IsPullToRefreshEnabled="true"
         RefreshCommand="{Binding RefreshGamesCommand}"
         x:Name="TeamsList"        
-        IsRefreshing="{Binding IsBusy, Mode=OneWay}">
-      <ListView.SeparatorColor>#ffc300</ListView.SeparatorColor>
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        SeparatorColor="{StaticResource Dividers}">
       <ListView.GroupHeaderTemplate>
         <DataTemplate>
-          <ViewCell Height="30">
+          <ViewCell Height="40">
             <StackLayout VerticalOptions="FillAndExpand"
-                         Padding="5"
-                         BackgroundColor="#3498DB">
-              <Label Text="{Binding Key}" TextColor="White" VerticalOptions="Center"/>
+                         Padding="20, 15, 20, 0">
+              <Label Text="{Binding Key}" Style="{StaticResource TableHeader}" VerticalOptions="Center"/>
             </StackLayout>
           </ViewCell>
         </DataTemplate>

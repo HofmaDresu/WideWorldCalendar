@@ -1,6 +1,4 @@
-﻿using WideWorldCalendar.Persistence;
-using WideWorldCalendar.Persistence.Models;
-using WideWorldCalendar.UtilityInterfaces;
+﻿using WideWorldCalendar.UtilityInterfaces;
 using WideWorldCalendar.ViewModels;
 using Xamarin.Forms;
 
@@ -11,14 +9,16 @@ namespace WideWorldCalendar.Views
         public TeamSchedulePage(int selectedTeamId)
         {
             InitializeComponent();
-            var selectedTeam = Data.GetInstance().GetTeam(selectedTeamId);
 
-            Title = selectedTeam.TeamName;
-            BindingContext = new TeamScheduleViewModel(selectedTeam.Id);
+            var vm = new TeamScheduleViewModel(selectedTeamId);
+            Title = "Schedule";
+            BindingContext = vm;
             GamesList.ItemSelected += (sender, e) => 
             {
                 GamesList.SelectedItem = null;
             };
+
+            GamesList.ScrollTo(vm.InitialDisplayGame, ScrollToPosition.Start, false);
         }
 
         protected override void OnAppearing()

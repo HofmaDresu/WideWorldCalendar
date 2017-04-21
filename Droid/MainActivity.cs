@@ -6,7 +6,7 @@ using Xamarin.Forms.Platform.Android.AppLinks;
 
 namespace WideWorldCalendar.Droid
 {
-	[Activity(Label = "Wide World Calendar", Icon = "@drawable/ic_launcher", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity(Label = "Wide World Calendar", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(new[] { "android.intent.action.VIEW" },
         Categories = new[] { "android.intent.category.DEFAULT", "android.intent.category.BROWSABLE" },
                   DataScheme = WideWorldCalendar.Constants.ScheduleDeepLinkScheme,
