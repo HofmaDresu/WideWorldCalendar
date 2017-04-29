@@ -18,13 +18,13 @@
     <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0" >
         <Label Text="Game reminder notifications:" Style="{StaticResource Content}" />
         <StackLayout Orientation="Horizontal" Padding="0,10,0,0" IsVisible="{Binding ShowGameNotifications}">
-            <Picker x:Name="HourPicker"
+            <customControls:AdjustableWidthPicker x:Name="HourPicker"
                     AutomationId="HourPicker"
                     SelectedIndex="{Binding SelectedHourIndex}"/>
-            <Picker x:Name="MeridianPicker"
+            <customControls:AdjustableWidthPicker x:Name="MeridianPicker"
                     AutomationId="MeridianPicker"
                     SelectedIndex="{Binding SelectedMeridianIndex}"/>
-            <Picker x:Name="DayPicker"
+            <customControls:AdjustableWidthPicker x:Name="DayPicker"
                     AutomationId="DayPicker"
                     SelectedIndex="{Binding SelectedDayIndex}"/>
         </StackLayout>
