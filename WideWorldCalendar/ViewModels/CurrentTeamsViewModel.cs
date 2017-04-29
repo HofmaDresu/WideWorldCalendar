@@ -63,7 +63,7 @@ namespace WideWorldCalendar.ViewModels
                 IsBusy = true;
                 await Task.Run(async () =>
                 {
-                    var teams = _data.GetMyCurrentTeams();
+                    var teams = _data.GetRecentAndCurrentTeams();
                     var dataFetchTasks = teams.Select(team => _scheduleFetcher.GetTeamSchedule(team.Id)).ToList();
                     try
                     {

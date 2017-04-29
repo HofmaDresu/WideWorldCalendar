@@ -140,7 +140,7 @@ namespace WideWorldCalendar.iOS
                 localNotifications.ClearAllNotifications();
             }
 
-            var teams = dataInstance.GetMyCurrentTeams();
+            var teams = dataInstance.GetRecentAndCurrentTeams();
             var dataFetchTasks = teams.Select(team => scheduleFetcher.GetTeamSchedule(team.Id)).ToList();
             try
             {
