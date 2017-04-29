@@ -99,7 +99,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
         {
             var scheduleFetcher = GetScheduleFetcher();
 
-            var teams = dataInstance.GetMyCurrentTeams();
+            var teams = dataInstance.GetRecentAndCurrentTeams();
             var dataFetchTasks = teams.Select(team => scheduleFetcher.GetTeamSchedule(team.Id)).ToList();
             try
             {
