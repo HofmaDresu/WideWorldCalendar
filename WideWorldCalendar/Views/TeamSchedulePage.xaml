@@ -4,63 +4,118 @@
              xmlns:converters="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar"
              x:Class="WideWorldCalendar.Views.TeamSchedulePage"
             xmlns:local="clr-namespace:WideWorldCalendar.Utilities;assembly=WideWorldCalendar" >
-  <ContentPage.Resources>
-    <ResourceDictionary>
-      <converters:BoolHomeAwayConverter x:Key="HomeAwayCvt"/>
-      <converters:DateTimeDateStringConverter x:Key="DateCvt"/>
-      <converters:DateTimeTimeStringConverter x:Key="TimeCvt"/>
-      <converters:GameDateFutureColorConverter x:Key="GameFutureCvt"/>
-      <DataTemplate x:Key="ScoredGameTemplate">
-        <ViewCell>
-          <Grid Padding="20,10,20,10" BackgroundColor="{Binding ScheduledDateTime, Converter={StaticResource GameFutureCvt}}">
-            <Grid.RowDefinitions>
-              <RowDefinition Height="auto"/>
-              <RowDefinition Height="auto"/>
-              <RowDefinition Height="auto"/>
-              <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <StackLayout Grid.Row="0" Orientation="Horizontal">
-                <Label Text="{Binding ScheduledDateTime, Converter={StaticResource DateCvt}}" Style="{StaticResource ItemDullHeader}" />
-                <Label Text="-"  Style="{StaticResource ItemDullHeader}"/>  
-                <Label Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}" Style="{StaticResource ItemDullHeader}"/>
-            </StackLayout>
-            <Label Grid.Row="1" Text="{Binding OpposingTeam.NameAndColor}" Style="{StaticResource ItemHeader}"/>
-            <StackLayout Grid.Row="2" Orientation="Horizontal">
-                <Label Text="{Binding Field}" Style="{StaticResource Content}"/>
-                <Label Text="@" Style="{StaticResource Content}"/>
-                <Label Text="{Binding ScheduledDateTime, Converter={StaticResource TimeCvt}}" Style="{StaticResource Content}" />
-            </StackLayout>
-            <Label Grid.Row="3" Text="{Binding GameScore}" Style="{StaticResource Content}"/>
-          </Grid>
-        </ViewCell>
-      </DataTemplate>
-      <DataTemplate x:Key="UnscoredGameTemplate">
-        <ViewCell >
-          <Grid Padding="20,10,20,10" BackgroundColor="{Binding ScheduledDateTime, Converter={StaticResource GameFutureCvt}}">
-            <Grid.RowDefinitions>
-              <RowDefinition Height="auto"/>
-              <RowDefinition Height="auto"/>
-              <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <StackLayout Grid.Row="0" Orientation="Horizontal">
-                <Label Text="{Binding ScheduledDateTime, Converter={StaticResource DateCvt}}" Style="{StaticResource ItemDullHeader}" />
-                <Label Text="-"  Style="{StaticResource ItemDullHeader}"/>  
-                <Label Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}" Style="{StaticResource ItemDullHeader}"/>
-            </StackLayout>
-            <Label Grid.Row="1" Text="{Binding OpposingTeam.NameAndColor}" Style="{StaticResource ItemHeader}"/>
-            <StackLayout Grid.Row="2" Orientation="Horizontal">
-                <Label Text="{Binding Field}" Style="{StaticResource Content}"/>
-                <Label Text="@" Style="{StaticResource Content}"/>
-                <Label Text="{Binding ScheduledDateTime, Converter={StaticResource TimeCvt}}" Style="{StaticResource Content}" />
-            </StackLayout>
-          </Grid>
-        </ViewCell>
-      </DataTemplate>
-      <local:GameTemplateSelector x:Key="GameTemplateSelector"
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolHomeAwayConverter x:Key="HomeAwayCvt"/>
+            <converters:DateTimeDateStringConverter x:Key="DateCvt"/>
+            <converters:DateTimeTimeStringConverter x:Key="TimeCvt"/>
+            <converters:GameDatePastFutureImageConverter x:Key="GamePastFutureImageCvt"/>
+            <converters:FullGameBarIsVisibleConverter x:Key="FullBarVisibleCvt" />
+            <converters:LastGameBarIsVisibleConverter x:Key="LastGameBarIsVisibleCvt"/>
+            <converters:FirstGameBarIsVisibleConverter x:Key="FirstGameBarIsVisibleCvt"/>
+            <DataTemplate x:Key="ScoredGameTemplate">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White">
+                        <StackLayout WidthRequest="30">
+                            <RelativeLayout>
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameDot{0}.png'}"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       />
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
+                                       IsVisible="{Binding ., Converter={StaticResource FullBarVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
+                                       />
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       IsVisible="{Binding ., Converter={StaticResource LastGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
+                                       />
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-15}"
+                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       IsVisible="{Binding ., Converter={StaticResource FirstGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
+                                       />
+                            </RelativeLayout>
+                        </StackLayout>
+                        <Grid Padding="0,10,20,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <StackLayout Grid.Row="0" Orientation="Horizontal">
+                                <Label Text="{Binding ScheduledDateTime, Converter={StaticResource DateCvt}}" Style="{StaticResource ItemDullHeader}" />
+                                <Label Text="-"  Style="{StaticResource ItemDullHeader}"/>
+                                <Label Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}" Style="{StaticResource ItemDullHeader}"/>
+                            </StackLayout>
+                            <Label Grid.Row="1" Text="{Binding OpposingTeam.NameAndColor}" Style="{StaticResource ItemHeader}"/>
+                            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                                <Label Text="{Binding Field}" Style="{StaticResource Content}"/>
+                                <Label Text="@" Style="{StaticResource Content}"/>
+                                <Label Text="{Binding ScheduledDateTime, Converter={StaticResource TimeCvt}}" Style="{StaticResource Content}" />
+                            </StackLayout>
+                            <Label Grid.Row="3" Text="{Binding GameScore}" Style="{StaticResource Content}"/>
+                        </Grid>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="UnscoredGameTemplate">
+                <ViewCell >
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White">
+                        <StackLayout WidthRequest="30">
+                            <RelativeLayout>
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameDot{0}.png'}"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       />
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
+                                       IsVisible="{Binding ., Converter={StaticResource FullBarVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
+                                       />
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       IsVisible="{Binding ., Converter={StaticResource LastGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
+                                       />
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-15}"
+                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       IsVisible="{Binding ., Converter={StaticResource FirstGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
+                                       />
+                            </RelativeLayout>
+                        </StackLayout>
+                        <Grid Padding="0,10,20,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <StackLayout Grid.Row="0" Orientation="Horizontal">
+                                <Label Text="{Binding ScheduledDateTime, Converter={StaticResource DateCvt}}" Style="{StaticResource ItemDullHeader}" />
+                                <Label Text="-"  Style="{StaticResource ItemDullHeader}"/>
+                                <Label Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}" Style="{StaticResource ItemDullHeader}"/>
+                            </StackLayout>
+                            <Label Grid.Row="1" Text="{Binding OpposingTeam.NameAndColor}" Style="{StaticResource ItemHeader}"/>
+                            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                                <Label Text="{Binding Field}" Style="{StaticResource Content}"/>
+                                <Label Text="@" Style="{StaticResource Content}"/>
+                                <Label Text="{Binding ScheduledDateTime, Converter={StaticResource TimeCvt}}" Style="{StaticResource Content}" />
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            <local:GameTemplateSelector x:Key="GameTemplateSelector"
           ScoredGameTemplate="{StaticResource ScoredGameTemplate}"
           UnscoredGameTemplate="{StaticResource UnscoredGameTemplate}" />
-    </ResourceDictionary>
-  </ContentPage.Resources>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout Orientation="Vertical" Spacing="0" Padding="0">
         <ContentView Style="{StaticResource PageSubHeader}">
             <Label Style="{StaticResource LightContent}" Text="{Binding MyTeamName}" />
@@ -70,9 +125,9 @@
 				    HasUnevenRows="True"
             ItemTemplate="{StaticResource GameTemplateSelector}"
             x:Name="GamesList"
-            SeparatorColor="{StaticResource Dividers}">
-          <ListView.ItemTemplate>
-          </ListView.ItemTemplate>
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
 </ContentPage>

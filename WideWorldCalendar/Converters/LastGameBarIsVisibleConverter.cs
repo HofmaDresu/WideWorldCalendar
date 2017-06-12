@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.Converters
 {
-    public class GameDateFutureColorConverter : IValueConverter
+    public class LastGameBarIsVisibleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return DateTime.Now < ((DateTime)value).AddHours(1) ? Color.White : Color.FromHex("#cccccc");
+            if (value == null || parameter == null) return false;
+            var list = ((ListView)parameter).ItemsSource.Cast<object>().ToList();
+            var index = list.IndexOf(value);
+            return index == list.Count - 1;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
