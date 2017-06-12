@@ -13,10 +13,10 @@
             <DataTemplate x:Key="ScoredGameTemplate">
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" BackgroundColor="White">
-                        <StackLayout WidthRequest="20">
+                        <StackLayout WidthRequest="30">
                             <RelativeLayout>
-                                <Image Source="GameDotPast.png" HeightRequest="8" WidthRequest="8"
-                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=-4}"
+                                <Image Source="GameDotPast.png"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
                                        />
                             </RelativeLayout>
@@ -47,10 +47,10 @@
             <DataTemplate x:Key="UnscoredGameTemplate">
                 <ViewCell >
                     <StackLayout Orientation="Horizontal" BackgroundColor="White">
-                        <StackLayout WidthRequest="20">
+                        <StackLayout WidthRequest="30">
                             <RelativeLayout>
-                                <Image Source="GameDotFuture.png" HeightRequest="8" WidthRequest="8"
-                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=-4}"
+                                <Image Source="GameDotFuture.png"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
                                        />
                             </RelativeLayout>
