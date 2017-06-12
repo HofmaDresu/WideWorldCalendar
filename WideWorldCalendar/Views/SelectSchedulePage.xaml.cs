@@ -54,18 +54,7 @@ namespace WideWorldCalendar
 							SeasonPicker.Items.Add(season);
 						}
 					});
-
-					if (_seasons.Count == 1)
-					{
-						_leagues = _scheduleFetcher.GetScheduleGroupings(_vm.SchedulePageHtml, _seasons.Last());
-						foreach (var league in _leagues)
-						{
-							LeaguePicker.Items.Add(league);
-						}
-
-					    _vm.LeagueSelected = true;
-					}
-					_vm.IsBusy = false;
+                    _vm.IsBusy = false;
 				});
 		}
 
