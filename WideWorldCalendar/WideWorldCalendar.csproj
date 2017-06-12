@@ -60,7 +60,7 @@
     <Compile Include="Converters\ListItemSelectedBackgroundColorConverter.cs" />
     <Compile Include="CustomControls\AdjustableWidthPicker.cs" />
     <Compile Include="Effects\EffectIds.cs" />
-    <Compile Include="Converters\GameDateFutureColorConverter.cs" />
+    <Compile Include="Converters\GameDatePastFutureImageConverter.cs" />
     <Compile Include="Effects\MainButtonEffect.cs" />
     <Compile Include="Persistence\Models\GameNotificationPreference.cs" />
     <Compile Include="Utilities\DataConverter.cs" />

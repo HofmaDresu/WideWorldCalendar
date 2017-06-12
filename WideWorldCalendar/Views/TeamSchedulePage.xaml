@@ -9,7 +9,7 @@
             <converters:BoolHomeAwayConverter x:Key="HomeAwayCvt"/>
             <converters:DateTimeDateStringConverter x:Key="DateCvt"/>
             <converters:DateTimeTimeStringConverter x:Key="TimeCvt"/>
-            <converters:GameDateFutureColorConverter x:Key="GameFutureCvt"/>
+            <converters:GameDatePastFutureImageConverter x:Key="GamePastFutureImageCvt"/>
             <converters:FullGameBarIsVisibleConverter x:Key="FullBarVisibleCvt" />
             <converters:LastGameBarIsVisibleConverter x:Key="LastGameBarIsVisibleCvt"/>
             <converters:FirstGameBarIsVisibleConverter x:Key="FirstGameBarIsVisibleCvt"/>
@@ -18,21 +18,21 @@
                     <StackLayout Orientation="Horizontal" BackgroundColor="White">
                         <StackLayout WidthRequest="30">
                             <RelativeLayout>
-                                <Image Source="GameDotPast.png"
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameDot{0}.png'}"
                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
                                        />
-                                <Image Source="GameBarPast.png" Aspect="Fill"
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
                                        IsVisible="{Binding ., Converter={StaticResource FullBarVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
                                        />
-                                <Image Source="GameBarPast.png" Aspect="Fill"
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
                                        IsVisible="{Binding ., Converter={StaticResource LastGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
                                        />
-                                <Image Source="GameBarPast.png" Aspect="Fill"
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-15}"
                                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
@@ -68,21 +68,21 @@
                     <StackLayout Orientation="Horizontal" BackgroundColor="White">
                         <StackLayout WidthRequest="30">
                             <RelativeLayout>
-                                <Image Source="GameDotFuture.png"
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameDot{0}.png'}"
                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
                                        />
-                                <Image Source="GameBarFuture.png" Aspect="Fill"
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
                                        IsVisible="{Binding ., Converter={StaticResource FullBarVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
                                        />
-                                <Image Source="GameBarFuture.png" Aspect="Fill"
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
                                        IsVisible="{Binding ., Converter={StaticResource LastGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
                                        />
-                                <Image Source="GameBarFuture.png" Aspect="Fill"
+                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-15}"
                                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
