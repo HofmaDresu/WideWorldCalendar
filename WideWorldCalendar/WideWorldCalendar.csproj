@@ -54,6 +54,8 @@
     <Compile Include="Colors.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Converters\BoolAlertOnOffIconSourceConverter.cs" />
+    <Compile Include="Converters\FirstGameBarIsVisibleConverter.cs" />
+    <Compile Include="Converters\LastGameBarIsVisibleConverter.cs" />
     <Compile Include="Converters\FullGameBarIsVisibleConverter.cs" />
     <Compile Include="Converters\ListItemSelectedBackgroundColorConverter.cs" />
     <Compile Include="CustomControls\AdjustableWidthPicker.cs" />

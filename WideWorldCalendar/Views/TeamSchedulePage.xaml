@@ -11,6 +11,8 @@
             <converters:DateTimeTimeStringConverter x:Key="TimeCvt"/>
             <converters:GameDateFutureColorConverter x:Key="GameFutureCvt"/>
             <converters:FullGameBarIsVisibleConverter x:Key="FullBarVisibleCvt" />
+            <converters:LastGameBarIsVisibleConverter x:Key="LastGameBarIsVisibleCvt"/>
+            <converters:FirstGameBarIsVisibleConverter x:Key="FirstGameBarIsVisibleCvt"/>
             <DataTemplate x:Key="ScoredGameTemplate">
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" BackgroundColor="White">
@@ -24,6 +26,17 @@
                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
                                        IsVisible="{Binding ., Converter={StaticResource FullBarVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
+                                       />
+                                <Image Source="GameBarPast.png" Aspect="Fill"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       IsVisible="{Binding ., Converter={StaticResource LastGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
+                                       />
+                                <Image Source="GameBarPast.png" Aspect="Fill"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-15}"
+                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       IsVisible="{Binding ., Converter={StaticResource FirstGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
                                        />
                             </RelativeLayout>
                         </StackLayout>
@@ -63,6 +76,17 @@
                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
                                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
                                        IsVisible="{Binding ., Converter={StaticResource FullBarVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
+                                       />
+                                <Image Source="GameBarFuture.png" Aspect="Fill"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       IsVisible="{Binding ., Converter={StaticResource LastGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
+                                       />
+                                <Image Source="GameBarFuture.png" Aspect="Fill"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
+                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-15}"
+                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       IsVisible="{Binding ., Converter={StaticResource FirstGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
                                        />
                             </RelativeLayout>
                         </StackLayout>
