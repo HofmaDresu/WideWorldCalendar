@@ -274,6 +274,24 @@
   <ItemGroup>
     <BundleResource Include="Resources\GameDotPast%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameBarFuture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameBarFuture%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameBarFuture%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameBarPast.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameBarPast%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameBarPast%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
