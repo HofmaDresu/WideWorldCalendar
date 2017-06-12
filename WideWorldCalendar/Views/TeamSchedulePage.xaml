@@ -3,43 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar"
              x:Class="WideWorldCalendar.Views.TeamSchedulePage"
-            xmlns:local="clr-namespace:WideWorldCalendar.Utilities;assembly=WideWorldCalendar" >
+             xmlns:local="clr-namespace:WideWorldCalendar.Utilities;assembly=WideWorldCalendar"
+             xmlns:custom="clr-namespace:WideWorldCalendar.CustomControls;assembly=WideWorldCalendar">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:BoolHomeAwayConverter x:Key="HomeAwayCvt"/>
             <converters:DateTimeDateStringConverter x:Key="DateCvt"/>
             <converters:DateTimeTimeStringConverter x:Key="TimeCvt"/>
-            <converters:GameDatePastFutureImageConverter x:Key="GamePastFutureImageCvt"/>
-            <converters:FullGameBarIsVisibleConverter x:Key="FullBarVisibleCvt" />
-            <converters:LastGameBarIsVisibleConverter x:Key="LastGameBarIsVisibleCvt"/>
-            <converters:FirstGameBarIsVisibleConverter x:Key="FirstGameBarIsVisibleCvt"/>
             <DataTemplate x:Key="ScoredGameTemplate">
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" BackgroundColor="White">
-                        <StackLayout WidthRequest="30">
-                            <RelativeLayout>
-                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameDot{0}.png'}"
-                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
-                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
-                                       />
-                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
-                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
-                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
-                                       IsVisible="{Binding ., Converter={StaticResource FullBarVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
-                                       />
-                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
-                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
-                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
-                                       IsVisible="{Binding ., Converter={StaticResource LastGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
-                                       />
-                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
-                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
-                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-15}"
-                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
-                                       IsVisible="{Binding ., Converter={StaticResource FirstGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
-                                       />
-                            </RelativeLayout>
-                        </StackLayout>
+                        <custom:GameStatusBar>
+                            <x:Arguments>
+                                <x:Object>{x:Reference GamesList}</x:Object>
+                            </x:Arguments>
+                        </custom:GameStatusBar>
                         <Grid Padding="0,10,20,10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -66,30 +44,11 @@
             <DataTemplate x:Key="UnscoredGameTemplate">
                 <ViewCell >
                     <StackLayout Orientation="Horizontal" BackgroundColor="White">
-                        <StackLayout WidthRequest="30">
-                            <RelativeLayout>
-                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameDot{0}.png'}"
-                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
-                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
-                                       />
-                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
-                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
-                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
-                                       IsVisible="{Binding ., Converter={StaticResource FullBarVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
-                                       />
-                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
-                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
-                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
-                                       IsVisible="{Binding ., Converter={StaticResource LastGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
-                                       />
-                                <Image Source="{Binding ScheduledDateTime, Converter={StaticResource GamePastFutureImageCvt}, ConverterParameter='GameBar{0}.png'}" Aspect="Fill"
-                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=0}"
-                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-15}"
-                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
-                                       IsVisible="{Binding ., Converter={StaticResource FirstGameBarIsVisibleCvt}, ConverterParameter={x:Reference GamesList}}"
-                                       />
-                            </RelativeLayout>
-                        </StackLayout>
+                        <custom:GameStatusBar>
+                            <x:Arguments>
+                                <x:Object>{x:Reference GamesList}</x:Object>
+                            </x:Arguments>
+                        </custom:GameStatusBar>
                         <Grid Padding="0,10,20,10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
