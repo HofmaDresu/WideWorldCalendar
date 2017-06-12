@@ -13,8 +13,15 @@
             <DataTemplate x:Key="ScoredGameTemplate">
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" BackgroundColor="White">
-                        <Image Source="GamePast.png" VerticalOptions="Fill" Aspect="Fill"/>
-                        <Grid Padding="20,10,20,10">
+                        <StackLayout WidthRequest="20">
+                            <RelativeLayout>
+                                <Image Source="GameDotPast.png" HeightRequest="8" WidthRequest="8"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=-4}"
+                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       />
+                            </RelativeLayout>
+                        </StackLayout>
+                        <Grid Padding="0,10,20,10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
@@ -40,8 +47,15 @@
             <DataTemplate x:Key="UnscoredGameTemplate">
                 <ViewCell >
                     <StackLayout Orientation="Horizontal" BackgroundColor="White">
-                        <Image Source="GameFuture.png" VerticalOptions="Fill" Aspect="Fill"/>
-                        <Grid Padding="20,10,20,10" BackgroundColor="{Binding ScheduledDateTime, Converter={StaticResource GameFutureCvt}}">
+                        <StackLayout WidthRequest="20">
+                            <RelativeLayout>
+                                <Image Source="GameDotFuture.png" HeightRequest="8" WidthRequest="8"
+                                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=-4}"
+                                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=15}"
+                                       />
+                            </RelativeLayout>
+                        </StackLayout>
+                        <Grid Padding="0,10,20,10" BackgroundColor="{Binding ScheduledDateTime, Converter={StaticResource GameFutureCvt}}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
