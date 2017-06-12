@@ -7,6 +7,7 @@ using WideWorldCalendar.Droid.BroadcastReceivers;
 using WideWorldCalendar.Droid.Utilities;
 using WideWorldCalendar.UtilityInterfaces;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 [assembly: Dependency(typeof(LocalNotification_Android))]
 namespace WideWorldCalendar.Droid.Utilities
@@ -57,20 +58,13 @@ namespace WideWorldCalendar.Droid.Utilities
                     .SetPriority((int)NotificationPriority.Low)
                     .SetVisibility(NotificationCompat.VisibilityPublic)
                     .SetCategory("reminder")
-                    .SetSmallIcon(Resource.Drawable.ic_launcher);
-            }
-            else if ((int)Build.VERSION.SdkInt >= 20)
-            {
-                builder
-                    .SetSmallIcon(Resource.Drawable.ic_launcher);
+                    .SetSmallIcon(Resource.Drawable.icon_notification_plain)
+                    .SetColor(Colors.PrimaryColor.ToAndroid());
             }
             else
             {
-                // Disable obsolete warning 'cause this was how you do it pre-20
-#pragma warning disable 618
                 builder
                     .SetSmallIcon(Resource.Drawable.ic_launcher);
-#pragma warning restore 618
             }
 
             var notification = builder.Build();
@@ -96,20 +90,13 @@ namespace WideWorldCalendar.Droid.Utilities
                     .SetPriority((int)NotificationPriority.Low)
                     .SetVisibility(NotificationCompat.VisibilityPublic)
                     .SetCategory("reminder")
-                    .SetSmallIcon(Resource.Drawable.ic_launcher);
-            }
-            else if ((int)Build.VERSION.SdkInt >= 20)
-            {
-                builder
-                    .SetSmallIcon(Resource.Drawable.ic_launcher);
+                    .SetSmallIcon(Resource.Drawable.icon_notification_plain)
+                    .SetColor(Colors.PrimaryColor.ToAndroid());
             }
             else
             {
-                // Disable obsolete warning 'cause this was how you do it pre-20
-#pragma warning disable 618
                 builder
                     .SetSmallIcon(Resource.Drawable.ic_launcher);
-#pragma warning restore 618
             }
 
             var notification = builder
