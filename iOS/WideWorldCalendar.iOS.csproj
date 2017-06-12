@@ -256,6 +256,24 @@
   <ItemGroup>
     <BundleResource Include="Resources\image_splash%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameDotPast%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameDotFuture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameDotFuture%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameDotFuture%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameDotPast.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameDotPast%402x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

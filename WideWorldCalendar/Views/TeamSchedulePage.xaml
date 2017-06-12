@@ -55,7 +55,7 @@
                                        />
                             </RelativeLayout>
                         </StackLayout>
-                        <Grid Padding="0,10,20,10" BackgroundColor="{Binding ScheduledDateTime, Converter={StaticResource GameFutureCvt}}">
+                        <Grid Padding="0,10,20,10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
