@@ -121,7 +121,7 @@ namespace WideWorldCalendar
 
                 _vm.DivisionSelected = true;
             }
-			catch (Exception ex)
+			catch (Exception)
             {
                 await DisplayAlert("Network Error", "There was a problem communicating with the Wide World server. Please try again later", "OK");
             }
