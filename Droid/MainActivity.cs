@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Microsoft.Azure.Mobile;
@@ -15,7 +16,9 @@ namespace WideWorldCalendar.Droid
 	{
 		protected override void OnCreate(Bundle bundle)
 		{
-			TabLayoutResource = Resource.Layout.Tabbar;
+            CreateNotificationChannels();
+
+            TabLayoutResource = Resource.Layout.Tabbar;
 			ToolbarResource = Resource.Layout.Toolbar;
 
 			base.OnCreate(bundle);
@@ -26,5 +29,28 @@ namespace WideWorldCalendar.Droid
             MobileCenter.Configure("31e541dc-2476-4e59-8da0-519cea09b4ad");
             LoadApplication(new App());
 		}
+
+        private void CreateNotificationChannels()
+        {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
+            {
+                var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+
+                var gameChannel = new NotificationChannel(Constants.GameNotificationChannelId, "Game Time Notifications", NotificationImportance.Low)
+                {
+                    Description = "These notifications remind you of an upcoming game."
+                };
+                gameChannel.EnableVibration(true);
+
+                var generalChannel = new NotificationChannel(Constants.GeneralNotificationChannelId, "General Notifications", NotificationImportance.Low)
+                {
+                    Description = "These notifications remind you of schedule changes and new schedule availability."
+                };
+                generalChannel.EnableVibration(true);
+
+                notificationManager.CreateNotificationChannel(gameChannel);
+                notificationManager.CreateNotificationChannel(generalChannel);
+            }
+        }
 	}
 }

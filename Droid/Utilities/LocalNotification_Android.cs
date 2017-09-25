@@ -48,7 +48,7 @@ namespace WideWorldCalendar.Droid.Utilities
         
         public static void CreateBasicNotification(Context context, int requestCode, string title, string message)
         {
-            var builder = new NotificationCompat.Builder(context)
+            var builder = GetBuilder(context, Constants.GeneralNotificationChannelId)
                 .SetContentTitle(title)
                 .SetContentText(message);
 
@@ -80,10 +80,9 @@ namespace WideWorldCalendar.Droid.Utilities
             var notificationIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(WideWorldCalendar.Constants.ScheduleDeepLinkUrl + teamId));
             var clickPendingIntent = PendingIntent.GetActivity(context, 0, notificationIntent, 0);
 
-            var builder = new NotificationCompat.Builder(context)
+            var builder = GetBuilder(context, Constants.GameNotificationChannelId)
                 .SetContentTitle(title)
                 .SetContentText(message);
-
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
             {
                 builder
@@ -107,6 +106,11 @@ namespace WideWorldCalendar.Droid.Utilities
 
             var notificationManager = NotificationManagerCompat.From(context);
             notificationManager?.Notify(teamId, notification);
+        }
+
+        private static NotificationCompat.Builder GetBuilder(Context context, string channelId)
+        {
+            return Build.VERSION.SdkInt >= BuildVersionCodes.O ? new NotificationCompat.Builder(context, channelId) : new NotificationCompat.Builder(context);
         }
     }
 }

@@ -8,5 +8,8 @@ namespace WideWorldCalendar.Droid
         public const string NotificationRequestCodeKey = "TeamId";
         public const string NotificationTitleKey = "Title";
         public const string NotificationMessageKey = "Message";
+
+        public const string GameNotificationChannelId = "GameNotificationChannel";
+        public const string GeneralNotificationChannelId = "GeneralNotificationsChannel";
     }
 }
