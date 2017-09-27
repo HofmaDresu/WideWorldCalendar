@@ -10,7 +10,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
     {
         public override void OnReceive(Context context, Intent intent)
         {
-            new LocalNotification_Android().ScheduleGameNotification(context);
+            new LocalNotification_Android().ScheduleGameNotification(context, true);
         }
     }
 }
