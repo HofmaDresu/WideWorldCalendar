@@ -83,7 +83,6 @@
     <Compile Include="ScheduleFetcher\Team.cs" />
     <Compile Include="ScheduleFetcher\MockScheduleFetcher.cs" />
     <Compile Include="ScheduleFetcher\ScheduleHtmlParser.cs" />
-    <Compile Include="UtilityInterfaces\IUnifiedAnalytics.cs" />
     <Compile Include="ViewModels\MasterPageItemViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\MenuPage.xaml.cs">

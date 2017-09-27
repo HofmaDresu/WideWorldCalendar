@@ -20,7 +20,6 @@ namespace WideWorldCalendar.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            DependencyService.Get<IUnifiedAnalytics>().SendScreenHitOnDefaultTracker("Current Teams");
             _vm.RefreshTeams();
         }
     }

@@ -24,8 +24,6 @@ namespace WideWorldCalendar.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            DependencyService.Get<IUnifiedAnalytics>().SendScreenHitOnDefaultTracker("Saved Team Schedule");
-            DependencyService.Get<IUnifiedAnalytics>().CreateAndSendEventOnDefaultTracker(Constants.AnalyticsCategoryUserAction, Constants.AnalyticsLabelViewTeamSchedule, Title);
         }
     }
 }

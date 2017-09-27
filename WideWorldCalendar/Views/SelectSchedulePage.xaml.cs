@@ -61,7 +61,6 @@ namespace WideWorldCalendar
 	    protected override void OnAppearing()
 	    {
 	        base.OnAppearing();
-            DependencyService.Get<IUnifiedAnalytics>().SendScreenHitOnDefaultTracker("Select Schedule");
         }
 
 	    void SeasonChanged(object sender, EventArgs e)

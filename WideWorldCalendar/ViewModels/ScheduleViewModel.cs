@@ -25,7 +25,6 @@ namespace WideWorldCalendar.ViewModels
 	            var data = Data.GetInstance();
 
 	            var myTeam = await SaveMyTeam(data, page);
-                DependencyService.Get<IUnifiedAnalytics>().CreateAndSendEventOnDefaultTracker(Constants.AnalyticsCategoryUserAction, "Save Team", myTeam.NameAndColor);
 
                 var persistanceGames = Games.Select(DataConverter.ConvertDtoToPersistence).ToList();
                 data.InsertGames(persistanceGames);

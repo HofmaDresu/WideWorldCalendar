@@ -30,7 +30,6 @@ namespace WideWorldCalendar.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            DependencyService.Get<IUnifiedAnalytics>().SendScreenHitOnDefaultTracker("Settings");
         }
     }
 }

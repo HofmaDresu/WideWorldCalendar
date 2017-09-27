@@ -40,7 +40,6 @@ namespace WideWorldCalendar
 
 								_vm.Games.AddRange(data.Result);
 								_vm.Title = data.Result.First()?.MyTeam.Name;
-                                DependencyService.Get<IUnifiedAnalytics>().CreateAndSendEventOnDefaultTracker(Constants.AnalyticsCategoryUserAction, Constants.AnalyticsLabelViewTeamSchedule, _vm.Title);
                                 _vm.IsBusy = false;
 							});
             GamesList.ItemSelected += (sender, e) => 
@@ -52,7 +51,6 @@ namespace WideWorldCalendar
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-            DependencyService.Get<IUnifiedAnalytics>().SendScreenHitOnDefaultTracker("Server Team Schedule");
         }
 	}
 }
