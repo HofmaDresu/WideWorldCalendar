@@ -98,3 +98,5 @@ Backup*/
 UpgradeLog*.XML
 
 *.ide
+.vs/
+*.bak
