@@ -50,22 +50,12 @@ namespace WideWorldCalendar.Droid.Utilities
         {
             var builder = GetBuilder(context, Constants.GeneralNotificationChannelId)
                 .SetContentTitle(title)
-                .SetContentText(message);
-
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-            {
-                builder
-                    .SetPriority((int)NotificationPriority.Low)
-                    .SetVisibility(NotificationCompat.VisibilityPublic)
-                    .SetCategory("reminder")
-                    .SetSmallIcon(Resource.Drawable.icon_notification_plain)
-                    .SetColor(Colors.PrimaryColor.ToAndroid());
-            }
-            else
-            {
-                builder
-                    .SetSmallIcon(Resource.Drawable.ic_launcher);
-            }
+                .SetContentText(message)
+                .SetPriority((int)NotificationPriority.Low)
+                .SetVisibility(NotificationCompat.VisibilityPublic)
+                .SetCategory("reminder")
+                .SetSmallIcon(Resource.Drawable.icon_notification_plain)
+                .SetColor(Colors.PrimaryColor.ToAndroid());
 
             var notification = builder.Build();
 
@@ -82,21 +72,12 @@ namespace WideWorldCalendar.Droid.Utilities
 
             var builder = GetBuilder(context, Constants.GameNotificationChannelId)
                 .SetContentTitle(title)
-                .SetContentText(message);
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-            {
-                builder
-                    .SetPriority((int)NotificationPriority.Low)
-                    .SetVisibility(NotificationCompat.VisibilityPublic)
-                    .SetCategory("reminder")
-                    .SetSmallIcon(Resource.Drawable.icon_notification_plain)
-                    .SetColor(Colors.PrimaryColor.ToAndroid());
-            }
-            else
-            {
-                builder
-                    .SetSmallIcon(Resource.Drawable.ic_launcher);
-            }
+                .SetContentText(message)
+                .SetPriority((int)NotificationPriority.Low)
+                .SetVisibility(NotificationCompat.VisibilityPublic)
+                .SetCategory("reminder")
+                .SetSmallIcon(Resource.Drawable.icon_notification_plain)
+                .SetColor(Colors.PrimaryColor.ToAndroid());
 
             var notification = builder
                 .SetContentIntent(clickPendingIntent)
