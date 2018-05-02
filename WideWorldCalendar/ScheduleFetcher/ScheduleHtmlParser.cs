@@ -30,7 +30,7 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 			if (seasonSections.Length <= 1) yield break;
 
-			var selectedSeasonSections = seasonSections.Where(s => s.Contains(season)).ToList();
+			var selectedSeasonSections = seasonSections.Where(s => s.Contains(WebUtility.HtmlEncode(season))).ToList();
 			if (selectedSeasonSections.Count != 1) yield break;
 
 			var scheduleGroupingSections = selectedSeasonSections[0].Split(new[] { "<span class=\"style128\">" }, StringSplitOptions.RemoveEmptyEntries);
@@ -51,13 +51,13 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 			if (seasonSections.Length <= 1) yield break;
 
-			var selectedSeasonSections = seasonSections.Where(s => s.Contains(season)).ToList();
+			var selectedSeasonSections = seasonSections.Where(s => s.Contains(WebUtility.HtmlEncode(season))).ToList();
 			if (selectedSeasonSections.Count != 1) yield break;
 
 			var scheduleGroupingSections = selectedSeasonSections[0].Split(new[] { "<span class=\"style128\">" }, StringSplitOptions.RemoveEmptyEntries);
 			if (scheduleGroupingSections.Length <= 1) yield break;
 
-			var selectedGroupingSections = scheduleGroupingSections.Where(s => s.Contains(schedule)).ToList();
+			var selectedGroupingSections = scheduleGroupingSections.Where(s => s.Contains(WebUtility.HtmlEncode(schedule))).ToList();
 			if (selectedGroupingSections.Count != 1) yield break;
 
 			var divisionSections = selectedGroupingSections[0].Split(new[] { "ID=" }, StringSplitOptions.RemoveEmptyEntries);
