@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using WideWorldCalendar.Droid.Utilities;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
@@ -67,9 +70,9 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             {
                 scheduleHtml = await scheduleFetcher.GetSchedulesPage();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //Eat exception
+                Crashes.TrackError(ex);
                 return;
             }
             var seasons = scheduleFetcher.GetSeasons(scheduleHtml);
@@ -105,9 +108,9 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             {
                 await Task.WhenAll(dataFetchTasks);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //Eat exception
+                Crashes.TrackError(ex, new Dictionary<string, string> { { "teamIds", string.Join(", ", teams.Select(team => team.Id)) } });
                 return;
             }
 
@@ -159,7 +162,6 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
                 return new RestScheduleFetcher();
 #endif
             }
-
         }
     }
 }
