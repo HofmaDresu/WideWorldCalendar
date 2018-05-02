@@ -12,6 +12,7 @@ using Xamarin.Forms.Platform.iOS;
 using WideWorldCalendar.Utilities;
 using System.Collections.Generic;
 using Microsoft.AppCenter.Distribute;
+using Microsoft.AppCenter.Crashes;
 
 namespace WideWorldCalendar.iOS
 {
@@ -101,9 +102,10 @@ namespace WideWorldCalendar.iOS
 	                dataUpdated = await CheckForNewSeason(dataInstance, localNotifications);
 	            }
 	        }
-	        catch (Exception)
-	        {
-	            completionHandler(UIBackgroundFetchResult.Failed);
+	        catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                completionHandler(UIBackgroundFetchResult.Failed);
 	        }
 	        finally
             {
@@ -146,9 +148,9 @@ namespace WideWorldCalendar.iOS
             {
                 await Task.WhenAll(dataFetchTasks);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //Eat Exception
+                Crashes.TrackError(ex, new Dictionary<string, string> { { "teamIds", string.Join(", ", teams.Select(team => team.Id)) } });
                 return false;
             }
 
