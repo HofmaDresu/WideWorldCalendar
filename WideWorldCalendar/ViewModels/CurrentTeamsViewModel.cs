@@ -95,7 +95,8 @@ namespace WideWorldCalendar.ViewModels
             });
         }
 
-        public ObservableCollection<Grouping<string, MyTeam>> Teams { get; } = new ObservableCollection<Grouping<string, MyTeam>>();
+        private ObservableCollection<Grouping<string, MyTeam>> _teams = new ObservableCollection<Grouping<string, MyTeam>>();
+        public ObservableCollection<Grouping<string, MyTeam>> Teams => _teams;
 
         public ICommand AddTeamsCommand { protected set; get; }
         public ICommand EditTeamCommand { protected set; get; }
@@ -105,13 +106,20 @@ namespace WideWorldCalendar.ViewModels
         public void RefreshTeams()
         {
             var currentTeams = _data.GetMyCurrentTeams().Select(CalculateRecord);
-            Teams.Clear();
-            Teams.Add(new Grouping<string, MyTeam>("CURRENT TEAMS", currentTeams));
+
+            foreach (var teamGroup in _teams)
+            {
+                teamGroup.Clear();
+            }
+            _teams.Clear();
+
+            _teams.Add(new Grouping<string, MyTeam>("CURRENT TEAMS", currentTeams));
             var pastTeams = _data.GetMyPastTeams().OrderByDescending(t => t.LastGameDateTime).Select(CalculateRecord);
             if (pastTeams.Any())
             {
-                Teams.Add(new Grouping<string, MyTeam>("PREVIOUS TEAMS", pastTeams));
+                _teams.Add(new Grouping<string, MyTeam>("PREVIOUS TEAMS", pastTeams));
             }
+            OnPropertyChanged(nameof(Teams));
         }
 
         private MyTeam CalculateRecord(MyTeam t)
