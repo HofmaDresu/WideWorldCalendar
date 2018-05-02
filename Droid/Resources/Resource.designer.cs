@@ -26,6 +26,25 @@ namespace WideWorldCalendar.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_dialog_actioned_on_disabled_toast = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_dialog_actioned_on_disabled_toast;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_download_progress_number_format = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_download_progress_number_format;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_downloading_mandatory_update = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_downloading_mandatory_update;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_install = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_install;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_install_ready_message = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_install_ready_message;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_install_ready_title = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_install_ready_title;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_notification_category = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_notification_category;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_unknown_sources_dialog_message = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_unknown_sources_dialog_message;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_unknown_sources_dialog_settings = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_unknown_sources_dialog_settings;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_download = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_update_dialog_download;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_message_mandatory = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_update_dialog_message_mandatory;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_message_optional = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_update_dialog_message_optional;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_postpone = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_update_dialog_postpone;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_title = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_update_dialog_title;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_view_release_notes = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_update_dialog_view_release_notes;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_ignore = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_update_failed_dialog_ignore;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_message = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_update_failed_dialog_message;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_reinstall = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_update_failed_dialog_reinstall;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_title = global::WideWorldCalendar.Droid.Resource.String.appcenter_distribute_update_failed_dialog_title;
 			global::Xamarin.Forms.Platform.Android.AppLinks.Resource.Attribute.buttonSize = global::WideWorldCalendar.Droid.Resource.Attribute.buttonSize;
 			global::Xamarin.Forms.Platform.Android.AppLinks.Resource.Attribute.circleCrop = global::WideWorldCalendar.Droid.Resource.Attribute.circleCrop;
 			global::Xamarin.Forms.Platform.Android.AppLinks.Resource.Attribute.colorScheme = global::WideWorldCalendar.Droid.Resource.Attribute.colorScheme;
@@ -4421,6 +4440,63 @@ namespace WideWorldCalendar.Droid
 			
 			// aapt resource value: 0x7f070056
 			public const int appbar_scrolling_view_behavior = 2131165270;
+			
+			// aapt resource value: 0x7f07005e
+			public const int appcenter_distribute_dialog_actioned_on_disabled_toast = 2131165278;
+			
+			// aapt resource value: 0x7f07005f
+			public const int appcenter_distribute_download_progress_number_format = 2131165279;
+			
+			// aapt resource value: 0x7f070060
+			public const int appcenter_distribute_downloading_mandatory_update = 2131165280;
+			
+			// aapt resource value: 0x7f070061
+			public const int appcenter_distribute_install = 2131165281;
+			
+			// aapt resource value: 0x7f070062
+			public const int appcenter_distribute_install_ready_message = 2131165282;
+			
+			// aapt resource value: 0x7f070063
+			public const int appcenter_distribute_install_ready_title = 2131165283;
+			
+			// aapt resource value: 0x7f070064
+			public const int appcenter_distribute_notification_category = 2131165284;
+			
+			// aapt resource value: 0x7f070065
+			public const int appcenter_distribute_unknown_sources_dialog_message = 2131165285;
+			
+			// aapt resource value: 0x7f070066
+			public const int appcenter_distribute_unknown_sources_dialog_settings = 2131165286;
+			
+			// aapt resource value: 0x7f070067
+			public const int appcenter_distribute_update_dialog_download = 2131165287;
+			
+			// aapt resource value: 0x7f070068
+			public const int appcenter_distribute_update_dialog_message_mandatory = 2131165288;
+			
+			// aapt resource value: 0x7f070069
+			public const int appcenter_distribute_update_dialog_message_optional = 2131165289;
+			
+			// aapt resource value: 0x7f07006a
+			public const int appcenter_distribute_update_dialog_postpone = 2131165290;
+			
+			// aapt resource value: 0x7f07006b
+			public const int appcenter_distribute_update_dialog_title = 2131165291;
+			
+			// aapt resource value: 0x7f07006c
+			public const int appcenter_distribute_update_dialog_view_release_notes = 2131165292;
+			
+			// aapt resource value: 0x7f07006d
+			public const int appcenter_distribute_update_failed_dialog_ignore = 2131165293;
+			
+			// aapt resource value: 0x7f07006e
+			public const int appcenter_distribute_update_failed_dialog_message = 2131165294;
+			
+			// aapt resource value: 0x7f07006f
+			public const int appcenter_distribute_update_failed_dialog_reinstall = 2131165295;
+			
+			// aapt resource value: 0x7f070070
+			public const int appcenter_distribute_update_failed_dialog_title = 2131165296;
 			
 			// aapt resource value: 0x7f070001
 			public const int auth_google_play_services_client_facebook_display_name = 2131165185;

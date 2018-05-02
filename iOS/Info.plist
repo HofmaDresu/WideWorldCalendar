@@ -54,6 +54,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wwc</string>
+        <string>appcenter-5db09c9e-5cc5-48f0-a3a4-ede6ebeb31fd</string>
 			</array>
 			<key>CFBundleURLName</key>
 			<string>WideWorldCalendar</string>

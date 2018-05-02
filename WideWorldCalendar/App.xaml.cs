@@ -1,12 +1,13 @@
 ﻿using WideWorldCalendar.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Microsoft.Azure.Mobile;
-using Microsoft.Azure.Mobile.Analytics;
-using Microsoft.Azure.Mobile.Crashes;
 using WideWorldCalendar.ScheduleFetcher;
 using System;
 using WideWorldCalendar.Persistence;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace WideWorldCalendar
@@ -22,7 +23,6 @@ namespace WideWorldCalendar
 		public App()
 		{
 			InitializeComponent();
-            MobileCenter.Start(typeof(Analytics), typeof(Crashes));
 
 #if UITEST
             DependencyService.Register<MockScheduleFetcher>();
@@ -37,6 +37,11 @@ namespace WideWorldCalendar
 
 		protected override void OnStart()
         {
+            AppCenter.Start("android=c243444f-8660-4a55-b22f-8b47b9146e2a;" +
+                  //"uwp={Your UWP App secret here};" +
+                  "ios=5db09c9e-5cc5-48f0-a3a4-ede6ebeb31fd;" +
+                  typeof(Analytics), typeof(Crashes), typeof(Distribute));
+
             foreach (var team in Data.GetInstance().GetMyCurrentTeams())
             {
                 var pageLink = new AppLinkEntry

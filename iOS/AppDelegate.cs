@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
-using Microsoft.Azure.Mobile;
 using UIKit;
 using UserNotifications;
 using WideWorldCalendar.iOS.Utilities;
@@ -12,6 +11,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using WideWorldCalendar.Utilities;
 using System.Collections.Generic;
+using Microsoft.AppCenter.Distribute;
 
 namespace WideWorldCalendar.iOS
 {
@@ -29,7 +29,7 @@ namespace WideWorldCalendar.iOS
 #if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start();
 #endif
-            MobileCenter.Configure("ce6abde5-5977-4858-bf93-d7661ab4fbf9");
+            Distribute.DontCheckForUpdatesInDebug();
             _app = new App();
             LoadApplication(_app);
 
