@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
              x:Class="WideWorldCalendar.Views.MenuPage">
   <MasterDetailPage.Master>
     <ContentPage Title="Menu">

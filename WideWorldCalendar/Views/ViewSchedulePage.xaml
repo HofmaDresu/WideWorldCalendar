@@ -3,6 +3,8 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		xmlns:local="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar"
 		xmlns:effects="clr-namespace:WideWorldCalendar.Effects;assembly=WideWorldCalendar"
+        xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+        ios:Page.UseSafeArea="true"
 		x:Class="WideWorldCalendar.ViewSchedulePage">
 	<ContentPage.Resources>
 		<ResourceDictionary>
