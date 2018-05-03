@@ -57,12 +57,6 @@
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Droid\WideWorldCalendar.Droid.csproj">
-      <Project>{FA286B01-444C-412B-BBA5-84A7C0F764C9}</Project>
-      <Name>WideWorldCalendar.Droid</Name>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests.cs" />
