@@ -16,7 +16,7 @@ namespace WideWorldCalendar.Droid.Effects
         {
             try
             {
-                var cornerRadius = Forms.Context.ToPixels(4);
+                var cornerRadius = MainActivity.Context.ToPixels(4);
                 var primaryColor = Colors.PrimaryColor.ToAndroid();
                 var disabledColor = Colors.PrimaryDisabledColor.ToAndroid();
 

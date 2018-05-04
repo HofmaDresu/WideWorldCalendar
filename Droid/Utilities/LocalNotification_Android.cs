@@ -16,7 +16,7 @@ namespace WideWorldCalendar.Droid.Utilities
     {
         public void ScheduleGameNotifications()
         {
-            ScheduleGameNotification(Forms.Context, true);
+            ScheduleGameNotification(MainActivity.Context, true);
         }
 
         public void ScheduleGameNotification(Context packageContext, bool instantCheck = false)

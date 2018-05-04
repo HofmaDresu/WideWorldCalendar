@@ -121,8 +121,8 @@ namespace WideWorldCalendar.ScheduleFetcher
                     Id = teamId,
                     Name = GetValueFromColumn(columns[1]),
 					Color = GetValueFromColumn(columns[5]),
-                    Division = division
-				};
+                    Division = WebUtility.HtmlDecode(division),
+                };
 
 				teamDictionary.Add(GetValueFromColumn(columns[0]), team);
 			}
