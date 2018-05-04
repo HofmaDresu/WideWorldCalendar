@@ -214,6 +214,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WideWorldCalendar.Core\WideWorldCalendar.Core.csproj">
+      <Project>{09dc94fc-5cbb-4055-904e-66804295991d}</Project>
+      <Name>WideWorldCalendar.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WideWorldCalendar\WideWorldCalendar.csproj">
       <Project>{EB52356F-3B24-41F5-BFEE-0B6504E233E5}</Project>
       <Name>WideWorldCalendar</Name>

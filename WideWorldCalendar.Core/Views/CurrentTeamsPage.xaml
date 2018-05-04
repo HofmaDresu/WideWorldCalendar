@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:effects="clr-namespace:WideWorldCalendar.Effects;assembly=WideWorldCalendar"
+             x:Class="WideWorldCalendar.Views.CurrentTeamsPage"
+             xmlns:local="clr-namespace:WideWorldCalendar.Utilities;assembly=WideWorldCalendar"
+             xmlns:converters="clr-namespace:WideWorldCalendar.Converters;assembly=WideWorldCalendar" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             x:Name="RootPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:BoolAlertOnOffIconSourceConverter x:Key="AlertOnOffSourceCvt"/>
+      <DataTemplate x:Key="CurrentTeamTemplate">
+        <ViewCell>
+          <ViewCell.ContextActions>
+            <MenuItem
+              Command="{Binding BindingContext.EditTeamCommand, Source={x:Reference RootPage}}"
+              CommandParameter="{Binding}"
+              Text="Edit" />
+            <MenuItem
+              Command="{Binding BindingContext.DeleteTeamCommand, Source={x:Reference RootPage}}"
+              CommandParameter="{Binding}"
+              Text="Delete" IsDestructive="True" />
+          </ViewCell.ContextActions>
+          <Grid Padding="20,10,20,10" BackgroundColor="{StaticResource Cells}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" Style="{StaticResource ItemHeader}" />
+            <Image Grid.Row="0" Grid.Column="1" Source="{Binding SendGameTimeReminders, Converter={StaticResource AlertOnOffSourceCvt}}" VerticalOptions="Start"/>
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Division}" Style="{StaticResource Content}" />
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Record}" Style="{StaticResource Content}" />
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <DataTemplate x:Key="PreviousTeamTemplate">
+        <ViewCell>
+          <ViewCell.ContextActions>
+            <MenuItem
+              Command="{Binding BindingContext.DeleteTeamCommand, Source={x:Reference RootPage}}"
+              CommandParameter="{Binding}"
+              Text="Delete" IsDestructive="True" />
+          </ViewCell.ContextActions>
+          <Grid Padding="20,10,20,10" BackgroundColor="{StaticResource Cells}" >
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto"/>
+              <RowDefinition Height="auto"/>
+              <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NameAndColor}" Style="{StaticResource ItemHeader}" />
+            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Division}" Style="{StaticResource Content}" />
+            <Label Grid.Row="2" Grid.Column="0" Text="{Binding Record}" Style="{StaticResource Content}" />
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <local:TeamTemplateSelector x:Key="TeamTemplateSelector"
+          CurrentTeamTemplate="{StaticResource CurrentTeamTemplate}"
+          PreviousTeamTemplate="{StaticResource PreviousTeamTemplate}" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <StackLayout Padding="0, 0, 0, 20"
+			  Orientation="Vertical">
+    <ListView
+        ItemsSource="{Binding Teams}"
+        SelectedItem="{Binding SelectedTeam, Mode=TwoWay}"
+        IsGroupingEnabled="True"
+        GroupDisplayBinding="{Binding Key}"
+        HasUnevenRows="True"
+        ItemTemplate="{StaticResource TeamTemplateSelector}"
+        IsPullToRefreshEnabled="true"
+        RefreshCommand="{Binding RefreshGamesCommand}"
+        x:Name="TeamsList"        
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        SeparatorColor="{StaticResource Dividers}">
+      <ListView.GroupHeaderTemplate>
+        <DataTemplate>
+          <ViewCell Height="40">
+            <StackLayout VerticalOptions="FillAndExpand"
+                         Padding="20, 15, 20, 0">
+              <Label Text="{Binding Key}" Style="{StaticResource TableHeader}" VerticalOptions="Center"/>
+            </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.GroupHeaderTemplate>
+      <ListView.ItemTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+    <Button 
+        AutomationId="AddTeamButton"
+        Text="Add Team"
+        Command="{Binding AddTeamsCommand}"
+        HorizontalOptions="FillAndExpand"
+        Margin="20, 0, 20, 0"
+        VerticalOptions="End"
+        TextColor="White">
+      <Button.Effects>
+        <effects:MainButtonEffect />
+      </Button.Effects>
+    </Button>
+  </StackLayout>
+</ContentPage>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:effects="clr-namespace:WideWorldCalendar.Effects;assembly=WideWorldCalendar"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             x:Class="WideWorldCalendar.SelectSchedulePage">
+	<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" WinPhone="20,20,20,20" />
+	</ContentPage.Padding>
+	<StackLayout
+		Padding="20, 20, 20, 0">
+	<Label Text="SEASON" Style="{StaticResource ItemDullHeader}"/>
+	<Picker x:Name="SeasonPicker"
+        AutomationId="SeasonPicker"
+        SelectedIndexChanged="SeasonChanged">
+    </Picker>
+    <Label Text="LEAGUE" Style="{StaticResource ItemDullHeader}"
+        IsVisible="{Binding SeasonSelected}"/>
+    <Picker x:Name="LeaguePicker"
+        AutomationId="LeaguePicker"
+        IsVisible="{Binding SeasonSelected}"
+        SelectedIndexChanged="LeagueChanged">
+    </Picker>
+    <Label Text="DIVISION" Style="{StaticResource ItemDullHeader}"
+        IsVisible="{Binding LeagueSelected}"/>
+    <Picker x:Name="DivisionPicker"
+        AutomationId="DivisionPicker"
+        IsVisible="{Binding LeagueSelected}"
+        SelectedIndexChanged="DivisionChanged">
+    </Picker>
+    <Label Text="TEAM" Style="{StaticResource ItemDullHeader}"
+        IsVisible="{Binding DivisionSelected}"/>
+    <Picker x:Name="TeamPicker"
+        AutomationId="TeamPicker"
+        IsVisible="{Binding DivisionSelected}"
+        SelectedIndexChanged="TeamChanged">
+    </Picker>
+    <Button Text="Get Schedule"
+        AutomationId="GetScheduleButton"
+        IsVisible="{Binding TeamSelected}"
+				x:Name="GetScheduleButton"
+        HorizontalOptions="FillAndExpand"
+        Margin="20, 20, 20, 0"
+        TextColor="White">
+      <Button.Effects>
+        <effects:MainButtonEffect />
+      </Button.Effects>
+    </Button>
+    <ActivityIndicator IsRunning="{Binding IsBusy}"
+        AutomationId="ActivityIndicator"></ActivityIndicator>
+	</StackLayout>
+</ContentPage>

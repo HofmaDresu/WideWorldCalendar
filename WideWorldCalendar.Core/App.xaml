@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WideWorldCalendar.App">
+	<Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#1686f3</Color>
+            <Color x:Key="PrimarySelected">#1271d0</Color>
+            <Color x:Key="Secondary">#061e48</Color>
+            <Color x:Key="SecondaryFiftyPercent">#80061e48</Color>
+            <Color x:Key="Dividers">#c8cdd5</Color>
+            <Color x:Key="Background">#f9f9f9</Color>
+            <Color x:Key="Cells">White</Color>
+            <Color x:Key="LightText">White</Color>
+            <Style x:Key="ItemHeader" TargetType="Label">
+                <Setter Property="FontFamily" Value="Roboto" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="ItemDullHeader" TargetType="Label">
+                <Setter Property="FontFamily" Value="Roboto" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="{StaticResource SecondaryFiftyPercent}" />
+            </Style>
+            <Style x:Key="TableHeader" TargetType="Label">
+                <Setter Property="FontFamily" Value="Roboto" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="{StaticResource SecondaryFiftyPercent}" />
+            </Style>
+            <Style x:Key="Content" TargetType="Label">
+                <Setter Property="FontFamily" Value="Roboto" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+            </Style>
+            <Style x:Key="LightContent" TargetType="Label" BasedOn="Content">
+                <Setter Property="FontFamily" Value="Roboto" />
+                <Setter Property="TextColor" Value="{StaticResource LightText}" />
+            </Style>
+            <Style x:Key="PageSubHeader" TargetType="ContentView">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Padding" Value="20,10,20,10"/>
+            </Style>
+            <Style x:Key="MenuView" TargetType="ContentView">
+                <Setter Property="Padding" Value="20,10,20,10"/>
+            </Style>
+            <Style x:Key="MenuText" TargetType="Label" BasedOn="Content">
+                <Setter Property="FontFamily" Value="Roboto" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="{StaticResource LightText}" />
+            </Style>
+        </ResourceDictionary>
+	</Application.Resources>
+</Application>

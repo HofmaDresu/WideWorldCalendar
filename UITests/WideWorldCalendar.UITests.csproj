@@ -63,6 +63,10 @@
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\WideWorldCalendar.Core\WideWorldCalendar.Core.csproj">
+      <Project>{09dc94fc-5cbb-4055-904e-66804295991d}</Project>
+      <Name>WideWorldCalendar.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests.cs" />
