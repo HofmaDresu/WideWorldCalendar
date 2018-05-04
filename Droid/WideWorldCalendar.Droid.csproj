@@ -235,6 +235,22 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <AndroidResource Include="Resources\drawable\Splash.webp" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\icon_alarm.webp" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher_round.webp" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.webp" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\icon_alarm.webp" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher_round.webp" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.webp" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_alarm.webp" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher_round.webp" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.webp" />
+    <AndroidResource Include="Resources\drawable-mdpi\icon_alarm.webp" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher_round.webp" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.webp" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_alarm.webp" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher_round.webp" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.webp" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -242,40 +258,7 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\icon_alarm.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\icon_alarm.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\icon_alarm.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\icon_alarm.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\icon_alarm.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\icon_logo_menu.png" />
@@ -351,21 +334,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\GameBarFuture.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher_round.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher_round.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher_round.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher_round.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\icon_notification_plain.png" />
