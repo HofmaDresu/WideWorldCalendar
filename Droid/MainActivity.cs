@@ -13,8 +13,11 @@ namespace WideWorldCalendar.Droid
                   DataHost = WideWorldCalendar.Constants.ScheduleDeepLinkDataHost)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
+        public static Activity Context;
+
 		protected override void OnCreate(Bundle bundle)
 		{
+            Context = this;
             CreateNotificationChannels();
 
             TabLayoutResource = Resource.Layout.Tabbar;
