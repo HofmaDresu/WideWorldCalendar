@@ -10,7 +10,7 @@ namespace WideWorldCalendar.ScheduleFetcher
     {
         private const string BaseScheduleUrl = "https://apps.dashplatform.com/dash/index.php?Action=League%2Fstandings&_method=GET&noheader=&facilityID=1&programID=0";
         private const string SeasonScheduleParameter = "SeasonID{0}";
-        private const string BaseTeamUrl = "https://apps.dashplatform.com/dash/index.php?Action=Team/index&company=wideworldsports&teamid={0}"
+        private const string BaseTeamUrl = "https://apps.dashplatform.com/dash/index.php?Action=Team/index&company=wideworldsports&teamid={0}";
 
         public async Task<List<NavigationOption>> GetSeasons()
 		{
