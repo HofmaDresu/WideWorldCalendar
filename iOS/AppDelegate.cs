@@ -28,11 +28,7 @@ namespace WideWorldCalendar.iOS
 			global::Xamarin.Forms.Forms.Init();
             DependencyService.Register<ProxyService>();
 			SetUpTheme();
-
-            // Code for starting up the Xamarin Test Cloud Agent
-#if ENABLE_TEST_CLOUD
-			Xamarin.Calabash.Start();
-#endif
+            
             Distribute.DontCheckForUpdatesInDebug();
             _app = new App();
             LoadApplication(_app);
