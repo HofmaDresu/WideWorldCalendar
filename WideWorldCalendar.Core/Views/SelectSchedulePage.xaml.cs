@@ -28,7 +28,7 @@ namespace WideWorldCalendar
 			Title = "Select Team";
 		    BindingContext = _vm;
 
-			GetScheduleButton.Clicked += (sender, e) => Navigation.PushAsync(new ViewSchedulePage(_teams[TeamPicker.SelectedIndex].Id));
+			GetScheduleButton.Clicked += (sender, e) => Navigation.PushAsync(new ViewSchedulePage(_teams[TeamPicker.SelectedIndex].Id, _seasons[SeasonPicker.SelectedIndex].Name));
 			_vm.IsBusy = true;
 			_scheduleFetcher.GetSeasons()
 				.ContinueWith(data =>

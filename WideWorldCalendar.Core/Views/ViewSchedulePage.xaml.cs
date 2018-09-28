@@ -13,7 +13,7 @@ namespace WideWorldCalendar
 		private readonly int _teamId;
 		private readonly ScheduleViewModel _vm;
 
-		public ViewSchedulePage(int teamId)
+		public ViewSchedulePage(int teamId, string seasonName)
 		{
 			InitializeComponent();
             _scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
@@ -37,6 +37,12 @@ namespace WideWorldCalendar
                                     });
                                     return;
 								}
+
+                                foreach (var game in data.Result)
+                                {
+                                    game.MyTeam.Division = seasonName;
+                                    game.OpposingTeam.Division = seasonName;
+                                }
 
 								_vm.Games.AddRange(data.Result);
 								_vm.Title = data.Result.First()?.MyTeam.Name;
