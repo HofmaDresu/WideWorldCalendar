@@ -10,7 +10,7 @@ namespace WideWorldCalendar.ScheduleFetcher
 		// Yield returns aren't really needed, but it was fun to write them
 		// This whole process could be much more efficient, but for now i'm being lazy
 
-		public static IEnumerable<string> GetSeasons(string html)
+		public static IEnumerable<NavigationOption> GetSeasons(string html)
 		{
 			var seasonSections = html.Split(new[] { "Season: </strong>" }, StringSplitOptions.RemoveEmptyEntries);
 

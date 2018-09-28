@@ -7,36 +7,24 @@ using System.Threading.Tasks;
 namespace WideWorldCalendar.ScheduleFetcher
 {
 	public class RestScheduleFetcher : IScheduleFetcher
-	{
-		public async Task<string> GetSchedulesPage()
-		{
-			return await GetClient().GetStringAsync("https://secure.wideworld-sports.me/wws_membership/SchedulesScoresDisplay.asp");
-		}
+    {
+        private const string BaseScheduleUrl = "https://apps.dashplatform.com/dash/index.php?Action=League%2Fstandings&_method=GET&noheader=&facilityID=1&programID=0";
+        private const string SeasonScheduleParameter = "SeasonID{0}";
+        private const string BaseTeamUrl = "https://apps.dashplatform.com/dash/index.php?Action=Team/index&company=wideworldsports&teamid={0}"
 
-		public List<string> GetSeasons(string schedulePageHtml)
+        public async Task<List<NavigationOption>> GetSeasons()
 		{
-			return ScheduleHtmlParser.GetSeasons(schedulePageHtml).ToList();
-		}
+			return ScheduleHtmlParser.GetSeasons(await GetClient().GetStringAsync(BaseScheduleUrl)).ToList();
+        }
 
-		public List<NavigationOption> GetDivisions(string schedulePageHtml, string season, string schedule)
+		public async Task<Dictionary<string, List<NavigationOption>>> GetLeagues(int seasonId)
 		{
-			return ScheduleHtmlParser.GetDivisions(schedulePageHtml, season, schedule).ToList();
-		}
-
-		public List<string> GetScheduleGroupings(string schedulePageHtml, string season)
-		{
-			return ScheduleHtmlParser.GetScheduleGroupings(schedulePageHtml, season).ToList();
-		}
-
-		public async Task<List<NavigationOption>> GetTeams(int divisionId)
-		{
-			var divisionReportHtml = await GetClient().GetStringAsync($"https://secure.wideworld-sports.me/wws_membership/DivisionReport.asp?ID={divisionId}");
-			return ScheduleHtmlParser.GetTeams(divisionReportHtml).ToList();
+            throw new NotImplementedException();
 		}
 
 		public async Task<List<Game>> GetTeamSchedule(int teamId)
 		{
-			var divisionReportHtml = await GetClient().GetStringAsync($"https://secure.wideworld-sports.me/wws_membership/PrintTeamSchedule.asp?ID={teamId}");
+			var divisionReportHtml = await GetClient().GetStringAsync(string.Format(BaseTeamUrl, teamId));
 			return ScheduleHtmlParser.GetTeamSchedule(teamId, divisionReportHtml).ToList();
 		}
 
