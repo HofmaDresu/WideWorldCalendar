@@ -6,8 +6,9 @@ namespace WideWorldCalendar.Persistence.Models
     [Table("Seasons")]
     public class Season : IEquatable<Season>
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public int ScheduleId { get; set; }
         public string Name { get; set; }
 
         public static bool operator ==(Season left, Season right) => Equals(left, right);
@@ -16,7 +17,7 @@ namespace WideWorldCalendar.Persistence.Models
 
         public bool Equals(Season other)
         {
-            return (Id, Name) == (other.Id, other.Name);
+            return (Id, ScheduleId, Name) == (other.Id, other.ScheduleId, other.Name);
         }
 
         public override bool Equals(object obj)
@@ -26,7 +27,7 @@ namespace WideWorldCalendar.Persistence.Models
 
         public override int GetHashCode()
         {
-            return (Id, Name).GetHashCode();
+            return (Id, ScheduleId, Name).GetHashCode();
         }
     }
 }

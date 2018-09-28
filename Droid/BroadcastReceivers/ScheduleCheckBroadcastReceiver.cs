@@ -68,7 +68,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             var seasons = new List<Season>();
             try
             {
-                seasons = (await scheduleFetcher.GetSeasons()).Select(s => new Season { Id = s.Id, Name = s.Name }).ToList();
+                seasons = (await scheduleFetcher.GetSeasons()).Select(s => new Season { ScheduleId = s.Id, Name = s.Name }).ToList();
             }
             catch (Exception ex)
             {

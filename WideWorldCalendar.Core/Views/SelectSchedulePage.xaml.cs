@@ -44,7 +44,7 @@ namespace WideWorldCalendar
 					}
 
                     _seasons = data.Result;
-                    Data.GetInstance().UpdateSeasons(_seasons.Select(s => new Season { Id = s.Id, Name = s.Name }).ToList());
+                    Data.GetInstance().UpdateSeasons(_seasons.Select(s => new Season { ScheduleId = s.Id, Name = s.Name }).ToList());
 
 
                     Device.BeginInvokeOnMainThread(() => 
