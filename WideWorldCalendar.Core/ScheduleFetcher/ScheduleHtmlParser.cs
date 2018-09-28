@@ -136,9 +136,22 @@ namespace WideWorldCalendar.ScheduleFetcher
             var gameTimeParts = gameScheduleStrings.Last().Split(isNight ? "pm" : "am").First().Split(':').Select(int.Parse).ToArray();
             var scheduledHour = isNight ? gameTimeParts[0] + 12 : gameTimeParts[0];
             var now = DateTime.Now;
-            var scheduledYear = now.Month < gameDateParts[0] ? now.Year : now.Year + 1;
+            var scheduledYear = CalculateYear(now, gameTimeParts[0]);
             var scheduledDateTime = new DateTime(scheduledYear, gameDateParts[0], gameDateParts[1], scheduledHour, gameTimeParts[1], 0);
             return scheduledDateTime;
+        }
+
+        private static int CalculateYear(DateTime now, int scheduledMonth)
+        {
+            if (now.Month >= 9 && scheduledMonth <= 3)
+            {
+                return now.Year + 1;
+            }
+            else if (now.Month <= 3 && scheduledMonth >= 9)
+            {
+                return now.Year - 1;
+            }
+            return now.Year;
         }
 
 		private static string CleanString(string source)
