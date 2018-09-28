@@ -53,6 +53,11 @@ namespace WideWorldCalendar
 						{
 							SeasonPicker.Items.Add(season.Name);
 						}
+
+                        if (_seasons.Count == 1)
+                        {
+                            SeasonPicker.SelectedIndex = 1;
+                        }
 					});
                     _vm.IsBusy = false;
 				});

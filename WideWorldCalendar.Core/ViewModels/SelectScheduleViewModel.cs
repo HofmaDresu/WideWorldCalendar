@@ -1,9 +1,8 @@
-﻿using System;
-using MvvmHelpers;
+﻿using MvvmHelpers;
 
 namespace WideWorldCalendar.ViewModels
 {
-	public class SelectScheduleViewModel : BaseViewModel
+    public class SelectScheduleViewModel : BaseViewModel
 	{
 	    private bool _seasonSelected;
         public bool SeasonSelected
