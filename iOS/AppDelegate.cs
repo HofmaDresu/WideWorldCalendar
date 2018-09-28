@@ -13,6 +13,8 @@ using WideWorldCalendar.Utilities;
 using System.Collections.Generic;
 using Microsoft.AppCenter.Distribute;
 using Microsoft.AppCenter.Crashes;
+using WideWorldCalendar.Persistence.Models;
+using WideWorldCalendar.iOS.ScheduleFetcher;
 
 namespace WideWorldCalendar.iOS
 {
@@ -24,6 +26,7 @@ namespace WideWorldCalendar.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init();
+            DependencyService.Register<ProxyService>();
 			SetUpTheme();
 
             // Code for starting up the Xamarin Test Cloud Agent
@@ -118,8 +121,7 @@ namespace WideWorldCalendar.iOS
         private static async Task<bool> CheckForNewSeason(Data dataInstance, LocalNotification_iOS localNotifications)
         {
             var scheduleFetcher = DependencyService.Get<IScheduleFetcher>();
-            var scheduleHtml = await scheduleFetcher.GetSchedulesPage();
-            var seasons = scheduleFetcher.GetSeasons(scheduleHtml);
+            var seasons = (await scheduleFetcher.GetSeasons()).Select(s => new Season { ScheduleId = s.Id, Name = s.Name }).ToList();
 
             if (seasons.Any(dataInstance.IsNewSeason))
             {
@@ -154,7 +156,7 @@ namespace WideWorldCalendar.iOS
                 return false;
             }
 
-            var serverGames = new List<Game>();
+            var serverGames = new List<WideWorldCalendar.ScheduleFetcher.Game>();
             foreach (var task in dataFetchTasks)
             {
                 var teamGames = task.Result;

@@ -217,6 +217,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Effects\MainButtonEffect.cs" />
+    <Compile Include="ScheduleFetcher\ProxyService.cs" />
     <Compile Include="ThirdPartyIds.cs" />
     <Compile Include="UserNotificationCenterDelegate.cs" />
     <Compile Include="Utilities\LocalNotification_iOS.cs" />
