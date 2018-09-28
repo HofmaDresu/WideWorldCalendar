@@ -31,19 +31,6 @@ namespace WideWorldCalendar.ViewModels
             }
         }
 
-        private bool _divisionSelected;
-        public bool DivisionSelected
-        {
-            get
-            {
-                return _divisionSelected;
-            }
-            set
-            {
-                SetProperty(ref _divisionSelected, value);
-            }
-        }
-
         private bool _teamSelected;
         public bool TeamSelected
         {

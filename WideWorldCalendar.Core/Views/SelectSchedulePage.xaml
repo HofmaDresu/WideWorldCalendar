@@ -21,18 +21,11 @@
         IsVisible="{Binding SeasonSelected}"
         SelectedIndexChanged="LeagueChanged">
     </Picker>
-    <Label Text="DIVISION" Style="{StaticResource ItemDullHeader}"
-        IsVisible="{Binding LeagueSelected}"/>
-    <Picker x:Name="DivisionPicker"
-        AutomationId="DivisionPicker"
-        IsVisible="{Binding LeagueSelected}"
-        SelectedIndexChanged="DivisionChanged">
-    </Picker>
     <Label Text="TEAM" Style="{StaticResource ItemDullHeader}"
-        IsVisible="{Binding DivisionSelected}"/>
+        IsVisible="{Binding LeagueSelected}"/>
     <Picker x:Name="TeamPicker"
         AutomationId="TeamPicker"
-        IsVisible="{Binding DivisionSelected}"
+        IsVisible="{Binding LeagueSelected}"
         SelectedIndexChanged="TeamChanged">
     </Picker>
     <Button Text="Get Schedule"

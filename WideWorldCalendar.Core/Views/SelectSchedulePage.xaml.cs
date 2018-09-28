@@ -69,8 +69,7 @@ namespace WideWorldCalendar
             _vm.IsBusy = true;
 
 		    _vm.LeagueSelected = false;
-		    _vm.DivisionSelected = false;
-            DivisionPicker.SelectedIndex = -1;
+            LeaguePicker.SelectedIndex = -1;
             _vm.TeamSelected = false;
 			TeamPicker.SelectedIndex = -1;
             try
@@ -103,50 +102,19 @@ namespace WideWorldCalendar
 		{
 			if (LeaguePicker.SelectedIndex == -1) return;
             
-            _vm.DivisionSelected = false;
-            DivisionPicker.SelectedIndex = -1;
             _vm.TeamSelected = false;
             TeamPicker.SelectedIndex = -1;
-            /*
-            _divisions = _scheduleFetcher.GetDivisions(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex], _leagues[LeaguePicker.SelectedIndex]);
-			DivisionPicker.Items.Clear();
-			foreach (var division in _divisions)
-			{
-				DivisionPicker.Items.Add(division.Name);
-			}
-            */
+
+
+            _teams = _leagueMappings[_leagues[LeaguePicker.SelectedIndex]];
+            TeamPicker.Items.Clear();
+            foreach (var team in _teams)
+            {
+                TeamPicker.Items.Add(team.Name);
+            }
+
             _vm.LeagueSelected = true;
         }
-
-		async void DivisionChanged(object sender, EventArgs e)
-		{
-			if (DivisionPicker.SelectedIndex == -1) return;
-			_vm.IsBusy = true;
-            
-            _vm.TeamSelected = false;
-            TeamPicker.SelectedIndex = -1;
-
-            try
-			{
-                /*
-				_teams = await _scheduleFetcher.GetTeams(_divisions[DivisionPicker.SelectedIndex].Id);
-				TeamPicker.Items.Clear();
-				foreach (var team in _teams)
-				{
-					TeamPicker.Items.Add(team.Name);
-				}
-                */
-                _vm.DivisionSelected = true;
-            }
-			catch (Exception)
-            {
-                await DisplayAlert("Network Error", "There was a problem communicating with the Wide World server. Please try again later", "OK");
-            }
-			finally
-			{
-                _vm.IsBusy = false;
-			}
-		}
 
 		void TeamChanged(object sender, EventArgs e)
 		{
