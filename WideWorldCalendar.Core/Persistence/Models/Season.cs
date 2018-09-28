@@ -7,7 +7,7 @@ namespace WideWorldCalendar.Persistence.Models
     public class Season : IEquatable<Season>
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public int Id { get; set; } // only used for DB, not used in equality checks
         public int ScheduleId { get; set; }
         public string Name { get; set; }
 
@@ -17,7 +17,7 @@ namespace WideWorldCalendar.Persistence.Models
 
         public bool Equals(Season other)
         {
-            return (Id, ScheduleId, Name) == (other.Id, other.ScheduleId, other.Name);
+            return ClassTouple() == other.ClassTouple();
         }
 
         public override bool Equals(object obj)
@@ -27,7 +27,9 @@ namespace WideWorldCalendar.Persistence.Models
 
         public override int GetHashCode()
         {
-            return (Id, ScheduleId, Name).GetHashCode();
+            return ClassTouple().GetHashCode();
         }
+
+        public (int, string) ClassTouple() => (ScheduleId, Name);
     }
 }
