@@ -29,23 +29,36 @@ namespace WideWorldCalendar.ScheduleFetcher
             }
 		}
 
-		public static IEnumerable<Dictionary<string, List<NavigationOption>>> GetLeagues(string html)
+		public static Dictionary<string, List<NavigationOption>> GetLeagues(string html)
 		{
-            throw new NotImplementedException();
-			var teamSections = html.Split(new[] { "PrintTeamSchedule.asp?ID=" }, StringSplitOptions.RemoveEmptyEntries);
-			if (teamSections.Length <= 1) yield break;
+            var leagueDictionary = new Dictionary<string, List<NavigationOption>>();
 
-			for (int i = 1; i < teamSections.Length; i++)
-			{
-				var scheduleTypeSection = teamSections[i];
-				var id = scheduleTypeSection.Split('\'')[0];
+            var leagueSections = html.Split(new[] { "<table class=\"table table-striped\">" }, StringSplitOptions.RemoveEmptyEntries).Skip(1);
 
-				var name = CleanString(scheduleTypeSection.Split('>')[1].Split('<')[0]);
+            foreach (var section in leagueSections)
+            {
 
-                
-				//yield return new NavigationOption { Id = int.Parse(id), Name = name };
-			}
+                var leagueName = CleanString(section.Split(new[] { "League Standings: " }, StringSplitOptions.RemoveEmptyEntries).Last()
+                    .Split(new[] { "<" }, StringSplitOptions.RemoveEmptyEntries).First());
 
+                var teamRows = section.Split(new[] { "</tr>" }, StringSplitOptions.RemoveEmptyEntries).Where(s => !s.Contains("/table")).Skip(2);
+                var teamItems = new List<NavigationOption>();
+
+                foreach (var row in teamRows)
+                {
+                    var teamName = row.Split(new[] { "</a>" }, StringSplitOptions.RemoveEmptyEntries).First()
+                        .Split(new[] { "\">" }, StringSplitOptions.RemoveEmptyEntries).Last();
+                    var teamIdString = row.Split(new[] { "teamid=" }, StringSplitOptions.RemoveEmptyEntries).Last()
+                        .Split(new[] { "\">" }, StringSplitOptions.RemoveEmptyEntries).First();
+                    if (!int.TryParse(teamIdString, out int teamId)) continue;
+
+                    teamItems.Add(new NavigationOption(teamId, CleanString(teamName).Trim()));
+                }
+
+                leagueDictionary[leagueName] = teamItems;
+            }
+
+            return leagueDictionary;
 		}
 
 		public static IEnumerable<Game> GetTeamSchedule(int teamId, string html)
