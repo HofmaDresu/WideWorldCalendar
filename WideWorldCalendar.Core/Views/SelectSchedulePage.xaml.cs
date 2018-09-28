@@ -68,7 +68,7 @@ namespace WideWorldCalendar
 	        base.OnAppearing();
         }
 
-	    async Task SeasonChanged(object sender, EventArgs e)
+	    async void SeasonChanged(object sender, EventArgs e)
 		{
 			if (SeasonPicker.SelectedIndex == -1) return;
             _vm.IsBusy = true;
