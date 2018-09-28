@@ -7,6 +7,6 @@ namespace WideWorldCalendar.ScheduleFetcher
 		public string Name { get; set; }
 		public string Color { get; set; }
         public string Division { get; set; }
-		public string NameAndColor => $"{Name} ({Color})";
+		public string NameAndColor => String.IsNullOrEmpty(Color) ? Name : $"{Name} ({Color})";
 	}
 }
