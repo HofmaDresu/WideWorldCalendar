@@ -3677,7 +3677,7 @@ Soccer, Indoor, B - Intermediate, Males only  <br/>Ages Adult   (over 18 years o
 ";
         #endregion
 
-        private const int delayMs = 5000;
+        private const int delayMs = 500;
 
 		public async Task<List<NavigationOption>> GetSeasons()
         {
@@ -3688,7 +3688,7 @@ Soccer, Indoor, B - Intermediate, Males only  <br/>Ages Adult   (over 18 years o
 		public async Task<Dictionary<string, List<NavigationOption>>> GetLeagues(int divisionId)
 		{
 			await Task.Delay(delayMs);
-            throw new NotImplementedException();
+            return ScheduleHtmlParser.GetLeagues(LeagueHtml);
 		}
 
 		public async Task<List<Game>> GetTeamSchedule(int teamId)

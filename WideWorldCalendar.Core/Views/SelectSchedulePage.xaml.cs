@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using WideWorldCalendar.Persistence;
 using WideWorldCalendar.Persistence.Models;
 using WideWorldCalendar.ScheduleFetcher;
@@ -15,7 +16,7 @@ namespace WideWorldCalendar
 	{
 		private readonly IScheduleFetcher _scheduleFetcher;
 		private List<NavigationOption> _seasons;
-		private List<Dictionary<string, List<NavigationOption>>> _leagueMappings;
+		private Dictionary<string, List<NavigationOption>> _leagueMappings;
 		private List<string> _leagues;
 		private List<NavigationOption> _teams;
 		private readonly SelectScheduleViewModel _vm = new SelectScheduleViewModel();
@@ -62,23 +63,40 @@ namespace WideWorldCalendar
 	        base.OnAppearing();
         }
 
-	    void SeasonChanged(object sender, EventArgs e)
+	    async Task SeasonChanged(object sender, EventArgs e)
 		{
 			if (SeasonPicker.SelectedIndex == -1) return;
+            _vm.IsBusy = true;
 
 		    _vm.LeagueSelected = false;
 		    _vm.DivisionSelected = false;
             DivisionPicker.SelectedIndex = -1;
             _vm.TeamSelected = false;
 			TeamPicker.SelectedIndex = -1;
+            try
+            {
+                _leagueMappings = await _scheduleFetcher.GetLeagues(_seasons[SeasonPicker.SelectedIndex].Id);
+                _leagues = _leagueMappings.Keys.ToList();
 
-			//_leagues = _scheduleFetcher.GetScheduleGroupings(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex]);
-			LeaguePicker.Items.Clear();
-			foreach (var league in _leagues)
-			{
-				LeaguePicker.Items.Add(league);
+                LeaguePicker.Items.Clear();
+                foreach (var league in _leagues)
+                {
+                    LeaguePicker.Items.Add(league);
+                }
+                _vm.SeasonSelected = true;
             }
-            _vm.SeasonSelected = true;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                Device.BeginInvokeOnMainThread(async () => {
+                    await DisplayAlert("Network Error", "There was a problem communicating with the Wide World server. Please try again later", "OK");
+                    _vm.IsBusy = false;
+                });
+            }
+            finally
+            {
+                _vm.IsBusy = false;
+            }
         }
 
 		void LeagueChanged(object sender, EventArgs e)
