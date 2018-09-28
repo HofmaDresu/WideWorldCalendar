@@ -15,7 +15,7 @@ namespace WideWorldCalendar.Persistence.Models
         public bool SendGameTimeReminders { get; set; }
 
         [Ignore]
-        public string NameAndColor => $"{TeamName} ({TeamColor})";
+		public string NameAndColor => String.IsNullOrEmpty(TeamColor) ? TeamName : $"{TeamName} ({TeamColor})";
         [Ignore]
         public string Record { get; set; }
     }
