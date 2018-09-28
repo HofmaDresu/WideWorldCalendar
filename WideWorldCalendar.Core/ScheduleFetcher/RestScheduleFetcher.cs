@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace WideWorldCalendar.ScheduleFetcher
 {
@@ -16,9 +17,14 @@ namespace WideWorldCalendar.ScheduleFetcher
 
         public RestScheduleFetcher()
         {
+            if (cookieContainer.Count == 0)
+            {
+                cookieContainer.Add(new Uri(BaseAddress), new Cookie("mysam_company", "wideworldsports"));
+            }
             handler = new HttpClientHandler
             {
-                CookieContainer = cookieContainer
+                CookieContainer = cookieContainer,
+                Proxy = DependencyService.Get<IProxyService>().Proxy,
             };
             client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) };
         }
@@ -26,15 +32,10 @@ namespace WideWorldCalendar.ScheduleFetcher
         private readonly CookieContainer cookieContainer = new CookieContainer();
         private readonly HttpClientHandler handler;
         private readonly HttpClient client;
-        private CookieCollection cookies;
 
         public async Task<List<NavigationOption>> GetSeasons()
 		{
-            await client.GetStringAsync(BaseScheduleUrl);
-            cookies = cookieContainer.GetCookies(new Uri(BaseScheduleUrl));
-
             var seasonsHtml = await client.GetStringAsync(BaseScheduleUrl);
-
 
             return ScheduleHtmlParser.GetSeasons(seasonsHtml).ToList();
         }
