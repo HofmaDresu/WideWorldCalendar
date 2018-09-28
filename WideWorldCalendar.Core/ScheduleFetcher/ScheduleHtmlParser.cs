@@ -12,14 +12,14 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 		public static IEnumerable<NavigationOption> GetSeasons(string html)
 		{
-            var afterCurrentSessionsHtml = html.Split(new[] { "<optgroup label=\"Current Seasons\">" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+            var afterCurrentSessionsHtml = html.Split(new[] { "<optgroup label='Current Seasons'>" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
             if (string.IsNullOrEmpty(afterCurrentSessionsHtml)) yield break;
-            var currentSessionItemsHtml = afterCurrentSessionsHtml.Split(new[] { "</optgroup" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+            var currentSessionItemsHtml = afterCurrentSessionsHtml.Split(new[] { "<optgroup" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
             if (string.IsNullOrEmpty(currentSessionItemsHtml)) yield break;
 
-            var individualSessionItems = currentSessionItemsHtml.Split(new[] { "</option" }, StringSplitOptions.RemoveEmptyEntries);
+            var individualSessionItems = currentSessionItemsHtml.Split(new[] { "</option" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            foreach (var sessionItem in individualSessionItems)
+            foreach (var sessionItem in individualSessionItems.Where(s => s.Contains("option")))
             {
                 var sessionIdString = sessionItem.Split(new[] { "value=\"", "\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
                 if (!int.TryParse(sessionIdString, out int sessionId)) continue;
