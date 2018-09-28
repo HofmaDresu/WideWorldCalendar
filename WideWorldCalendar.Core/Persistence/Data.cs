@@ -197,9 +197,9 @@ namespace WideWorldCalendar.Persistence
         #endregion
 
         #region Seasons
-        public bool IsNewSeason(string seasonName)
+        public bool IsNewSeason(Season season)
         {
-			return Seasons.Any() && Seasons.All(d => d.Name != seasonName);
+			return Seasons.Any() && Seasons.All(d => !d.Equals(season));
         }
 
         public void UpdateSeasons(List<Season> seasons)

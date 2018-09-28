@@ -65,17 +65,16 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
         private static async Task CheckForNewSeason(Context context, Data dataInstance)
         {
             IScheduleFetcher scheduleFetcher = GetScheduleFetcher();
-            string scheduleHtml;
+            var seasons = new List<Season>();
             try
             {
-                scheduleHtml = await scheduleFetcher.GetSchedulesPage();
+                seasons = (await scheduleFetcher.GetSeasons()).Select(s => new Season { Id = s.Id, Name = s.Name }).ToList();
             }
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
                 return;
             }
-            var seasons = scheduleFetcher.GetSeasons(scheduleHtml);
 
             if (seasons.Any(dataInstance.IsNewSeason))
             {
