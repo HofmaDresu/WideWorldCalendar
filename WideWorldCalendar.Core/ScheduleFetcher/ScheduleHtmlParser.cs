@@ -77,7 +77,7 @@ namespace WideWorldCalendar.ScheduleFetcher
                 var game = new Game
                 {
                     ScheduledDateTime = GetScheduledDateTime(gameInfoSection),
-                    Field = gameInfoSection.Split("<br>")[1],
+                    Field = CleanString(gameInfoSection.Split("<br>")[1]),
                 };
 
                 SetTeamInfo(teamId, teamsInfoSection, game);
@@ -93,16 +93,16 @@ namespace WideWorldCalendar.ScheduleFetcher
             for (int i = 0; i < teamRows.Count; i++)
             {
                 var row = teamRows[i];
-                var teamIdString = row.Split("teamId=").Last().Split("\">").First();
+                var teamIdString = row.Split("teamid=").Last().Split("\">").First();
                 if (!int.TryParse(teamIdString, out int currentTeamId)) continue;
 
-                var teamColumns = row.Split("</td>").Where(s => s.Contains("<td>")).ToArray();
+                var teamColumns = row.Split("</td>").Where(s => s.Contains("<td")).ToArray();
                 var hasScore = int.TryParse(teamColumns[0].Split('>').Last(), out int score);
 
                 var team = new Team
                 {
                     Id = currentTeamId,
-                    Name = teamColumns[1].Split('>')[1].Split('<')[0],
+                    Name = teamColumns[1].Split('>')[2].Split('<')[0],
                 };
 
                 if (currentTeamId == teamId)
@@ -141,15 +141,9 @@ namespace WideWorldCalendar.ScheduleFetcher
             return scheduledDateTime;
         }
 
-        private static string GetValueFromColumn(string column)
-		{
-			var substring = column.Split(new[] { "'style3'>" }, StringSplitOptions.RemoveEmptyEntries)[1];
-			return CleanString(substring.Split('<')[0].Trim());
-		}
-
 		private static string CleanString(string source)
 		{
-			return WebUtility.HtmlDecode(source.Replace("\n", "").Trim());
+			return WebUtility.HtmlDecode(source.Replace("\n", "").Replace("\r", "").Trim());
 		}
 	}
 }
