@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using WideWorldCalendar.Persistence;
+using WideWorldCalendar.Persistence.Models;
 using WideWorldCalendar.ScheduleFetcher;
 using WideWorldCalendar.UtilityInterfaces;
 using WideWorldCalendar.ViewModels;
@@ -13,9 +14,9 @@ namespace WideWorldCalendar
 	public partial class SelectSchedulePage : ContentPage
 	{
 		private readonly IScheduleFetcher _scheduleFetcher;
-		private List<string> _seasons;
+		private List<NavigationOption> _seasons;
+		private List<Dictionary<string, List<NavigationOption>>> _leagueMappings;
 		private List<string> _leagues;
-		private List<NavigationOption> _divisions;
 		private List<NavigationOption> _teams;
 		private readonly SelectScheduleViewModel _vm = new SelectScheduleViewModel();
 
@@ -28,7 +29,7 @@ namespace WideWorldCalendar
 
 			GetScheduleButton.Clicked += (sender, e) => Navigation.PushAsync(new ViewSchedulePage(_teams[TeamPicker.SelectedIndex].Id));
 			_vm.IsBusy = true;
-			_scheduleFetcher.GetSchedulesPage()
+			_scheduleFetcher.GetSeasons()
 				.ContinueWith(data =>
 				{
 					if (data.IsFaulted || data.IsCanceled)
@@ -41,17 +42,15 @@ namespace WideWorldCalendar
                         return;
 					}
 
-					_vm.SchedulePageHtml = data.Result;
-
-					_seasons = _scheduleFetcher.GetSeasons(_vm.SchedulePageHtml);
-                    Data.GetInstance().UpdateSeasons(_seasons);
+                    _seasons = data.Result;
+                    Data.GetInstance().UpdateSeasons(_seasons.Select(s => new Season { Id = s.Id, Name = s.Name }).ToList());
 
 
                     Device.BeginInvokeOnMainThread(() => 
 					{
 						foreach (var season in _seasons)
 						{
-							SeasonPicker.Items.Add(season);
+							SeasonPicker.Items.Add(season.Name);
 						}
 					});
                     _vm.IsBusy = false;
@@ -73,7 +72,7 @@ namespace WideWorldCalendar
             _vm.TeamSelected = false;
 			TeamPicker.SelectedIndex = -1;
 
-			_leagues = _scheduleFetcher.GetScheduleGroupings(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex]);
+			//_leagues = _scheduleFetcher.GetScheduleGroupings(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex]);
 			LeaguePicker.Items.Clear();
 			foreach (var league in _leagues)
 			{
@@ -90,14 +89,14 @@ namespace WideWorldCalendar
             DivisionPicker.SelectedIndex = -1;
             _vm.TeamSelected = false;
             TeamPicker.SelectedIndex = -1;
-
+            /*
             _divisions = _scheduleFetcher.GetDivisions(_vm.SchedulePageHtml, _seasons[SeasonPicker.SelectedIndex], _leagues[LeaguePicker.SelectedIndex]);
 			DivisionPicker.Items.Clear();
 			foreach (var division in _divisions)
 			{
 				DivisionPicker.Items.Add(division.Name);
 			}
-
+            */
             _vm.LeagueSelected = true;
         }
 
@@ -111,13 +110,14 @@ namespace WideWorldCalendar
 
             try
 			{
+                /*
 				_teams = await _scheduleFetcher.GetTeams(_divisions[DivisionPicker.SelectedIndex].Id);
 				TeamPicker.Items.Clear();
 				foreach (var team in _teams)
 				{
 					TeamPicker.Items.Add(team.Name);
 				}
-
+                */
                 _vm.DivisionSelected = true;
             }
 			catch (Exception)

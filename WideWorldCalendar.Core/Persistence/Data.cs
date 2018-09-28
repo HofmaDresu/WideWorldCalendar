@@ -202,10 +202,10 @@ namespace WideWorldCalendar.Persistence
 			return Seasons.Any() && Seasons.All(d => d.Name != seasonName);
         }
 
-        public void UpdateSeasons(List<string> seasonNames)
+        public void UpdateSeasons(List<Season> seasons)
         {
             _db.DeleteAll<Season>();
-            _db.InsertAll(seasonNames.Select(n => new Season { Name = n}));
+            _db.InsertAll(seasons);
         }
         #endregion
 
