@@ -41,9 +41,10 @@ namespace WideWorldCalendar.ScheduleFetcher
         }
 
 		public async Task<Dictionary<string, List<NavigationOption>>> GetLeagues(int seasonId)
-		{
-            throw new NotImplementedException();
-		}
+        {
+            var seasonHtml = await client.GetStringAsync($"{BaseScheduleUrl}&{string.Format(SeasonScheduleParameter, seasonId)}");
+            return ScheduleHtmlParser.GetLeagues(seasonHtml);
+        }
 
 		public async Task<List<Game>> GetTeamSchedule(int teamId)
 		{
