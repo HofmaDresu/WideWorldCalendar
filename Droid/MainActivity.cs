@@ -2,6 +2,9 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using WideWorldCalendar.Droid.ScheduleFetcher;
+using WideWorldCalendar.ScheduleFetcher;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android.AppLinks;
 
 namespace WideWorldCalendar.Droid
@@ -26,6 +29,7 @@ namespace WideWorldCalendar.Droid
 			base.OnCreate(bundle);
 
 			global::Xamarin.Forms.Forms.Init(this, bundle);
+            DependencyService.Register<ProxyService>();
             AndroidAppLinks.Init(this);
 
             LoadApplication(new App());

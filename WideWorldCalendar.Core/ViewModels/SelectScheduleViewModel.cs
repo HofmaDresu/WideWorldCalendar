@@ -5,19 +5,6 @@ namespace WideWorldCalendar.ViewModels
 {
 	public class SelectScheduleViewModel : BaseViewModel
 	{
-		private string _schedulePageHtml;
-		public string SchedulePageHtml
-		{
-			get
-			{
-				return _schedulePageHtml;
-			}
-			set
-			{
-				SetProperty(ref _schedulePageHtml, value);
-			}
-		}
-
 	    private bool _seasonSelected;
         public bool SeasonSelected
         {
@@ -41,19 +28,6 @@ namespace WideWorldCalendar.ViewModels
             set
             {
                 SetProperty(ref _leagueSelected, value);
-            }
-        }
-
-        private bool _divisionSelected;
-        public bool DivisionSelected
-        {
-            get
-            {
-                return _divisionSelected;
-            }
-            set
-            {
-                SetProperty(ref _divisionSelected, value);
             }
         }
 

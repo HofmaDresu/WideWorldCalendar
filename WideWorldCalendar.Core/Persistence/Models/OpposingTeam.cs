@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace WideWorldCalendar.Persistence.Models
 {
@@ -10,6 +11,6 @@ namespace WideWorldCalendar.Persistence.Models
         public string TeamName { get; set; }
         public string TeamColor { get; set; }
         [Ignore]
-        public string NameAndColor => $"{TeamName} ({TeamColor})";
+        public string NameAndColor => String.IsNullOrEmpty(TeamColor) ? TeamName : $"{TeamName} ({TeamColor})";
     }
 }

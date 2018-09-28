@@ -1,48 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace WideWorldCalendar.ScheduleFetcher
 {
 	public class RestScheduleFetcher : IScheduleFetcher
-	{
-		public async Task<string> GetSchedulesPage()
-		{
-			return await GetClient().GetStringAsync("https://secure.wideworld-sports.me/wws_membership/SchedulesScoresDisplay.asp");
-		}
+    {
+        private const string BaseAddress = "https://apps.dashplatform.com";
+        private const string BaseScheduleUrl = BaseAddress + "/dash/index.php?Action=League%2Fstandings&_method=GET&noheader=&facilityID=1&programID=0";
+        private const string SeasonScheduleParameter = "SeasonID{0}";
+        private const string BaseTeamUrl = BaseAddress + "/dash/index.php?Action=Team/index&company=wideworldsports&teamid={0}";
 
-		public List<string> GetSeasons(string schedulePageHtml)
-		{
-			return ScheduleHtmlParser.GetSeasons(schedulePageHtml).ToList();
-		}
+        public RestScheduleFetcher()
+        {
+            if (cookieContainer.Count == 0)
+            {
+                cookieContainer.Add(new Uri(BaseAddress), new Cookie("mysam_company", "wideworldsports"));
+            }
+            handler = new HttpClientHandler
+            {
+                CookieContainer = cookieContainer,
+                Proxy = DependencyService.Get<IProxyService>().Proxy,
+            };
+            client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) };
+        }
 
-		public List<NavigationOption> GetDivisions(string schedulePageHtml, string season, string schedule)
-		{
-			return ScheduleHtmlParser.GetDivisions(schedulePageHtml, season, schedule).ToList();
-		}
+        private readonly CookieContainer cookieContainer = new CookieContainer();
+        private readonly HttpClientHandler handler;
+        private readonly HttpClient client;
 
-		public List<string> GetScheduleGroupings(string schedulePageHtml, string season)
+        public async Task<List<NavigationOption>> GetSeasons()
 		{
-			return ScheduleHtmlParser.GetScheduleGroupings(schedulePageHtml, season).ToList();
-		}
+            var seasonsHtml = await client.GetStringAsync(BaseScheduleUrl);
 
-		public async Task<List<NavigationOption>> GetTeams(int divisionId)
-		{
-			var divisionReportHtml = await GetClient().GetStringAsync($"https://secure.wideworld-sports.me/wws_membership/DivisionReport.asp?ID={divisionId}");
-			return ScheduleHtmlParser.GetTeams(divisionReportHtml).ToList();
-		}
+            return ScheduleHtmlParser.GetSeasons(seasonsHtml).ToList();
+        }
+
+		public async Task<Dictionary<string, List<NavigationOption>>> GetLeagues(int seasonId)
+        {
+            var seasonHtml = await client.GetStringAsync($"{BaseScheduleUrl}&{string.Format(SeasonScheduleParameter, seasonId)}");
+            return ScheduleHtmlParser.GetLeagues(seasonHtml);
+        }
 
 		public async Task<List<Game>> GetTeamSchedule(int teamId)
 		{
-			var divisionReportHtml = await GetClient().GetStringAsync($"https://secure.wideworld-sports.me/wws_membership/PrintTeamSchedule.asp?ID={teamId}");
+			var divisionReportHtml = await client.GetStringAsync(string.Format(BaseTeamUrl, teamId));
 			return ScheduleHtmlParser.GetTeamSchedule(teamId, divisionReportHtml).ToList();
 		}
-
-	    private HttpClient GetClient()
-	    {
-	        return new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
-	    }
 	}
 }
