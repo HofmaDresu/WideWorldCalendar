@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Net;
+using WideWorldCalendar.Utilities;
 
 namespace WideWorldCalendar.ScheduleFetcher
 {
@@ -63,75 +64,84 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 		public static IEnumerable<Game> GetTeamSchedule(int teamId, string html)
         {
-            throw new NotImplementedException();
-            var myTeamId = html.Split(new[] { "styleTeam" }, StringSplitOptions.RemoveEmptyEntries)[2]
-							   .Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries)[1]
-							   .Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0]
-			                   .Trim();
+            var scheduleSection = html.Split("<h3>Schedule</h3>").Last()
+                .Split("<h3>League Standings</h3>").First();
 
-		    var division = html.Split(new[] {"Season:"}, StringSplitOptions.RemoveEmptyEntries)[1]
-		        .Split(new[] {"style81\">"}, StringSplitOptions.RemoveEmptyEntries)[1]
-		        .Split(new[] {"<"}, StringSplitOptions.RemoveEmptyEntries)[0];
+            var gameSections = scheduleSection.Split("</li>").Where(s => s.Contains("li"));
 
+            foreach (var section in gameSections)
+            {
+                var gameInfoSection = section.Split("col-5").Last().Split("col-7").First();
+                var teamsInfoSection = section.Split("col-7").Last().Split("</table>").First();
 
-
-            var teamDictionary = new Dictionary<string, Team>();
-
-			var teamListTable = html.Split(new[] { "Team Contacts" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(new[] { "<table" }, StringSplitOptions.RemoveEmptyEntries)[1];
-
-			var teamRows = teamListTable.Split(new[] { "</tr>" }, StringSplitOptions.RemoveEmptyEntries);
-
-			foreach (var row in teamRows)
-			{
-				if (row.StartsWith(" width", StringComparison.CurrentCultureIgnoreCase)) continue;
-				if (row.Contains("/table>")) break;
-
-				var columns = row.Split(new[] { "</td>" }, StringSplitOptions.RemoveEmptyEntries);
-				var team = new Team
-				{
-                    Id = teamId,
-                    Name = GetValueFromColumn(columns[1]),
-					Color = GetValueFromColumn(columns[5]),
-                    Division = WebUtility.HtmlDecode(division),
+                var game = new Game
+                {
+                    ScheduledDateTime = GetScheduledDateTime(gameInfoSection),
+                    Field = gameInfoSection.Split("<br>")[1],
                 };
 
-				teamDictionary.Add(GetValueFromColumn(columns[0]), team);
-			}
+                SetTeamInfo(teamId, teamsInfoSection, game);
 
-			var scheduleTable = html.Split(new[] { "Schedules/Scores" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(new[] { "<table" }, StringSplitOptions.RemoveEmptyEntries)[1];;
+                yield return game;
+            }
 
-			var scheduleRows = scheduleTable.Split(new[] { "</tr>" }, StringSplitOptions.RemoveEmptyEntries);
+        }
 
-			foreach (var row in scheduleRows)
-			{
-				if (row.StartsWith(" width", StringComparison.CurrentCultureIgnoreCase)) continue;
-				if (row.Contains("/table>")) break;
+        private static void SetTeamInfo(int teamId, string teamsInfoSection, Game game)
+        {
+            var teamRows = teamsInfoSection.Split("</tr>").Where(s => s.Contains("<tr>")).ToList();
+            for (int i = 0; i < teamRows.Count; i++)
+            {
+                var row = teamRows[i];
+                var teamIdString = row.Split("teamId=").Last().Split("\">").First();
+                if (!int.TryParse(teamIdString, out int currentTeamId)) continue;
 
-				var columns = row.Split(new[] { "</td>" }, StringSplitOptions.RemoveEmptyEntries);
+                var teamColumns = row.Split("</td>").Where(s => s.Contains("<td>")).ToArray();
+                var hasScore = int.TryParse(teamColumns[0].Split('>').Last(), out int score);
 
-				var homeTeamId = GetValueFromColumn(columns[4]);
-				var awayTeamId = GetValueFromColumn(columns[6]);
-				var isHomeGame = homeTeamId == myTeamId;
-                int homeTeamScoreInt;
-                var homeTeamScore = int.TryParse(GetValueFromColumn(columns[5]), out homeTeamScoreInt) ? homeTeamScoreInt : (int?)null;
-                int awayTeamScoreInt;
-                var awayTeamScore = int.TryParse(GetValueFromColumn(columns[7]), out awayTeamScoreInt) ? awayTeamScoreInt : (int?)null;
-
-                yield return new Game
-				{
-					ScheduledDateTime = DateTime.Parse(GetValueFromColumn(columns[0]) + " " + GetValueFromColumn(columns[2])),
-					Field = GetValueFromColumn(columns[3]),
-					IsHomeGame = isHomeGame,
-					MyTeam = teamDictionary[myTeamId],
-					OpposingTeam = isHomeGame ? teamDictionary[awayTeamId] : teamDictionary[homeTeamId],
-                    MyTeamScore = isHomeGame ? homeTeamScore : awayTeamScore,
-                    OpposingTeamScore = isHomeGame ? awayTeamScore : homeTeamScore
+                var team = new Team
+                {
+                    Id = currentTeamId,
+                    Name = teamColumns[1].Split('>')[1].Split('<')[0],
                 };
-			}
-			yield break;
-		}
 
-		private static string GetValueFromColumn(string column)
+                if (currentTeamId == teamId)
+                {
+                    if (i == 0)
+                    {
+                        game.IsHomeGame = true;
+                    }
+                    game.MyTeam = team;
+                    if (hasScore)
+                    {
+                        game.MyTeamScore = score;
+                    }
+                }
+                else
+                {
+                    game.OpposingTeam = team;
+                    if (hasScore)
+                    {
+                        game.OpposingTeamScore = score;
+                    }
+                }
+            }
+        }
+
+        private static DateTime GetScheduledDateTime(string section)
+        {
+            var gameScheduleStrings = section.Split("<h4 class=\"list-group-item-heading\">").Last().Split("</h4>").First().Trim().Split(" ");
+            var gameDateParts = gameScheduleStrings.First().Split('/').Select(int.Parse).ToArray();
+            var isNight = gameScheduleStrings.Last().Contains("pm");
+            var gameTimeParts = gameScheduleStrings.Last().Split(isNight ? "pm" : "am").First().Split(':').Select(int.Parse).ToArray();
+            var scheduledHour = isNight ? gameTimeParts[0] + 12 : gameTimeParts[0];
+            var now = DateTime.Now;
+            var scheduledYear = now.Month < gameDateParts[0] ? now.Year : now.Year + 1;
+            var scheduledDateTime = new DateTime(scheduledYear, gameDateParts[0], gameDateParts[1], scheduledHour, gameTimeParts[1], 0);
+            return scheduledDateTime;
+        }
+
+        private static string GetValueFromColumn(string column)
 		{
 			var substring = column.Split(new[] { "'style3'>" }, StringSplitOptions.RemoveEmptyEntries)[1];
 			return CleanString(substring.Split('<')[0].Trim());
