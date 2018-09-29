@@ -17,7 +17,7 @@ namespace WideWorldCalendar.Persistence.Models
 
         public bool Equals(Season other)
         {
-            return ClassTouple() == other.ClassTouple();
+            return ScheduleId == other.ScheduleId && Name.Equals(other.Name, StringComparison.InvariantCulture);
         }
 
         public override bool Equals(object obj)
