@@ -62,7 +62,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             new LocalNotification_Android().ScheduleGameNotification(context);
         }
 
-        private static async Task CheckForNewSeason(Context context, Data dataInstance)
+        private async Task CheckForNewSeason(Context context, Data dataInstance)
         {
             IScheduleFetcher scheduleFetcher = GetScheduleFetcher();
             var seasons = new List<Season>();
@@ -97,7 +97,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             }
         }
 
-        private static async Task UpdateSchedulesIfNeeded(Context context, Data dataInstance)
+        private async Task UpdateSchedulesIfNeeded(Context context, Data dataInstance)
         {
             var scheduleFetcher = GetScheduleFetcher();
 
@@ -147,7 +147,7 @@ namespace WideWorldCalendar.Droid.BroadcastReceivers
             dataInstance.UpdateSchedules(serverGames.Select(DataConverter.ConvertDtoToPersistence).ToList());
         }
 
-        private static IScheduleFetcher GetScheduleFetcher()
+        private IScheduleFetcher GetScheduleFetcher()
         {
             if (Forms.IsInitialized)
             {
