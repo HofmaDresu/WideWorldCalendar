@@ -24,7 +24,9 @@ namespace WideWorldCalendar.ScheduleFetcher
             handler = new HttpClientHandler
             {
                 CookieContainer = cookieContainer,
+#if DEBUG
                 Proxy = DependencyService.Get<IProxyService>().Proxy,
+#endif
             };
             client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) };
         }
