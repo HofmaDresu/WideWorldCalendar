@@ -11,8 +11,8 @@ namespace WideWorldCalendar.ScheduleFetcher
 	public class RestScheduleFetcher : IScheduleFetcher
     {
         private const string BaseAddress = "https://apps.dashplatform.com";
-        private const string BaseScheduleUrl = BaseAddress + "/dash/index.php?Action=League%2Fstandings&_method=GET&noheader=&facilityID=1&programID=0";
-        private const string SeasonScheduleParameter = "SeasonID{0}";
+        private const string BaseScheduleUrl = BaseAddress + "/dash/index.php?Action=League%2Fstandings&_method=GET&noheader=&facilityID=1&programID=0&company=wideworldsports";
+        private const string SeasonScheduleParameter = "seasonID={0}";
         private const string BaseTeamUrl = BaseAddress + "/dash/index.php?Action=Team/index&company=wideworldsports&teamid={0}";
 
         public RestScheduleFetcher()
