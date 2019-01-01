@@ -131,13 +131,20 @@ namespace WideWorldCalendar.ScheduleFetcher
         private static DateTime GetScheduledDateTime(string section)
         {
             var gameScheduleStrings = section.Split("<h4 class=\"list-group-item-heading\">").Last().Split("</h4>").First().Trim().Split(" ");
+
             var gameDateParts = gameScheduleStrings.First().Split('/').Select(int.Parse).ToArray();
+            var gameMonth = gameDateParts[0];
+            var gameDay = gameDateParts[1];
+
             var isNight = gameScheduleStrings.Last().Contains("pm");
             var gameTimeParts = gameScheduleStrings.Last().Split(isNight ? "pm" : "am").First().Split(':').Select(int.Parse).ToArray();
-            var scheduledHour = isNight ? gameTimeParts[0] + 12 : gameTimeParts[0];
+            var gameHour= gameTimeParts[0];
+            var gameMinute = gameTimeParts[1];
+            var scheduledHour = isNight ? gameHour + 12 : gameHour;
+
             var now = DateTime.Now;
-            var scheduledYear = CalculateYear(now, gameTimeParts[0]);
-            var scheduledDateTime = new DateTime(scheduledYear, gameDateParts[0], gameDateParts[1], scheduledHour, gameTimeParts[1], 0);
+            var scheduledYear = CalculateYear(now, gameMonth);
+            var scheduledDateTime = new DateTime(scheduledYear, gameMonth, gameDay, scheduledHour, gameMinute, 0);
             return scheduledDateTime;
         }
 
