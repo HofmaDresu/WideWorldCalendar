@@ -182,8 +182,7 @@ namespace WideWorldCalendar.Persistence
                                         sg =>
                                             g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
                                             g.Field == sg.Field
-                                            && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
-                                            g.OpposingTeam.TeamColor == sg.OpposingTeam.Color))
+                                            && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name))
                                 ||
                                 serverGames.Any(
                                     sg =>
@@ -191,8 +190,7 @@ namespace WideWorldCalendar.Persistence
                                             g =>
                                                 g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
                                                 g.Field == sg.Field
-                                                && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
-                                                g.OpposingTeam.TeamColor == sg.OpposingTeam.Color));
+                                                && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name));
         }
         #endregion
 
