@@ -16,7 +16,7 @@ namespace WideWorldCalendar.Persistence.Models
             TeamColorBlue = blue;
         }
 
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public int Id { get; set; }
         public double TeamColorRed { get; set; }
         public double TeamColorGreen { get; set; }
