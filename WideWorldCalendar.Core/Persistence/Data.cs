@@ -349,12 +349,12 @@ namespace WideWorldCalendar.Persistence
 
         public TeamColor GetTeamColor(int id)
         {
-            return _db.Get<TeamColor>(id);
+            return _db.Find<TeamColor>(id);
         }
 
-        public void InsertTeamColor(List<TeamColor> opposingTeams)
+        public void InsertTeamColor(TeamColor teamColor)
         {
-            _db.InsertAll(opposingTeams);
+            _db.Insert(teamColor);
         }
         #endregion
     }
