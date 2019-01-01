@@ -9,7 +9,6 @@ namespace WideWorldCalendar.Persistence.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string TeamName { get; set; }
         public int TeamColorRed { get; set; }
         public int TeamColorGreen { get; set; }
         public int TeamColorBlue { get; set; }

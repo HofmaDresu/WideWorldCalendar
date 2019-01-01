@@ -136,7 +136,7 @@ namespace WideWorldCalendar.ViewModels
                 // Let user know record info is unavailable for seasons that predate this feature
                 Record = $"{winCount} - {lossCount} - {tieCount}" + (t.LastGameDateTime < new System.DateTime(2017, 01, 06) ? " (record unavailable)" : string.Empty),
                 SendGameTimeReminders = t.SendGameTimeReminders,
-                TeamColor = t.TeamColor,
+                Color = t.Color,
                 TeamName = t.TeamName
             };
             return team;

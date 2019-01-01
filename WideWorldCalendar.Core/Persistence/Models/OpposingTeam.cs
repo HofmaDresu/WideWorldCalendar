@@ -10,9 +10,9 @@ namespace WideWorldCalendar.Persistence.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string TeamName { get; set; }
-        [Obsolete]
+        [Obsolete("Use 'Color' instead")]
         public string TeamColor { get; set; }
         [Ignore]
-        public string NameAndColor => String.IsNullOrEmpty(TeamColor) ? TeamName : $"{TeamName} ({TeamColor})";
+        public Color Color { get; set; }
     }
 }
