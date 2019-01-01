@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Net;
 using WideWorldCalendar.Utilities;
+using Xamarin.Forms;
 
 namespace WideWorldCalendar.ScheduleFetcher
 {
@@ -165,5 +166,18 @@ namespace WideWorldCalendar.ScheduleFetcher
 		{
 			return WebUtility.HtmlDecode(source.Replace("\n", "").Replace("\r", "").Trim());
 		}
+
+        public static Color GetTeamColor(string html)
+        {
+            try
+            {
+                var colorHex = html.Split("<div class=\"form-group\"><input type=\"text\" name=\"color\" ")[1].Split("value=\"")[1].Split("\"")[0];
+                return colorHex.StartsWith("#") ? Color.FromHex(colorHex) : Color.Transparent;
+            }
+            catch (Exception)
+            {
+                return Color.Transparent;
+            }
+        }
 	}
 }

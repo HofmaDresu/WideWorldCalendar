@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using System;
+using Xamarin.Forms;
 
 namespace WideWorldCalendar.Persistence.Models
 {
@@ -8,9 +9,11 @@ namespace WideWorldCalendar.Persistence.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public int? ServerId { get; set; }
         public string TeamName { get; set; }
+        [Obsolete("Use 'Color' instead")]
         public string TeamColor { get; set; }
         [Ignore]
-        public string NameAndColor => String.IsNullOrEmpty(TeamColor) ? TeamName : $"{TeamName} ({TeamColor})";
+        public Color Color { get; set; }
     }
 }

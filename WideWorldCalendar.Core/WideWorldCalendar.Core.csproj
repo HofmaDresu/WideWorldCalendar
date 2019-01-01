@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>WideWorldCalendar</AssemblyName>
     <RootNamespace>WideWorldCalendar</RootNamespace>
+    <Configurations>Debug;Release;UITest</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -12,6 +13,11 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>default</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UITest|AnyCPU'">
+    <LangVersion>default</LangVersion>
+    <DefineConstants>TRACE;UITEST</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

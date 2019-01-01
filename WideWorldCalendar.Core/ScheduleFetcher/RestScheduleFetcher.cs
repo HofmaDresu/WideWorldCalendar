@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WideWorldCalendar.Persistence;
 using Xamarin.Forms;
 
 namespace WideWorldCalendar.ScheduleFetcher
@@ -49,9 +50,41 @@ namespace WideWorldCalendar.ScheduleFetcher
         }
 
 		public async Task<List<Game>> GetTeamSchedule(int teamId)
-		{
-			var divisionReportHtml = await client.GetStringAsync(string.Format(BaseTeamUrl, teamId));
-			return ScheduleHtmlParser.GetTeamSchedule(teamId, divisionReportHtml).ToList();
+        {
+            var data = Data.GetInstance();
+            var divisionReportHtml = await client.GetStringAsync(string.Format(BaseTeamUrl, teamId));
+            var games = ScheduleHtmlParser.GetTeamSchedule(teamId, divisionReportHtml).ToList();
+
+            foreach (var game in games)
+            {
+                var dbMyTeamColor = data.GetTeamColor(game.MyTeam.Id);
+                if (!(dbMyTeamColor is null))
+                {
+                    game.MyTeam.Color = dbMyTeamColor.Color;
+                }
+                else
+                {
+                    var color = ScheduleHtmlParser.GetTeamColor(divisionReportHtml);
+                    game.MyTeam.Color = color;
+                    data.InsertTeamColor(new Persistence.Models.TeamColor(game.MyTeam.Id, color.R, color.G, color.B));
+                }
+
+                var dbOpposingColor = data.GetTeamColor(game.OpposingTeam.Id);
+                if (!(dbOpposingColor is null))
+                {
+                    game.OpposingTeam.Color = dbOpposingColor.Color;
+                }
+                else
+                {
+                    var opposingTeamDivisionReportHtml = await client.GetStringAsync(string.Format(BaseTeamUrl, game.OpposingTeam.Id));
+
+                    var color = ScheduleHtmlParser.GetTeamColor(opposingTeamDivisionReportHtml);
+                    game.OpposingTeam.Color = color;
+                    data.InsertTeamColor(new Persistence.Models.TeamColor(game.OpposingTeam.Id, color.R, color.G, color.B));
+                }
+            }
+
+            return games;
 		}
 	}
 }

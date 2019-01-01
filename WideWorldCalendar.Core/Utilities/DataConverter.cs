@@ -18,8 +18,8 @@ namespace WideWorldCalendar.Utilities
                 ScheduledDateTime = dto.ScheduledDateTime,
                 OpposingTeam = new Persistence.Models.OpposingTeam
                 {
-                    TeamName = dto.OpposingTeam.Name,
-                    TeamColor = dto.OpposingTeam.Color
+                    ServerId = dto.OpposingTeam.Id,
+                    TeamName = dto.OpposingTeam.Name
                 },
                 MyTeamScore = dto.MyTeamScore,
                 OpposingTeamScore = dto.OpposingTeamScore
@@ -32,7 +32,6 @@ namespace WideWorldCalendar.Utilities
             {
                 Id = dto.Id,
                 TeamName = dto.Name,
-                TeamColor = dto.Color,
                 Division = dto.Division,
                 LastGameDateTime = lastGameDateTime,
                 SendGameTimeReminders = sendGameTimeReminders

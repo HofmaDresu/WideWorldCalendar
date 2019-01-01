@@ -46,7 +46,7 @@ namespace WideWorldCalendar
             {
                 var pageLink = new AppLinkEntry
                 {
-                    Title = team.NameAndColor,
+                    Title = team.TeamName,
                     Description = team.Division,
                     AppLinkUri = new Uri(Constants.ScheduleDeepLinkUrl + team.Id, UriKind.RelativeOrAbsolute),
                     IsLinkActive = true

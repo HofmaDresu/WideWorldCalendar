@@ -34,6 +34,7 @@ namespace WideWorldCalendar.Persistence
             _db.CreateTable<Season>();
             _db.CreateTable<DeviceData>();
             _db.CreateTable<GameNotificationPreference>();
+            _db.CreateTable<TeamColor>();
 
             if (!_db.Table<DeviceData>().Any())
             {
@@ -64,23 +65,40 @@ namespace WideWorldCalendar.Persistence
 
         public MyTeam GetTeam(int teamId)
         {
-            return MyTeams.FirstOrDefault(t => t.Id == teamId);
+            var team =  MyTeams.FirstOrDefault(t => t.Id == teamId);
+            team.Color = GetTeamColor(teamId)?.Color ?? Color.Transparent;
+            return team;
         }
 
         public List<MyTeam> GetMyCurrentTeams()
         {
-            return MyTeams.Where(t => t.LastGameDateTime.Date >= DateTime.Now.Date).ToList();
+            var teams = MyTeams.Where(t => t.LastGameDateTime.Date >= DateTime.Now.Date).ToList();
+            return teams.Select(t =>
+            {
+                t.Color = GetTeamColor(t.Id)?.Color ?? Color.Transparent;
+                return t;
+            }).ToList();
         }
 
         public List<MyTeam> GetRecentAndCurrentTeams()
         {
-            return MyTeams.Where(t => t.LastGameDateTime.Date >= DateTime.Now.Date.AddDays(-7)
+            var teams = MyTeams.Where(t => t.LastGameDateTime.Date >= DateTime.Now.Date.AddDays(-7)
                                 && GetGames(t.Id).Any(g => !g.MyTeamScore.HasValue)).ToList();
+            return teams.Select(t =>
+            {
+                t.Color = GetTeamColor(t.Id)?.Color ?? Color.Transparent;
+                return t;
+            }).ToList();
         }
 
         public List<MyTeam> GetMyPastTeams()
         {
-            return MyTeams.Where(t => t.LastGameDateTime.Date < DateTime.Now.Date).ToList();
+            var teams = MyTeams.Where(t => t.LastGameDateTime.Date < DateTime.Now.Date).ToList();
+            return teams.Select(t =>
+            {
+                t.Color = GetTeamColor(t.Id)?.Color ?? Color.Transparent;
+                return t;
+            }).ToList();
         }
 
         public void DeleteMyTeam(int id)
@@ -102,14 +120,11 @@ namespace WideWorldCalendar.Persistence
         #endregion
 
         #region OpposingTeams
-        public List<OpposingTeam> GetOpposingTeams()
-        {
-            return OpposingTeams.ToList();
-        }
-
         public OpposingTeam GetOpposingTeam(int id)
         {
-            return _db.Get<OpposingTeam>(id);
+            var team = _db.Get<OpposingTeam>(id);
+            team.Color = GetTeamColor(team.ServerId.GetValueOrDefault(-1))?.Color ?? Color.Transparent;
+            return team;
         }
 
         public void DeleteOpposingTeams(List<OpposingTeam> teams)
@@ -182,8 +197,7 @@ namespace WideWorldCalendar.Persistence
                                         sg =>
                                             g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
                                             g.Field == sg.Field
-                                            && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
-                                            g.OpposingTeam.TeamColor == sg.OpposingTeam.Color))
+                                            && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name))
                                 ||
                                 serverGames.Any(
                                     sg =>
@@ -191,8 +205,7 @@ namespace WideWorldCalendar.Persistence
                                             g =>
                                                 g.IsHomeGame == sg.IsHomeGame && g.ScheduledDateTime == sg.ScheduledDateTime &&
                                                 g.Field == sg.Field
-                                                && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name &&
-                                                g.OpposingTeam.TeamColor == sg.OpposingTeam.Color));
+                                                && g.MyTeamId == sg.MyTeam.Id && g.OpposingTeam.TeamName == sg.OpposingTeam.Name));
         }
         #endregion
 
@@ -229,7 +242,7 @@ namespace WideWorldCalendar.Persistence
                 yield return new GameNotification
                 {
                     TeamId = currentTeam.Id,
-                    TeamNameAndColor = currentTeam.NameAndColor,
+                    TeamName = currentTeam.TeamName,
                     Title = notificationTitle,
                     Message = notificationMessage,
                     FirstGameTime = teamGames?.FirstOrDefault()?.ScheduledDateTime
@@ -254,7 +267,7 @@ namespace WideWorldCalendar.Persistence
                     yield return new GameNotification
                     {
                         TeamId = team.Id,
-                        TeamNameAndColor = team.NameAndColor,
+                        TeamName = team.TeamName,
                         Title = notificationTitle,
                         Message = notificationMessage,
                         FirstGameTime = teamGames?.FirstOrDefault()?.ScheduledDateTime
@@ -342,6 +355,20 @@ namespace WideWorldCalendar.Persistence
         {
             _db.DeleteAll<GameNotificationPreference>();
             _db.Insert(preference);
+        }
+        #endregion
+
+        #region TeamColors
+
+
+        public TeamColor GetTeamColor(int id)
+        {
+            return _db.Find<TeamColor>(id);
+        }
+
+        public void InsertTeamColor(TeamColor teamColor)
+        {
+            _db.Insert(teamColor);
         }
         #endregion
     }
