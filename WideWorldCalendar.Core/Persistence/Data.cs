@@ -34,6 +34,7 @@ namespace WideWorldCalendar.Persistence
             _db.CreateTable<Season>();
             _db.CreateTable<DeviceData>();
             _db.CreateTable<GameNotificationPreference>();
+            _db.CreateTable<TeamColor>();
 
             if (!_db.Table<DeviceData>().Any())
             {
@@ -340,6 +341,20 @@ namespace WideWorldCalendar.Persistence
         {
             _db.DeleteAll<GameNotificationPreference>();
             _db.Insert(preference);
+        }
+        #endregion
+
+        #region TeamColors
+
+
+        public TeamColor GetTeamColor(int id)
+        {
+            return _db.Get<TeamColor>(id);
+        }
+
+        public void InsertTeamColor(List<TeamColor> opposingTeams)
+        {
+            _db.InsertAll(opposingTeams);
         }
         #endregion
     }

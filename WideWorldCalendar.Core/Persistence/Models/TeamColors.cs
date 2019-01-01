@@ -5,7 +5,7 @@ using Xamarin.Forms;
 namespace WideWorldCalendar.Persistence.Models
 {
     [Table("TeamColors")]
-    class TeamColor
+    public class TeamColor
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -14,11 +14,11 @@ namespace WideWorldCalendar.Persistence.Models
         public int TeamColorGreen { get; set; }
         public int TeamColorBlue { get; set; }
         [Ignore]
-        public Color TeamColor
+        public Color Color
         {
             get
             {
-                return Color.FromRgb(TeamColorRed, TeamColorGreen, blueValue);
+                return Color.FromRgb(TeamColorRed, TeamColorGreen, TeamColorBlue);
             }
         }
     }
