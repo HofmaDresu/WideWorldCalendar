@@ -76,7 +76,11 @@ namespace WideWorldCalendar.ScheduleFetcher
                 }
                 else
                 {
+                    var opposingTeamDivisionReportHtml = await client.GetStringAsync(string.Format(BaseTeamUrl, game.OpposingTeam.Id));
 
+                    var color = ScheduleHtmlParser.GetTeamColor(opposingTeamDivisionReportHtml);
+                    game.OpposingTeam.Color = color;
+                    data.InsertTeamColor(new Persistence.Models.TeamColor(game.OpposingTeam.Id, color.R, color.G, color.B));
                 }
             }
 
