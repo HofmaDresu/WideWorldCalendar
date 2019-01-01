@@ -43,7 +43,12 @@
                                   <Label Text="-"  Style="{StaticResource ItemDullHeader}"/>  
                                   <Label Text="{Binding IsHomeGame, Converter={StaticResource HomeAwayCvt}}" Style="{StaticResource ItemDullHeader}"/>
                               </StackLayout>
-                              <Label Grid.Row="1" Text="{Binding OpposingTeam.TeamName}" Style="{StaticResource ItemHeader}"/>
+                              <StackLayout
+                                  Orientation="Horizontal"
+                                  Grid.Row="1" >
+                                  <Label Text="{Binding OpposingTeam.Name}" Style="{StaticResource ItemHeader}"/>
+                                  <BoxView BackgroundColor="{Binding OpposingTeam.Color}" />
+                              </StackLayout>
                               <StackLayout Grid.Row="2" Orientation="Horizontal">
                                   <Label Text="{Binding Field}" Style="{StaticResource Content}"/>
                                   <Label Text="@" Style="{StaticResource Content}"/>

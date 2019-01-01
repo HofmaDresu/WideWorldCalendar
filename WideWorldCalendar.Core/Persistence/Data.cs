@@ -65,23 +65,40 @@ namespace WideWorldCalendar.Persistence
 
         public MyTeam GetTeam(int teamId)
         {
-            return MyTeams.FirstOrDefault(t => t.Id == teamId);
+            var team =  MyTeams.FirstOrDefault(t => t.Id == teamId);
+            team.Color = GetTeamColor(teamId)?.Color ?? Color.Transparent;
+            return team;
         }
 
         public List<MyTeam> GetMyCurrentTeams()
         {
-            return MyTeams.Where(t => t.LastGameDateTime.Date >= DateTime.Now.Date).ToList();
+            var teams = MyTeams.Where(t => t.LastGameDateTime.Date >= DateTime.Now.Date).ToList();
+            return teams.Select(t =>
+            {
+                t.Color = GetTeamColor(t.Id)?.Color ?? Color.Transparent;
+                return t;
+            }).ToList();
         }
 
         public List<MyTeam> GetRecentAndCurrentTeams()
         {
-            return MyTeams.Where(t => t.LastGameDateTime.Date >= DateTime.Now.Date.AddDays(-7)
+            var teams = MyTeams.Where(t => t.LastGameDateTime.Date >= DateTime.Now.Date.AddDays(-7)
                                 && GetGames(t.Id).Any(g => !g.MyTeamScore.HasValue)).ToList();
+            return teams.Select(t =>
+            {
+                t.Color = GetTeamColor(t.Id)?.Color ?? Color.Transparent;
+                return t;
+            }).ToList();
         }
 
         public List<MyTeam> GetMyPastTeams()
         {
-            return MyTeams.Where(t => t.LastGameDateTime.Date < DateTime.Now.Date).ToList();
+            var teams = MyTeams.Where(t => t.LastGameDateTime.Date < DateTime.Now.Date).ToList();
+            return teams.Select(t =>
+            {
+                t.Color = GetTeamColor(t.Id)?.Color ?? Color.Transparent;
+                return t;
+            }).ToList();
         }
 
         public void DeleteMyTeam(int id)
@@ -103,14 +120,11 @@ namespace WideWorldCalendar.Persistence
         #endregion
 
         #region OpposingTeams
-        public List<OpposingTeam> GetOpposingTeams()
-        {
-            return OpposingTeams.ToList();
-        }
-
         public OpposingTeam GetOpposingTeam(int id)
         {
-            return _db.Get<OpposingTeam>(id);
+            var team = _db.Get<OpposingTeam>(id);
+            team.Color = GetTeamColor(team.ServerId.GetValueOrDefault(-1))?.Color ?? Color.Transparent;
+            return team;
         }
 
         public void DeleteOpposingTeams(List<OpposingTeam> teams)

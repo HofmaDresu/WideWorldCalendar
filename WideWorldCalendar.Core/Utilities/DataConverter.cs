@@ -18,6 +18,7 @@ namespace WideWorldCalendar.Utilities
                 ScheduledDateTime = dto.ScheduledDateTime,
                 OpposingTeam = new Persistence.Models.OpposingTeam
                 {
+                    ServerId = dto.OpposingTeam.Id,
                     TeamName = dto.OpposingTeam.Name
                 },
                 MyTeamScore = dto.MyTeamScore,
