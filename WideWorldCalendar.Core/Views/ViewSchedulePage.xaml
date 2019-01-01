@@ -47,7 +47,7 @@
                                   Orientation="Horizontal"
                                   Grid.Row="1" >
                                   <Label Text="{Binding OpposingTeam.Name}" Style="{StaticResource ItemHeader}"/>
-                                  <BoxView BackgroundColor="{Binding OpposingTeam.Color}" />
+                                <BoxView BackgroundColor="{Binding OpposingTeam.Color}" WidthRequest="12" HeightRequest="12" VerticalOptions="Center" CornerRadius="100" />
                               </StackLayout>
                               <StackLayout Grid.Row="2" Orientation="Horizontal">
                                   <Label Text="{Binding Field}" Style="{StaticResource Content}"/>
