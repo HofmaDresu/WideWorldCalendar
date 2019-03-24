@@ -98,20 +98,19 @@ namespace WideWorldCalendar.ScheduleFetcher
                 if (!int.TryParse(teamIdString, out int currentTeamId)) continue;
 
                 var teamColumns = row.Split("</td>").Where(s => s.Contains("<td")).ToArray();
-                var hasScore = int.TryParse(teamColumns[0].Split('>').Last(), out int score);
+                var scoreColumn = teamColumns[0];
+                var teamNameColumn = teamColumns[1];
+                var hasScore = int.TryParse(scoreColumn.Split('>').Last(), out int score);
 
                 var team = new Team
                 {
                     Id = currentTeamId,
-                    Name = teamColumns[1].Split('>')[2].Split('<')[0],
+                    Name = teamNameColumn.Split('>')[2].Split('<')[0],
                 };
 
                 if (currentTeamId == teamId)
                 {
-                    if (i == 0)
-                    {
-                        game.IsHomeGame = true;
-                    }
+                    game.IsHomeGame = teamNameColumn.Contains(">H<");
                     game.MyTeam = team;
                     if (hasScore)
                     {
