@@ -6,7 +6,7 @@ namespace WideWorldCalendar.Converters
 {
     public class TeamColorIsKnownConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var xamColor = value as Color?;
             var systemColor = value as System.Drawing.Color?;
