@@ -66,7 +66,7 @@ namespace WideWorldCalendar.ScheduleFetcher
                 {
                     var color = ScheduleHtmlParser.GetTeamColor(divisionReportHtml);
                     game.MyTeam.Color = color;
-                    data.InsertTeamColor(new Persistence.Models.TeamColor(game.MyTeam.Id, color.R, color.G, color.B));
+                    data.InsertTeamColor(new Persistence.Models.TeamColor(game.MyTeam.Id, color.R, color.G, color.B, color.A));
                 }
 
                 var dbOpposingColor = data.GetTeamColor(game.OpposingTeam.Id);
@@ -80,7 +80,7 @@ namespace WideWorldCalendar.ScheduleFetcher
 
                     var color = ScheduleHtmlParser.GetTeamColor(opposingTeamDivisionReportHtml);
                     game.OpposingTeam.Color = color;
-                    data.InsertTeamColor(new Persistence.Models.TeamColor(game.OpposingTeam.Id, color.R, color.G, color.B));
+                    data.InsertTeamColor(new Persistence.Models.TeamColor(game.OpposingTeam.Id, color.R, color.G, color.B, color.A));
                 }
             }
 
