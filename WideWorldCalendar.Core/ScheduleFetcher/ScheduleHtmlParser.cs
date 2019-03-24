@@ -170,7 +170,8 @@ namespace WideWorldCalendar.ScheduleFetcher
         {
             try
             {
-                var colorHex = html.Split("<div class=\"form-group\"><input type=\"text\" name=\"color\" ")[1].Split("value=\"")[1].Split("\"")[0];
+                var colorSection = html.Split("<div class=\"form-group\"><input type=\"text\" name=\"color\" ")[1].Split("/div")[0];
+                var colorHex = colorSection.Split("value=\"")[1].Split("/")[0].Split("\"")[0];
                 return colorHex.StartsWith("#") ? Color.FromHex(colorHex) : Color.Transparent;
             }
             catch (Exception)
