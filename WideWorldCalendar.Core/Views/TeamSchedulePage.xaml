@@ -5,7 +5,8 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true"
              x:Class="WideWorldCalendar.Views.TeamSchedulePage"
-             xmlns:local="clr-namespace:WideWorldCalendar.Utilities;assembly=WideWorldCalendar" >
+             xmlns:local="clr-namespace:WideWorldCalendar.Utilities;assembly=WideWorldCalendar"
+             xmlns:customcontrols="clr-namespace:WideWorldCalendar.CustomControls">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:BoolHomeAwayConverter x:Key="HomeAwayCvt"/>
@@ -58,7 +59,7 @@
                                   Orientation="Horizontal"
                                   Grid.Row="1" >
                                 <Label Text="{Binding OpposingTeam.TeamName}" Style="{StaticResource ItemHeader}"/>
-                                <BoxView BackgroundColor="{Binding OpposingTeam.Color}" WidthRequest="12" HeightRequest="12" VerticalOptions="Center" CornerRadius="100" />
+                                <customcontrols:TeamColorCircle Color="{Binding OpposingTeam.Color}" />
                             </StackLayout>
                             <StackLayout Grid.Row="2" Orientation="Horizontal">
                                 <Label Text="{Binding Field}" Style="{StaticResource Content}"/>
@@ -112,7 +113,7 @@
                                   Orientation="Horizontal"
                                   Grid.Row="1" >
                                 <Label Text="{Binding OpposingTeam.TeamName}" Style="{StaticResource ItemHeader}"/>
-                                <BoxView BackgroundColor="{Binding OpposingTeam.Color}" WidthRequest="12" HeightRequest="12" VerticalOptions="Center" CornerRadius="100" />
+                                <customcontrols:TeamColorCircle Color="{Binding OpposingTeam.Color}" />
                             </StackLayout>
                             <StackLayout Grid.Row="2" Orientation="Horizontal">
                                 <Label Text="{Binding Field}" Style="{StaticResource Content}"/>
