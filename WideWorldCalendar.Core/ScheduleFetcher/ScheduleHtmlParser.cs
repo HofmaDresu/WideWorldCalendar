@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using WideWorldCalendar.Utilities;
 using Xamarin.Forms;
+using System.Text.RegularExpressions;
 
 namespace WideWorldCalendar.ScheduleFetcher
 {
@@ -63,54 +64,55 @@ namespace WideWorldCalendar.ScheduleFetcher
             return leagueDictionary;
 		}
 
-		public static IEnumerable<Game> GetTeamSchedule(int teamId, string html)
+        public static IEnumerable<Game> GetTeamSchedule(int teamId, string html)
         {
             var scheduleSection = html.Split("<h3>Schedule</h3>").Last()
                 .Split("<h3>League Standings</h3>").First();
 
-            var gameSections = scheduleSection.Split("</li>").Where(s => s.Contains("li"));
+            var gameSections = scheduleSection.Split("list-group-item ").Where(s => s.Contains("col-lg-6 col-12")).ToList();
 
-            foreach (var section in gameSections)
+            return gameSections.Select(section =>
             {
-                var gameInfoSection = section.Split("col-5").Last().Split("col-7").First();
-                var teamsInfoSection = section.Split("col-7").Last().Split("</table>").First();
+                var dateTimeSection = section.Split("flex-shrink-0").Last().Split("mr-4").First();
+                var gamesInfoSection = section.Split("flex-grow-1").Last().Split("</small>").First();
 
                 var game = new Game
                 {
-                    ScheduledDateTime = GetScheduledDateTime(gameInfoSection),
-                    Field = CleanString(gameInfoSection.Split("<br>")[1]),
+                    ScheduledDateTime = GetScheduledDateTime(dateTimeSection),
+                    Field = CleanString(gamesInfoSection.Split("<small>").Last()),
                 };
 
-                SetTeamInfo(teamId, teamsInfoSection, game);
-
-                yield return game;
-            }
+                SetTeamInfo(teamId, gamesInfoSection, game);
+                return game;
+            });
 
         }
 
-        private static void SetTeamInfo(int teamId, string teamsInfoSection, Game game)
+        public static void SetTeamInfo(int teamId, string teamsInfoSection, Game game)
         {
-            var teamRows = teamsInfoSection.Split("</tr>").Where(s => s.Contains("<tr>")).ToList();
+            var cleanedTeamsInfoSection = teamsInfoSection.Split("</h6>").Last();
+
+            var teamRows = cleanedTeamsInfoSection.Split("justify-content-between").ToList();
             for (int i = 0; i < teamRows.Count; i++)
             {
                 var row = teamRows[i];
                 var teamIdString = row.Split("teamid=").Last().Split("\">").First();
                 if (!int.TryParse(teamIdString, out int currentTeamId)) continue;
 
-                var teamColumns = row.Split("</td>").Where(s => s.Contains("<td")).ToArray();
-                var scoreColumn = teamColumns[0];
-                var teamNameColumn = teamColumns[1];
+                var teamColumns = row.Split("</div>").Where(s => s.Contains("<div")).ToArray();
+                var teamNameColumn = teamColumns[0];
+                var scoreColumn = teamColumns[1];
                 var hasScore = int.TryParse(scoreColumn.Split('>').Last(), out int score);
 
                 var team = new Team
                 {
                     Id = currentTeamId,
-                    Name = teamNameColumn.Split('>')[2].Split('<')[0],
+                    Name = teamNameColumn.Split("teamid=").Last().Split('>')[1].Split('<')[0],
                 };
 
                 if (currentTeamId == teamId)
                 {
-                    game.IsHomeGame = teamNameColumn.Contains(">H<");
+                    game.IsHomeGame = teamNameColumn.Contains("fa-home");
                     game.MyTeam = team;
                     if (hasScore)
                     {
@@ -130,14 +132,19 @@ namespace WideWorldCalendar.ScheduleFetcher
 
         private static DateTime GetScheduledDateTime(string section)
         {
-            var gameScheduleStrings = section.Split("<h4 class=\"list-group-item-heading\">").Last().Split("</h4>").First().Trim().Split(" ");
+            var gameScheduleSections = section.Split("\"list-group-item-heading\">").Last().Split("</div>").ToList();
 
-            var gameDateParts = gameScheduleStrings.First().Split('/').Select(int.Parse).ToArray();
-            var gameMonth = gameDateParts[0];
-            var gameDay = gameDateParts[1];
+            var gameDateStrings = gameScheduleSections[0].Trim().Split(" ");
 
-            var isNight = gameScheduleStrings.Last().Contains("pm");
-            var gameTimeParts = gameScheduleStrings.Last().Split(isNight ? "pm" : "am").First().Split(':').Select(int.Parse).ToArray();
+            var gameMonthString = gameDateStrings[0];
+            var gameMonth = GetMonthNumberFromString(gameMonthString);
+            var intRegex = new Regex(@"\d+");
+            var gameDay = int.Parse(intRegex.Match(gameDateStrings[1]).Value);
+
+            var gameTimeString = gameScheduleSections[1];
+
+            var isNight = gameTimeString.Contains("pm");
+            var gameTimeParts = gameTimeString.Split('>').Last().Split(' ')[1].Split(':').Select(int.Parse).ToArray();
             var gameHour= gameTimeParts[0];
             var gameMinute = gameTimeParts[1];
             var scheduledHour = isNight ? gameHour + 12 : gameHour;
@@ -146,6 +153,39 @@ namespace WideWorldCalendar.ScheduleFetcher
             var scheduledYear = CalculateYear(now, gameMonth);
             var scheduledDateTime = new DateTime(scheduledYear, gameMonth, gameDay, scheduledHour, gameMinute, 0);
             return scheduledDateTime;
+        }
+
+        private static int GetMonthNumberFromString(string gameMonthString)
+        {
+            switch (gameMonthString)
+            {
+                case "Jan":
+                    return 1;
+                case "Feb":
+                    return 2;
+                case "Mar":
+                    return 3;
+                case "Apr":
+                    return 4;
+                case "May":
+                    return 5;
+                case "Jun":
+                    return 6;
+                case "Jul":
+                    return 7;
+                case "Aug":
+                    return 8;
+                case "Sep":
+                    return 9;
+                case "Oct":
+                    return 10;
+                case "Nov":
+                    return 11;
+                case "Dec":
+                    return 12;
+                default:
+                    throw new ArgumentException(gameMonthString);
+            }
         }
 
         private static int CalculateYear(DateTime now, int scheduledMonth)

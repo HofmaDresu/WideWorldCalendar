@@ -2840,6 +2840,7 @@ namespace WideWorldCalendar.ScheduleFetcher
         #endregion
         #region TeamHtml
         private const string TeamHtml = @"
+
 <!DOCTYPE html>
 <html lang=""en"">
 <head>
@@ -2848,8 +2849,8 @@ namespace WideWorldCalendar.ScheduleFetcher
   <meta name=""viewport"" content=""width=device-width, initial-scale=1.0, maximum-scale=1"">
   <meta http-equiv=""X-UA-Compatible"" content=""IE=edge"" >
 
-  <link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/apple-touch-icon.png"" rel=""apple-touch-icon"" size=""180x180"" type=""image/png""/><meta name=""apple-mobile-web-app-title"" content=""Dash Online""/><meta name=""apple-mobile-web-app-capable"" content=""yes""/><meta name=""apple-mobile-web-app-status-bar-style"" content=""black""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon-32x32.png"" rel=""icon"" size=""32x32"" type=""image/png""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon-16x16.png"" rel=""icon"" size=""16x16"" type=""image/png""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/manifest.json"" rel=""manifest""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/safari-pinned-tab.svg"" rel=""mask-icon"" color=""#2222b5""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon.ico"" rel=""shortcut icon"" type=""image/x-icon""/><meta name=""msapplication-config"" content=""dash/browsercongif.xml""/><meta name=""theme-color"" content=""#ffffff""/><link href=""//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700.css?deployment=1553294840"" rel=""stylesheet"" type=""text/css""/>    <script defer src=""https://pro.fontawesome.com/releases/v5.0.13/js/all.js"" integrity=""sha384-d84LGg2pm9KhR4mCAs3N29GQ4OYNy+K+FBHX8WhimHpPm86c839++MDABegrZ3gn"" crossorigin=""anonymous""></script>
-    <link href=""https://apps.dashplatform.com/dash/assets/dash/dist/css/online.min.css?deployment=1553294840"" rel=""stylesheet"" type=""text/css""/><script src=""https://apps.dashplatform.com/dash/assets/dash/dist/js/online.min.js?deployment=1553294840"" type=""text/javascript""></script><meta property=""og:title"" content=""WideWorld Sports Center""/><meta property=""og:description"" content=""Welcome to WideWorld Sports Center WideWorld Sports Center - Schedules, standings, team payment and more!""/><meta property=""og:image"" content=""https://cdn.pbrd.co/images/Hw7RdP9.jpg""/><meta property=""og:url"" content=""https://apps.dashplatform.com/dash?cid=wideworldsports""/><meta property=""og:type"" content=""business.business""/>  
+  <link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/apple-touch-icon.png"" rel=""apple-touch-icon"" size=""180x180"" type=""image/png""/><meta name=""apple-mobile-web-app-title"" content=""Dash Online""/><meta name=""apple-mobile-web-app-capable"" content=""yes""/><meta name=""apple-mobile-web-app-status-bar-style"" content=""black""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon-32x32.png"" rel=""icon"" size=""32x32"" type=""image/png""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon-16x16.png"" rel=""icon"" size=""16x16"" type=""image/png""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/manifest.json"" rel=""manifest""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/safari-pinned-tab.svg"" rel=""mask-icon"" color=""#2222b5""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon.ico"" rel=""shortcut icon"" type=""image/x-icon""/><meta name=""msapplication-config"" content=""dash/browsercongif.xml""/><meta name=""theme-color"" content=""#ffffff""/><link href=""//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700.css?deployment=1571166088"" rel=""stylesheet"" type=""text/css""/>    <script defer src=""https://pro.fontawesome.com/releases/v5.0.13/js/all.js"" integrity=""sha384-d84LGg2pm9KhR4mCAs3N29GQ4OYNy+K+FBHX8WhimHpPm86c839++MDABegrZ3gn"" crossorigin=""anonymous""></script>
+    <link href=""https://apps.dashplatform.com/dash/assets/dash/dist/css/online.min.css?deployment=1571166088"" rel=""stylesheet"" type=""text/css""/><script src=""https://apps.dashplatform.com/dash/assets/dash/dist/js/online.min.js?deployment=1571166088"" type=""text/javascript""></script><meta property=""og:title"" content=""WideWorld Sports Center""/><meta property=""og:description"" content=""Welcome to WideWorld Sports Center WideWorld Sports Center - Schedules, standings, team payment and more!""/><meta property=""og:image"" content=""https://cdn.pbrd.co/images/Hw7RdP9.jpg""/><meta property=""og:url"" content=""https://apps.dashplatform.com/dash?cid=wideworldsports""/><meta property=""og:type"" content=""business.business""/>  
   <link rel=""stylesheet"" type=""text/css"" href=""https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css""/>
 
   <script type=""text/javascript"" src=""https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js""></script>
@@ -2931,15 +2932,15 @@ namespace WideWorldCalendar.ScheduleFetcher
       <div class=""navbar-collapse collapse "">
         <ul class=""nav navbar-nav ml-auto align-items-left align-items-md-center "">
         
-            <li class=""nav-item"">
-              <a class=""nav-link "" href=""?action=signupSwitch"">
+                      <li class=""nav-item "">
+              <a class=""nav-link "" href=""index.php?Action=ProgramFinder/index&company=wideworldsports"">
                 <span class=""menu-icon d-inline-block d-md-none"">
                   <i class=""fas fa-clipboard-check fa-lg""></i>
                 </span>
                 <span class=""menu-text"">Registration</span>
               </a>
             </li>
-                          <li class=""nav-item"">
+                          <li class=""nav-item "">
                 <a class=""nav-link "" href=""index.php?Action=Reservation/index&company=wideworldsports"">
                   <span class=""menu-icon d-inline-block d-md-none"">
                     <i class=""fas fa-flag fa-lg""></i>
@@ -2947,33 +2948,15 @@ namespace WideWorldCalendar.ScheduleFetcher
                   <span class=""menu-text "" >Reservation</span>
                 </a>
               </li>
-                          <li class=""nav-item"">
-                <a class=""nav-link "" href=""index.php?Action=Schedule/index&company=wideworldsports"">
-                  <span class=""menu-icon d-inline-block d-md-none"">
-                    <i class=""far fa-calendar-alt fa-lg""></i>
-                  </span>
-                  <span class=""menu-text"" >Schedule</span>
-                </a>
-              </li>
-
-
-            <li class=""nav-item dropdown"">
-              <a href=""#"" class=""nav-link"" data-toggle=""dropdown"">
+                        <li class=""nav-item "">
+              <a class=""nav-link "" href=""index.php?Action=Schedule/location&company=wideworldsports"">
                 <span class=""menu-icon d-inline-block d-md-none"">
-                  <i class=""fas fa-plus fa-lg""></i>
+                  <i class=""far fa-calendar-alt fa-lg""></i>
                 </span>
-                <span class=""menu-text"" >More</span>
+                <span class=""menu-text"">Schedule</span>
               </a>
-              <ul class=""dropdown-menu dropdown-menu-right"">
-                                <li class=""dropdown-item""><a href=""?action=stats"">Stats</a>
-                  
-                <li class=""dropdown-item""><a href=""index.php?Action=League/standings&company=wideworldsports"">Leagues</a></li>
-                <li class=""dropdown-item dropdown-divider""></li>
-                <li class=""dropdown-item""><a href=""?action=help"">Locations</a></li>
-              </ul>
             </li>
-
-            <li class=""nav-item"" >
+                        <li class=""nav-item"" >
               <a class=""nav-link"" href=""https://www.wideworld-sports.com"" target=""_blank"">
                 <span class=""menu-icon d-inline-block d-md-none"">
                   <i class=""fas fa-external-link fa-lg""></i>
@@ -2981,56 +2964,32 @@ namespace WideWorldCalendar.ScheduleFetcher
                 <span class=""menu-text"">Website</span>
               </a>
             </li>
-
-            <li class=""nav-item"">
-              <a href=""?action=support"" class=""nav-link d-none d-md-block """"  data-toggle=""tooltip"" title=""Help"" >
+            <li class=""nav-item "" >
+              <a href=""?action=support"" class=""nav-link d-none d-md-block""  data-toggle=""tooltip"" title=""Help"" >
                 <i class=""fas fa-question fa-lg""></i>
               </a>
-              <a href=""?action=support"" class=""nav-link d-inline d-md-none"" >
+              <a href=""?action=support"" class=""nav-link d-inline d-sm-none"" >
                 <span class=""menu-icon d-inline-block d-md-none"">
                   <i class=""fas fa-question fa-lg""></i>
                 </span>
                 <span class=""menu-text"">Help</span>
               </a>
             </li>
-            <li class=""nav-item"">
-
-
-              <a href=""?action=message"" class=""nav-link d-none d-md-block ""  data-toggle=""tooltip"" title=""Messages""  >
-                <i class=""fas fa-comment-alt-lines fa-lg""></i>
-              </a>
-              <a href=""?action=message"" class=""nav-link d-inline d-md-none"" >
-                <span class=""menu-icon d-inline-block d-md-none"">
-                  <i class=""fas fa-comment-alt-lines fa-lg""></i>
-                </span>
-                <span class=""menu-text"">Message</span>
-              </a>
-            </li>
-
-            <li class=""nav-item dropdown"">
-              <a href=""#"" class=""nav-link"" data-toggle=""dropdown"" style=""height: 56px;"">
-                <div class=""name-badge-or-picture"">
-                                      <div class=""name name-badge"">Matt Hoffman</div>
-                                  </div>
-
-                <div class=""d-inline d-sm-none customer-name"" >
-                  Matt Hoffman                </div>
-              </a>
-              <ul class=""dropdown-menu dropdown-menu-right"">
-                
-                <li class=""dropdown-item d-md-none d-md-block""><a href=""index.php?Action=Customer/memberCard&company=wideworldsports"">Member Card</a></li>
-                <li class=""dropdown-item""><a href=""index.php?Action=Customer/edit&company=wideworldsports"">Profile</a></li>
-                                <li class=""dropdown-item""><a href=""?action=stats"">Stats</a>
-                                                    <li class=""dropdown-item""><a href=""index.php?Action=X/#/online/billing"">Billing</a></li>
-                <li class=""dropdown-divider""></li>
-                <li class=""dropdown-item hide switch-account-button""><a href=""?action=Auth/login&switchAccount=1"">Switch Account</a></li>
-                <li class=""dropdown-item""><a href=""?action=Auth/logout"">Sign Out</a></li>
-
-              </ul>
-            </li>
-
-        
           
+
+                      <li class=""nav-item "">
+              <a href=""index.php?Action=Auth/login&company=wideworldsports"" class=""nav-link d-none d-md-block"" >
+                <span style=""border: white 1px solid; padding: .8em; border-radius: .3em;"">
+                  Log In
+                </span>
+              </a>
+              <a href=""index.php?Action=Auth/login&company=wideworldsports"" class=""nav-link d-inline d-md-none"" >
+                <span class=""menu-icon d-inline-block d-md-none"">
+                  <i class=""fas fa-user-circle fa-lg""></i>
+                </span>
+                <span class=""menu-text "" >Log In</span>
+              </a>
+            </li>
 
           
         </ul>
@@ -3097,342 +3056,11 @@ namespace WideWorldCalendar.ScheduleFetcher
     
     
             
-    <div class=""container"" id=""cartDIV"" ><!-- shopping cart javascript -->
-<script type=""text/javascript"" class=""SITCart_script"">
-
-  
-      function SITCart_updateDisplay() {
-        $j.post(""?action=inc/cartInit"", function(data, status) {
-          if (!$j('#cartDIV').is(':visible')) {
-            $j('#cartDIV').show();
-          }
-          $j('#cartDIV').html(data);
-          SIT_Utils.triggerEvent(window, 'cart-update');
-        });
-      }
-
-      /**
-       * Adds a product to the shopping cart
-       * @param prodID
-       * @param quantity
-       * @param options
-       * @return
-       */
-      function SITCart_addProduct(prodID, quantity, options) {
-        var submissionData = {
-          sitcart_action: 'add',
-          sitcart_prod: prodID,
-          sitcart_quantity: quantity
-        };
-
-        if (options && options.customerID) {
-          submissionData.sitcart_customer = options.customerID;
-        }
-        if (options && options.customerIDCart) {
-          submissionData.sitcart_customercart = options.customerIDCart;
-        }
-        if (options && options.teamID) {
-          submissionData.sitcart_team = options.teamID;
-        }
-        if (options && options.priceOverride) {
-          submissionData.sitcart_price_override = options.priceOverride;
-        }
-        if (options && options.usaHockeyData) {
-          submissionData.sitcart_usa_hockey_data = options.usaHockeyData;
-        }
-
-        $j.post(""?action=inc/cartInit"", submissionData, function(data, status) {
-          if (!$j('#cartDIV').is(':visible')) {
-            $j('#cartDIV').show();
-          }
-          $j('#cartDIV').replaceWith(data);
-          SIT_Utils.triggerEvent(window, 'cart-update');
-
-          // If we have a callback, run that
-          if (options && options.afterItemAdd) {
-            options.afterItemAdd();
-          }
-        });
-      }
-
-      /**
-       * Adds a pass product to the cart
-       * @param passType
-       * @param quantity
-       * @param customerID
-       */
-      function SITCart_addPass(passType, quantity, customerID) {
-        var data = {
-          sitcart_action: 'add',
-          sitcart_passtype: passType,
-          sitcart_quantity: quantity,
-          sitcart_customer: customerID
-        };
-        $j.post(""?action=inc/cartInit"", data,  function(data) {
-          $j('#cartDIV').replaceWith(data);
-          SIT_Utils.triggerEvent(window, 'cart-update');
-        });
-      }
-
-      /**
-       * Applies a pass to a cart item
-       *
-       * @param passTypeID
-       * @param passID
-       * @param cartItemID
-       * @param customerID
-       */
-      function SITCart_applyPass(passTypeID, passID, customerID, cartItemID) {
-        var data = {
-          sitcart_action: 'add',
-          sitcart_apply_customerpass: passID,
-          sitcart_customer: customerID
-        };
-
-        if (typeof cartItemID != 'undefined') {
-          data.sitcart_item = cartItemID;
-          data.sitcart_applypass = passTypeID;
-        } else {
-          data.sitcart_applypass_all = passTypeID;
-        }
-
-        $j.post(""?action=inc/cartInit"", data,  function(data) {
-          $j('#cartDIV').replaceWith(data);
-          SIT_Utils.triggerEvent(window, 'cart-update');
-        });
-      }
-
-      function SITCart_addCustomer_selectUtil(selector, teamID) {
-        var customerList = Array();
-        $j(selector).each(function() {
-          customerList.push($j(this).val());
-        });
-        SITCart_addMassInvoiceCustomer(customerList, teamID);
-      }
-      /**
-       * Mass invoice tool that adds multiple customers to a cart to be invoiced.
-       * @param customerID
-       * @returns
-       */
-      function SITCart_addMassInvoiceCustomer(customerID, teamID) {
-        $j.post(""?action=inc/cartInit"", { sitcart_action: 'massinvoice', sitcart_customerList: customerID.toString(), team_id: teamID}, function(data, status) {
-          $j('#cartDIV').replaceWith(data);
-          SIT_Utils.triggerEvent(window, 'cart-update');
-        });
-      }
-
-      /**
-       * Mass invoice tool that adds multiple customers to a cart to be invoiced.
-       * @param $invoiceID
-       * @param $invoiceDue
-       * @param $customerID
-       * @returns
-      */
-      function SIT_Cart_addInvoicePayment($invoiceID, $invoiceDue, $customerID) {
-        $j.post(""?action=inc/cartInit"", { sitcart_action: 'sitcart_invoice', amount: $invoiceDue, invoiceID: $invoiceID, sitcart_customercart: $customerID}, function(data, status) {
-          $j('#cartDIV').replaceWith(data);
-          SIT_Utils.triggerEvent(window, 'cart-update');
-        });
-      }
-      /**
-       * Adds a product by UPC to the shopping cart
-       * @param upc
-       * @return
-       */
-      function SITCart_addProductByUPC(upc) {
-        $j.post(""?action=inc/cartInit"", { sitcart_action: ""add"", sitcart_upc: upc}, function(data, status) {
-          $j('#cartDIV').replaceWith(data);
-          SIT_Utils.triggerEvent(window, 'cart-update');
-        });
-      }
-    function SITCart_updatePartialPayment() {
-      var cartTotal = 0.00;
-      carTotal = parseFloat(cartTotal);
-      SIT_Utils.triggerEvent(window, 'cart-update');
-      $j('input[id=""partialPaymentInput""]').val(cartTotal);
-    }
-    /**
-     * Adds customer's credits to the cart
-     * @return
-     */
-    function SITCart_applyCredit(options, callback) {
-      $j.post(""?action=inc/cartInit"", { sitcart_action: ""apply_account_credit"", sitcart_options: options}, function(data, status) {
-        $j('#cartDIV').replaceWith(data);
-        SIT_Utils.triggerEvent(window, 'cart-update');
-        if (typeof callback == 'function') {
-          callback();
-        }
-      });
-    }
-
-    function SITCart_removeItem(itemID) {
-      $j.post(""?action=inc/cartInit"", {sitcart_action: 'modify', sitcart_itemsremove: itemID, cashRegister: true, wrapper: false }, function(data, status) {
-        $j('#cartDIV').replaceWith(data);
-        SIT_Utils.triggerEvent(window, 'cart-update');
-
-      });
-    }
-
-    function SITCart_Close() {
-      $j.post('index.php?Action=Cart/destroy&company=wideworldsports', function() {
-        //don't remove the cartDIV so other ajax calls can update the info in it
-        $j('#cartDIV').replaceWith(""<div id='cartDIV'></div>"");
-        SIT_Utils.triggerEvent(window, 'cart-update');
-
-            });
-    }
-
-    function SITCart_ReloadGiftCard(giftCardID, amount) {
-      $j.post('?action=inc/cartInit', {sitcart_action: 'reload_gift_card', giftCardID: giftCardID, amount: amount}, function(data, status) {
-        $j('#cartDIV').replaceWith(data);
-        if (!$j(this).parents('.cashRegister-cartWrapper').length) {
-          $j('html, body').animate({
-            scrollTop: 0
-          }, 600);
-        }
-      });
-    }
-
-    function SITCart_TransferGiftCard(to, from) {
-      $j.post('?action=inc/cartInit', {sitcart_action: 'transfer_gift_card', to: to, from: from}, function(data, status) {
-        $j('#cartDIV').replaceWith(data);
-        $j('html, body').animate({
-          scrollTop: 0
-        }, 600);
-      });
-    }
-
-    //discount ajax route only used for the checkout
-    function SITCart_ApplyDiscount(discountCode) {
-      $j.post('?action=inc/cartInit', {sitcart_action: 'modify', sitcart_discountCode: discountCode}, function(data, status) {
-        $j('#cartDIV').replaceWith(data);
-      });
-    }
-
-      /* page load stuff - jquery bindings */
-      jQuery(document).ready(function($j) {
-        /* Send request to process mass invoice */
-        $j('#massInvoice').click(function(){
-          var invoice_customerList = $j('input[name=""invoice_customerList[]""]').map(function() {
-            return this.value;
-          }).get().join(',');
-          SITGoLocation(""index.php?Action=MassInvoice&nocart=1&company=wideworldsports&invoice_customerList=""+invoice_customerList);
-        });
-
-        /* removes customers from the mass invoice process */
-        $j('#massInvoiceClear').click(function() {
-            $j.post(""?action=inc/cartInit"", {  sitcart_action: 'massinvoice_clear' }, function(data, status) {
-              $j('#cartDIV').replaceWith(data);
-            });
-        });
-        /**
-         * Toggle the display of the mass invoice customer list
-         *
-         */
-        $j('.toggle_cart_customer_list').click(function() {
-          let customerList = $j('#cart_mass_invoice_customer_list');
-          customerList.toggle();
-        });
-
-        /**
-         * Remove customer from mass invoice customer list
-         *
-         */
-        $j('.remove-mass-invoice-customer').click(function() {
-          if (!$j(this).prop('checked')) {
-            // Remove customer from cart when input is unchecked
-            var parent = $j(this).parent();
-            $j.post(""index.php?Action=Cart/removeCustomer&company=wideworldsports"", {customer_id: $j(this).attr('data-id')}, function (resp) {
-              $j('#mass_invoice_customer_count').text(resp.customer_count + '/')
-            });
-          } else {
-            $j.post(""index.php?Action=Cart/addCustomer&company=wideworldsports"", {customer_id: $j(this).attr('data-id')}, function (resp) {
-              $j('#mass_invoice_customer_count').text(resp.customer_count + '/')
-            });
-          }
-        });
-        
-        /**
-         * click functionality of the quick cash button
-         */
-        $j('#quick_cash_submit').click(function() {
-          $j.post('?Action=Checkout/quickCashCheckout', function(response) {
-            $j('#sessionMessageOutput').html(response);
-            $j('#SIT_Cart').remove(); //successful quick cash, so need to remove the cart
-          }).error(function(response) {
-            SIT_printErrors(response.responseJSON);
-          });
-        });
-
-        /**
-         * Listener to submit the apply discount in the cart
-         */
-        $j('#sitcart_applyDiscount').click(function() {
-          SITCart_ApplyDiscount($j('#sitcart_discountCode').val());
-        });
-
-        /**
-         * Prevent submitting cart data when hitting enter in the discount form
-         *
-         */
-        $j('#sitcart_discountCode').keypress(function(e) {
-          if (e.which == 13) {
-            e.preventDefault();
-            SITCart_ApplyDiscount($j(this).val());
-          }
-        });
-      });
-    //-->
-    </script>
-<script type=""text/javascript"">
-    jQuery('.cashRegister-cartWrapper .table tr:not(.dropdownCart), .sitcart_us_area').show();
-  $j('.hideCart').text('Hide');
-  </script>
-<div id=""SIT_Cart"" >
-  </div></div>  
+    
 
 
-<script type=""text/javascript"">
-  $j(function() {
 
-    $j("".decline-team-invite"").click(function(event) {
-      event.preventDefault();
-
-      var id = $j(this).data(""request-id"");
-      var team = $j(this).data(""request-team"");
-      var customerID = $j(this).data(""customer-id"");
-
-      // Sanity check...
-      if(id === undefined || team === undefined) {
-        return true;
-      }
-
-      if(!confirm(""This will decline your invite for \"""" + team + ""\"" and you will need to reapply.\nAre you sure you wish to continue?"")) {
-        return false;
-      }
-
-      $j.post('index.php?Action=TeamAction/declineJoinRequest.json&extension=json&company=wideworldsports', {request_id: id, customer_id: customerID, declined: true}, function(response) {
-        Messenger().post({
-          showCloseButton: true,
-          message: 'You have successfully declined Join request',
-          type: 'success',
-          hideAfter: 3
-        });
-      }).fail(function(response, status) {
-        if (response.hasOwnProperty('responseJSON') && response.responseJSON.hasOwnProperty('formErrors')) {
-          $j.each(response.responseJSON.formErrors, function(fieldName, fieldErrors) {
-            SIT_messageErrors([fieldErrors]);
-          });
-        } else {
-          SIT_messageErrors(['Unable to decline your request. Please try reloading the page and try again.']);
-        }
-      });
-
-    });
-  });
-</script>
-
-<h2>Team The Producers</h2>
+<h2>Team Subs</h2>
 <br class=""clearfix"">
 
 
@@ -3444,13 +3072,10 @@ namespace WideWorldCalendar.ScheduleFetcher
       Team <span class=""caret""></span>
     </a>
     <ul class=""dropdown-menu"">
-                    <li class=""dropdown-item""><a href=""https://apps.dashplatform.com/dash/index.php?Action=Message/index/1151&company=wideworldsports"">Message</a></li>
-        <li class=""dropdown-item""><a href=""https://apps.dashplatform.com/dash/index.php?Action=Team/rsvpAll&teamid=1151&company=wideworldsports"">RSVP</a></li>
-                    <li class=""dropdown-item""><a href=""https://apps.dashplatform.com/dash/index.php?Action=Team/invite&groupid=1151&company=wideworldsports"">Invite</a></li>
-                    <li class=""dropdown-item""><a href=""#"" id=""removeButton"" onclick=""leaveTeam(event)"">Leave&nbsp;Team</a></li>
-                </ul>
+                                    <li class=""dropdown-item""><a class=""active"" href=""index.php?Action=Auth/login&company=wideworldsports"">Login</a></li>
+          </ul>
   </li>
-        
+  
 </ul>
 <br/>
 
@@ -3458,647 +3083,384 @@ namespace WideWorldCalendar.ScheduleFetcher
 
 <h4>Description</h4>
 
- Starting 03/04/2019 HS &amp; Adult Soccer Winter 2 2019<br/>
-Soccer, Indoor, B - Intermediate, Coed  <br/>Ages Adult   (over 18 years old)
+ Starting 08/28/2019 HS &amp; Adult Fall 1 2019<br/>
+Soccer, Indoor, NA, Males only  <br/>Ages Adult   (over 18 years old)
 <br/> Games 8<br/>
 
+  Includes 8 Games. Team balances due IN FULL by the first scheduled game.<br/>
 
   <h4 style=""float:left; margin-right:10px;"">Team Color</h4>
   <div style=""margin-top:5px;"">
-    <form id=""o5c9788824521c6-64759371"" method=""POST""  role=""form"" action=""index.php?Action=TeamAction/save&company=wideworldsports""><input type=""hidden"" name=""_method"" id=""g5c9788824526e311400666""  value=""POST""/>    <div class=""form-group""><input type=""text"" name=""color"" id=""v5c978882452a7500974685""  disabled class=""form-control"" value=""#6f6528""/><script>jQuery('#v5c978882452a7500974685').spectrum({""preferredFormat"":""hex"",""allowEmpty"":true,""showInput"":true,""disabled"":true});</script><span class=""form-text invalid-feedback""></span></div>    </form>  </div>
+    <form id=""j5dacb6be478589-45588452"" method=""POST""  role=""form"" action=""index.php?Action=TeamAction/save&company=wideworldsports""><input type=""hidden"" name=""_method"" id=""l5dacb6be478b8935687049""  value=""POST""/>    <div class=""form-group""><input type=""text"" name=""color"" id=""w5dacb6be478fd408289123""  disabled class=""form-control"" value=""#f0f205""/><script>jQuery('#w5dacb6be478fd408289123').spectrum({""preferredFormat"":""hex"",""allowEmpty"":true,""showInput"":true,""disabled"":true});</script><span class=""form-text invalid-feedback""></span></div>    </form>  </div>
 
-  <div style=""margin-top: 20px"" id=""rosterDiv"">
-    <form method=""post"">
-      <div class=""table-responsive"">
-        <table class=""table table-sm table-striped"">
-          <tr>
-                          <th style=""font-weight: bold"">Team Roster</th>
-                                <th style=""font-weight: bold"">Stats</th>
-                                                    </tr>
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=9835&company=wideworldsports"">Kiki Bell</a>
-                              </td>
 
+
+  <div class=""mb-3"">
+      <a name=""schedules""></a>
+      <h3>Schedule</h3>
+    
+<!-- Begin schedule output -->
+<div class=""list-group flex-row flex-wrap"">
+
+      <div class=""list-group-item col-lg-6 col-12 inactive"">
+
+          <div class=""d-flex align-items-stretch"">
+            <div class=""flex-shrink-0 border-right event__date d-flex flex-column justify-content-between"">
+              <div>
+                  <div class=""list-group-item-heading"">Sep 9th</div>
+                  <div class=""mb-0 "">Mon 8:30 pm</div>
+                  <div class=""mb-0 text-small"">1h</div>
+              </div>
+              <div class=""d-flex justify-content-between mr-4"">
+                
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7349"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                              </div>
+            </div>
+            <div class=""flex-grow-1 pl-2 event__details"">
+                <h6 class=""mb-0 text-muted text-uppercase"">
+                  Game                                  </h6>
+                                <div class=""d-flex justify-content-between"">
+                      <div class=""text-truncate mr-3"">
+                        <i class=""fa fa-circle"" style=""color: #87f801;""></i>
+                        <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1631"">Domino Men</a>                      </div>
+                    <div>1</div>
+                  </div>
+                
+                                <div class=""d-flex justify-content-between"">
+                  <div class=""text-truncate mr-2"">
+                    <i class=""fa fa-home"" style=""color: #f0f205;""></i>
+                    <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">Subs</a>                  </div>
+                  <div>6</div>
+                </div>
               
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=9835&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
+            <div>
+                          </div>
+            <div>
+              <div class=""mb-0""><small>Daycroft School Field</small></div>
+            </div>
+          </div>
+            <div>
+                            </div>
+          </div>
+        </div>
+      <div class=""list-group-item col-lg-6 col-12 inactive"">
 
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=15955&company=wideworldsports"">Olivia Clark</a>
-                              </td>
-
+          <div class=""d-flex align-items-stretch"">
+            <div class=""flex-shrink-0 border-right event__date d-flex flex-column justify-content-between"">
+              <div>
+                  <div class=""list-group-item-heading"">Sep 16th</div>
+                  <div class=""mb-0 "">Mon 7:30 pm</div>
+                  <div class=""mb-0 text-small"">1h</div>
+              </div>
+              <div class=""d-flex justify-content-between mr-4"">
+                
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7352"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                              </div>
+            </div>
+            <div class=""flex-grow-1 pl-2 event__details"">
+                <h6 class=""mb-0 text-muted text-uppercase"">
+                  Game                                  </h6>
+                                <div class=""d-flex justify-content-between"">
+                      <div class=""text-truncate mr-3"">
+                        <i class=""fa fa-circle"" style=""color: #48b93a;""></i>
+                        <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1604"">Gasping For Air</a>                      </div>
+                    <div>0</div>
+                  </div>
+                
+                                <div class=""d-flex justify-content-between"">
+                  <div class=""text-truncate mr-2"">
+                    <i class=""fa fa-home"" style=""color: #f0f205;""></i>
+                    <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">Subs</a>                  </div>
+                  <div>5</div>
+                </div>
               
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=15955&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
+            <div>
+                          </div>
+            <div>
+              <div class=""mb-0""><small>Daycroft School Field</small></div>
+            </div>
+          </div>
+            <div>
+                            </div>
+          </div>
+        </div>
+      <div class=""list-group-item col-lg-6 col-12 inactive"">
 
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=15528&company=wideworldsports"">Brandon Ellefson</a>
-                              </td>
-
+          <div class=""d-flex align-items-stretch"">
+            <div class=""flex-shrink-0 border-right event__date d-flex flex-column justify-content-between"">
+              <div>
+                  <div class=""list-group-item-heading"">Sep 23rd</div>
+                  <div class=""mb-0 "">Mon 7:30 pm</div>
+                  <div class=""mb-0 text-small"">1h</div>
+              </div>
+              <div class=""d-flex justify-content-between mr-4"">
+                
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7355"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                              </div>
+            </div>
+            <div class=""flex-grow-1 pl-2 event__details"">
+                <h6 class=""mb-0 text-muted text-uppercase"">
+                  Game                                  </h6>
+                                <div class=""d-flex justify-content-between"">
+                      <div class=""text-truncate mr-3"">
+                        <i class=""fa fa-circle"" style=""color: #f0f205;""></i>
+                        <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">Subs</a>                      </div>
+                    <div>3</div>
+                  </div>
+                
+                                <div class=""d-flex justify-content-between"">
+                  <div class=""text-truncate mr-2"">
+                    <i class=""fa fa-home"" style=""color: #1803f7;""></i>
+                    <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1680"">Code Blue</a>                  </div>
+                  <div>3</div>
+                </div>
               
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=15528&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
+            <div>
+                          </div>
+            <div>
+              <div class=""mb-0""><small>Daycroft School Field</small></div>
+            </div>
+          </div>
+            <div>
+                            </div>
+          </div>
+        </div>
+      <div class=""list-group-item col-lg-6 col-12 inactive"">
 
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=11839&company=wideworldsports"">Edgar Faler</a>
-                              </td>
-
+          <div class=""d-flex align-items-stretch"">
+            <div class=""flex-shrink-0 border-right event__date d-flex flex-column justify-content-between"">
+              <div>
+                  <div class=""list-group-item-heading"">Sep 30th</div>
+                  <div class=""mb-0 "">Mon 8:30 pm</div>
+                  <div class=""mb-0 text-small"">1h</div>
+              </div>
+              <div class=""d-flex justify-content-between mr-4"">
+                
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7357"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                              </div>
+            </div>
+            <div class=""flex-grow-1 pl-2 event__details"">
+                <h6 class=""mb-0 text-muted text-uppercase"">
+                  Game                                  </h6>
+                                <div class=""d-flex justify-content-between"">
+                      <div class=""text-truncate mr-3"">
+                        <i class=""fa fa-circle"" style=""color: #f0f205;""></i>
+                        <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">Subs</a>                      </div>
+                    <div>7</div>
+                  </div>
+                
+                                <div class=""d-flex justify-content-between"">
+                  <div class=""text-truncate mr-2"">
+                    <i class=""fa fa-home"" style=""color: #87f801;""></i>
+                    <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1631"">Domino Men</a>                  </div>
+                  <div>2</div>
+                </div>
               
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=11839&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
+            <div>
+                          </div>
+            <div>
+              <div class=""mb-0""><small>Daycroft School Field</small></div>
+            </div>
+          </div>
+            <div>
+                            </div>
+          </div>
+        </div>
+      <div class=""list-group-item col-lg-6 col-12 inactive"">
 
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=16664&company=wideworldsports"">Andrew Fisher</a>
-                              </td>
-
+          <div class=""d-flex align-items-stretch"">
+            <div class=""flex-shrink-0 border-right event__date d-flex flex-column justify-content-between"">
+              <div>
+                  <div class=""list-group-item-heading"">Sep 30th</div>
+                  <div class=""mb-0 "">Mon 9:30 pm</div>
+                  <div class=""mb-0 text-small"">1h</div>
+              </div>
+              <div class=""d-flex justify-content-between mr-4"">
+                
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7356"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                              </div>
+            </div>
+            <div class=""flex-grow-1 pl-2 event__details"">
+                <h6 class=""mb-0 text-muted text-uppercase"">
+                  Game                                  </h6>
+                                <div class=""d-flex justify-content-between"">
+                      <div class=""text-truncate mr-3"">
+                        <i class=""fa fa-circle"" style=""color: #f0f205;""></i>
+                        <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">Subs</a>                      </div>
+                    <div>7</div>
+                  </div>
+                
+                                <div class=""d-flex justify-content-between"">
+                  <div class=""text-truncate mr-2"">
+                    <i class=""fa fa-home"" style=""color: #b5b0b0;""></i>
+                    <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1648"">Tigers U50 Aluminum</a>                  </div>
+                  <div>7</div>
+                </div>
               
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=16664&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
+            <div>
+                          </div>
+            <div>
+              <div class=""mb-0""><small>Daycroft School Field</small></div>
+            </div>
+          </div>
+            <div>
+                            </div>
+          </div>
+        </div>
+      <div class=""list-group-item col-lg-6 col-12 inactive"">
 
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=12501&company=wideworldsports"">Michael Gorski</a>
-                              </td>
-
+          <div class=""d-flex align-items-stretch"">
+            <div class=""flex-shrink-0 border-right event__date d-flex flex-column justify-content-between"">
+              <div>
+                  <div class=""list-group-item-heading"">Oct 7th</div>
+                  <div class=""mb-0 "">Mon 7:30 pm</div>
+                  <div class=""mb-0 text-small"">1h</div>
+              </div>
+              <div class=""d-flex justify-content-between mr-4"">
+                
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7361"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                              </div>
+            </div>
+            <div class=""flex-grow-1 pl-2 event__details"">
+                <h6 class=""mb-0 text-muted text-uppercase"">
+                  Game                                  </h6>
+                                <div class=""d-flex justify-content-between"">
+                      <div class=""text-truncate mr-3"">
+                        <i class=""fa fa-circle"" style=""color: #49ff00;""></i>
+                        <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1690"">WWSC Monday Men Green</a>                      </div>
+                    <div>4</div>
+                  </div>
+                
+                                <div class=""d-flex justify-content-between"">
+                  <div class=""text-truncate mr-2"">
+                    <i class=""fa fa-home"" style=""color: #f0f205;""></i>
+                    <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">Subs</a>                  </div>
+                  <div>5</div>
+                </div>
               
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=12501&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
+            <div>
+                          </div>
+            <div>
+              <div class=""mb-0""><small>Daycroft School Field</small></div>
+            </div>
+          </div>
+            <div>
+                            </div>
+          </div>
+        </div>
+      <div class=""list-group-item col-lg-6 col-12 inactive"">
 
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=13502&company=wideworldsports"">Charles Groh</a>
-                              </td>
-
+          <div class=""d-flex align-items-stretch"">
+            <div class=""flex-shrink-0 border-right event__date d-flex flex-column justify-content-between"">
+              <div>
+                  <div class=""list-group-item-heading"">Oct 14th</div>
+                  <div class=""mb-0 "">Mon 8:45 pm</div>
+                  <div class=""mb-0 text-small"">1h</div>
+              </div>
+              <div class=""d-flex justify-content-between mr-4"">
+                
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7368"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                              </div>
+            </div>
+            <div class=""flex-grow-1 pl-2 event__details"">
+                <h6 class=""mb-0 text-muted text-uppercase"">
+                  Game                                  </h6>
+                                <div class=""d-flex justify-content-between"">
+                      <div class=""text-truncate mr-3"">
+                        <i class=""fa fa-circle"" style=""color: #f0f205;""></i>
+                        <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">Subs</a>                      </div>
+                    <div>5</div>
+                  </div>
+                
+                                <div class=""d-flex justify-content-between"">
+                  <div class=""text-truncate mr-2"">
+                    <i class=""fa fa-home"" style=""color: #1803f7;""></i>
+                    <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1680"">Code Blue</a>                  </div>
+                  <div>1</div>
+                </div>
               
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=13502&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
+            <div>
+                          </div>
+            <div>
+              <div class=""mb-0""><small>Revel &amp; Roll Field</small></div>
+            </div>
+          </div>
+            <div>
+                            </div>
+          </div>
+        </div>
+      <div class=""list-group-item col-lg-6 col-12 "">
 
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=12238&company=wideworldsports"">Matt Hoffman</a>
-                              </td>
-
+          <div class=""d-flex align-items-stretch"">
+            <div class=""flex-shrink-0 border-right event__date d-flex flex-column justify-content-between"">
+              <div>
+                  <div class=""list-group-item-heading"">Oct 21st</div>
+                  <div class=""mb-0 "">Mon 8:30 pm</div>
+                  <div class=""mb-0 text-small"">1h</div>
+              </div>
+              <div class=""d-flex justify-content-between mr-4"">
+                
+                              </div>
+            </div>
+            <div class=""flex-grow-1 pl-2 event__details"">
+                <h6 class=""mb-0 text-muted text-uppercase"">
+                  Game                                  </h6>
+                                <div class=""d-flex justify-content-between"">
+                      <div class=""text-truncate mr-3"">
+                        <i class=""fa fa-circle"" style=""color: #48b93a;""></i>
+                        <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1604"">Gasping For Air</a>                      </div>
+                    <div>-</div>
+                  </div>
+                
+                                <div class=""d-flex justify-content-between"">
+                  <div class=""text-truncate mr-2"">
+                    <i class=""fa fa-home"" style=""color: #f0f205;""></i>
+                    <a class=""font-weight-bold"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">Subs</a>                  </div>
+                  <div>-</div>
+                </div>
               
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=12238&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=9733&company=wideworldsports"">Ashley Mantha</a>
-                              </td>
-
-              
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=9733&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=14952&company=wideworldsports"">David Mariouw</a>
-                              </td>
-
-              
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=14952&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=13296&company=wideworldsports"">Jacob Maurer</a>
-                              </td>
-
-              
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=13296&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=14666&company=wideworldsports"">Heather Neff</a>
-                              </td>
-
-              
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=14666&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=16803&company=wideworldsports"">Erik Nelhiebel</a>
-                              </td>
-
-              
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=16803&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=9256&company=wideworldsports"">Elizabeth Payeur</a>
-                              </td>
-
-              
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=9256&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=13724&company=wideworldsports"">Kristopher Schilling</a>
-                              </td>
-
-              
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=13724&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=8225&company=wideworldsports"">Rachel Schilling</a>
-                              </td>
-
-              
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=8225&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=15151&company=wideworldsports"">RJ Stefl</a>
-                              </td>
-
-              
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=15151&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-            <tr>
-              <td>
-                                  <a href=""index.php?Action=profile&id=14394&company=wideworldsports"">Tom Waters</a>
-                              </td>
-
-              
-                              <td>
-                  <a href=""index.php?Action=Stats/index&customerID=14394&company=wideworldsports"">Stats</a>
-                </td>
-              
-            </tr>
-
-          
-                  </table>
-      </div>
-    </form>
+            <div>
+                          </div>
+            <div>
+              <div class=""mb-0""><small>Daycroft School Field</small></div>
+            </div>
+          </div>
+            <div>
+                            </div>
+          </div>
+        </div>
   </div>
 
+<script>
+  jQuery('.dropdown').click(function () {
+    // for some reason the schedule display dropdowns need this click handler to open on mobile. dont ask why, I don't know.
+    // console.log('test');
+  });
+  jQuery(document).on('show.bs.dropdown', '.dropdown', function(e) {
+    var dropdown = jQuery(e.target).find('.dropdown-menu');
 
-  <a name=""schedules""></a>
-  <h3>Schedule</h3>
-        <ul class=""flex flex-row list-group clearfix flex-wrap"">
-              <li  class=""col-md-6 list-group-item  "">
-          <div class=""row"">
-            <div class=""col-5"">
-              <h4 class=""list-group-item-heading"">
-                3/7 Thu                9:45pm              </h4>
-              <b>WideWorld Sports Center</b><br>
-              Revel &amp; Roll Field  <br>
-              Game              01h 00m<br>
+    dropdown.appendTo('body');
+    dropdown.css({width: 'unset'});
 
-            </div>
-            <div class=""col-7"">
+    jQuery(this).on('hidden.bs.dropdown', function () {
+      dropdown.appendTo(e.target);
+    });
+  });
+  jQuery(document).on('shown.bs.dropdown', '.dropdown', function(e) {
+    var dropdown = jQuery(e.target).find('.dropdown-menu');
+    var button = jQuery(e.target);
+    var dropDownTop = button.offset().top + button.outerHeight();
 
-            <p class=""list-group-item-text"">
+    dropdown.css({transform: ""translate3d(""+button.offset().left+""px,""+dropDownTop+""px,0px)""});
+  });
 
-            
-              <table>
-                <tr>
-                  <td  class=""lead"" style=""min-width: 50px""></td>
-                  <td>
-                    <!-- show event description if home or away team not set // playoffs -->
-                                      </td>
-                </tr>
-
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px"">2</td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1137"">FC Goog</a> <span class=""badge badge-secondary"">H</span></td>
-                </tr>
-                
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px"">3</td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1151"">The Producers</a></td>
-                </tr>
-                              </table>
-            
-              <div style=""margin-left: 50px"">
-                <br>
-                                  <a class=""btn btn-secondary btn-sm"" href=""index.php?Action=Stats/game&company=wideworldsports&eventID=5416"">Stats</a>
-                
-                
-                              </div>
-
-          </p>
-
-            </div>
-          </div>
-        </li>
-              <li  class=""col-md-6 list-group-item  "">
-          <div class=""row"">
-            <div class=""col-5"">
-              <h4 class=""list-group-item-heading"">
-                3/14 Thu                8:45pm              </h4>
-              <b>WideWorld Sports Center</b><br>
-              Revel &amp; Roll Field  <br>
-              Game              01h 00m<br>
-
-            </div>
-            <div class=""col-7"">
-
-            <p class=""list-group-item-text"">
-
-            
-              <table>
-                <tr>
-                  <td  class=""lead"" style=""min-width: 50px""></td>
-                  <td>
-                    <!-- show event description if home or away team not set // playoffs -->
-                                      </td>
-                </tr>
-
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px"">4</td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1151"">The Producers</a> <span class=""badge badge-secondary"">H</span></td>
-                </tr>
-                
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px"">4</td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1147"">Etbtsstnb</a></td>
-                </tr>
-                              </table>
-            
-              <div style=""margin-left: 50px"">
-                <br>
-                                  <a class=""btn btn-secondary btn-sm"" href=""index.php?Action=Stats/game&company=wideworldsports&eventID=5418"">Stats</a>
-                
-                
-                              </div>
-
-          </p>
-
-            </div>
-          </div>
-        </li>
-              <li  class=""col-md-6 list-group-item  "">
-          <div class=""row"">
-            <div class=""col-5"">
-              <h4 class=""list-group-item-heading"">
-                3/21 Thu                8:45pm              </h4>
-              <b>WideWorld Sports Center</b><br>
-              Revel &amp; Roll Field  <br>
-              Game              01h 00m<br>
-
-            </div>
-            <div class=""col-7"">
-
-            <p class=""list-group-item-text"">
-
-            
-              <table>
-                <tr>
-                  <td  class=""lead"" style=""min-width: 50px""></td>
-                  <td>
-                    <!-- show event description if home or away team not set // playoffs -->
-                                      </td>
-                </tr>
-
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px"">8</td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1151"">The Producers</a> <span class=""badge badge-secondary"">H</span></td>
-                </tr>
-                
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px"">7</td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1272"">Ultimate FC</a></td>
-                </tr>
-                              </table>
-            
-              <div style=""margin-left: 50px"">
-                <br>
-                                  <a class=""btn btn-secondary btn-sm"" href=""index.php?Action=Stats/game&company=wideworldsports&eventID=5404"">Stats</a>
-                
-                
-                              </div>
-
-          </p>
-
-            </div>
-          </div>
-        </li>
-              <li  class=""col-md-6 list-group-item list-group-item-info "">
-          <div class=""row"">
-            <div class=""col-5"">
-              <h4 class=""list-group-item-heading"">
-                3/28 Thu                7:45pm              </h4>
-              <b>WideWorld Sports Center</b><br>
-              Revel &amp; Roll Field  <br>
-              Game              01h 00m<br>
-
-            </div>
-            <div class=""col-7"">
-
-            <p class=""list-group-item-text"">
-
-            
-              <table>
-                <tr>
-                  <td  class=""lead"" style=""min-width: 50px""></td>
-                  <td>
-                    <!-- show event description if home or away team not set // playoffs -->
-                                      </td>
-                </tr>
-
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px""></td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1151"">The Producers</a> <span class=""badge badge-secondary"">H</span></td>
-                </tr>
-                
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px""></td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1137"">FC Goog</a></td>
-                </tr>
-                              </table>
-            
-              <div style=""margin-left: 50px"">
-                <br>
-                                  <a class=""btn btn-secondary btn-sm"" href=""index.php?Action=Stats/game&company=wideworldsports&eventID=5422"">Stats</a>
-                
-                                  <a  class=""btn btn-secondary btn-sm"" href=""https://apps.dashplatform.com/dash/index.php?Action=Team/rsvp&e=5422&t=1151&cid=wideworldsports&company=wideworldsports"">RSVP</a>
-                
-                              </div>
-
-          </p>
-
-            </div>
-          </div>
-        </li>
-              <li  class=""col-md-6 list-group-item list-group-item-info "">
-          <div class=""row"">
-            <div class=""col-5"">
-              <h4 class=""list-group-item-heading"">
-                4/4 Thu                9:15pm              </h4>
-              <b>WideWorld Sports Center</b><br>
-              Revel &amp; Roll Field  <br>
-              Game              01h 00m<br>
-
-            </div>
-            <div class=""col-7"">
-
-            <p class=""list-group-item-text"">
-
-            
-              <table>
-                <tr>
-                  <td  class=""lead"" style=""min-width: 50px""></td>
-                  <td>
-                    <!-- show event description if home or away team not set // playoffs -->
-                                      </td>
-                </tr>
-
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px""></td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1246"">Incrediballs</a> <span class=""badge badge-secondary"">H</span></td>
-                </tr>
-                
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px""></td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1151"">The Producers</a></td>
-                </tr>
-                              </table>
-            
-              <div style=""margin-left: 50px"">
-                <br>
-                                  <a class=""btn btn-secondary btn-sm"" href=""index.php?Action=Stats/game&company=wideworldsports&eventID=5409"">Stats</a>
-                
-                                  <a  class=""btn btn-secondary btn-sm"" href=""https://apps.dashplatform.com/dash/index.php?Action=Team/rsvp&e=5409&t=1151&cid=wideworldsports&company=wideworldsports"">RSVP</a>
-                
-                              </div>
-
-          </p>
-
-            </div>
-          </div>
-        </li>
-              <li  class=""col-md-6 list-group-item list-group-item-info "">
-          <div class=""row"">
-            <div class=""col-5"">
-              <h4 class=""list-group-item-heading"">
-                4/11 Thu                10:15pm              </h4>
-              <b>WideWorld Sports Center</b><br>
-              Revel &amp; Roll Field  <br>
-              Game              01h 00m<br>
-
-            </div>
-            <div class=""col-7"">
-
-            <p class=""list-group-item-text"">
-
-            
-              <table>
-                <tr>
-                  <td  class=""lead"" style=""min-width: 50px""></td>
-                  <td>
-                    <!-- show event description if home or away team not set // playoffs -->
-                                      </td>
-                </tr>
-
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px""></td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1131"">The Elusive Eleven</a> <span class=""badge badge-secondary"">H</span></td>
-                </tr>
-                
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px""></td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1151"">The Producers</a></td>
-                </tr>
-                              </table>
-            
-              <div style=""margin-left: 50px"">
-                <br>
-                                  <a class=""btn btn-secondary btn-sm"" href=""index.php?Action=Stats/game&company=wideworldsports&eventID=5410"">Stats</a>
-                
-                                  <a  class=""btn btn-secondary btn-sm"" href=""https://apps.dashplatform.com/dash/index.php?Action=Team/rsvp&e=5410&t=1151&cid=wideworldsports&company=wideworldsports"">RSVP</a>
-                
-                              </div>
-
-          </p>
-
-            </div>
-          </div>
-        </li>
-              <li  class=""col-md-6 list-group-item list-group-item-info "">
-          <div class=""row"">
-            <div class=""col-5"">
-              <h4 class=""list-group-item-heading"">
-                4/18 Thu                9:15pm              </h4>
-              <b>WideWorld Sports Center</b><br>
-              Revel &amp; Roll Field  <br>
-              Game              01h 00m<br>
-
-            </div>
-            <div class=""col-7"">
-
-            <p class=""list-group-item-text"">
-
-            
-              <table>
-                <tr>
-                  <td  class=""lead"" style=""min-width: 50px""></td>
-                  <td>
-                    <!-- show event description if home or away team not set // playoffs -->
-                                      </td>
-                </tr>
-
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px""></td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1272"">Ultimate FC</a> <span class=""badge badge-secondary"">H</span></td>
-                </tr>
-                
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px""></td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1151"">The Producers</a></td>
-                </tr>
-                              </table>
-            
-              <div style=""margin-left: 50px"">
-                <br>
-                                  <a class=""btn btn-secondary btn-sm"" href=""index.php?Action=Stats/game&company=wideworldsports&eventID=5428"">Stats</a>
-                
-                                  <a  class=""btn btn-secondary btn-sm"" href=""https://apps.dashplatform.com/dash/index.php?Action=Team/rsvp&e=5428&t=1151&cid=wideworldsports&company=wideworldsports"">RSVP</a>
-                
-                              </div>
-
-          </p>
-
-            </div>
-          </div>
-        </li>
-              <li  class=""col-md-6 list-group-item list-group-item-info "">
-          <div class=""row"">
-            <div class=""col-5"">
-              <h4 class=""list-group-item-heading"">
-                4/25 Thu                7:15pm              </h4>
-              <b>WideWorld Sports Center</b><br>
-              Revel &amp; Roll Field  <br>
-              Game              01h 00m<br>
-
-            </div>
-            <div class=""col-7"">
-
-            <p class=""list-group-item-text"">
-
-            
-              <table>
-                <tr>
-                  <td  class=""lead"" style=""min-width: 50px""></td>
-                  <td>
-                    <!-- show event description if home or away team not set // playoffs -->
-                                      </td>
-                </tr>
-
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px""></td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1147"">Etbtsstnb</a> <span class=""badge badge-secondary"">H</span></td>
-                </tr>
-                
-                                <tr>
-                  <td class=""lead"" style=""min-width: 50px""></td>
-                  <td><a href=""index.php?Action=team/index&company=wideworldsports&teamid=1151"">The Producers</a></td>
-                </tr>
-                              </table>
-            
-              <div style=""margin-left: 50px"">
-                <br>
-                                  <a class=""btn btn-secondary btn-sm"" href=""index.php?Action=Stats/game&company=wideworldsports&eventID=5430"">Stats</a>
-                
-                                  <a  class=""btn btn-secondary btn-sm"" href=""https://apps.dashplatform.com/dash/index.php?Action=Team/rsvp&e=5430&t=1151&cid=wideworldsports&company=wideworldsports"">RSVP</a>
-                
-                              </div>
-
-          </p>
-
-            </div>
-          </div>
-        </li>
-            </ul>
-        <a name=""standings""></a>
+</script>  </div>
+    <a name=""standings""></a>
   <h3>League Standings</h3>
       <div class=""table-responsive"">
       <table class=""table table-striped"">
         <tr>
-          <th colspan=""12"">League Standings: Open Coed Thursday D3B</th>
+          <th colspan=""12"">League Standings: O30 Men Monday</th>
         </tr>
         <tr>
           <th>Team</th>
@@ -4120,82 +3482,122 @@ Soccer, Indoor, B - Intermediate, Coed  <br/>Ages Adult   (over 18 years old)
                   
           <tr>
                           <td>
-                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1147"">
-                  Etbtsstnb</a>
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">
+                  Subs</a>
               </td>
             
+            <td class=""numeric"">5</td>
             <td class=""numeric"">2</td>
-            <td class=""numeric"">1</td>
             <td class=""numeric"">0</td>
 
                           <td class=""numeric"">0</td>
+              <td class=""numeric"">17</td>
+              <td class=""numeric"">38</td>
+              <td class=""numeric"">18</td>
+              <td class=""numeric"">20</td>
+            
+            <td class=""numeric"">0.857</td>
+                        <td class=""numeric"">7</td>
+          </tr>
+                  
+          <tr>
+                          <td>
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1631"">
+                  Domino Men</a>
+              </td>
+            
+            <td class=""numeric"">4</td>
+            <td class=""numeric"">1</td>
+            <td class=""numeric"">2</td>
+
+                          <td class=""numeric"">0</td>
+              <td class=""numeric"">13</td>
+              <td class=""numeric"">30</td>
+              <td class=""numeric"">23</td>
               <td class=""numeric"">7</td>
-              <td class=""numeric"">19</td>
-              <td class=""numeric"">13</td>
-              <td class=""numeric"">6</td>
             
-            <td class=""numeric"">0.833</td>
-                        <td class=""numeric"">3</td>
+            <td class=""numeric"">0.643</td>
+                        <td class=""numeric"">7</td>
           </tr>
                   
           <tr>
                           <td>
-                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1151"">
-                  The Producers</a>
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1690"">
+                  WWSC Monday Men Green</a>
               </td>
             
-            <td class=""numeric"">2</td>
-            <td class=""numeric"">1</td>
-            <td class=""numeric"">0</td>
-
-                          <td class=""numeric"">0</td>
-              <td class=""numeric"">7</td>
-              <td class=""numeric"">15</td>
-              <td class=""numeric"">13</td>
-              <td class=""numeric"">2</td>
-            
-            <td class=""numeric"">0.833</td>
-                        <td class=""numeric"">3</td>
-          </tr>
-                  
-          <tr>
-                          <td>
-                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1137"">
-                  FC Goog</a>
-              </td>
-            
-            <td class=""numeric"">1</td>
-            <td class=""numeric"">0</td>
-            <td class=""numeric"">2</td>
-
-                          <td class=""numeric"">0</td>
-              <td class=""numeric"">3</td>
-              <td class=""numeric"">10</td>
-              <td class=""numeric"">13</td>
-              <td class=""numeric"">-3</td>
-            
-            <td class=""numeric"">0.333</td>
-                        <td class=""numeric"">3</td>
-          </tr>
-                  
-          <tr>
-                          <td>
-                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1272"">
-                  Ultimate FC</a>
-              </td>
-            
-            <td class=""numeric"">0</td>
+            <td class=""numeric"">4</td>
             <td class=""numeric"">0</td>
             <td class=""numeric"">3</td>
 
                           <td class=""numeric"">0</td>
-              <td class=""numeric"">0</td>
-              <td class=""numeric"">13</td>
-              <td class=""numeric"">18</td>
-              <td class=""numeric"">-5</td>
+              <td class=""numeric"">12</td>
+              <td class=""numeric"">34</td>
+              <td class=""numeric"">27</td>
+              <td class=""numeric"">7</td>
             
-            <td class=""numeric"">0.000</td>
-                        <td class=""numeric"">3</td>
+            <td class=""numeric"">0.571</td>
+                        <td class=""numeric"">7</td>
+          </tr>
+                  
+          <tr>
+                          <td>
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1680"">
+                  Code Blue</a>
+              </td>
+            
+            <td class=""numeric"">3</td>
+            <td class=""numeric"">1</td>
+            <td class=""numeric"">3</td>
+
+                          <td class=""numeric"">0</td>
+              <td class=""numeric"">10</td>
+              <td class=""numeric"">23</td>
+              <td class=""numeric"">21</td>
+              <td class=""numeric"">2</td>
+            
+            <td class=""numeric"">0.500</td>
+                        <td class=""numeric"">7</td>
+          </tr>
+                  
+          <tr>
+                          <td>
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1648"">
+                  Tigers U50 Aluminum</a>
+              </td>
+            
+            <td class=""numeric"">1</td>
+            <td class=""numeric"">2</td>
+            <td class=""numeric"">4</td>
+
+                          <td class=""numeric"">0</td>
+              <td class=""numeric"">5</td>
+              <td class=""numeric"">30</td>
+              <td class=""numeric"">43</td>
+              <td class=""numeric"">-13</td>
+            
+            <td class=""numeric"">0.286</td>
+                        <td class=""numeric"">7</td>
+          </tr>
+                  
+          <tr>
+                          <td>
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1604"">
+                  Gasping For Air</a>
+              </td>
+            
+            <td class=""numeric"">1</td>
+            <td class=""numeric"">0</td>
+            <td class=""numeric"">6</td>
+
+                          <td class=""numeric"">0</td>
+              <td class=""numeric"">3</td>
+              <td class=""numeric"">14</td>
+              <td class=""numeric"">37</td>
+              <td class=""numeric"">-23</td>
+            
+            <td class=""numeric"">0.143</td>
+                        <td class=""numeric"">7</td>
           </tr>
               </table>
     </div>
@@ -4209,12 +3611,12 @@ Soccer, Indoor, B - Intermediate, Coed  <br/>Ages Adult   (over 18 years old)
     <!-- Modal content-->
     <div class=""modal-content"">
       <div class=""modal-header"">
-        <h4 class=""modal-title"">Request to join The Producers</h4>
+        <h4 class=""modal-title"">Request to join Subs</h4>
         <button type=""button"" class=""close"" data-dismiss=""modal"">&times;</button>
       </div>
       <div class=""modal-body"">
         <p>
-          Matt Hoffman is requesting to join a group. You will receive an email notification when
+           is requesting to join a group. You will receive an email notification when
           a group manager accepts or rejects your request.
         </p>
         <button onclick=""requestJoin()"" class=""btn btn-primary text-center"">Request Membership</button>
@@ -4232,9 +3634,6 @@ Soccer, Indoor, B - Intermediate, Coed  <br/>Ages Adult   (over 18 years old)
       <div class=""height-30"">
         &#169; 2019 Dash
             </div>
-            <div class=""footer-contact height-30"">
-        <b>Call 734-913-4625 or <a href=""index.php?action=support"">email us</a></b>
-      </div>
           </div>
   </div>
 <div id=""windowNotice"">
@@ -4264,8 +3663,8 @@ Soccer, Indoor, B - Intermediate, Coed  <br/>Ages Adult   (over 18 years old)
       async: true,
       type: 'POST',
       data: {
-        customerID: 12238,
-        teamID: 1151      }
+        customerID: 0,
+        teamID: 1675      }
     }).always(function(jqXHR, textStatus, errorThrown){
       processAjaxResponse(jqXHR, textStatus, errorThrown);
       $j('#joinModal').modal('hide');
@@ -4283,15 +3682,15 @@ Soccer, Indoor, B - Intermediate, Coed  <br/>Ages Adult   (over 18 years old)
         async: true,
         type: 'POST',
         data: {
-          customerID: 12238,
-          teamID: 1151        }
+          customerID: 0,
+          teamID: 1675        }
       }).done(function (data, textStatus, jqXHR) {
         if(data.formErrors.length) {
           data.formErrors.map(function(e,k){dashMessage(e,'error')});
         } else {
           dashMessage(""You have been successfully removed from the team. You will now be redirected."", 'success');
           setTimeout(function () {
-            location.replace('index.php?Action=Team/index&teamid=1151&leave=1&company=wideworldsports')
+            location.replace('index.php?Action=Team/index&teamid=1675&leave=1&company=wideworldsports')
           }, 3000)
         }
       }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -4309,10 +3708,11 @@ Soccer, Indoor, B - Intermediate, Coed  <br/>Ages Adult   (over 18 years old)
 
 </script></body>
 </html>
+
 ";
         #endregion
 
-        private const int delayMs = 500;
+        private const int delayMs = 5;
 
 		public async Task<List<NavigationOption>> GetSeasons()
         {
