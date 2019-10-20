@@ -2840,44 +2840,44 @@ namespace WideWorldCalendar.ScheduleFetcher
         #endregion
         #region TeamHtml
         private const string TeamHtml = @"
+
 <!DOCTYPE html>
 <html lang=""en"">
 <head>
       
       
-  <meta name = ""viewport"" content=""width=device-width, initial-scale=1.0, maximum-scale=1"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0, maximum-scale=1"">
   <meta http-equiv=""X-UA-Compatible"" content=""IE=edge"" >
 
-  <link href = ""https://apps.dashplatform.com/dash/share/images/icons/dash/apple-touch-icon.png"" rel=""apple-touch-icon"" size=""180x180"" type=""image/png""/><meta name = ""apple-mobile-web-app-title"" content=""Dash Online""/><meta name = ""apple-mobile-web-app-capable"" content=""yes""/><meta name = ""apple-mobile-web-app-status-bar-style"" content=""black""/><link href = ""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon-32x32.png"" rel=""icon"" size=""32x32"" type=""image/png""/><link href = ""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon-16x16.png"" rel=""icon"" size=""16x16"" type=""image/png""/><link href = ""https://apps.dashplatform.com/dash/share/images/icons/dash/manifest.json"" rel=""manifest""/><link href = ""https://apps.dashplatform.com/dash/share/images/icons/dash/safari-pinned-tab.svg"" rel=""mask-icon"" color=""#2222b5""/><link href = ""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon.ico"" rel=""shortcut icon"" type=""image/x-icon""/><meta name = ""msapplication-config"" content=""dash/browsercongif.xml""/><meta name = ""theme-color"" content=""#ffffff""/><link href = ""//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700.css?deployment=1571166088"" rel=""stylesheet"" type=""text/css""/>    <script defer src=""https://pro.fontawesome.com/releases/v5.0.13/js/all.js"" integrity=""sha384-d84LGg2pm9KhR4mCAs3N29GQ4OYNy+K+FBHX8WhimHpPm86c839++MDABegrZ3gn"" crossorigin=""anonymous""></script>
-    <link href = ""https://apps.dashplatform.com/dash/assets/dash/dist/css/online.min.css?deployment=1571166088"" rel=""stylesheet"" type=""text/css""/><script src = ""https://apps.dashplatform.com/dash/assets/dash/dist/js/online.min.js?deployment=1571166088"" type=""text/javascript""></script><meta property = ""og:title"" content=""WideWorld Sports Center""/><meta property = ""og:description"" content=""Welcome to WideWorld Sports Center WideWorld Sports Center - Schedules, standings, team payment and more!""/><meta property = ""og:image"" content=""https://cdn.pbrd.co/images/Hw7RdP9.jpg""/><meta property = ""og:url"" content=""https://apps.dashplatform.com/dash?cid=wideworldsports""/><meta property = ""og:type"" content=""business.business""/>  
-  <link rel = ""stylesheet"" type=""text/css"" href=""https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css""/>
+  <link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/apple-touch-icon.png"" rel=""apple-touch-icon"" size=""180x180"" type=""image/png""/><meta name=""apple-mobile-web-app-title"" content=""Dash Online""/><meta name=""apple-mobile-web-app-capable"" content=""yes""/><meta name=""apple-mobile-web-app-status-bar-style"" content=""black""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon-32x32.png"" rel=""icon"" size=""32x32"" type=""image/png""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon-16x16.png"" rel=""icon"" size=""16x16"" type=""image/png""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/manifest.json"" rel=""manifest""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/safari-pinned-tab.svg"" rel=""mask-icon"" color=""#2222b5""/><link href=""https://apps.dashplatform.com/dash/share/images/icons/dash/favicon.ico"" rel=""shortcut icon"" type=""image/x-icon""/><meta name=""msapplication-config"" content=""dash/browsercongif.xml""/><meta name=""theme-color"" content=""#ffffff""/><link href=""//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700.css?deployment=1571166088"" rel=""stylesheet"" type=""text/css""/>    <script defer src=""https://pro.fontawesome.com/releases/v5.0.13/js/all.js"" integrity=""sha384-d84LGg2pm9KhR4mCAs3N29GQ4OYNy+K+FBHX8WhimHpPm86c839++MDABegrZ3gn"" crossorigin=""anonymous""></script>
+    <link href=""https://apps.dashplatform.com/dash/assets/dash/dist/css/online.min.css?deployment=1571166088"" rel=""stylesheet"" type=""text/css""/><script src=""https://apps.dashplatform.com/dash/assets/dash/dist/js/online.min.js?deployment=1571166088"" type=""text/javascript""></script><meta property=""og:title"" content=""WideWorld Sports Center""/><meta property=""og:description"" content=""Welcome to WideWorld Sports Center WideWorld Sports Center - Schedules, standings, team payment and more!""/><meta property=""og:image"" content=""https://cdn.pbrd.co/images/Hw7RdP9.jpg""/><meta property=""og:url"" content=""https://apps.dashplatform.com/dash?cid=wideworldsports""/><meta property=""og:type"" content=""business.business""/>  
+  <link rel=""stylesheet"" type=""text/css"" href=""https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css""/>
 
-  <script type = ""text/javascript"" src=""https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js""></script>
+  <script type=""text/javascript"" src=""https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js""></script>
       <title>Welcome to WideWorld Sports Center WideWorld Sports Center - Schedules, standings, team payment and more!</title>
   
-  <script type = ""text/javascript"" >
+  <script type=""text/javascript"">
     $j = jQuery.noConflict();
   </script>
 
-  <script type = ""text/javascript"" >
+  <script type=""text/javascript"">
     $j(function() {
-            init_mysam();
-        });
+      init_mysam();
+    });
   </script>
 
       <!-- Google Analytics -->
-    <script type = ""text/javascript"" >
-      (function(i, s, o, g, r, a, m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()
-        {
-            (i[r].q = i[r].q ||[]).push(arguments)},i[r].l=1*new Date(); a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a, m)
-    })(window, document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script type=""text/javascript"">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-651856-6', 'auto');
 
-    ga('set', 'dimension1', 'wideworldsports' );
-
-    ga('send', 'pageview');
+            ga('set', 'dimension1', 'wideworldsports' );
+      
+      ga('send', 'pageview');
 
 
       
@@ -2887,37 +2887,36 @@ namespace WideWorldCalendar.ScheduleFetcher
 <body>
 
 
-<div id = ""fb-root"" ></ div >
-< script type=""text/javascript"">
-  window.fbAsyncInit = function()
-    {
-        FB.init({
-        appId: '328419437305840',
+<div id=""fb-root""></div>
+<script type=""text/javascript"">
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: '328419437305840',
       version: 'v3.1',
       cookie: true,
       xfbml: true
-        });
+    });
 
     $j(window).trigger('fbInitComplete');
-    };
+  };
 
-    (function(d, s, id){
+  (function(d, s, id){
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) {return;}
-js = d.createElement(s); js.id = id;
+    js = d.createElement(s); js.id = id;
     // Note we were previously using //connect.facebook.net/en_US/sdk/debug.js on non-production, but facebook seems to have broken it
     js.src = 'https://connect.facebook.net/en_US/sdk.js';
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
-<div id = ""baseWindow"" >
-  < !--Adding a container div so that we can easily hide all nav items with javascript -->
-<div id = ""navbar-container"" >
-  < !--Static navbar -->
+<div id=""baseWindow"">
+  <!-- Adding a container div so that we can easily hide all nav items with javascript -->
+<div id=""navbar-container"">
+  <!-- Static navbar -->
   <nav class=""navbar navbar-expand-md navbar-light fixed-top noprint p-0"" role=""navigation"">
     <div class=""container"">
       <div class=""navbar-header d-block d-md-flex col-12 col-md-3 p-0"">
-        <button type = ""button"" class=""navbar-toggler  float-right"" data-toggle=""collapse"" data-target="".navbar-collapse"">
+        <button type=""button"" class=""navbar-toggler  float-right"" data-toggle=""collapse"" data-target="".navbar-collapse"">
           <i class=""fas fa-bars fa-2x""></i>
         </button>
 
@@ -2926,7 +2925,7 @@ js = d.createElement(s); js.id = id;
           <i class=""fas fa-home fa-lg""></i>
         </span>
         <span class=""d-none d-sm-inline truncate-text company-title float-left"" >
-          WideWorld Sports Center</span>
+          WideWorld Sports Center        </span>
         </a>
       </div>
 
@@ -2966,10 +2965,10 @@ js = d.createElement(s); js.id = id;
               </a>
             </li>
             <li class=""nav-item "" >
-              <a href = ""?action=support"" class=""nav-link d-none d-md-block""  data-toggle=""tooltip"" title=""Help"" >
+              <a href=""?action=support"" class=""nav-link d-none d-md-block""  data-toggle=""tooltip"" title=""Help"" >
                 <i class=""fas fa-question fa-lg""></i>
               </a>
-              <a href = ""?action=support"" class=""nav-link d-inline d-sm-none"" >
+              <a href=""?action=support"" class=""nav-link d-inline d-sm-none"" >
                 <span class=""menu-icon d-inline-block d-md-none"">
                   <i class=""fas fa-question fa-lg""></i>
                 </span>
@@ -2979,12 +2978,12 @@ js = d.createElement(s); js.id = id;
           
 
                       <li class=""nav-item "">
-              <a href = ""index.php?Action=Auth/login&company=wideworldsports"" class=""nav-link d-none d-md-block"" >
-                <span style = ""border: white 1px solid; padding: .8em; border-radius: .3em;"" >
+              <a href=""index.php?Action=Auth/login&company=wideworldsports"" class=""nav-link d-none d-md-block"" >
+                <span style=""border: white 1px solid; padding: .8em; border-radius: .3em;"">
                   Log In
                 </span>
               </a>
-              <a href = ""index.php?Action=Auth/login&company=wideworldsports"" class=""nav-link d-inline d-md-none"" >
+              <a href=""index.php?Action=Auth/login&company=wideworldsports"" class=""nav-link d-inline d-md-none"" >
                 <span class=""menu-icon d-inline-block d-md-none"">
                   <i class=""fas fa-user-circle fa-lg""></i>
                 </span>
@@ -2998,20 +2997,18 @@ js = d.createElement(s); js.id = id;
     </div>
   </nav>
 
-  <div style = ""height: 75px;"" class=""noprint"">
+  <div style=""height: 75px;"" class=""noprint"">
     <!-- spacer so if top menu is shown it doesn't overlap with content below -->
   </div>
 </div><!-- /#navbar-container -->
 
 
-<script type = ""text/javascript"" >
-  (function($j) {
-    $j.fn.nameBadge = function(options)
-{
-    var settings = $j.extend({
-    border:
-        {
-        color: 'transparent',
+<script type=""text/javascript"">
+  (function ($j) {
+    $j.fn.nameBadge = function (options) {
+      var settings = $j.extend({
+        border: {
+          color: 'transparent',
           width: 0
         },
         text: 'var(--base-secondary)',
@@ -3020,13 +3017,13 @@ js = d.createElement(s); js.id = id;
         middlename: true,
         uppercase: false
       }, options);
-    return this.each(function() {
+      return this.each(function () {
         var elementText = $j(this).text();
-        var initialLetters = elementText.match(settings.middlename ? /\b(\w) / g : / ^\w |\b\w(?=\S +$) / g);
+        var initialLetters = elementText.match(settings.middlename ? /\b(\w)/g : /^\w|\b\w(?=\S+$)/g);
         var initials = initialLetters.join('');
         $j(this).text(initials);
         $j(this).css({
-            'color': settings.text,
+          'color': settings.text,
           'background-color': 'white',
           'border': settings.border.width + 'px solid ' + settings.border.color,
           'display': 'inline-block',
@@ -3040,14 +3037,14 @@ js = d.createElement(s); js.id = id;
           'text-align': 'center',
           'text-transform' : settings.uppercase ? 'uppercase' : ''
         });
-    });
-};
+      });
+    };
   }(jQuery));
 
 </script>
 
-<script type = ""text/javascript"" >
-  (function($j) {
+<script type=""text/javascript"">
+  (function ($j) {
     // must be included
     $j('.name').nameBadge();
   }(jQuery));
@@ -3055,7 +3052,7 @@ js = d.createElement(s); js.id = id;
 </script>
 
 
-  <div id = ""mainWindow"" class=""container"">
+  <div id=""mainWindow"" class=""container"">
     
     
             
@@ -3072,7 +3069,7 @@ js = d.createElement(s); js.id = id;
         <li class=""nav-item""><a class=""nav-link"" href=""#standings"">Standings</a></li>
     <li class=""nav-item dropdown"">
     <a class=""nav-link dropdown-toggle"" data-toggle=""dropdown"" href=""#"">
-      Team<span class=""caret""></span>
+      Team <span class=""caret""></span>
     </a>
     <ul class=""dropdown-menu"">
                                     <li class=""dropdown-item""><a class=""active"" href=""index.php?Action=Auth/login&company=wideworldsports"">Login</a></li>
@@ -3087,24 +3084,22 @@ js = d.createElement(s); js.id = id;
 <h4>Description</h4>
 
  Starting 08/28/2019 HS &amp; Adult Fall 1 2019<br/>
-Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
+Soccer, Indoor, NA, Males only  <br/>Ages Adult   (over 18 years old)
 <br/> Games 8<br/>
 
-  Includes 8 Games.Team balances due IN FULL by the first scheduled game.<br/>
+  Includes 8 Games. Team balances due IN FULL by the first scheduled game.<br/>
 
-  <h4 style = ""float:left; margin-right:10px;"" > Team Color</h4>
-  <div style = ""margin-top:5px;"" >
-
-   < form id= ""j5dacb6be478589-45588452"" method= ""POST""  role= ""form"" action= ""index.php?Action=TeamAction/save&company=wideworldsports"" >< input type= ""hidden"" name= ""_method"" id= ""l5dacb6be478b8935687049""  value= ""POST"" />    < div class=""form-group""><input type = ""text"" name=""color"" id=""w5dacb6be478fd408289123""  disabled class=""form-control"" value=""#f0f205""/><script>jQuery('#w5dacb6be478fd408289123').spectrum({ ""preferredFormat"":""hex"",""allowEmpty"":true,""showInput"":true,""disabled"":true});</script><span class=""form-text invalid-feedback""></span></div>    </form>  </div>
+  <h4 style=""float:left; margin-right:10px;"">Team Color</h4>
+  <div style=""margin-top:5px;"">
+    <form id=""j5dacb6be478589-45588452"" method=""POST""  role=""form"" action=""index.php?Action=TeamAction/save&company=wideworldsports""><input type=""hidden"" name=""_method"" id=""l5dacb6be478b8935687049""  value=""POST""/>    <div class=""form-group""><input type=""text"" name=""color"" id=""w5dacb6be478fd408289123""  disabled class=""form-control"" value=""#f0f205""/><script>jQuery('#w5dacb6be478fd408289123').spectrum({""preferredFormat"":""hex"",""allowEmpty"":true,""showInput"":true,""disabled"":true});</script><span class=""form-text invalid-feedback""></span></div>    </form>  </div>
 
 
 
   <div class=""mb-3"">
-      <a name = ""schedules"" ></ a >
-      < h3 > Schedule </ h3 >
-
-
-< !--Begin schedule output -->
+      <a name=""schedules""></a>
+      <h3>Schedule</h3>
+    
+<!-- Begin schedule output -->
 <div class=""list-group flex-row flex-wrap"">
 
       <div class=""list-group-item col-lg-6 col-12 inactive"">
@@ -3118,12 +3113,12 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
               </div>
               <div class=""d-flex justify-content-between mr-4"">
                 
-                                    <a href = ""index.php?Action=Stats/game&company=wideworldsports&eventID=7349"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7349"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
                               </div>
             </div>
             <div class=""flex-grow-1 pl-2 event__details"">
                 <h6 class=""mb-0 text-muted text-uppercase"">
-                  Game</h6>
+                  Game                                  </h6>
                                 <div class=""d-flex justify-content-between"">
                       <div class=""text-truncate mr-3"">
                         <i class=""fa fa-circle"" style=""color: #87f801;""></i>
@@ -3159,12 +3154,12 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
               </div>
               <div class=""d-flex justify-content-between mr-4"">
                 
-                                    <a href = ""index.php?Action=Stats/game&company=wideworldsports&eventID=7352"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7352"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
                               </div>
             </div>
             <div class=""flex-grow-1 pl-2 event__details"">
                 <h6 class=""mb-0 text-muted text-uppercase"">
-                  Game</h6>
+                  Game                                  </h6>
                                 <div class=""d-flex justify-content-between"">
                       <div class=""text-truncate mr-3"">
                         <i class=""fa fa-circle"" style=""color: #48b93a;""></i>
@@ -3200,12 +3195,12 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
               </div>
               <div class=""d-flex justify-content-between mr-4"">
                 
-                                    <a href = ""index.php?Action=Stats/game&company=wideworldsports&eventID=7355"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7355"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
                               </div>
             </div>
             <div class=""flex-grow-1 pl-2 event__details"">
                 <h6 class=""mb-0 text-muted text-uppercase"">
-                  Game</h6>
+                  Game                                  </h6>
                                 <div class=""d-flex justify-content-between"">
                       <div class=""text-truncate mr-3"">
                         <i class=""fa fa-circle"" style=""color: #f0f205;""></i>
@@ -3241,12 +3236,12 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
               </div>
               <div class=""d-flex justify-content-between mr-4"">
                 
-                                    <a href = ""index.php?Action=Stats/game&company=wideworldsports&eventID=7357"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7357"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
                               </div>
             </div>
             <div class=""flex-grow-1 pl-2 event__details"">
                 <h6 class=""mb-0 text-muted text-uppercase"">
-                  Game</h6>
+                  Game                                  </h6>
                                 <div class=""d-flex justify-content-between"">
                       <div class=""text-truncate mr-3"">
                         <i class=""fa fa-circle"" style=""color: #f0f205;""></i>
@@ -3282,12 +3277,12 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
               </div>
               <div class=""d-flex justify-content-between mr-4"">
                 
-                                    <a href = ""index.php?Action=Stats/game&company=wideworldsports&eventID=7356"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7356"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
                               </div>
             </div>
             <div class=""flex-grow-1 pl-2 event__details"">
                 <h6 class=""mb-0 text-muted text-uppercase"">
-                  Game</h6>
+                  Game                                  </h6>
                                 <div class=""d-flex justify-content-between"">
                       <div class=""text-truncate mr-3"">
                         <i class=""fa fa-circle"" style=""color: #f0f205;""></i>
@@ -3323,12 +3318,12 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
               </div>
               <div class=""d-flex justify-content-between mr-4"">
                 
-                                    <a href = ""index.php?Action=Stats/game&company=wideworldsports&eventID=7361"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7361"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
                               </div>
             </div>
             <div class=""flex-grow-1 pl-2 event__details"">
                 <h6 class=""mb-0 text-muted text-uppercase"">
-                  Game</h6>
+                  Game                                  </h6>
                                 <div class=""d-flex justify-content-between"">
                       <div class=""text-truncate mr-3"">
                         <i class=""fa fa-circle"" style=""color: #49ff00;""></i>
@@ -3364,12 +3359,12 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
               </div>
               <div class=""d-flex justify-content-between mr-4"">
                 
-                                    <a href = ""index.php?Action=Stats/game&company=wideworldsports&eventID=7368"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
+                                    <a href=""index.php?Action=Stats/game&company=wideworldsports&eventID=7368"" title=""Stats""><i class=""fa fa-chart-bar""></i></a>
                               </div>
             </div>
             <div class=""flex-grow-1 pl-2 event__details"">
                 <h6 class=""mb-0 text-muted text-uppercase"">
-                  Game</h6>
+                  Game                                  </h6>
                                 <div class=""d-flex justify-content-between"">
                       <div class=""text-truncate mr-3"">
                         <i class=""fa fa-circle"" style=""color: #f0f205;""></i>
@@ -3409,7 +3404,7 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
             </div>
             <div class=""flex-grow-1 pl-2 event__details"">
                 <h6 class=""mb-0 text-muted text-uppercase"">
-                  Game</h6>
+                  Game                                  </h6>
                                 <div class=""d-flex justify-content-between"">
                       <div class=""text-truncate mr-3"">
                         <i class=""fa fa-circle"" style=""color: #48b93a;""></i>
@@ -3440,32 +3435,32 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
   jQuery('.dropdown').click(function () {
     // for some reason the schedule display dropdowns need this click handler to open on mobile. dont ask why, I don't know.
     // console.log('test');
-});
+  });
   jQuery(document).on('show.bs.dropdown', '.dropdown', function(e) {
     var dropdown = jQuery(e.target).find('.dropdown-menu');
 
     dropdown.appendTo('body');
-    dropdown.css({ width: 'unset'});
+    dropdown.css({width: 'unset'});
 
-    jQuery(this).on('hidden.bs.dropdown', function() {
-        dropdown.appendTo(e.target);
+    jQuery(this).on('hidden.bs.dropdown', function () {
+      dropdown.appendTo(e.target);
     });
-});
+  });
   jQuery(document).on('shown.bs.dropdown', '.dropdown', function(e) {
     var dropdown = jQuery(e.target).find('.dropdown-menu');
     var button = jQuery(e.target);
     var dropDownTop = button.offset().top + button.outerHeight();
 
-    dropdown.css({ transform: ""translate3d("" + button.offset().left + ""px,"" + dropDownTop + ""px,0px)""});
-});
+    dropdown.css({transform: ""translate3d(""+button.offset().left+""px,""+dropDownTop+""px,0px)""});
+  });
 
 </script>  </div>
-    <a name = ""standings"" ></ a >
-  < h3 > League Standings</h3>
+    <a name=""standings""></a>
+  <h3>League Standings</h3>
       <div class=""table-responsive"">
       <table class=""table table-striped"">
         <tr>
-          <th colspan = ""12"" > League Standings: O30 Men Monday</th>
+          <th colspan=""12"">League Standings: O30 Men Monday</th>
         </tr>
         <tr>
           <th>Team</th>
@@ -3487,7 +3482,7 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
                   
           <tr>
                           <td>
-                <a style = ""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1675"">
                   Subs</a>
               </td>
             
@@ -3507,7 +3502,7 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
                   
           <tr>
                           <td>
-                <a style = ""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1631"">
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1631"">
                   Domino Men</a>
               </td>
             
@@ -3527,7 +3522,7 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
                   
           <tr>
                           <td>
-                <a style = ""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1690"">
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1690"">
                   WWSC Monday Men Green</a>
               </td>
             
@@ -3547,7 +3542,7 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
                   
           <tr>
                           <td>
-                <a style = ""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1680"">
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1680"">
                   Code Blue</a>
               </td>
             
@@ -3567,7 +3562,7 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
                   
           <tr>
                           <td>
-                <a style = ""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1648"">
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1648"">
                   Tigers U50 Aluminum</a>
               </td>
             
@@ -3587,7 +3582,7 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
                   
           <tr>
                           <td>
-                <a style = ""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1604"">
+                <a  style=""color:blue"" href=""index.php?Action=team/index&company=wideworldsports&teamid=1604"">
                   Gasping For Air</a>
               </td>
             
@@ -3606,26 +3601,26 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
           </tr>
               </table>
     </div>
-    <div class='text-muted text-small'>Standings sorted by: Pts, GD, wins, GF(Your facility may not adhere to the standing rules above)</div>
+    <div class='text-muted text-small'>Standings sorted by: Pts, GD, wins, GF (Your facility may not adhere to the standing rules above)</div>
 
 
 <!-- Request Join Modal -->
-<div id = ""joinModal"" class=""modal fade"" role=""dialog"">
+<div id=""joinModal"" class=""modal fade"" role=""dialog"">
   <div class=""modal-dialog"">
 
     <!-- Modal content-->
     <div class=""modal-content"">
       <div class=""modal-header"">
         <h4 class=""modal-title"">Request to join Subs</h4>
-        <button type = ""button"" class=""close"" data-dismiss=""modal"">&times;</button>
+        <button type=""button"" class=""close"" data-dismiss=""modal"">&times;</button>
       </div>
       <div class=""modal-body"">
         <p>
-           is requesting to join a group.You will receive an email notification when
-         a group manager accepts or rejects your request.
+           is requesting to join a group. You will receive an email notification when
+          a group manager accepts or rejects your request.
         </p>
-        <button onclick = ""requestJoin()"" class=""btn btn-primary text-center"">Request Membership</button>
-        </div>
+        <button onclick=""requestJoin()"" class=""btn btn-primary text-center"">Request Membership</button>
+      </div>
     </div>
 
   </div>
@@ -3633,98 +3628,87 @@ Soccer, Indoor, NA, Males only<br/>Ages Adult   (over 18 years old)
 
     </div>
   </div>
-  <div id = ""footerWindow"" class=""text-muted"">
+  <div id=""footerWindow"" class=""text-muted"">
     <div class=""container"">
-      <a href = ""http://www.dashplatform.com"" >< img src=""/dash/share/images/Dash-logo-v3-blue.svg"" width=""20"" alt=""Dash Logo"" style=""margin-right:5px;""/></a>
+      <a href=""http://www.dashplatform.com""><img src=""/dash/share/images/Dash-logo-v3-blue.svg"" width=""20"" alt=""Dash Logo"" style=""margin-right:5px;""/></a>
       <div class=""height-30"">
         &#169; 2019 Dash
             </div>
           </div>
   </div>
-<div id = ""windowNotice"" >
-  < div class=""alert alert-info"" style=""margin-left: auto; margin-right: auto; width:60%""></div>
+<div id=""windowNotice"">
+  <div class=""alert alert-info"" style=""margin-left: auto; margin-right: auto; width:60%""></div>
 </div>
 
-<script type = ""text/javascript"" >
+<script type=""text/javascript"">
 
-  function processAjaxResponse(jqXHR, textStatus, errorThrown)
-{
+  function processAjaxResponse(jqXHR, textStatus, errorThrown) {
     console.log(jqXHR);
     var options = {
       hideAfter: 5
     };
-jqXHR.formErrors.map(function(v, k) {
+    jqXHR.formErrors.map(function(v,k) {
       dashMessage(v, 'error', options);
     });
-    jqXHR.formSuccess.map(function(v, k) {
+    jqXHR.formSuccess.map(function(v,k) {
       dashMessage(v, 'success', options);
     });
   }
 
-  function requestJoin()
-{
+  function requestJoin() {
     $j.ajax({
-    url: 'index.php?Action=Team/join.json&extension=json&company=wideworldsports',
+      url: 'index.php?Action=Team/join.json&extension=json&company=wideworldsports',
       dataType: 'json',
       cache: false,
       async: true,
       type: 'POST',
-      data:
-        {
+      data: {
         customerID: 0,
         teamID: 1675      }
     }).always(function(jqXHR, textStatus, errorThrown){
-        processAjaxResponse(jqXHR, textStatus, errorThrown);
+      processAjaxResponse(jqXHR, textStatus, errorThrown);
       $j('#joinModal').modal('hide');
     });
     return;
-}
+  }
 
-function leaveTeam(e)
-{
+  function leaveTeam(e) {
     e.preventDefault();
-    if (confirm('Are you sure you want to leave?'))
-    {
+    if(confirm('Are you sure you want to leave?')) {
       $j.ajax({
         url: 'index.php?Action=Team/remove.json&extension=json&company=wideworldsports',
         dataType: 'json',
         cache: false,
         async: true,
         type: 'POST',
-        data:
-            {
-            customerID: 0,
+        data: {
+          customerID: 0,
           teamID: 1675        }
-        }).done(function(data, textStatus, jqXHR) {
-            if (data.formErrors.length)
-            {
-                data.formErrors.map(function(e, k){ dashMessage(e, 'error')});
-            }
-            else
-            {
-                dashMessage(""You have been successfully removed from the team. You will now be redirected."", 'success');
-                setTimeout(function() {
-                    location.replace('index.php?Action=Team/index&teamid=1675&leave=1&company=wideworldsports')
-               }, 3000)
+      }).done(function (data, textStatus, jqXHR) {
+        if(data.formErrors.length) {
+          data.formErrors.map(function(e,k){dashMessage(e,'error')});
+        } else {
+          dashMessage(""You have been successfully removed from the team. You will now be redirected."", 'success');
+          setTimeout(function () {
+            location.replace('index.php?Action=Team/index&teamid=1675&leave=1&company=wideworldsports')
+          }, 3000)
         }
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            if (jqXHR.responseJSON.error)
-            {
-                dashMessage(""An error occurred. "" + jqXHR.responseJSON.error.message + "" A system administrator has been notified"", 'error');
-            }
-            else
-            {
-                dashMessage(""An error occurred "" + errorThrown + "". A system administrator has been notified"", 'error');
-            }
-        }).always(function(jqXHR, textStatus, errorThrown) {
-        });
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        if(jqXHR.responseJSON.error) {
+          dashMessage(""An error occurred. "" + jqXHR.responseJSON.error.message + "" A system administrator has been notified"", 'error');
+        } else {
+          dashMessage(""An error occurred "" + errorThrown + "". A system administrator has been notified"", 'error');
+        }
+      }).always(function (jqXHR, textStatus, errorThrown) {
+      });
     }
-}
+  }
 
 
 </script></body>
 </html>
+
 ";
         #endregion
 
