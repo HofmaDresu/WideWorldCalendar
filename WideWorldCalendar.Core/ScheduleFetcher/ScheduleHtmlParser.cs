@@ -88,29 +88,31 @@ namespace WideWorldCalendar.ScheduleFetcher
 
         }
 
-        private static void SetTeamInfo(int teamId, string teamsInfoSection, Game game)
+        public static void SetTeamInfo(int teamId, string teamsInfoSection, Game game)
         {
-            var teamRows = teamsInfoSection.Split("</tr>").Where(s => s.Contains("<tr>")).ToList();
+            var cleanedTeamsInfoSection = teamsInfoSection.Split("</h6>").Last();
+
+            var teamRows = cleanedTeamsInfoSection.Split("justify-content-between").ToList();
             for (int i = 0; i < teamRows.Count; i++)
             {
                 var row = teamRows[i];
                 var teamIdString = row.Split("teamid=").Last().Split("\">").First();
                 if (!int.TryParse(teamIdString, out int currentTeamId)) continue;
 
-                var teamColumns = row.Split("</td>").Where(s => s.Contains("<td")).ToArray();
-                var scoreColumn = teamColumns[0];
-                var teamNameColumn = teamColumns[1];
+                var teamColumns = row.Split("</div>").Where(s => s.Contains("<div")).ToArray();
+                var teamNameColumn = teamColumns[0];
+                var scoreColumn = teamColumns[1];
                 var hasScore = int.TryParse(scoreColumn.Split('>').Last(), out int score);
 
                 var team = new Team
                 {
                     Id = currentTeamId,
-                    Name = teamNameColumn.Split('>')[2].Split('<')[0],
+                    Name = teamNameColumn.Split("teamid=").Last().Split('>')[1].Split('<')[0],
                 };
 
                 if (currentTeamId == teamId)
                 {
-                    game.IsHomeGame = teamNameColumn.Contains(">H<");
+                    game.IsHomeGame = teamNameColumn.Contains("fa-home");
                     game.MyTeam = team;
                     if (hasScore)
                     {

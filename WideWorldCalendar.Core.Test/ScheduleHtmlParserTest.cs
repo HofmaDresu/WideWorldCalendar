@@ -880,11 +880,49 @@ Soccer, Indoor, NA, Males only  <br/>Ages Adult   (over 18 years old)
 ";
         #endregion
         private const int MatchingTeamId = 1675;
+        #region SingleGameSectionHtml
+        private const string CompletedHomeGameSectionHtml = @"
+ pl-2 event__details"">
+    <h6 class=""mb-0 text-muted text-uppercase"">
+        Game                                  </h6>
+                    <div class=""d-flex justify-content-between"">
+            <div class=""text-truncate mr-3"">
+            <svg class=""svg-inline--fa fa-circle fa-w-16"" style=""color: #87f801;"" aria-hidden=""true"" data-prefix=""fa"" data-icon=""circle"" role=""img"" xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 512 512"" data-fa-i2svg=""""><path fill=""currentColor"" d=""M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z""></path></svg><!-- <i class=""fa fa-circle"" style=""color: #87f801;""></i> -->
+            <a class=""font-weight-bold"" href=""index.php?Action=team/index&amp;company=wideworldsports&amp;teamid=1631"">Domino Men</a>                      </div>
+        <div>1</div>
+        </div>
+                
+                    <div class=""d-flex justify-content-between"">
+        <div class=""text-truncate mr-2"">
+        <svg class=""svg-inline--fa fa-home fa-w-18"" style=""color: #f0f205;"" aria-hidden=""true"" data-prefix=""fa"" data-icon=""home"" role=""img"" xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 576 512"" data-fa-i2svg=""""><path fill=""currentColor"" d=""M488 312.7V456c0 13.3-10.7 24-24 24H348c-6.6 0-12-5.4-12-12V356c0-6.6-5.4-12-12-12h-72c-6.6 0-12 5.4-12 12v112c0 6.6-5.4 12-12 12H112c-13.3 0-24-10.7-24-24V312.7c0-3.6 1.6-7 4.4-9.3l188-154.8c4.4-3.6 10.8-3.6 15.3 0l188 154.8c2.7 2.3 4.3 5.7 4.3 9.3zm83.6-60.9L488 182.9V44.4c0-6.6-5.4-12-12-12h-56c-6.6 0-12 5.4-12 12V117l-89.5-73.7c-17.7-14.6-43.3-14.6-61 0L4.4 251.8c-5.1 4.2-5.8 11.8-1.6 16.9l25.5 31c4.2 5.1 11.8 5.8 16.9 1.6l235.2-193.7c4.4-3.6 10.8-3.6 15.3 0l235.2 193.7c5.1 4.2 12.7 3.5 16.9-1.6l25.5-31c4.2-5.2 3.4-12.7-1.7-16.9z""></path></svg><!-- <i class=""fa fa-home"" style=""color: #f0f205;""></i> -->
+        <a class=""font-weight-bold"" href=""index.php?Action=team/index&amp;company=wideworldsports&amp;teamid=1675"">Subs</a>                  </div>
+        <div>6</div>
+    </div>
+              
+<div>
+                </div>
+<div>
+    <div class=""mb-0""><small>Daycroft School Field
+";
+        #endregion
+
 
         [TestMethod]
         public void GetTeamSchedule_RunsWithoutError()
         {
             ScheduleHtmlParser.GetTeamSchedule(MatchingTeamId, TeamHtml).ToList();
+        }
+
+        [TestMethod]
+        public void SetTeamInfo_SetsTeams()
+        {
+            var game = new Game();
+            ScheduleHtmlParser.SetTeamInfo(MatchingTeamId, CompletedHomeGameSectionHtml, game);
+            Assert.IsNotNull(game.MyTeam);
+            Assert.IsNotNull(game.OpposingTeam);
+            Assert.IsTrue(game.IsHomeGame);
+            Assert.IsNotNull(game.MyTeamScore);
+            Assert.IsNotNull(game.OpposingTeamScore);
         }
     }
 }
